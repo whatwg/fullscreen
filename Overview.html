@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"><html lang="en-US"><head>
+  <meta content="text/html;charset=UTF-8" http-equiv="content-type">
+  <title>Fullscreen</title>
+  <style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em 1em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   pre code { color:inherit; background:transparent }
+   pre.css { border: solid 0.0625em; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   .XXX { padding:.5em; border:solid #f00 }
+   p.XXX::before { content:"Issue: " }
+   dl.switch { padding-left:2em }
+   dl.switch > dt { text-indent:-1.5em }
+   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color:orangered }
+   code :link, code :visited { color:inherit }
+   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
+   table { border-collapse:collapse; border-style:hidden hidden none hidden }
+   table thead { border-bottom:solid }
+   table tbody th:first-child { border-left:solid }
+   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
+
+   .warning { color: red; background: transparent; font-weight: bolder; font-style: italic; }
+   .warning p:first-child { margin-top: 0; }
+   .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   @media print {
+     [data-anolis-spec]::after { content:"[" attr(data-anolis-spec) "]"; font-size:.6em; vertical-align:super; text-transform:uppercase }
+   }
+  </style>
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet">
+ </head>
+ <body>
+
+<div class="head">
+
+<!--begin-logo-->
+<p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
+<!--end-logo-->
+ <h1>Fullscreen</h1>
+ <h2 class="no-num no-toc" id="editor-s-draft-15-october-2011">Editor's Draft 15 October 2011</h2>
+
+ <dl>
+  <dt>This Version:
+  <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html</a>
+  <dt>Editor:
+  <dd><a href="http://annevankesteren.nl/">Anne van Kesteren</a>
+    (<a href="http://www.opera.com/">Opera Software ASA</a>)
+    &lt;<a href="mailto:annevk@opera.com">annevk@opera.com</a>&gt;
+ </dl>
+
+<!--begin-copyright-->
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+<!--end-copyright-->
+</div>
+
+<hr>
+
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+<p>The Fullscreen specification defines a way for a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> to be
+displayed fullscreen programmatically and potentially highlighting a given
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>.</p>
+
+
+<h2 class="no-num no-toc" id="sotd">Status of this Document</h2>
+<p>Whatever.
+
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+
+<!--begin-toc-->
+<ol class="toc">
+ <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
+ <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
+ <li><a href="#model"><span class="secno">3 </span>Model</a></li>
+ <li><a href="#api"><span class="secno">4 </span>API</a></li>
+ <li><a href="#ui"><span class="secno">5 </span>UI</a></li>
+ <li><a href="#selectors-:fullscreen-and-:fullscreen-ancestor"><span class="secno">6 </span>Selectors (<code title="">:fullscreen</code> and <code title="">:fullscreen-ancestor</code>)</a></li>
+ <li><a href="#rendering"><span class="secno">7 </span>Rendering</a></li>
+ <li><a class="no-num" href="#references">References</a>
+  <ol class="toc">
+   <li><a class="no-num" href="#normative-references">Normative references</a></ol></li>
+ <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
+<!--end-toc-->
+
+
+
+<h2 id="conformance"><span class="secno">1 </span>Conformance</h2>
+<p>All diagrams, examples, and notes in this specification are
+non-normative, as are all sections explicitly marked non-normative.
+Everything else in this specification is normative.
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+"OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do
+not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a>
+
+
+<h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
+
+<p>Most terminology used in this specification is from the DOM and HTML.
+<a href="#refsDOM">[DOM]</a>
+<a href="#refsHTML">[HTML]</a>
+
+<p>The term <dfn id="context-object">context object</dfn> means the object on which the method
+or attribute being discussed was called. When the
+<a href="#context-object">context object</a> is unambiguous, the term can be omitted.
+
+<p>A <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> <var title="">A</var>
+is called a <dfn id="descendant-browsing-context">descendant browsing context</dfn> of a
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> <var title="">B</var> if
+and only if <var title="">B</var> is an
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a> of
+<var title="">A</var>.
+
+
+<h2 id="model"><span class="secno">3 </span>Model</h2>
+
+<p>All documents have an associated <dfn id="fullscreen-flag">fullscreen flag</dfn>, <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>, and <dfn id="fullscreen-element">fullscreen element</dfn>.
+
+<p>Unless otherwise stated the <a href="#fullscreen-flag">fullscreen flag</a> and
+<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> are unset, and the
+<a href="#fullscreen-element">fullscreen element</a> is null.
+
+<p class="note">HTML defines under what conditions the
+<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
+<a href="#refsHTML">[HTML]</a>
+<!--
+  not set for <iframe>, createDocument();
+  set for <iframe allowfullscreen>
+-->
+
+<p>To <dfn id="transition-to-fullscreen">transition to fullscreen</dfn>, either with an
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>
+<var title="">element</var> or
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+<var title="">doc</var>, run these steps:
+
+<ol>
+ <li><p>Optionally, perform some animation.
+
+ <li><p>Display the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> fullscreen.
+
+ <li>
+  <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these substeps:
+
+  <ol>
+   <li><p>If an
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> was
+   passed to this algorithm, let <var title="">doc</var> be
+   <var title="">element</var>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>
+
+   <li><p>If an
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> was
+   passed to this algorithm, let <var title="">target</var> be
+   <var title="">element</var>, or <var title="">doc</var> otherwise.
+
+   <li><p>Set the <a href="#fullscreen-flag">fullscreen flag</a> for <var title="">doc</var> and
+   all <var title="">doc</var>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>
+   (if any).
+
+   <li><p>For each
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a> in
+   <var title="">doc</var>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context" title="ancestor browsing context">ancestor browser contexts</a>
+   (if any), set the <a href="#fullscreen-element">fullscreen element</a> of their
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#parent-browsing-context">parent browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> to
+   their <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>.
+
+   <li><p>Set <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> to
+   <var title="">element</var>.
+
+   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a>
+   named <code>fullscreenchanged</code> with its
+   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
+   <var title="">target</var>.
+  </ol>
+
+ <li><p>Optionally, display a message indicating how the user can exit
+ displaying the top-level browsing context fullscreen.
+
+</ol>
+
+<p>To <dfn id="transition-from-fullscreen">transition from fullscreen</dfn>, with
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
+<var title="">doc</var>, run these steps:
+
+<ol>
+ <li><p>Optionally, perform some animation.
+
+ <li><p>Display the
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> normally.
+
+ <li>
+  <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these substeps:
+
+  <ol>
+   <li><p>Unset the <a href="#fullscreen-flag">fullscreen flag</a> and set the
+   <a href="#fullscreen-element">fullscreen element</a> to null, for <var title="">doc</var>,
+   <var title="">doc</var>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>, and
+   <var title="">doc</var>'s
+   <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>.
+
+   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a>
+   named <code>fullscreenchanged</code> with its
+   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
+   <var title="">doc</var>.
+  </ol>
+</ol>
+
+
+<h2 id="api"><span class="secno">4 </span>API</h2>
+
+<pre class="idl">partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> {
+  void <a href="#dom-element-enterfullscreen" title="dom-Element-enterFullscreen">enterFullscreen</a>();
+};
+
+partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> {
+  readonly attribute boolean <a href="#dom-document-fullscreen" title="dom-Document-fullscreen">fullscreen</a>;
+  readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
+  readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
+
+  void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
+};</pre>
+
+<p>The
+<dfn id="dom-element-enterfullscreen" title="dom-Element-enterFullscreen"><code>enterFullscreen()</code></dfn>
+method must run these steps:
+
+<ol>
+ <li><p>If the <a href="#context-object">context object</a> is not
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a>, terminate these steps.
+
+ <li><p>If the <a href="#context-object">context object</a>'s
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, or an
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does not
+ have the <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, terminate these steps.
+
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p>Optionally, e.g. based on a previously-established user preference, for security reasons, or due to platform limitations, terminate these steps.
+
+ <li><p><a href="#transition-to-fullscreen">Transition to fullscreen</a> with the
+ <a href="#context-object">context object</a>.
+</ol>
+
+<p>The <dfn id="dom-document-fullscreen" title="dom-Document-fullscreen"><code>fullscreen</code></dfn>
+attribute must return true if the <a href="#context-object">context object</a>'s
+<a href="#fullscreen-flag">fullscreen flag</a> is set, or false otherwise.
+
+<p>The
+<dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
+attribute must return true if the <a href="#context-object">context object</a> and all
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> have
+their <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, or false otherwise.
+
+<p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
+attribute must return the <a href="#context-object">context object</a>'s
+<a href="#fullscreen-element">fullscreen element</a>.
+
+<p>The
+<dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
+method must run these steps:
+
+<ol>
+ <li><p>If the <a href="#context-object">context object</a>, or an
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does not
+ have the <a href="#fullscreen-flag">fullscreen flag</a> set, terminate these steps.
+
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p><a href="#transition-from-fullscreen">Transition from fullscreen</a> with the
+ <a href="#context-object">context object</a>.
+</ol>
+
+<h2 id="ui"><span class="secno">5 </span>UI</h2>
+
+<p>If the user enters fullscreen through the user agent user
+interface, the user agent should <a href="#transition-to-fullscreen">transition to fullscreen</a> with
+the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
+
+<p>If the user enters fullscreen through the user agent user interface for a particular element (e.g. the HTML <code>video</code> element), the user agent should <a href="#transition-to-fullscreen">transition to fullscreen</a> with that element.
+
+<p>If the user exits fullscreen through the user agent user interface (e.g. by pressing a keyboard shortcut), the user agent should
+<a href="#transition-from-fullscreen">transition from fullscreen</a> with
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
+
+
+<h2 id="selectors-:fullscreen-and-:fullscreen-ancestor"><span class="secno">6 </span>Selectors (<code title="">:fullscreen</code> and <code title="">:fullscreen-ancestor</code>)</h2>
+
+<p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
+pseudo-class must match the <a href="#fullscreen-element">fullscreen element</a> (if any).
+
+<p>The
+<dfn id="css-pc-fullscreen-ancestor" title="css-pc-fullscreen-ancestor"><code>:fullscreen-ancestor</code></dfn>
+pseudo-class must match all
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a> that are
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-ancestor" title="concept-tree-ancestor">ancestors</a> of
+the <a href="#fullscreen-element">fullscreen element</a> (if any).
+
+<h2 id="rendering"><span class="secno">7 </span>Rendering</h2>
+
+<p>This section is to be interpreted equivalently to the Rendering section
+of HTML.
+<a href="#refsHTML">[HTML]</a>
+
+<p>However, unlike the HTML specification, the CSS rules given below are to
+be put between "author normal declarations" and
+"author important declarations" in the cascading order.
+<a href="#refsCSS">[CSS]</a>
+
+<pre class="css">:fullscreen:not(:root) {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:2147483647;
+  background:black;
+  width:100%;
+  height:100%;
+}
+/* If there is a fullscreen element that is not the root then
+   we should hide the viewport scrollbar. */
+:fullscreen-ancestor:root {
+  overflow:hidden;
+}
+:fullscreen-ancestor {
+  /* Ancestors of a fullscreen element should not induce stacking contexts
+     that would prevent the fullscreen element from being on top. */
+  z-index:auto;
+  /* Ancestors of a fullscreen element should not be partially transparent,
+     since that would apply to the fullscreen element and make the page visible
+     behind it. It would also create a pseudo-stacking-context that would let content
+     draw on top of the fullscreen element. */
+  opacity:1;
+  /* Ancestors of a fullscreen element should not apply SVG masking, clipping, or
+     filtering, since that would affect the fullscreen element and create a pseudo-
+     stacking context. */
+  mask:none;
+  clip:none;
+  filter:none;
+}</pre>
+
+<p class="XXX">We could also not set <a href="#fullscreen-element">fullscreen element</a> when
+<code title="dom-Element-enterFullscreen"><a href="#dom-element-enterfullscreen">enterFullscreen()</a></code> is invoked
+on the <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document-element">document element</a> and thereby avoid
+the need for <code title="">:not(:root)</code> above.
+
+
+<h2 class="no-num" id="references">References</h2>
+<h3 class="no-num" id="normative-references">Normative references</h3>
+<div id="anolis-references-normative"><dl><dt id="refsCSS">[CSS]
+<dd><cite><a href="http://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek &Ccedil;elik, Ian Hickson et al.. W3C.
+
+<dt id="refsDOM">[DOM]
+<dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
+
+<dt id="refsHTML">[HTML]
+<dd><cite><a href="http://www.whatwg.org/html">HTML</a></cite>, Ian Hickson. WHATWG.
+
+<dt id="refsRFC2119">[RFC2119]
+<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
+
+</dl></div>
+
+
+<!--<h3 class=no-num>Informative references</h3>
+<div id=anolis-references-informative></div>-->
+
+
+
+<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+<p>Many thanks to Robert O'Callahan for designing the initial model.</p>
+<!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
+
+<p>Thanks to &hellip; and friends for their useful comments.</p>
