@@ -130,7 +130,9 @@ and only if <var title="">B</var> is an
 
 <h2 id="model"><span class="secno">3 </span>Model</h2>
 
-<!-- XXX say task source -->
+<p>The <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#task-source">task source</a> used by this
+specification is the
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#user-interaction-task-source">user interaction task source</a>.
 
 <p>All <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>
 have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn> and
@@ -146,6 +148,14 @@ and the <a href="#fullscreen-element">fullscreen element</a> is null.
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
 -->
+
+<p>If the <a href="#fullscreen-element">fullscreen element</a> is removed from the
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>, act as if
+the <code title="dom-Document-exitFullscreen"><a href="#dom-document-exitfullscreen">exitFullscreen()</a></code> method
+was invoked on the
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
+<!-- XXX reference DOM mutation -->
 
 
 <h2 id="api"><span class="secno">4 </span>API</h2>
@@ -290,6 +300,14 @@ in terms of
 <code title="dom-Element-requestFullscreen"><a href="#dom-element-requestfullscreen">requestFullscreen()</a></code> and
 <code title="dom-Document-exitFullscreen"><a href="#dom-document-exitfullscreen">exitFullscreen()</a></code>.
 
+<p>If the end user instructs the user agent to end a fullscreen session
+initiated via
+<code title="dom-Element-requestFullscreen"><a href="#dom-element-requestfullscreen">requestFullscreen()</a></code>, act as
+if <code title="dom-Document-exitFullscreen"><a href="#dom-document-exitfullscreen">exitFullscreen()</a></code> was
+invoked on the
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
+
 <h2 id="selectors-:fullscreen-and-:fullscreen-ancestor"><span class="secno">6 </span>Selectors (<code title="">:fullscreen</code> and <code title="">:fullscreen-ancestor</code>)</h2>
 
 <p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
@@ -344,8 +362,10 @@ be put between "author normal declarations" and
   mask:none;
   clip:none;
   filter:none;
+  transform:none;
 }</pre>
 
+<p class="XXX">Should transitions be forbidden too?
 
 
 <h2 class="no-num" id="references">References</h2>
@@ -372,7 +392,14 @@ be put between "author normal declarations" and
 
 <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-<p>Many thanks to Robert O'Callahan for designing the initial model.</p>
+<p>Many thanks to Robert O'Callahan for designing the initial model and his
+useful comments.</p>
 <!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
 
-<p>Thanks to &hellip; and friends for their useful comments.</p>
+<p>Thanks to
+Chris Pearce,
+Darin Fisher,
+Glenn Maynard, and
+Rune Lillesveen
+
+for their useful comments.</p>

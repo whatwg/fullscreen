@@ -125,7 +125,9 @@ and only if <var title>B</var> is an
 
 <h2>Model</h2>
 
-<!-- XXX say task source -->
+<p>The <span data-anolis-spec=html>task source</span> used by this
+specification is the
+<span data-anolis-spec=html>user interaction task source</span>.
 
 <p>All <span data-anolis-spec=dom title=concept-document>documents</span>
 have an associated <dfn>fullscreen enabled flag</dfn> and
@@ -141,6 +143,14 @@ and the <span>fullscreen element</span> is null.
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
 -->
+
+<p>If the <span>fullscreen element</span> is removed from the
+<span data-anolis-spec=dom title=concept-document>document</span>, act as if
+the <code title=dom-Document-exitFullscreen>exitFullscreen()</code> method
+was invoked on the
+<span data-anolis-spec=html>top-level browsing context</span>'s
+<span data-anolis-spec=dom title=concept-document>document</span>.
+<!-- XXX reference DOM mutation -->
 
 
 <h2>API</h2>
@@ -285,6 +295,14 @@ in terms of
 <code title=dom-Element-requestFullscreen>requestFullscreen()</code> and
 <code title=dom-Document-exitFullscreen>exitFullscreen()</code>.
 
+<p>If the end user instructs the user agent to end a fullscreen session
+initiated via
+<code title=dom-Element-requestFullscreen>requestFullscreen()</code>, act as
+if <code title=dom-Document-exitFullscreen>exitFullscreen()</code> was
+invoked on the
+<span data-anolis-spec=html>top-level browsing context</span>'s
+<span data-anolis-spec=dom title=concept-document>document</span>.
+
 <h2>Selectors (<code title>:fullscreen</code> and <code title>:fullscreen-ancestor</code>)</h2>
 
 <p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
@@ -339,8 +357,10 @@ be put between "author normal declarations" and
   mask:none;
   clip:none;
   filter:none;
+  transform:none;
 }</pre>
 
+<p class=XXX>Should transitions be forbidden too?
 
 
 <h2 class=no-num>References</h2>
@@ -355,7 +375,14 @@ be put between "author normal declarations" and
 
 <h2 class=no-num>Acknowledgments</h2>
 
-<p>Many thanks to Robert O'Callahan for designing the initial model.</p>
+<p>Many thanks to Robert O'Callahan for designing the initial model and his
+useful comments.</p>
 <!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
 
-<p>Thanks to &hellip; and friends for their useful comments.</p>
+<p>Thanks to
+Chris Pearce,
+Darin Fisher,
+Glenn Maynard, and
+Rune Lillesveen
+
+for their useful comments.</p>
