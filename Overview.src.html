@@ -77,10 +77,9 @@
 
 <h2 class="no-num no-toc">Abstract</h2>
 
-<p>The Fullscreen specification defines a way for a
-<span data-anolis-spec=html>top-level browsing context</span> to be
-displayed fullscreen programmatically and potentially highlighting a given
-<span data-anolis-spec=dom title=concept-element>element</span>.</p>
+<p>The Fullscreen specification defines a way for an
+<span data-anolis-spec=dom title=concept-element>element</span> to be
+displayed fullscreen programmatically.</p>
 
 
 <h2 class="no-num no-toc" id=sotd>Status of this Document</h2>
@@ -126,11 +125,14 @@ and only if <var title>B</var> is an
 
 <h2>Model</h2>
 
-<p>All documents have an associated <dfn>fullscreen flag</dfn>, <dfn>fullscreen enabled flag</dfn>, and <dfn>fullscreen element</dfn>.
+<!-- XXX say task source -->
 
-<p>Unless otherwise stated the <span>fullscreen flag</span> and
-<span>fullscreen enabled flag</span> are unset, and the
-<span>fullscreen element</span> is null.
+<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
+have an associated <dfn>fullscreen enabled flag</dfn> and
+<dfn>fullscreen element</dfn>.
+
+<p>Unless otherwise stated the <span>fullscreen enabled flag</span> is unset
+and the <span>fullscreen element</span> is null.
 
 <p class=note>HTML defines under what conditions the
 <span>fullscreen enabled flag</span> is set.
@@ -140,97 +142,11 @@ and only if <var title>B</var> is an
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn>transition to fullscreen</dfn>, either with an
-<span data-anolis-spec=dom title=concept-element>element</span>
-<var title>element</var> or
-<span data-anolis-spec=dom title=concept-document>document</span>
-<var title>doc</var>, run these steps:
-
-<ol>
- <li><p>Optionally, perform some animation.
-
- <li><p>Display the
- <span data-anolis-spec=html>top-level browsing context</span> fullscreen.
-
- <li>
-  <p><span data-anolis-spec=html>Queue a task</span> to run these substeps:
-
-  <ol>
-   <li><p>If an
-   <span data-anolis-spec=dom title=concept-element>element</span> was
-   passed to this algorithm, let <var title>doc</var> be
-   <var title>element</var>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>
-
-   <li><p>If an
-   <span data-anolis-spec=dom title=concept-element>element</span> was
-   passed to this algorithm, let <var title>target</var> be
-   <var title>element</var>, or <var title>doc</var> otherwise.
-
-   <li><p>Set the <span>fullscreen flag</span> for <var title>doc</var> and
-   all <var title>doc</var>'s
-   <span data-anolis-spec=html>ancestor browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>documents</span>
-   (if any).
-
-   <li><p>For each
-   <span data-anolis-spec=html>nested browsing context</span> in
-   <var title>doc</var>'s
-   <span title="ancestor browsing context" data-anolis-spec=html>ancestor browser contexts</span>
-   (if any), set the <span>fullscreen element</span> of their
-   <span data-anolis-spec=html>parent browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>document</span> to
-   their <span data-anolis-spec=html>browsing context container</span>.
-
-   <li><p>Set <var title>doc</var>'s <span>fullscreen element</span> to
-   <var title>element</var>.
-
-   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span>
-   named <code>fullscreenchanged</code> with its
-   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
-   <var title>target</var>.
-  </ol>
-
- <li><p>Optionally, display a message indicating how the user can exit
- displaying the top-level browsing context fullscreen.
-
-</ol>
-
-<p>To <dfn>transition from fullscreen</dfn>, with
-<span data-anolis-spec=dom title=concept-document>document</span>
-<var title>doc</var>, run these steps:
-
-<ol>
- <li><p>Optionally, perform some animation.
-
- <li><p>Display the
- <span data-anolis-spec=html>top-level browsing context</span> normally.
-
- <li>
-  <p><span data-anolis-spec=html>Queue a task</span> to run these substeps:
-
-  <ol>
-   <li><p>Unset the <span>fullscreen flag</span> and set the
-   <span>fullscreen element</span> to null, for <var title>doc</var>,
-   <var title>doc</var>'s
-   <span data-anolis-spec=html>ancestor browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>documents</span>, and
-   <var title>doc</var>'s
-   <span data-anolis-spec=html>descendant browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>documents</span>.
-
-   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span>
-   named <code>fullscreenchanged</code> with its
-   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
-   <var title>doc</var>.
-  </ol>
-</ol>
-
 
 <h2>API</h2>
 
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
-  void <span title=dom-Element-enterFullscreen>enterFullscreen</span>();
+  void <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
 };
 
 partial interface <span data-anolis-spec=dom>Document</span> {
@@ -242,30 +158,85 @@ partial interface <span data-anolis-spec=dom>Document</span> {
 };</pre>
 
 <p>The
-<dfn title=dom-Element-enterFullscreen><code>enterFullscreen()</code></dfn>
+<dfn title=dom-Element-requestFullscreen><code>requestFullscreen()</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If the <span>context object</span> is not
- <span data-anolis-spec=dom>in a document</span>, terminate these steps.
+ <li>
+  <p>If any of the following conditions are true, terminate these steps and
+  <span data-anolis-spec=html>queue a task</span> to
+  <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
+  named <code>fullscreenerror</code> with its
+  <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
+  <span>context object</span>:
 
- <li><p>If the <span>context object</span>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>, or an
+  <ul>
+   <li><p>The <span>context object</span> is not
+   <span data-anolis-spec=dom>in a document</span>.
+
+   <li><p>The <span>context object</span>'s
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>, or an
+   <span data-anolis-spec=html>ancestor browsing context</span>'s
+   <span data-anolis-spec=dom title=concept-document>document</span> does
+   not have the <span>fullscreen enabled flag</span> set.
+
+   <li><p>The <span>context object</span>'s
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>, or an
+   <span data-anolis-spec=html>ancestor browsing context</span>'s
+   <span data-anolis-spec=dom title=concept-document>document</span> has a
+   non-null <span>fullscreen element</span>.
+
+   <li><p>This algorithm is not
+   <span data-anolis-spec=html>allowed to show a pop-up</span>.
+
+   <li><p>There is a previously-established user preference, security risk,
+   or platform limitation.
+  </ul>
+
+ <li><p>Let <var title>doc</var> be <var title>element</var>'s
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>.
+
+ <li><p>Let <var title>docs</var> be all <var title>doc</var>'s
  <span data-anolis-spec=html>ancestor browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span> does not
- have the <span>fullscreen enabled flag</span> set, terminate these steps.
+ <span data-anolis-spec=dom title=concept-document>documents</span> (if any)
+ and <var title>doc</var>.
+
+ <li>
+  <p>For each <var title>document</var> in <var title>docs</var>, run these
+  substeps:
+
+  <ol>
+   <li><p>Let <var title>following document</var> be the
+   <span data-anolis-spec=dom title=concept-document>document</span> after
+   <var title>document</var> in <var title>docs</var>, or null if there is
+   no such document.
+
+   <li><p>If <var title>following document</var> is null, set
+   <var title>document</var>'s <span>fullscreen element</span> to the
+   <span>context object</span>,
+   <span data-anolis-spec=html>queue a task</span> to
+   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
+   named <code>fullscreenchange</code> with its
+   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
+   <span>context object</span>, and terminate these substeps.
+
+   <li><p>Set <var title>document</var>'s <span>fullscreen element</span> to
+   <var title>following document</var>'s
+   <span data-anolis-spec=html>browsing context container</span> and
+   <span data-anolis-spec=html>queue a task</span> to
+   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
+   named <code>fullscreenchange</code> with its
+   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
+   <var title>document</var>.
+  </ol>
 
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>Optionally, e.g. based on a previously-established user preference, for security reasons, or due to platform limitations, terminate these steps.
+ <li><p>Optionally, perform some animation.
 
- <li><p><span>Transition to fullscreen</span> with the
- <span>context object</span>.
+ <li><p>Optionally, display a message indicating how the user can exit
+ displaying the <span>context object</span> fullscreen.
 </ol>
-
-<p>The <dfn title=dom-Document-fullscreen><code>fullscreen</code></dfn>
-attribute must return true if the <span>context object</span>'s
-<span>fullscreen flag</span> is set, or false otherwise.
 
 <p>The
 <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
@@ -283,31 +254,37 @@ attribute must return the <span>context object</span>'s
 method must run these steps:
 
 <ol>
- <li><p>If the <span>context object</span>, or an
+ <li><p>If the <span>context object</span> does not have a non-null
+ <span>fullscreen element</span>, terminate these steps.
+
+ <li><p>Let <var title>docs</var> be all the <span>context object</span>'s
+ <span data-anolis-spec=html>descendant browsing context</span>'s
+ <span data-anolis-spec=dom title=concept-document>documents</span> with a
+ non-null <span>fullscreen element</span> (if any),
+ the <span>context object</span>, and all the
+ <span>context object</span>'s
  <span data-anolis-spec=html>ancestor browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span> does not
- have the <span>fullscreen flag</span> set, terminate these steps.
+ <span data-anolis-spec=dom title=concept-document>documents</span>.
+
+ <li><p>For each <var title>document</var> in <var title>docs</var>, set
+ <var title>document</var>'s <span>fullscreen element</span> to null and
+ <span data-anolis-spec=html>queue a task</span> to
+ <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
+ named <code>fullscreenchange</code> with its
+ <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
+ <var title>document</var>.
 
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p><span>Transition from fullscreen</span> with the
- <span>context object</span>.
+ <li><p>Optionally, perform some animation.
 </ol>
 
 <h2>UI</h2>
 
-<p>If the user enters fullscreen through the user agent user
-interface, the user agent should <span>transition to fullscreen</span> with
-the <span data-anolis-spec=html>top-level browsing context</span>'s
-<span data-anolis-spec=dom title=concept-document>document</span>.
-
-<p>If the user enters fullscreen through the user agent user interface for a particular element (e.g. the HTML <code>video</code> element), the user agent should <span>transition to fullscreen</span> with that element.
-
-<p>If the user exits fullscreen through the user agent user interface (e.g. by pressing a keyboard shortcut), the user agent should
-<span>transition from fullscreen</span> with
-<span data-anolis-spec=html>top-level browsing context</span>'s
-<span data-anolis-spec=dom title=concept-document>document</span>.
-
+<p>User agents are encouraged to implement native media fullscreen controls
+in terms of
+<code title=dom-Element-requestFullscreen>requestFullscreen()</code> and
+<code title=dom-Element-exitFullscreen>exitFullscreen()</code>.
 
 <h2>Selectors (<code title>:fullscreen</code> and <code title>:fullscreen-ancestor</code>)</h2>
 
@@ -332,7 +309,7 @@ be put between "author normal declarations" and
 "author important declarations" in the cascading order.
 <span data-anolis-ref>CSS</span>
 
-<pre class=css>:fullscreen:not(:root) {
+<pre class=css>:fullscreen {
   position:fixed;
   top:0;
   left:0;
@@ -365,10 +342,6 @@ be put between "author normal declarations" and
   filter:none;
 }</pre>
 
-<p class=XXX>We could also not set <span>fullscreen element</span> when
-<code title=dom-Element-enterFullscreen>enterFullscreen()</code> is invoked
-on the <span data-anolis-spec=dom>document element</span> and thereby avoid
-the need for <code title>:not(:root)</code> above.
 
 
 <h2 class=no-num>References</h2>

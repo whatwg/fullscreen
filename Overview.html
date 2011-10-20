@@ -49,7 +49,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 <!--end-logo-->
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="editor-s-draft-15-october-2011">Editor's Draft 15 October 2011</h2>
+ <h2 class="no-num no-toc" id="editor-s-draft-20-october-2011">Editor's Draft 20 October 2011</h2>
 
  <dl>
   <dt>This Version:
@@ -69,10 +69,9 @@
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-<p>The Fullscreen specification defines a way for a
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> to be
-displayed fullscreen programmatically and potentially highlighting a given
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>.</p>
+<p>The Fullscreen specification defines a way for an
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> to be
+displayed fullscreen programmatically.</p>
 
 
 <h2 class="no-num no-toc" id="sotd">Status of this Document</h2>
@@ -131,11 +130,14 @@ and only if <var title="">B</var> is an
 
 <h2 id="model"><span class="secno">3 </span>Model</h2>
 
-<p>All documents have an associated <dfn id="fullscreen-flag">fullscreen flag</dfn>, <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>, and <dfn id="fullscreen-element">fullscreen element</dfn>.
+<!-- XXX say task source -->
 
-<p>Unless otherwise stated the <a href="#fullscreen-flag">fullscreen flag</a> and
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> are unset, and the
-<a href="#fullscreen-element">fullscreen element</a> is null.
+<p>All <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>
+have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn> and
+<dfn id="fullscreen-element">fullscreen element</dfn>.
+
+<p>Unless otherwise stated the <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is unset
+and the <a href="#fullscreen-element">fullscreen element</a> is null.
 
 <p class="note">HTML defines under what conditions the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
@@ -145,101 +147,15 @@ and only if <var title="">B</var> is an
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn id="transition-to-fullscreen">transition to fullscreen</dfn>, either with an
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>
-<var title="">element</var> or
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
-<var title="">doc</var>, run these steps:
-
-<ol>
- <li><p>Optionally, perform some animation.
-
- <li><p>Display the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> fullscreen.
-
- <li>
-  <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these substeps:
-
-  <ol>
-   <li><p>If an
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> was
-   passed to this algorithm, let <var title="">doc</var> be
-   <var title="">element</var>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>
-
-   <li><p>If an
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> was
-   passed to this algorithm, let <var title="">target</var> be
-   <var title="">element</var>, or <var title="">doc</var> otherwise.
-
-   <li><p>Set the <a href="#fullscreen-flag">fullscreen flag</a> for <var title="">doc</var> and
-   all <var title="">doc</var>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>
-   (if any).
-
-   <li><p>For each
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a> in
-   <var title="">doc</var>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context" title="ancestor browsing context">ancestor browser contexts</a>
-   (if any), set the <a href="#fullscreen-element">fullscreen element</a> of their
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#parent-browsing-context">parent browsing context</a>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> to
-   their <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>.
-
-   <li><p>Set <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> to
-   <var title="">element</var>.
-
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a>
-   named <code>fullscreenchanged</code> with its
-   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
-   <var title="">target</var>.
-  </ol>
-
- <li><p>Optionally, display a message indicating how the user can exit
- displaying the top-level browsing context fullscreen.
-
-</ol>
-
-<p>To <dfn id="transition-from-fullscreen">transition from fullscreen</dfn>, with
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>
-<var title="">doc</var>, run these steps:
-
-<ol>
- <li><p>Optionally, perform some animation.
-
- <li><p>Display the
- <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> normally.
-
- <li>
-  <p><a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these substeps:
-
-  <ol>
-   <li><p>Unset the <a href="#fullscreen-flag">fullscreen flag</a> and set the
-   <a href="#fullscreen-element">fullscreen element</a> to null, for <var title="">doc</var>,
-   <var title="">doc</var>'s
-   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>, and
-   <var title="">doc</var>'s
-   <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
-   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>.
-
-   <li><p><a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">Fire an event</a>
-   named <code>fullscreenchanged</code> with its
-   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
-   <var title="">doc</var>.
-  </ol>
-</ol>
-
 
 <h2 id="api"><span class="secno">4 </span>API</h2>
 
 <pre class="idl">partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> {
-  void <a href="#dom-element-enterfullscreen" title="dom-Element-enterFullscreen">enterFullscreen</a>();
+  void <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
 };
 
 partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> {
-  readonly attribute boolean <a href="#dom-document-fullscreen" title="dom-Document-fullscreen">fullscreen</a>;
+  readonly attribute boolean <span title="dom-Document-fullscreen">fullscreen</span>;
   readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
   readonly attribute <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
 
@@ -247,30 +163,85 @@ partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-fi
 };</pre>
 
 <p>The
-<dfn id="dom-element-enterfullscreen" title="dom-Element-enterFullscreen"><code>enterFullscreen()</code></dfn>
+<dfn id="dom-element-requestfullscreen" title="dom-Element-requestFullscreen"><code>requestFullscreen()</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If the <a href="#context-object">context object</a> is not
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a>, terminate these steps.
+ <li>
+  <p>If any of the following conditions are true, terminate these steps and
+  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+  named <code>fullscreenerror</code> with its
+  <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
+  <a href="#context-object">context object</a>:
 
- <li><p>If the <a href="#context-object">context object</a>'s
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, or an
+  <ul>
+   <li><p>The <a href="#context-object">context object</a> is not
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a>.
+
+   <li><p>The <a href="#context-object">context object</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, or an
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does
+   not have the <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set.
+
+   <li><p>The <a href="#context-object">context object</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, or an
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> has a
+   non-null <a href="#fullscreen-element">fullscreen element</a>.
+
+   <li><p>This algorithm is not
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-pop-up">allowed to show a pop-up</a>.
+
+   <li><p>There is a previously-established user preference, security risk,
+   or platform limitation.
+  </ul>
+
+ <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>.
+
+ <li><p>Let <var title="">docs</var> be all <var title="">doc</var>'s
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does not
- have the <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, terminate these steps.
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> (if any)
+ and <var title="">doc</var>.
+
+ <li>
+  <p>For each <var title="">document</var> in <var title="">docs</var>, run these
+  substeps:
+
+  <ol>
+   <li><p>Let <var title="">following document</var> be the
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> after
+   <var title="">document</var> in <var title="">docs</var>, or null if there is
+   no such document.
+
+   <li><p>If <var title="">following document</var> is null, set
+   <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> to the
+   <a href="#context-object">context object</a>,
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+   named <code>fullscreenchange</code> with its
+   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
+   <a href="#context-object">context object</a>, and terminate these substeps.
+
+   <li><p>Set <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> to
+   <var title="">following document</var>'s
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> and
+   <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+   named <code>fullscreenchange</code> with its
+   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
+   <var title="">document</var>.
+  </ol>
 
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>Optionally, e.g. based on a previously-established user preference, for security reasons, or due to platform limitations, terminate these steps.
+ <li><p>Optionally, perform some animation.
 
- <li><p><a href="#transition-to-fullscreen">Transition to fullscreen</a> with the
- <a href="#context-object">context object</a>.
+ <li><p>Optionally, display a message indicating how the user can exit
+ displaying the <a href="#context-object">context object</a> fullscreen.
 </ol>
-
-<p>The <dfn id="dom-document-fullscreen" title="dom-Document-fullscreen"><code>fullscreen</code></dfn>
-attribute must return true if the <a href="#context-object">context object</a>'s
-<a href="#fullscreen-flag">fullscreen flag</a> is set, or false otherwise.
 
 <p>The
 <dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
@@ -288,31 +259,37 @@ attribute must return the <a href="#context-object">context object</a>'s
 method must run these steps:
 
 <ol>
- <li><p>If the <a href="#context-object">context object</a>, or an
+ <li><p>If the <a href="#context-object">context object</a> does not have a non-null
+ <a href="#fullscreen-element">fullscreen element</a>, terminate these steps.
+
+ <li><p>Let <var title="">docs</var> be all the <a href="#context-object">context object</a>'s
+ <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> with a
+ non-null <a href="#fullscreen-element">fullscreen element</a> (if any),
+ the <a href="#context-object">context object</a>, and all the
+ <a href="#context-object">context object</a>'s
  <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
- <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does not
- have the <a href="#fullscreen-flag">fullscreen flag</a> set, terminate these steps.
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>.
+
+ <li><p>For each <var title="">document</var> in <var title="">docs</var>, set
+ <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> to null and
+ <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+ <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+ named <code>fullscreenchange</code> with its
+ <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
+ <var title="">document</var>.
 
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p><a href="#transition-from-fullscreen">Transition from fullscreen</a> with the
- <a href="#context-object">context object</a>.
+ <li><p>Optionally, perform some animation.
 </ol>
 
 <h2 id="ui"><span class="secno">5 </span>UI</h2>
 
-<p>If the user enters fullscreen through the user agent user
-interface, the user agent should <a href="#transition-to-fullscreen">transition to fullscreen</a> with
-the <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
-
-<p>If the user enters fullscreen through the user agent user interface for a particular element (e.g. the HTML <code>video</code> element), the user agent should <a href="#transition-to-fullscreen">transition to fullscreen</a> with that element.
-
-<p>If the user exits fullscreen through the user agent user interface (e.g. by pressing a keyboard shortcut), the user agent should
-<a href="#transition-from-fullscreen">transition from fullscreen</a> with
-<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
-<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>.
-
+<p>User agents are encouraged to implement native media fullscreen controls
+in terms of
+<code title="dom-Element-requestFullscreen"><a href="#dom-element-requestfullscreen">requestFullscreen()</a></code> and
+<code title="dom-Element-exitFullscreen">exitFullscreen()</code>.
 
 <h2 id="selectors-:fullscreen-and-:fullscreen-ancestor"><span class="secno">6 </span>Selectors (<code title="">:fullscreen</code> and <code title="">:fullscreen-ancestor</code>)</h2>
 
@@ -337,7 +314,7 @@ be put between "author normal declarations" and
 "author important declarations" in the cascading order.
 <a href="#refsCSS">[CSS]</a>
 
-<pre class="css">:fullscreen:not(:root) {
+<pre class="css">:fullscreen {
   position:fixed;
   top:0;
   left:0;
@@ -370,10 +347,6 @@ be put between "author normal declarations" and
   filter:none;
 }</pre>
 
-<p class="XXX">We could also not set <a href="#fullscreen-element">fullscreen element</a> when
-<code title="dom-Element-enterFullscreen"><a href="#dom-element-enterfullscreen">enterFullscreen()</a></code> is invoked
-on the <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document-element">document element</a> and thereby avoid
-the need for <code title="">:not(:root)</code> above.
 
 
 <h2 class="no-num" id="references">References</h2>
