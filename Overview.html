@@ -222,10 +222,10 @@ method must run these steps:
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
-   <a href="#context-object">context object</a>, and terminate these substeps.
+   <a href="#context-object">context object</a>.
 
-   <li><p>Set <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> to
-   <var title="">following document</var>'s
+   <li><p>Otherwise, set <var title="">document</var>'s
+   <a href="#fullscreen-element">fullscreen element</a> to <var title="">following document</var>'s
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> and
    <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
@@ -288,7 +288,7 @@ method must run these steps:
 <p>User agents are encouraged to implement native media fullscreen controls
 in terms of
 <code title="dom-Element-requestFullscreen"><a href="#dom-element-requestfullscreen">requestFullscreen()</a></code> and
-<code title="dom-Element-exitFullscreen">exitFullscreen()</code>.
+<code title="dom-Document-exitFullscreen"><a href="#dom-document-exitfullscreen">exitFullscreen()</a></code>.
 
 <h2 id="selectors-:fullscreen-and-:fullscreen-ancestor"><span class="secno">6 </span>Selectors (<code title="">:fullscreen</code> and <code title="">:fullscreen-ancestor</code>)</h2>
 

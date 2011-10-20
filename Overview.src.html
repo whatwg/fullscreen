@@ -217,10 +217,10 @@ method must run these steps:
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
    named <code>fullscreenchange</code> with its
    <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
-   <span>context object</span>, and terminate these substeps.
+   <span>context object</span>.
 
-   <li><p>Set <var title>document</var>'s <span>fullscreen element</span> to
-   <var title>following document</var>'s
+   <li><p>Otherwise, set <var title>document</var>'s
+   <span>fullscreen element</span> to <var title>following document</var>'s
    <span data-anolis-spec=html>browsing context container</span> and
    <span data-anolis-spec=html>queue a task</span> to
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
@@ -283,7 +283,7 @@ method must run these steps:
 <p>User agents are encouraged to implement native media fullscreen controls
 in terms of
 <code title=dom-Element-requestFullscreen>requestFullscreen()</code> and
-<code title=dom-Element-exitFullscreen>exitFullscreen()</code>.
+<code title=dom-Document-exitFullscreen>exitFullscreen()</code>.
 
 <h2>Selectors (<code title>:fullscreen</code> and <code title>:fullscreen-ancestor</code>)</h2>
 
