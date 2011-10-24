@@ -49,7 +49,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 <!--end-logo-->
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="editor-s-draft-20-october-2011">Editor's Draft 20 October 2011</h2>
+ <h2 class="no-num no-toc" id="editor-s-draft-24-october-2011">Editor's Draft 24 October 2011</h2>
 
  <dl>
   <dt>This Version:
@@ -257,7 +257,10 @@ method must run these steps:
 attribute must return true if the <a href="#context-object">context object</a> and all
 <a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
 <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> have
-their <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, or false otherwise.
+their <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set and the
+<a class="external" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>'s
+<a href="#fullscreen-element">fullscreen element</a> is null, or false otherwise.
 
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
 attribute must return the <a href="#context-object">context object</a>'s
