@@ -172,6 +172,8 @@ was invoked on the
 
 <h2>API</h2>
 
+<p class=XXX>Currently the API restricts to one invocation of requestFullscreen() per top-level browsing context. We are going to remove that restriction in favor of a stack-based approach.
+
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
   void <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
 };

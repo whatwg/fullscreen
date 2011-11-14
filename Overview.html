@@ -49,7 +49,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 <!--end-logo-->
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="editor-s-draft-5-november-2011">Editor's Draft 5 November 2011</h2>
+ <h2 class="no-num no-toc" id="editor-s-draft-14-november-2011">Editor's Draft 14 November 2011</h2>
 
  <dl>
   <dt>This Version:
@@ -67,7 +67,7 @@
 <p><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-5 November 2011, the editors have made this specification available
+14 November 2011, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -172,6 +172,8 @@ was invoked on the
 
 
 <h2 id="api"><span class="secno">4 </span>API</h2>
+
+<p class="XXX">Currently the API restricts to one invocation of requestFullscreen() per top-level browsing context. We are going to remove that restriction in favor of a stack-based approach.
 
 <pre class="idl">partial interface <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> {
   void <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
