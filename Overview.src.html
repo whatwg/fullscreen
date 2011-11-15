@@ -96,7 +96,8 @@ When published on W3C TR, the following paragraph applies as well.
 
 <p>The Fullscreen specification defines a way for an
 <span data-anolis-spec=dom title=concept-element>element</span> to be
-displayed fullscreen programmatically.</p>
+displayed fullscreen programmatically. This allows for video players or
+games to be used fullscreen.</p>
 
 
 <h2 class="no-num no-toc" id=sotd>Status of this Document</h2>
@@ -399,6 +400,23 @@ dialog while fullscreen.
 
 
 
+<h2>Security and Privacy Considerations</h2>
+
+<p>User agents should ensure, e.g. by means of an overlay, that the end user
+is aware something is displayed fullscreen. User agents should provide a
+means of exiting fullscreen that always works and advertise this to the
+user. This is to prevent a site from spoofing the end user by recreating the
+user agent or even operating system environment when fullscreen. See also
+the definition of
+<code title=dom-Element-requestFullscreen>requestFullscreen()</code>.
+
+<p>To prevent embedded content from going fullscreen only embedded content
+specifically allowed via the <code>allowfullscreen</code> attribute of the
+HTML <code>iframe</code> element will be able to go fullscreen. This
+prevents untrusted content from going fullscreen.
+
+
+
 <h2 class=no-num>References</h2>
 <h3 class=no-num>Normative references</h3>
 <div id=anolis-references-normative></div>
@@ -420,7 +438,8 @@ Chris Pearce,
 Darin Fisher,
 Glenn Maynard,
 Jo&atilde;o Eiras,
-Josh Soref, and
-Rune Lillesveen
+Josh Soref,
+Rune Lillesveen, and
+Sigbj&oslash;rn Vik
 
 for their useful comments.</p>
