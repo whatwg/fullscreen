@@ -385,6 +385,19 @@ be put between "author normal declarations" and
   transition:none;
 }</pre> <!-- XXX clean up comments at some point -->
 
+<p>The following CSS rules do apply at "user agent declarations" in the
+cascading order.
+
+<pre class="css">:fullscreen {
+  background:black;
+  color:white;
+}</pre>
+
+<p class="XXX">The HTML <code>&lt;dialog modal&gt;</code> feature faces the same
+rendering issues. We should find a unified model that also addresses what
+happens if you go fullscreen from a modal dialog or if you have a modal
+dialog while fullscreen.
+
 
 
 <h2 class="no-num" id="references">References</h2>
@@ -419,6 +432,7 @@ useful comments.</p>
 Chris Pearce,
 Darin Fisher,
 Glenn Maynard,
+Jo&atilde;o Eiras,
 Josh Soref, and
 Rune Lillesveen
 
