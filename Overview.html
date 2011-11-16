@@ -49,7 +49,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 <!--end-logo-->
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="editor-s-draft-15-november-2011">Editor's Draft 15 November 2011</h2>
+ <h2 class="no-num no-toc" id="editor-s-draft-16-november-2011">Editor's Draft 16 November 2011</h2>
 
  <dl>
   <dt>This Version:
@@ -67,7 +67,7 @@
 <p><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 November 2011, the editors have made this specification available
+16 November 2011, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -199,7 +199,8 @@ method must run these steps:
   <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
   named <code>fullscreenerror</code> with its
   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
-  <a href="#context-object">context object</a>:
+  <a href="#context-object">context object</a>'s
+  <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>:
 
   <ul>
    <li><p>The <a href="#context-object">context object</a> is not
@@ -249,7 +250,7 @@ method must run these steps:
    <a class="external" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
-   <a href="#context-object">context object</a>.
+   <var title="">document</var>.
 
    <li><p>Otherwise, set <var title="">document</var>'s
    <a href="#fullscreen-element">fullscreen element</a> to <var title="">following document</var>'s
