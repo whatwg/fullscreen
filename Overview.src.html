@@ -239,13 +239,13 @@ method must run these steps:
 
 <ol>
  <li>
-  <p>If any of the following conditions are true, terminate these steps and
+  <p>If any of the following conditions are true,
   <span data-anolis-spec=html>queue a task</span> to
   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
   named <code>fullscreenerror</code> with its
   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
   <span>context object</span>'s
-  <span data-anolis-spec=dom title=concept-node-document>node document</span>:
+  <span data-anolis-spec=dom title=concept-node-document>node document</span>, and then terminate these steps:
 
   <ul>
    <li><p>The <span>context object</span> is not

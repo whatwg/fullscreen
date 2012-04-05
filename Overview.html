@@ -222,13 +222,13 @@ method must run these steps:
 
 <ol>
  <li>
-  <p>If any of the following conditions are true, terminate these steps and
+  <p>If any of the following conditions are true,
   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
   named <code>fullscreenerror</code> with its
   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
   <a href="#context-object">context object</a>'s
-  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>:
+  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, and then terminate these steps:
 
   <ul>
    <li><p>The <a href="#context-object">context object</a> is not
