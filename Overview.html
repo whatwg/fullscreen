@@ -157,12 +157,12 @@ have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</df
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn id="concept-fullscreen-push" title="concept-fullscreen-push">push</dfn> an
+<p>To <dfn id="concept-fullscreen-add" title="concept-fullscreen-add">add</dfn> an
 <var title="">element</var> on a <var title="">document</var>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>, push it on top of
+<a href="#fullscreen-element-stack">fullscreen element stack</a>, add it on top of
 <var title="">document</var>'s
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>'s
-<a href="#top-layer">top layer</a>, and then push it on top of
+<a href="#top-layer">top layer</a>, and then add it on top of
 <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
 <p>To <dfn id="concept-fullscreen-remove" title="concept-fullscreen-remove">remove</dfn> an
@@ -277,7 +277,7 @@ method must run these steps:
    no such document.
 
    <li><p>If <var title="">following document</var> is null,
-   <a href="#concept-fullscreen-push" title="concept-fullscreen-push">push</a>
+   <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
    <a href="#context-object">context object</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
@@ -291,7 +291,7 @@ method must run these steps:
    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> is not
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>,
-   <span title-concept-fullscreen-push="">push</span>
+   <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and
@@ -565,7 +565,8 @@ Jo&atilde;o Eiras,
 Josh Soref,
 Rafa&#322; Ch&#322;odnicki,
 Rune Lillesveen,
-Sigbj&oslash;rn Vik, and
+Sigbj&oslash;rn Vik,
+Simon Pieters, and
 Tab Atkins
 
 for also being awesome.

@@ -174,12 +174,12 @@ have an associated <dfn>fullscreen enabled flag</dfn> and
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn title=concept-fullscreen-push>push</dfn> an
+<p>To <dfn title=concept-fullscreen-add>add</dfn> an
 <var title>element</var> on a <var title>document</var>'s
-<span>fullscreen element stack</span>, push it on top of
+<span>fullscreen element stack</span>, add it on top of
 <var title>document</var>'s
 <span data-anolis-spec=html>browsing context</span>'s
-<span>top layer</span>, and then push it on top of
+<span>top layer</span>, and then add it on top of
 <var title>document</var>'s <span>fullscreen element stack</span>.
 
 <p>To <dfn title=concept-fullscreen-remove>remove</dfn> an
@@ -294,7 +294,7 @@ method must run these steps:
    no such document.
 
    <li><p>If <var title>following document</var> is null,
-   <span title=concept-fullscreen-push>push</span>
+   <span title=concept-fullscreen-add>add</span>
    <span>context object</span> on
    <var title>document</var>'s <span>fullscreen element stack</span>, and
    <span data-anolis-spec=html>queue a task</span> to
@@ -308,7 +308,7 @@ method must run these steps:
    <span data-anolis-spec=dom title=concept-element>element</span> is not
    <var title>following document</var>'s
    <span data-anolis-spec=html>browsing context container</span>,
-   <span title-concept-fullscreen-push>push</span>
+   <span title=concept-fullscreen-add>add</span>
    <var title>following document</var>'s
    <span data-anolis-spec=html>browsing context container</span> on
    <var title>document</var>'s <span>fullscreen element stack</span>, and
@@ -573,7 +573,8 @@ João Eiras,
 Josh Soref,
 Rafał Chłodnicki,
 Rune Lillesveen,
-Sigbj&oslash;rn Vik, and
+Sigbj&oslash;rn Vik,
+Simon Pieters, and
 Tab Atkins
 
 for also being awesome.
