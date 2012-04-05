@@ -508,7 +508,7 @@ above the element below the element in the stack, if any), within the same
 <p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
 pseudo-class must match the top
 <span data-anolis-spec=dom title=concept-element>element</span> of the
-<span>context object</span>'s
+<span data-anolis-spec=dom title=concept-document>document</span>'s
 <span>fullscreen element stack</span> (if any).
 
 
@@ -517,6 +517,7 @@ pseudo-class must match the top
 section uses this term -->
 
 <pre class=css>@namespace html "http://www.w3.org/1999/xhtml";
+
 :fullscreen {
   position:fixed;
   top:0; right:0; bottom:0; left:0;
