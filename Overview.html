@@ -264,7 +264,9 @@ method must run these steps:
  <li><p>Let <var title="">docs</var> be all <var title="">doc</var>'s
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> (if any)
- and <var title="">doc</var>.
+ and <var title="">doc</var>, in order of furthest away from
+ <var title="">doc</var> to <var title="">doc</var>.
+ <!-- XXX order terminology -->
 
  <li>
   <p>For each <var title="">document</var> in <var title="">docs</var>, run these
