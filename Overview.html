@@ -499,7 +499,8 @@ pseudo-class must match the top
 <!-- HTML's "The CSS user agent style sheet and presentational hints"
 section uses this term -->
 
-<pre class="css">:fullscreen {
+<pre class="css">@namespace html "http://www.w3.org/1999/xhtml";
+:fullscreen {
   position:fixed;
   top:0; right:0; bottom:0; left:0;
   margin:0;
@@ -508,7 +509,7 @@ section uses this term -->
   height:100%;
 }
 
-iframe:fullscreen {
+html|iframe:fullscreen {
   border:none;
 }
 
