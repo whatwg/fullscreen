@@ -48,7 +48,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
 
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="living-specification-—-last-updated-4-may-2012">Living Specification — Last Updated 4 May 2012</h2>
+ <h2 class="no-num no-toc" id="living-specification-—-last-updated-17-may-2012">Living Specification — Last Updated 17 May 2012</h2>
 
  <dl>
   <dt>This Version:
@@ -81,7 +81,7 @@
 <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a>.
 To the extent possible under law, the editor has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-4 May 2012, the editor has made this specification available
+17 May 2012, the editor has made this specification available
 under the
 <a rel="license"
 href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>,
@@ -274,6 +274,10 @@ method must run these steps:
    or platform limitation.
   </ul>
 
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p>Optionally, perform some animation.
+
  <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>.
 
@@ -295,10 +299,10 @@ method must run these steps:
    no such document.
 
    <li><p>If <var title="">following document</var> is null,
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
    <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
    <a href="#context-object">context object</a> on
-   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
@@ -309,11 +313,11 @@ method must run these steps:
    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> is not
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>,
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
    <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> on
-   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
@@ -322,10 +326,6 @@ method must run these steps:
    <li><p>Otherwise, do nothing for this <var title="">document</var>. It stays
    the same.
   </ol>
-
- <li><p>Return, and run the remaining steps asynchronously.
-
- <li><p>Optionally, perform some animation.
 
  <li><p>Optionally, display a message indicating how the user can exit
  displaying the <a href="#context-object">context object</a> fullscreen.
@@ -354,6 +354,10 @@ method must run these steps:
  <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
  empty, terminate these steps.
 
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p>Optionally, perform some animation.
+
  <li><p>Let <var title="">descendants</var> be all the <var title="">doc</var>'s
  <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> with a
@@ -365,9 +369,9 @@ method must run these steps:
 
  <li><p>For each <var title="">descendant</var> in
  <var title="">descendants</var>,
- <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a>
- <var title="">descendant</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
+ <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a>
+ <var title="">descendant</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
  named <code>fullscreenchange</code> with its
  <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
@@ -388,7 +392,7 @@ method must run these steps:
     the top is either not <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a> or
     its
     <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>
-    is not <var title="">doc</var>, repeat this substep.
+    is not <var title="">doc</var>, run these substeps again.
 
     <p class="note">This is needed because a non-top
     <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> in the
@@ -411,10 +415,6 @@ method must run these steps:
 
    <li><p>Otherwise, set <var title="">doc</var> to null.
   </ol>
-
- <li><p>Return, and run the remaining steps asynchronously.
-
- <li><p>Optionally, perform some animation.
 </ol>
 
 

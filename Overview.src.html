@@ -262,6 +262,10 @@ method must run these steps:
    or platform limitation.
   </ul>
 
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p>Optionally, perform some animation.
+
  <li><p>Let <var title>doc</var> be <var title>element</var>'s
  <span data-anolis-spec=dom title=concept-node-document>node document</span>.
 
@@ -283,10 +287,10 @@ method must run these steps:
    no such document.
 
    <li><p>If <var title>following document</var> is null,
+   <span data-anolis-spec=html>queue a task</span> to
    <span title=concept-fullscreen-add>add</span>
    <span>context object</span> on
-   <var title>document</var>'s <span>fullscreen element stack</span>, and
-   <span data-anolis-spec=html>queue a task</span> to
+   <var title>document</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
    named <code>fullscreenchange</code> with its
    <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
@@ -297,11 +301,11 @@ method must run these steps:
    <span data-anolis-spec=dom title=concept-element>element</span> is not
    <var title>following document</var>'s
    <span data-anolis-spec=html>browsing context container</span>,
+   <span data-anolis-spec=html>queue a task</span> to
    <span title=concept-fullscreen-add>add</span>
    <var title>following document</var>'s
    <span data-anolis-spec=html>browsing context container</span> on
-   <var title>document</var>'s <span>fullscreen element stack</span>, and
-   <span data-anolis-spec=html>queue a task</span> to
+   <var title>document</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
    named <code>fullscreenchange</code> with its
    <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
@@ -310,10 +314,6 @@ method must run these steps:
    <li><p>Otherwise, do nothing for this <var title>document</var>. It stays
    the same.
   </ol>
-
- <li><p>Return, and run the remaining steps asynchronously.
-
- <li><p>Optionally, perform some animation.
 
  <li><p>Optionally, display a message indicating how the user can exit
  displaying the <span>context object</span> fullscreen.
@@ -342,6 +342,10 @@ method must run these steps:
  <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
  empty, terminate these steps.
 
+ <li><p>Return, and run the remaining steps asynchronously.
+
+ <li><p>Optionally, perform some animation.
+
  <li><p>Let <var title>descendants</var> be all the <var title>doc</var>'s
  <span data-anolis-spec=html>descendant browsing context</span>'s
  <span data-anolis-spec=dom title=concept-document>documents</span> with a
@@ -353,9 +357,9 @@ method must run these steps:
 
  <li><p>For each <var title>descendant</var> in
  <var title>descendants</var>,
- <span title=concept-fullscreen-empty>empty</span>
- <var title>descendant</var>'s <span>fullscreen element stack</span>, and
  <span data-anolis-spec=html>queue a task</span> to
+ <span title=concept-fullscreen-empty>empty</span>
+ <var title>descendant</var>'s <span>fullscreen element stack</span> and
  <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
  named <code>fullscreenchange</code> with its
  <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
@@ -376,7 +380,7 @@ method must run these steps:
     the top is either not <span data-anolis-spec=dom>in a document</span> or
     its
     <span data-anolis-spec=dom title=concept-node-document>node document</span>
-    is not <var title>doc</var>, repeat this substep.
+    is not <var title>doc</var>, run these substeps again.
 
     <p class=note>This is needed because a non-top
     <span data-anolis-spec=dom title=concept-element>element</span> in the
@@ -399,10 +403,6 @@ method must run these steps:
 
    <li><p>Otherwise, set <var title>doc</var> to null.
   </ol>
-
- <li><p>Return, and run the remaining steps asynchronously.
-
- <li><p>Optionally, perform some animation.
 </ol>
 
 
