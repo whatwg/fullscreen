@@ -232,6 +232,27 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dvcs.w
   void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
 };</pre>
 
+<dl class="domintro">
+ <dt><code><var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
+ <dd>Displays <var title="">element</var> fullscreen.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
+ <dd>Returns true if <var title="">document</var> has the ability to display
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a>
+ fullscreen, or false otherwise.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
+ <dd>Returns the
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> that is
+ displayed fullscreen, or null if there is no such
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
+ <dd>Stops any
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a> within
+ <var title="">document</var> from being displayed fullscreen.
+</dl>
+
 <p>The
 <dfn id="dom-element-requestfullscreen" title="dom-Element-requestFullscreen"><code>requestFullscreen()</code></dfn>
 method must run these steps:
