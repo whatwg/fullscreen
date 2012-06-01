@@ -524,10 +524,8 @@ stack is rendered closest to the user.
  <li><p>It is not rendered if it, or an ancestor, has the
  <code title>display</code> property set to <code title>none</code>.
 
- <li><p>Its <code title>position</code> property computes to
- <code title>absolute</code>, <code title>center</code>, or
- <code title>fixed</code>, if one of those is the specified value, or
- <code title>absolute</code> otherwise.
+ <li><p>If its specified <code title>position</code> property is
+ <code title>static</code>, it computes to <code title>absolute</code>.
 
  <li><p>Its outline, if any, is to be rendered before layer 10.
 
@@ -544,6 +542,9 @@ stack is rendered closest to the user.
 This pseudo-element is a box rendered immediately below the element (and
 above the element below the element in the stack, if any), within the same
 <span>top layer</span>.
+
+<p class=note>No restrictions are made on what properties apply to this
+pseudo-element.
 
 
 <h3><code title>:fullscreen</code> pseudo-class</h3>
@@ -568,6 +569,7 @@ section uses this term -->
   box-sizing:border-box;
   width:100%;
   height:100%;
+  object-fit:contain;
 }
 
 iframe:fullscreen {
@@ -614,6 +616,7 @@ being awesome.
 Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
+<i title>fantasai</i>,
 Glenn Maynard,
 Ian Hickson,
 João Eiras,

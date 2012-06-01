@@ -480,10 +480,8 @@ stack is rendered closest to the user.
  <li><p>It is not rendered if it, or an ancestor, has the
  <code title="">display</code> property set to <code title="">none</code>.
 
- <li><p>Its <code title="">position</code> property computes to
- <code title="">absolute</code>, <code title="">center</code>, or
- <code title="">fixed</code>, if one of those is the specified value, or
- <code title="">absolute</code> otherwise.
+ <li><p>If its specified <code title="">position</code> property is
+ <code title="">static</code>, it computes to <code title="">absolute</code>.
 
  <li><p>Its outline, if any, is to be rendered before layer 10.
 
@@ -500,6 +498,9 @@ stack is rendered closest to the user.
 This pseudo-element is a box rendered immediately below the element (and
 above the element below the element in the stack, if any), within the same
 <a href="#top-layer">top layer</a>.
+
+<p class="note">No restrictions are made on what properties apply to this
+pseudo-element.
 
 
 <h3 id=":fullscreen-pseudo-class"><span class="secno">6.3 </span><code title="">:fullscreen</code> pseudo-class</h3>
@@ -524,6 +525,7 @@ section uses this term -->
   box-sizing:border-box;
   width:100%;
   height:100%;
+  object-fit:contain;
 }
 
 iframe:fullscreen {
@@ -556,7 +558,7 @@ prevents untrusted content from going fullscreen.
 
 
 <h2 class="no-num" id="references">References</h2>
-<div class="dontpublish" id="anolis-references"><dl><dt id="refsDOM">[DOM]
+<div id="anolis-references"><dl><dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
 
 <dt id="refsHTML">[HTML]
@@ -579,6 +581,7 @@ being awesome.
 Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
+<i title="">fantasai</i>,
 Glenn Maynard,
 Ian Hickson,
 João Eiras,
