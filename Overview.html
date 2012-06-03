@@ -48,7 +48,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
 
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc dontpublish" id="living-specification-—-last-updated-1-june-2012">Living Specification — Last Updated 1 June 2012</h2>
+ <h2 class="no-num no-toc dontpublish" id="living-specification-—-last-updated-3-june-2012">Living Specification — Last Updated 3 June 2012</h2>
  <dl>
   <dt>This Version:
   <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html</a>
@@ -80,7 +80,7 @@
 <a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal</a>.
 To the extent possible under law, the editors has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 June 2012, the editors have made this specification available
+3 June 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -130,15 +130,15 @@ NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
 "OPTIONAL" in the normative parts of this specification are to be
 interpreted as described in RFC2119. For readability, these words do
 not appear in all uppercase letters in this specification.
-<a data-anolis-ref="" href="#refsRFC2119">[RFC2119]</a>
+<a href="#refsRFC2119">[RFC2119]</a>
 
 
 
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
 <p>Most terminology used in this specification is from DOM and HTML.
-<a data-anolis-ref="" href="#refsDOM">[DOM]</a>
-<a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+<a href="#refsDOM">[DOM]</a>
+<a href="#refsHTML">[HTML]</a>
 
 <p>The term <dfn id="context-object">context object</dfn> means the object on which the method
 or attribute being discussed was called. When the
@@ -167,7 +167,7 @@ have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</df
 
 <p class="note">HTML defines under what conditions the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
-<a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+<a href="#refsHTML">[HTML]</a>
 <!--
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
@@ -457,7 +457,7 @@ initiated via
 <h2 id="rendering"><span class="secno">6 </span>Rendering</h2>
 
 <p>This section is to be interpreted equivalently to the Rendering section
-of HTML. <a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+of HTML. <a href="#refsHTML">[HTML]</a>
 
 
 <h3 id="new-stacking-layer"><span class="secno">6.1 </span>New stacking layer</h3>
@@ -467,11 +467,11 @@ though someone smart comes along and writes a better CSS standard. -->
 
 <p>This specification introduces a new stacking layer to the
 <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a>
-of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after layer 10, and
-is therefore rendered closest to the user within a viewport. Each
-<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> has one associated
-viewport and therefore also one <a href="#top-layer">top layer</a>.
-<a data-anolis-ref="" href="#refsCSS">[CSS]</a>
+of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after step 10 in
+the painting order, and is therefore rendered closest to the user within a
+viewport. Each <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> has one
+associated viewport and therefore also one <a href="#top-layer">top layer</a>.
+<a href="#refsCSS">[CSS]</a>
 
 <p class="note">The terminology used in this and following subsection attempts
 to match CSS 2.1 Appendix E.
@@ -488,6 +488,8 @@ stack is rendered closest to the user.
 <ul>
  <li><p>It generates a new stacking context.
 
+ <li><p>Its parent stacking context is the root stacking context.
+
  <li><p>Its containing block is the initial containing block.
 
  <li>
@@ -503,7 +505,8 @@ stack is rendered closest to the user.
  <li><p>If its specified <code title="">position</code> property is
  <code title="">static</code>, it computes to <code title="">absolute</code>.
 
- <li><p>Its outline, if any, is to be rendered before layer 10.
+ <li><p>Its outline, if any, is to be rendered before step 10 in the
+ painting order.
 
  <li><p>Unless overridden by another specification, its static position for
  <code title="">left</code>, <code title="">right</code>, and

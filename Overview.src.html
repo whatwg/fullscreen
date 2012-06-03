@@ -511,10 +511,10 @@ though someone smart comes along and writes a better CSS standard. -->
 
 <p>This specification introduces a new stacking layer to the
 <a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a>
-of CSS 2.1. It is called the <dfn>top layer</dfn>, comes after layer 10, and
-is therefore rendered closest to the user within a viewport. Each
-<span data-anolis-spec=html>browsing context</span> has one associated
-viewport and therefore also one <span>top layer</span>.
+of CSS 2.1. It is called the <dfn>top layer</dfn>, comes after step 10 in
+the painting order, and is therefore rendered closest to the user within a
+viewport. Each <span data-anolis-spec=html>browsing context</span> has one
+associated viewport and therefore also one <span>top layer</span>.
 <span data-anolis-ref>CSS</span>
 
 <p class=note>The terminology used in this and following subsection attempts
@@ -532,6 +532,8 @@ stack is rendered closest to the user.
 <ul>
  <li><p>It generates a new stacking context.
 
+ <li><p>Its parent stacking context is the root stacking context.
+
  <li><p>Its containing block is the initial containing block.
 
  <li>
@@ -547,7 +549,8 @@ stack is rendered closest to the user.
  <li><p>If its specified <code title>position</code> property is
  <code title>static</code>, it computes to <code title>absolute</code>.
 
- <li><p>Its outline, if any, is to be rendered before layer 10.
+ <li><p>Its outline, if any, is to be rendered before step 10 in the
+ painting order.
 
  <li><p>Unless overridden by another specification, its static position for
  <code title>left</code>, <code title>right</code>, and
