@@ -48,11 +48,11 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
 
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc publish" id="w3c-working-draft-31-may-2012">W3C Working Draft 31 May 2012</h2>
+ <h2 class="no-num no-toc publish" id="w3c-working-draft-25-june-2012">W3C Working Draft 25 June 2012</h2>
 
  <dl>
   <dt>This Version:
-  <dd class="publish"><a href="http://www.w3.org/TR/2012/WD-fullscreen-20120531/">http://www.w3.org/TR/2012/WD-fullscreen-20120531/</a>
+  <dd class="publish"><a href="http://www.w3.org/TR/2012/WD-fullscreen-20120625/">http://www.w3.org/TR/2012/WD-fullscreen-20120625/</a>
 
   <dt class="publish">Latest Version:
   <dd class="publish"><a href="http://www.w3.org/TR/fullscreen/">http://www.w3.org/TR/fullscreen/</a>
@@ -92,47 +92,36 @@ publications and the latest revision of this technical report can be found in
 the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
 http://www.w3.org/TR/.</i>
 
-<p>This is the 12 June 2012 First Public Working Draft of Fullscreen. 
-
-<p>This document was jointly produced by the
-<a href="http://www.w3.org/2008/webapps/">Web Applications Working Group</a> and the
-<a href="http://www.w3.org/Style/CSS/members">CSS Working Group</a>.
-The Web Applications Working Group is part of the
-<a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients Activity</a> and
-the CSS Working Group is part of the <a href="http://www.w3.org/Style/">Style Activity</a>. Both
-of these Working Groups are part of the the W3C 
-<a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
-
-<p>Comments related to the API part of this document should be sent to the
-<a href="mailto:public-webapps@w3.org?subject=%5Bfullscreen-api%5D%20">public-webapps</a> mail list
-(<a href="http://lists.w3.org/Archives/Public/public-webapps/">archived</a>) 
-with a subject header of <samp>[fullscreen-api]</samp> and 
-comments related to the CSS part of this document should be sent to 
-the <a href="mailto:www-style@w3.org?subject=%5Bfullscreen-css%5D%20">www-style</a> mail list
-(<a href="http://lists.w3.org/Archives/Public/www-style/">archived</a>) 
-with a subject header of <samp>[fullscreen-css]</samp>, or
+<p>This is the 25 June 2012 W3C Working Draft of Fullscreen. Please send
+comments to
+<a href="mailto:public-webapps@w3.org?subject=%5Bfullscreen%5D%20">public-webapps@w3.org</a>
+(<a href="http://lists.w3.org/Archives/Public/public-webapps/">archived</a>)
+with <samp>[fullscreen]</samp> at the start of the subject line, or
 <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>.
 
-<p>Publication as a Working Draft does not imply endorsement by the W3C
-Membership. This is a draft document and may be updated, replaced or
-obsoleted by other documents at any time. It is inappropriate to cite this
-document as other than work in progress.
+<p>This document is produced by the
+<a href="http://www.w3.org/2008/webapps/">Web Applications</a> (WebApps) Working
+Group. The WebApps Working Group is part of the
+<a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients Activity</a> in
+the W3C <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
 
-<p>This document was jointly produced by groups operating under the
+<p>This document was produced by a group operating under the
 <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004
-W3C Patent Policy</a>. 
-
-W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">
-public list of any patent disclosures for the Web Applications Working Group</a> and
-a <a href="http://www.w3.org/2004/01/pp-impl/32061/status" rel="disclosure">public
-list of any patent disclosures for the CSS Working Group</a> made in connection with 
-the deliverables of these groups; those pages also includes instructions for disclosing a patent. 
-An individual who has actual knowledge of a patent which the individual believes contains
+W3C Patent Policy</a>. W3C maintains a
+<a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public
+list of any patent disclosures</a> made in connection with the deliverables of
+the group; that page also includes instructions for disclosing a patent. An
+individual who has actual knowledge of a patent which the individual believes
+contains
 <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
 Claim(s)</a> must disclose the information in accordance with
 <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
 6 of the W3C Patent Policy</a>.
 
+<p>Publication as a Working Draft does not imply endorsement by the W3C
+Membership. This is a draft document and may be updated, replaced or
+obsoleted by other documents at any time. It is inappropriate to cite this
+document as other than work in progress.
 </div>
 </div>
 
@@ -267,10 +256,31 @@ at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a>
 
 partial interface <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> {
   readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
-  readonly attribute <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
+  readonly attribute <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
 
   void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
 };</pre>
+
+<dl class="domintro">
+ <dt><code><var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
+ <dd>Displays <var title="">element</var> fullscreen.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
+ <dd>Returns true if <var title="">document</var> has the ability to display
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a>
+ fullscreen, or false otherwise.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
+ <dd>Returns the
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> that is
+ displayed fullscreen, or null if there is no such
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>.
+
+ <dt><code><var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
+ <dd>Stops any
+ <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a> within
+ <var title="">document</var> from being displayed fullscreen.
+</dl>
 
 <p>The
 <dfn id="dom-element-requestfullscreen" title="dom-Element-requestFullscreen"><code>requestFullscreen()</code></dfn>
@@ -486,12 +496,11 @@ though someone smart comes along and writes a better CSS standard. -->
 
 <p>This specification introduces a new stacking layer to the
 <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a>
-of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after layer 10, and
-is therefore rendered closest to the user within a viewport. Each
-<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> has one associated
-viewport and therefore also one <a href="#top-layer">top layer</a>.
-
-<!-- XXX brackets ref? -->
+of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after step 10 in
+the painting order, and is therefore rendered closest to the user within a
+viewport. Each <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> has one
+associated viewport and therefore also one <a href="#top-layer">top layer</a>.
+<a data-anolis-ref="" href="#refsCSS">[CSS]</a>
 
 <p class="note">The terminology used in this and following subsection attempts
 to match CSS 2.1 Appendix E.
@@ -508,6 +517,8 @@ stack is rendered closest to the user.
 <ul>
  <li><p>It generates a new stacking context.
 
+ <li><p>Its parent stacking context is the root stacking context.
+
  <li><p>Its containing block is the initial containing block.
 
  <li>
@@ -520,12 +531,11 @@ stack is rendered closest to the user.
  <li><p>It is not rendered if it, or an ancestor, has the
  <code title="">display</code> property set to <code title="">none</code>.
 
- <li><p>Its <code title="">position</code> property computes to
- <code title="">absolute</code>, <code title="">center</code>, or
- <code title="">fixed</code>, if one of those is the specified value, or
- <code title="">absolute</code> otherwise.
+ <li><p>If its specified <code title="">position</code> property is
+ <code title="">static</code>, it computes to <code title="">absolute</code>.
 
- <li><p>Its outline, if any, is to be rendered before layer 10.
+ <li><p>Its outline, if any, is to be rendered before step 10 in the
+ painting order.
 
  <li><p>Unless overridden by another specification, its static position for
  <code title="">left</code>, <code title="">right</code>, and
@@ -540,6 +550,18 @@ stack is rendered closest to the user.
 This pseudo-element is a box rendered immediately below the element (and
 above the element below the element in the stack, if any), within the same
 <a href="#top-layer">top layer</a>.
+
+<p class="note">The <code>::backdrop</code> pseudo-element can be used to
+create a backdrop that hides the underlying document for an element in the
+<a href="#top-layer">top layer</a>'s stack. E.g. for the element that is displayed
+fullscreen as described by this specification.
+
+<p>It does not inherit from any element and is not
+inherited from. No restrictions are made on what properties apply to this
+pseudo-element either.
+
+<!-- That this is not in a more normative prose is because CSS should have
+     hooks for this stuff which make it normative. -->
 
 
 <h3 id=":fullscreen-pseudo-class"><span class="secno">6.3 </span><code title="">:fullscreen</code> pseudo-class</h3>
@@ -564,6 +586,7 @@ section uses this term -->
   box-sizing:border-box;
   width:100%;
   height:100%;
+  object-fit:contain;
 }
 
 iframe:fullscreen {
@@ -596,7 +619,10 @@ prevents untrusted content from going fullscreen.
 
 
 <h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsDOM">[DOM]
+<div id="anolis-references"><dl><dt id="refsCSS">[CSS]
+<dd><cite><a href="http://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek &Ccedil;elik, Ian Hickson et al.. W3C.
+
+<dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
 
 <dt id="refsHTML">[HTML]
@@ -619,11 +645,13 @@ being awesome.
 Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
+<i title="">fantasai</i>,
 Glenn Maynard,
 Ian Hickson,
 Jo&atilde;o Eiras,
 Josh Soref,
-Rafa&#322; Ch&#322;odnicki,
+&Oslash;yvind Stenhaug,
+Rafa&lstrok; Ch&lstrok;odnicki,
 Rune Lillesveen,
 Sigbj&oslash;rn Vik,
 Simon Pieters, and
