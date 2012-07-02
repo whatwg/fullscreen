@@ -48,7 +48,7 @@
 <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
 
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc dontpublish" id="living-specification-—-last-updated-25-june-2012">Living Specification — Last Updated 25 June 2012</h2>
+ <h2 class="no-num no-toc dontpublish" id="living-specification-—-last-updated-2-july-2012">Living Specification — Last Updated 2 July 2012</h2>
  <dl>
   <dt>This Version:
   <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html</a>
@@ -80,7 +80,7 @@
 <a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal</a>.
 To the extent possible under law, the editors has waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 June 2012, the editors have made this specification available
+2 July 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -130,16 +130,16 @@ NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
 "OPTIONAL" in the normative parts of this specification are to be
 interpreted as described in RFC2119. For readability, these words do
 not appear in all uppercase letters in this specification.
-<a data-anolis-ref="" href="#refsRFC2119">[RFC2119]</a>
+<a href="#refsRFC2119">[RFC2119]</a>
 
 
 
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
 <p>Most terminology used in this specification is from CSS, DOM, and HTML.
-<a data-anolis-ref="" href="#refsCSS">[CSS]</a>
-<a data-anolis-ref="" href="#refsDOM">[DOM]</a>
-<a data-anolis-ref="" href="#refsHTML5">[HTML5]</a>
+<a href="#refsCSS">[CSS]</a>
+<a href="#refsDOM">[DOM]</a>
+<a href="#refsHTML5">[HTML5]</a>
 
 <p>The term <dfn id="context-object">context object</dfn> means the object on which the method
 or attribute being discussed was called. When the
@@ -168,7 +168,7 @@ have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</df
 
 <p class="note">HTML defines under what conditions the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
-<a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+<a href="#refsHTML">[HTML]</a>
 <!--
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
@@ -458,7 +458,7 @@ initiated via
 <h2 id="rendering"><span class="secno">6 </span>Rendering</h2>
 
 <p>This section is to be interpreted equivalently to the Rendering section
-of HTML. <a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+of HTML. <a href="#refsHTML">[HTML]</a>
 
 
 <h3 id="new-stacking-layer"><span class="secno">6.1 </span>New stacking layer</h3>
@@ -472,7 +472,7 @@ of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after st
 the painting order, and is therefore rendered closest to the user within a
 viewport. Each <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> has one
 associated viewport and therefore also one <a href="#top-layer">top layer</a>.
-<a data-anolis-ref="" href="#refsCSS">[CSS]</a>
+<a href="#refsCSS">[CSS]</a>
 
 <p class="note">The terminology used in this and following subsection attempts
 to match CSS 2.1 Appendix E.
@@ -525,8 +525,8 @@ above the element below the element in the stack, if any), within the same
 
 <p class="note">The <code>::backdrop</code> pseudo-element can be used to
 create a backdrop that hides the underlying document for an element in the
-<a href="#top-layer">top layer</a>'s stack. E.g. for the element that is displayed
-fullscreen as described by this specification.
+<a href="#top-layer">top layer</a>'s stack (such as an element that is displayed
+fullscreen).
 
 <p>It does not inherit from any element and is not
 inherited from. No restrictions are made on what properties apply to this
