@@ -1,57 +1,20 @@
 <!DOCTYPE html><html lang="en-US"><head>
   <meta charset="utf-8">
-  <title>Fullscreen</title>
-  <style>
-   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em 1em }
-   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
-   pre code { color:inherit; background:transparent }
-   pre.css { border: solid 0.0625em; background: #FFFFEE; color: black; padding: 0.5em 1em; }
-   .example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
-   .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
-   p.note::before { content:"Note: " }
-   .XXX { padding:.5em; border:solid #f00 }
-   p.XXX::before { content:"Issue: " }
-   dl.switch { padding-left:2em }
-   dl.switch > dt { text-indent:-1.5em }
-   dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
-   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
-   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
-   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
-   dl.domintro dd p { margin: 0.5em 0; }
-   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: red; border: solid 2px; background: white; padding: 0 0.25em; }
-   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
-   dfn { font-weight:bold; font-style:normal }
-   code { color:orangered }
-   code :link, code :visited { color:inherit }
-   hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
-   table { border-collapse:collapse; border-style:hidden hidden none hidden }
-   table thead { border-bottom:solid }
-   table tbody th:first-child { border-left:solid }
-   table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-
-   .warning { color: red; background: transparent; font-weight: bolder; font-style: italic; }
-   .warning p:first-child { margin-top: 0; }
-   .warning p:last-child { margin-bottom: 0; }
-   .warning:before { font-style: normal; }
-   p.warning:before { content: '\26A0 Warning! '; }
-
-   @media print {
-     [data-anolis-spec]::after { content:"[" attr(data-anolis-spec) "]"; font-size:.6em; vertical-align:super; text-transform:uppercase }
-   }
-  </style>
-  <link class="dontpublish" href="http://www.whatwg.org/style/specification" rel="stylesheet">
-  </head>
+  <title>Fullscreen Standard</title>
+  <link href="//www.whatwg.org/style/specification" rel="stylesheet">
+  <link href="//www.whatwg.org/images/icon" rel="icon">
+ </head>
  <body>
 
 <div class="head">
 
-<p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
-
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc dontpublish" id="living-specification-—-last-updated-6-july-2012">Living Specification — Last Updated 6 July 2012</h2>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-12-september-2012">Living Standard — Last Updated 12 September 2012</h2>
+
  <dl>
   <dt>This Version:
-  <dd class="dontpublish"><a href="http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html</a>
+  <dd><a href="//fullscreen.spec.whatwg.org/">http://fullscreen.spec.whatwg.org/</a>
+
   <dt class="dontpublish">Participate:</dt>
   <dd class="dontpublish">Send feedback to
   <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
@@ -61,14 +24,10 @@
   <dd class="dontpublish"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
- <dd><a href="http://dvcs.w3.org/hg/fullscreen/shortlog">http://dvcs.w3.org/hg/fullscreen/shortlog</a></dd>
-
- <dt>Previous Version:
- <dd><a href="http://www.w3.org/TR/2012/WD-fullscreen-20120703/">http://www.w3.org/TR/2012/WD-fullscreen-20120703/</a></dd>
+ <dd><a href="https://github.com/whatwg/fullscreen/commits">https://github.com/whatwg/fullscreen/commits</a></dd>
 
   <dt>Editors:
   <dd class="h-card vcard"><a class="u-url url p-name fn" href="http://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
-    (<a class="p-org org h-org h-card" href="http://www.opera.com/">Opera Software ASA</a>)
     &lt;<a class="u-email email " href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 
   <dd class="h-card vcard"><a class="u-url url p-fn fn" href="http://tantek.com/" lang="tr">Tantek Çelik</a>
@@ -76,15 +35,12 @@
     &lt;<a class="u-email email" href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>&gt;
  </dl>
 
-<script async="" src="/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
+<script async="" src="//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
 
-<p class="copyright dontpublish">Copyright © 2012 the Contributors to the Fullscreen Specification, and when published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
-
-<p class="copyright dontpublish">This living specification may also be used under the terms of
-<a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal</a>.
-To the extent possible under law, the editors has waived all copyright and
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-6 July 2012, the editors have made this specification available
+12 September 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -94,11 +50,9 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 
 
-<div class="dontpublish">
-<h2 class="no-num no-toc" id="disclaimer">Disclaimer</h2>
+<h2 class="no-num no-toc" id="abstract">Abstract</h2>
+<p>Fullscreen defines the fullscreen API for the web platform.
 
-<p>This specification was published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
-</div>
 
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
@@ -601,7 +555,7 @@ prevents untrusted content from going fullscreen.
 <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
 
 <dt id="refsHTML">[HTML]
-<dd><cite><a href="http://www.whatwg.org/C">HTML</a></cite>, Ian Hickson. WHATWG.
+<dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsHTML5">[HTML5]
 <dd><cite><a href="http://dev.w3.org/html5/spec/">HTML5</a></cite>, Ian Hickson. W3C.

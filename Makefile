@@ -10,9 +10,3 @@ Overview.html: Overview.src.html data Makefile
 
 data/xrefs/dom/fullscreen.json: Overview.src.html Makefile
 	$(ANOLIS) --dump-xrefs=$@ $< /tmp/spec
-
-publish: Overview.src.html data Makefile
-	$(ANOLIS) --output-encoding=ascii --omit-optional-tags --quote-attr-values \
-	--w3c-compat-substitutions --enable=xspecxref --enable=refs --w3c-shortname="fullscreen" \
-	--filter=".dontpublish" --pubdate="$(PUBDATE)" --w3c-status=WD \
-	$< TR.html
