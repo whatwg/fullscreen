@@ -9,19 +9,19 @@
 <div class="head">
 
  <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-13-september-2012">Living Standard — Last Updated 13 September 2012</h2>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-17-october-2012">Living Standard — Last Updated 17 October 2012</h2>
 
  <dl>
   <dt>This Version:
   <dd><a href="//fullscreen.spec.whatwg.org/">http://fullscreen.spec.whatwg.org/</a>
 
-  <dt class="dontpublish">Participate:</dt>
-  <dd class="dontpublish">Send feedback to
+ <dt>Participate:</dt>
+ <dd>Send feedback to
   <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
   <!--(<a href=XXX>archives</a>)--> or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">open bugs</a>)
-  <dd class="dontpublish"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/fullscreen/commits">https://github.com/whatwg/fullscreen/commits</a></dd>
@@ -40,7 +40,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 September 2012, the editors have made this specification available
+17 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -117,7 +117,7 @@ and only if <var title="">B</var> is an
 specification is the
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#user-interaction-task-source">user interaction task source</a>.
 
-<p>All <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a>
+<p>All <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
 have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn> and
 <dfn id="fullscreen-element-stack">fullscreen element stack</dfn>. Unless otherwise stated the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is unset and the
@@ -149,7 +149,7 @@ have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</df
 
 <p>To <dfn id="concept-fullscreen-empty" title="concept-fullscreen-empty">empty</dfn> a
 <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, remove
-all the <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a> in
+all the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> in
 it from <var title="">document</var>'s
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>'s
 <a href="#top-layer">top layer</a>, and then empty <var title="">document</var>'s
@@ -161,31 +161,31 @@ it from <var title="">document</var>'s
 <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method
 was invoked on the
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> and
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> and
 subsequently <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a> that
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>'s
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s
 <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
 <p class="note">Since a <code title="">fullscreenchange</code> event will be
 dispatched regardless, emptying the <a href="#fullscreen-element-stack">fullscreen element stack</a>
 per above is fine.
 
-<p>If an <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>
+<p>If an <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
 at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a> is removed from a
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>,
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>,
 <a href="#fully-exit-fullscreen">fully exit fullscreen</a>.
 <!-- XXX reference DOM mutation -->
 
 
 <h2 id="api"><span class="secno">4 </span>API</h2>
 
-<pre class="idl">partial interface <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a> {
+<pre class="idl">partial interface <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#element">Element</a> {
   void <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
 };
 
-partial interface <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#document">Document</a> {
+partial interface <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#document">Document</a> {
   readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
-  readonly attribute <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
+  readonly attribute <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
 
   void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
 };</pre>
@@ -196,18 +196,18 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dvcs.w
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
  <dd>Returns true if <var title="">document</var> has the ability to display
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a>
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>
  fullscreen, or false otherwise.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
  <dd>Returns the
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> that is
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that is
  displayed fullscreen, or null if there is no such
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a>.
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
  <dd>Stops any
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">elements</a> within
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> within
  <var title="">document</var> from being displayed fullscreen.
 </dl>
 
@@ -219,31 +219,31 @@ method must run these steps:
  <li>
   <p>If any of the following conditions are true,
   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
   named <code>fullscreenerror</code> with its
   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
   <a href="#context-object">context object</a>'s
-  <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, and then terminate these steps:
+  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>, and then terminate these steps:
 
   <ul>
    <li><p>The <a href="#context-object">context object</a> is not
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a>.
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#in-a-document">in a document</a>.
 
    <li><p>The <a href="#context-object">context object</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>, or an
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>, or an
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> does
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> does
    not have the <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set.
 
    <li><p>The <a href="#context-object">context object</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>
    <a href="#fullscreen-element-stack">fullscreen element stack</a> is not empty and its top
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> is not an
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-tree-ancestor" title="concept-tree-ancestor">ancestor</a> of
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is not an
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-ancestor" title="concept-tree-ancestor">ancestor</a> of
    the <a href="#context-object">context object</a>.
 
    <li><p>A <a href="#descendant-browsing-context">descendant browsing context</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> has a
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
    non-empty <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
    <li><p>This algorithm is not
@@ -258,11 +258,11 @@ method must run these steps:
  <li><p>Optionally, perform some animation.
 
  <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>.
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
 
  <li><p>Let <var title="">docs</var> be all <var title="">doc</var>'s
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> (if any)
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> (if any)
  and <var title="">doc</var>, in order of furthest away from
  <var title="">doc</var> to <var title="">doc</var>.
  <!-- XXX order terminology -->
@@ -273,7 +273,7 @@ method must run these steps:
 
   <ol>
    <li><p>Let <var title="">following document</var> be the
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> after
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> after
    <var title="">document</var> in <var title="">docs</var>, or null if there is
    no such document.
 
@@ -282,14 +282,14 @@ method must run these steps:
    <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
    <a href="#context-object">context object</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
    <var title="">document</var>.
 
    <li><p>Otherwise, if <var title="">document</var>'s
    <a href="#fullscreen-element-stack">fullscreen element stack</a> is either empty or its top
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> is not
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is not
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>,
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
@@ -297,7 +297,7 @@ method must run these steps:
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
    <var title="">document</var>.
@@ -314,12 +314,12 @@ method must run these steps:
 <dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
 attribute must return true if the <a href="#context-object">context object</a> and all
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> have
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> have
 their <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, or false otherwise.
 
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
 attribute must return the top
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> of the
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of the
 <a href="#context-object">context object</a>'s
 <a href="#fullscreen-element-stack">fullscreen element stack</a>, or null otherwise.
 
@@ -339,10 +339,10 @@ method must run these steps:
 
  <li><p>Let <var title="">descendants</var> be all the <var title="">doc</var>'s
  <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">documents</a> with a
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> with a
  non-empty <a href="#fullscreen-element-stack">fullscreen element stack</a> (if any), ordered so that
  the child of the <var title="">doc</var> is last and the
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a> furthest
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> furthest
  away from the <var title="">doc</var> is first.
  <!-- XXX order terminology -->
 
@@ -351,7 +351,7 @@ method must run these steps:
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
  <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a>
  <var title="">descendant</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
- <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
  named <code>fullscreenchange</code> with its
  <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
  <var title="">descendant</var>.
@@ -362,24 +362,24 @@ method must run these steps:
   <ol>
    <li>
     <p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
-    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> of
+    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of
     <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
     <p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
     non-empty and the
-    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> now at
-    the top is either not <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#in-a-document">in a document</a> or
+    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> now at
+    the top is either not <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#in-a-document">in a document</a> or
     its
-    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>
+    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>
     is not <var title="">doc</var>, run these substeps again.
 
     <p class="note">This is needed because a non-top
-    <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> in the
+    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
     <a href="#fullscreen-element-stack">fullscreen element stack</a> could have been removed from
     <var title="">doc</var>.
 
    <li><p><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-event-fire" title="concept-event-fire">fire an event</a>
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
    named <code>fullscreenchange</code> with its
    <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
    <var title="">doc</var>.
@@ -390,7 +390,7 @@ method must run these steps:
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, set
    <var title="">doc</var> to that
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-node-document" title="concept-node-document">node document</a>.
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
 
    <li><p>Otherwise, set <var title="">doc</var> to null.
   </ol>
@@ -497,8 +497,8 @@ pseudo-element either.
 
 <p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
 pseudo-class must match the top
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-element" title="concept-element">element</a> of the
-<a class="external" data-anolis-spec="dom" href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#concept-document" title="concept-document">document</a>'s
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of the
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s
 <a href="#fullscreen-element-stack">fullscreen element stack</a> (if any).
 
 
@@ -552,7 +552,7 @@ prevents untrusted content from going fullscreen.
 <dd><cite><a href="http://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek Çelik, Ian Hickson et al.. W3C.
 
 <dt id="refsDOM">[DOM]
-<dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">DOM4</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. W3C.
+<dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id="refsHTML">[HTML]
 <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
