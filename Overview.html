@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en-US"><head>
   <meta charset="utf-8">
-  <title>Fullscreen Standard</title>
+  <title>Fullscreen API Standard</title>
   <link href="//www.whatwg.org/style/specification" rel="stylesheet">
   <link href="//www.whatwg.org/images/icon" rel="icon">
  </head>
@@ -8,8 +8,9 @@
 
 <div class="head">
 
- <h1>Fullscreen</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-31-october-2012">Living Standard — Last Updated 31 October 2012</h2>
+ <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
+ <h1>Fullscreen API</h1>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-5-november-2012">Living Standard — Last Updated 5 November 2012</h2>
 
  <dl>
   <dt>This Version:
@@ -36,12 +37,12 @@
     &lt;<a class="u-email email" href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>&gt;
  </dl>
 
-<script async="" src="//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
+<script async="" src="//resources.whatwg.org/file-bug.js"></script>
 
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-31 October 2012, the editors have made this specification available
+5 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -541,10 +542,11 @@ user agent or even operating system environment when fullscreen. See also
 the definition of
 <a href="#dom-element-requestfullscreen"><code title="dom-Element-requestFullscreen">requestFullscreen()</code></a>.
 
-<p>To prevent embedded content from going fullscreen only embedded content
-specifically allowed via the <code>allowfullscreen</code> attribute of the
-HTML <code>iframe</code> element will be able to go fullscreen. This
-prevents untrusted content from going fullscreen.
+<p>To enable content in a
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a> to go fullscreen,
+it needs to be specifically allowed via the <code>allowfullscreen</code>
+attribute of the HTML <code>iframe</code> element. This prevents untrusted
+content from going fullscreen.
 
 
 
@@ -584,6 +586,7 @@ Ian Hickson,
 João Eiras,
 Josh Soref,
 Øyvind Stenhaug,
+Pat Ladd,
 Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbjørn Vik,
