@@ -10,7 +10,7 @@
 
  <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
  <h1>Fullscreen API</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-10-november-2012">Living Standard — Last Updated 10 November 2012</h2>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-11-january-2013">Living Standard — Last Updated 11 January 2013</h2>
 
  <dl>
   <dt>This Version:
@@ -42,7 +42,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-10 November 2012, the editors have made this specification available
+11 January 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -251,7 +251,7 @@ method must run these steps:
    non-empty <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
    <li><p>This algorithm is not
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-pop-up">allowed to show a pop-up</a>.
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>.
 
    <li><p>There is a previously-established user preference, security risk,
    or platform limitation.
@@ -421,11 +421,13 @@ initiated via
 <p>This section is to be interpreted equivalently to the Rendering section
 of HTML. <a href="#refsHTML">[HTML]</a>
 
+<p class="XXX">Long term CSS will define the <a href="#top-layer">top layer</a> concept
+and its associated <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
+pseudo-element as part of CSS' stacking context model. Patching CSS as done
+here is sketchy as hell.
+
 
 <h3 id="new-stacking-layer"><span class="secno">6.1 </span>New stacking layer</h3>
-
-<!-- CSS is clunky as hell. That's why we patch it until we die. Ideally
-though someone smart comes along and writes a better CSS standard. -->
 
 <p>This specification introduces a new stacking layer to the
 <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a>
@@ -465,7 +467,8 @@ stack is rendered closest to the user.
  <code title="">display</code> property set to <code title="">none</code>.
 
  <li><p>If its specified <code title="">position</code> property is
- <code title="">static</code>, it computes to <code title="">absolute</code>.
+ <code title="">static</code> or <code title="">relative</code>, it computes to
+ <code title="">absolute</code>.
 
  <li><p>Its outline, if any, is to be rendered before step 10 in the
  painting order.
@@ -484,10 +487,10 @@ This pseudo-element is a box rendered immediately below the element (and
 above the element below the element in the stack, if any), within the same
 <a href="#top-layer">top layer</a>.
 
-<p class="note">The <code>::backdrop</code> pseudo-element can be used to
-create a backdrop that hides the underlying document for an element in the
-<a href="#top-layer">top layer</a>'s stack (such as an element that is displayed
-fullscreen).
+<p class="note">The <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
+pseudo-element can be used to create a backdrop that hides the underlying
+document for an element in the <a href="#top-layer">top layer</a>'s stack (such as an
+element that is displayed fullscreen).
 
 <p>It does not inherit from any element and is not
 inherited from. No restrictions are made on what properties apply to this
@@ -587,6 +590,7 @@ Glenn Maynard,
 Ian Hickson,
 João Eiras,
 Josh Soref,
+Matt Falkenhagen,
 Øyvind Stenhaug,
 Pat Ladd,
 Rafał Chłodnicki,
