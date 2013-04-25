@@ -6,35 +6,38 @@
   <link rel=stylesheet href=//www.whatwg.org/style/specification>
   <link rel=icon href=//resources.whatwg.org/logo-fullscreen.svg>
  </head>
- <body>
+ <body class=h-entry>
 
 <div class=head>
 
  <p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-fullscreen.svg width=100 height=100></a></p>
- <h1>Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 01 Jan 1901]</h2>
+ <h1 class=p-name>Fullscreen API</h1>
+ <h2 class="no-num no-toc">Living Standard &mdash; Last Updated 
+  <time class=dt-published datetime="[CDATE: YYYYMMDD]">[DATE: 01 Jan 1901]</time>
+ </h2>
 
  <dl>
   <dt>This Version:
-  <dd><a href=//fullscreen.spec.whatwg.org/>http://fullscreen.spec.whatwg.org/</a>
+  <dd><a class=u-url href=//fullscreen.spec.whatwg.org/>http://fullscreen.spec.whatwg.org/</a>
 
  <dt>Participate:</dt>
  <dd>Send feedback to
-  <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
+  <a rel=discussion href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
   <!--(<a href=XXX>archives</a>)--> or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
-  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">open bugs</a>)
- <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+  (<a rel=issues href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">open bugs</a>)
+ <dd><a rel=discussion href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href=https://github.com/whatwg/fullscreen/commits>https://github.com/whatwg/fullscreen/commits</a></dd>
  <dd><a href="https://twitter.com/FullscreenAPI">@FullscreenAPI</a>
 
   <dt>Editors:
-  <dd class="h-card vcard"><a class="u-url url p-name fn" lang="nl" href="http://annevankesteren.nl/">Anne van Kesteren</a>
+  <dd class="p-author h-card vcard"><a class="u-url url p-name fn" lang="nl" href="http://annevankesteren.nl/">Anne van Kesteren</a>
+    (<a class="p-org org h-org h-card" href="http://www.mozilla.org/">Mozilla Foundation</a>)  
     &lt;<a class="u-email email " href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>>
 
-  <dd class="h-card vcard"><a class="u-url url p-fn fn" lang="tr" href="http://tantek.com/">Tantek Çelik</a>
+  <dd class="p-author h-card vcard"><a class="u-url url p-fn fn" lang="tr" href="http://tantek.com/">Tantek Çelik</a>
     (<a class="p-org org h-org h-card" href="http://www.mozilla.org/">Mozilla Foundation</a>)
     &lt;<a class="u-email email" href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>>
  </dl>
@@ -176,6 +179,9 @@ at the top of a <span>fullscreen element stack</span> is removed from a
 partial interface <span data-anolis-spec=dom>Document</span> {
   readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
   readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
+
+  attribute EventHandler <span title=dom-Document-onfullscreenchange>onfullscreenchange</span>;
+  attribute EventHandler <span title=dom-Document-onfullscreenerror>onfullscreenerror</span>;
 
   void <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
 };</pre>
