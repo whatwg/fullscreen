@@ -230,9 +230,7 @@ method must run these steps:
   <p>If any of the following conditions are true,
   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-  named <code>fullscreenerror</code> with its
-  <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
-  <a href="#context-object">context object</a>'s
+  named <code>fullscreenerror</code> on the <a href="#context-object">context object</a>'s
   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>, and then terminate these steps:
 
   <ul>
@@ -293,9 +291,7 @@ method must run these steps:
    <a href="#context-object">context object</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> with its
-   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on the
-   <var title="">document</var>.
+   named <code>fullscreenchange</code> on the <var title="">document</var>.
 
    <li><p>Otherwise, if <var title="">document</var>'s
    <a href="#fullscreen-element-stack">fullscreen element stack</a> is either empty or its top
@@ -308,9 +304,7 @@ method must run these steps:
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> on
    <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> with its
-   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
-   <var title="">document</var>.
+   named <code>fullscreenchange</code> on <var title="">document</var>.
 
    <li><p>Otherwise, do nothing for this <var title="">document</var>. It stays
    the same.
@@ -362,9 +356,7 @@ method must run these steps:
  <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a>
  <var title="">descendant</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
- named <code>fullscreenchange</code> with its
- <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
- <var title="">descendant</var>.
+ named <code>fullscreenchange</code> on <var title="">descendant</var>.
 
  <li>
   <p>While <var title="">doc</var> is not null, run these substeps:
@@ -390,9 +382,7 @@ method must run these steps:
 
    <li><p><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> with its
-   <code title="dom-Event-bubbles">bubbles</code> attribute set to true on
-   <var title="">doc</var>.
+   named <code>fullscreenchange</code> on <var title="">doc</var>.
 
    <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
    empty and <var title="">doc</var>'s
@@ -602,8 +592,9 @@ Pat Ladd,
 Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbjørn Vik,
-Simon Pieters, and
-Tab Atkins
+Simon Pieters,
+Tab Atkins, and
+Vincent Scheib
 
 for also being awesome.
 

@@ -216,9 +216,7 @@ method must run these steps:
   <p>If any of the following conditions are true,
   <span data-anolis-spec=html>queue a task</span> to
   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
-  named <code>fullscreenerror</code> with its
-  <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
-  <span>context object</span>'s
+  named <code>fullscreenerror</code> on the <span>context object</span>'s
   <span data-anolis-spec=dom title=concept-node-document>node document</span>, and then terminate these steps:
 
   <ul>
@@ -279,9 +277,7 @@ method must run these steps:
    <span>context object</span> on
    <var title>document</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
-   named <code>fullscreenchange</code> with its
-   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on the
-   <var title>document</var>.
+   named <code>fullscreenchange</code> on the <var title>document</var>.
 
    <li><p>Otherwise, if <var title>document</var>'s
    <span>fullscreen element stack</span> is either empty or its top
@@ -294,9 +290,7 @@ method must run these steps:
    <span data-anolis-spec=html>browsing context container</span> on
    <var title>document</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
-   named <code>fullscreenchange</code> with its
-   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
-   <var title>document</var>.
+   named <code>fullscreenchange</code> on <var title>document</var>.
 
    <li><p>Otherwise, do nothing for this <var title>document</var>. It stays
    the same.
@@ -348,9 +342,7 @@ method must run these steps:
  <span title=concept-fullscreen-empty>empty</span>
  <var title>descendant</var>'s <span>fullscreen element stack</span> and
  <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
- named <code>fullscreenchange</code> with its
- <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
- <var title>descendant</var>.
+ named <code>fullscreenchange</code> on <var title>descendant</var>.
 
  <li>
   <p>While <var title>doc</var> is not null, run these substeps:
@@ -376,9 +368,7 @@ method must run these steps:
 
    <li><p><span data-anolis-spec=html>Queue a task</span> to
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
-   named <code>fullscreenchange</code> with its
-   <code title=dom-Event-bubbles>bubbles</code> attribute set to true on
-   <var title>doc</var>.
+   named <code>fullscreenchange</code> on <var title>doc</var>.
 
    <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
    empty and <var title>doc</var>'s
@@ -573,8 +563,9 @@ Pat Ladd,
 Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbj&oslash;rn Vik,
-Simon Pieters, and
-Tab Atkins
+Simon Pieters,
+Tab Atkins, and
+Vincent Scheib
 
 for also being awesome.
 
