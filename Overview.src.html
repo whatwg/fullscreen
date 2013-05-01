@@ -164,7 +164,8 @@ dispatched regardless, emptying the <span>fullscreen element stack</span>
 per above is fine.
 
 <p>If an <span data-anolis-spec=dom title=concept-element>element</span>
-at the top of a <span>fullscreen element stack</span> is removed from a
+at the top of a <span>fullscreen element stack</span> is
+<span data-anolis-spec=dom title="node is removed">removed</span> from a
 <span data-anolis-spec=dom title=concept-document>document</span>,
 <span>fully exit fullscreen</span>.
 <!-- XXX reference DOM mutation -->
@@ -188,21 +189,21 @@ partial interface <span data-anolis-spec=dom>Document</span> {
 
 <dl class=domintro>
  <dt><code><var title>element</var> . <span title=dom-Element-requestFullscreen>requestFullscreen</span>()</code>
- <dd>Displays <var title>element</var> fullscreen.
+ <dd><p>Displays <var title>element</var> fullscreen.
 
  <dt><code><var title>document</var> . <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span></code>
- <dd>Returns true if <var title>document</var> has the ability to display
+ <dd><p>Returns true if <var title>document</var> has the ability to display
  <span data-anolis-spec=dom title=concept-element>elements</span>
  fullscreen, or false otherwise.
 
  <dt><code><var title>document</var> . <span title=dom-Document-fullscreenElement>fullscreenElement</span></code>
- <dd>Returns the
+ <dd><p>Returns the
  <span data-anolis-spec=dom title=concept-element>element</span> that is
  displayed fullscreen, or null if there is no such
  <span data-anolis-spec=dom title=concept-element>element</span>.
 
  <dt><code><var title>document</var> . <span title=dom-Document-exitFullscreen>exitFullscreen</span>()</code>
- <dd>Stops any
+ <dd><p>Stops any
  <span data-anolis-spec=dom title=concept-element>elements</span> within
  <var title>document</var> from being displayed fullscreen.
 </dl>

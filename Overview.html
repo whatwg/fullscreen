@@ -178,7 +178,8 @@ dispatched regardless, emptying the <a href="#fullscreen-element-stack">fullscre
 per above is fine.
 
 <p>If an <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
-at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a> is removed from a
+at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a> is
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#node-is-removed" title="node is removed">removed</a> from a
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>,
 <a href="#fully-exit-fullscreen">fully exit fullscreen</a>.
 <!-- XXX reference DOM mutation -->
@@ -202,21 +203,21 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dom.sp
 
 <dl class="domintro">
  <dt><code><var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
- <dd>Displays <var title="">element</var> fullscreen.
+ <dd><p>Displays <var title="">element</var> fullscreen.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
- <dd>Returns true if <var title="">document</var> has the ability to display
+ <dd><p>Returns true if <var title="">document</var> has the ability to display
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>
  fullscreen, or false otherwise.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
- <dd>Returns the
+ <dd><p>Returns the
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that is
  displayed fullscreen, or null if there is no such
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
- <dd>Stops any
+ <dd><p>Stops any
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> within
  <var title="">document</var> from being displayed fullscreen.
 </dl>
