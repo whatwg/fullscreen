@@ -130,8 +130,15 @@ have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</df
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is unset and the
 <a href="#fullscreen-element-stack">fullscreen element stack</a> is empty.
 
-<p class="note">HTML defines under what conditions the
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
+<p class="note">HTML defines the exact conditions udner which the
+<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> from a
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> will have it set. For a
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a> it is only set if the
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-iframe-element.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a> element that is responsible for creating the
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a> has its
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-iframe-element.html#attr-iframe-allowfullscreen"><code class="external" data-anolis-spec="html">allowfullscreen</code></a> attribute set. That attribute is
+defined by HTML as well.
 <a href="#refsHTML">[HTML]</a>
 <!--
   not set for <iframe>, createDocument();
@@ -176,6 +183,10 @@ subsequently <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty
 <p class="note">Since a <code title="">fullscreenchange</code> event will be
 dispatched regardless, emptying the <a href="#fullscreen-element-stack">fullscreen element stack</a>
 per above is fine.
+
+<p class="note">HTML invokes the <a href="#fully-exit-fullscreen">fully exit fullscreen</a> algorithm for
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html#navigate" title="navigate">navigation</a>.
+<a href="#refsHTML">[HTML]</a>
 
 <p>If an <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
 at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a> is

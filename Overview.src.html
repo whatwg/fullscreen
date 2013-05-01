@@ -116,8 +116,15 @@ have an associated <dfn>fullscreen enabled flag</dfn> and
 <span>fullscreen enabled flag</span> is unset and the
 <span>fullscreen element stack</span> is empty.
 
-<p class=note>HTML defines under what conditions the
-<span>fullscreen enabled flag</span> is set.
+<p class=note>HTML defines the exact conditions udner which the
+<span>fullscreen enabled flag</span> is set. A
+<span data-anolis-spec=dom title=concept-document>document</span> from a
+<span data-anolis-spec=html>top-level browsing context</span> will have it set. For a
+<span data-anolis-spec=html>nested browsing context</span> it is only set if the
+<code data-anolis-spec=html>iframe</code> element that is responsible for creating the
+<span data-anolis-spec=html>nested browsing context</span> has its
+<code data-anolis-spec=html>allowfullscreen</code> attribute set. That attribute is
+defined by HTML as well.
 <span data-anolis-ref>HTML</span>
 <!--
   not set for <iframe>, createDocument();
@@ -162,6 +169,10 @@ subsequently <span title=concept-fullscreen-empty>empty</span> that
 <p class=note>Since a <code title>fullscreenchange</code> event will be
 dispatched regardless, emptying the <span>fullscreen element stack</span>
 per above is fine.
+
+<p class=note>HTML invokes the <span>fully exit fullscreen</span> algorithm for
+<span data-anolis-spec=html title=navigate>navigation</span>.
+<span data-anolis-ref>HTML</span>
 
 <p>If an <span data-anolis-spec=dom title=concept-element>element</span>
 at the top of a <span>fullscreen element stack</span> is
