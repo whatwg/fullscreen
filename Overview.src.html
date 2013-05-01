@@ -180,10 +180,10 @@ partial interface <span data-anolis-spec=dom>Document</span> {
   readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
   readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
 
-  attribute EventHandler <span title=dom-Document-onfullscreenchange>onfullscreenchange</span>;
-  attribute EventHandler <span title=dom-Document-onfullscreenerror>onfullscreenerror</span>;
-
   void <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
+
+  attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenchange>onfullscreenchange</span>;
+  attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenerror>onfullscreenerror</span>;
 };</pre>
 
 <dl class=domintro>
@@ -381,6 +381,28 @@ method must run these steps:
    <li><p>Otherwise, set <var title>doc</var> to null.
   </ol>
 </ol>
+
+<hr>
+
+<p>The following are the <span data-anolis-spec=html>event handlers</span> (and their
+corresponding
+<span data-anolis-spec=html title="event handler event type">event handler event types</span>)
+that must be supported on
+<span data-anolis-spec=dom title=concept-document>documents</span> as attributes:
+
+<table>
+ <thead>
+	<tr>
+	 <th><span data-anolis-spec=html title="event handlers">event handler</span>
+	 <th><span data-anolis-spec=html>event handler event type</span>
+ <tbody>
+	<tr>
+	 <td><dfn title="handler-document-onfullscreenchange"><code>onfullscreenchange</code></dfn>
+	 <td><code title="event-document-fullscreenchange">fullscreenchange</code>
+	<tr>
+	 <td><dfn title="handler-document-onfullscreenerror"><code>onfullscreenerror</code></dfn>
+	 <td><code title="event-document-fullscreenerror">fullscreenerror</code>
+</table>
 
 
 

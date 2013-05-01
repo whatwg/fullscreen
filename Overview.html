@@ -194,10 +194,10 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dom.sp
   readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
   readonly attribute <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
 
-  attribute EventHandler <span title="dom-Document-onfullscreenchange">onfullscreenchange</span>;
-  attribute EventHandler <span title="dom-Document-onfullscreenerror">onfullscreenerror</span>;
-
   void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
+
+  attribute <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenchange" title="handler-document-onfullscreenchange">onfullscreenchange</a>;
+  attribute <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenerror" title="handler-document-onfullscreenerror">onfullscreenerror</a>;
 };</pre>
 
 <dl class="domintro">
@@ -395,6 +395,28 @@ method must run these steps:
    <li><p>Otherwise, set <var title="">doc</var> to null.
   </ol>
 </ol>
+
+<hr>
+
+<p>The following are the <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers">event handlers</a> (and their
+corresponding
+<a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handler-event-type" title="event handler event type">event handler event types</a>)
+that must be supported on
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> as attributes:
+
+<table>
+ <thead>
+	<tr>
+	 <th><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handlers" title="event handlers">event handler</a>
+	 <th><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
+ <tbody>
+	<tr>
+	 <td><dfn id="handler-document-onfullscreenchange" title="handler-document-onfullscreenchange"><code>onfullscreenchange</code></dfn>
+	 <td><code title="event-document-fullscreenchange">fullscreenchange</code>
+	<tr>
+	 <td><dfn id="handler-document-onfullscreenerror" title="handler-document-onfullscreenerror"><code>onfullscreenerror</code></dfn>
+	 <td><code title="event-document-fullscreenerror">fullscreenerror</code>
+</table>
 
 
 
