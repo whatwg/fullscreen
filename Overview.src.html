@@ -463,7 +463,7 @@ stack is rendered closest to the user.
 <p class=note>The <code title>z-index</code> property has no effect in the
 <span>top layer</span>.
 
-<p>An element in this stack has the following attributes:
+<p>An element in this stack has the following <dfn>characteristics</dfn>:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -501,7 +501,8 @@ stack is rendered closest to the user.
 <dfn title=css-pe-backdrop><code>::backdrop</code></dfn> pseudo-element.
 This pseudo-element is a box rendered immediately below the element (and
 above the element below the element in the stack, if any), within the same
-<span>top layer</span>.
+<span>top layer</span>. This pseudo-element box has the same <span>characteristics</span>
+as any element box in the <span>top layer</span>.
 
 <p class=note>The <code title=css-pe-backdrop>::backdrop</code>
 pseudo-element can be used to create a backdrop that hides the underlying
