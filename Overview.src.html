@@ -114,7 +114,7 @@ specification is the
 have an associated <dfn>fullscreen enabled flag</dfn> and
 <dfn>fullscreen element stack</dfn>. Unless otherwise stated the
 <span>fullscreen enabled flag</span> is unset and the
-<span>fullscreen element stack</span> is empty.
+<span>fullscreen element stack</span> is an initially empty ordered set.
 
 <p class=note>HTML defines the exact conditions under which the
 <span>fullscreen enabled flag</span> is set. A
@@ -133,10 +133,10 @@ defined by HTML as well.
 
 <p>To <dfn title=concept-fullscreen-add>add</dfn> an
 <var title>element</var> on a <var title>document</var>'s
-<span>fullscreen element stack</span>, add it on top of
+<span>fullscreen element stack</span>, add, or move if already present, it on top of
 <var title>document</var>'s
 <span data-anolis-spec=html>browsing context</span>'s
-<span>top layer</span>, and then add it on top of
+<span>top layer</span>, and then add, or move if already present, it on top of
 <var title>document</var>'s <span>fullscreen element stack</span>.
 
 <p>To <dfn title=concept-fullscreen-remove>remove</dfn> an
@@ -456,14 +456,14 @@ associated viewport and therefore also one <span>top layer</span>.
 <p class=note>The terminology used in this and following subsection attempts
 to match CSS 2.1 Appendix E.
 
-<p>The <span>top layer</span> consists of a stack of elements, rendered in
-the order they have been added to the stack. The last element added to the
-stack is rendered closest to the user.
+<p>The <span>top layer</span> consists of an ordered set of elements, rendered in the
+order they have been added to the set. The last element added is rendered closest to the
+user.
 
 <p class=note>The <code title>z-index</code> property has no effect in the
 <span>top layer</span>.
 
-<p>An element in this stack has the following <dfn>characteristics</dfn>:
+<p>An element in a <span>top layer</span> has the following <dfn>characteristics</dfn>:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -497,17 +497,16 @@ stack is rendered closest to the user.
 
 <h3><code title>::backdrop</code> pseudo-element</h3>
 
-<p>Each element in the <span>top layer</span>'s stack has a
+<p>Each element in a <span>top layer</span> has a
 <dfn title=css-pe-backdrop><code>::backdrop</code></dfn> pseudo-element.
 This pseudo-element is a box rendered immediately below the element (and
-above the element below the element in the stack, if any), within the same
+above the element before the element in the set, if any), within the same
 <span>top layer</span>. This pseudo-element box has the same <span>characteristics</span>
 as any element box in the <span>top layer</span>.
 
-<p class=note>The <code title=css-pe-backdrop>::backdrop</code>
-pseudo-element can be used to create a backdrop that hides the underlying
-document for an element in the <span>top layer</span>'s stack (such as an
-element that is displayed fullscreen).
+<p class=note>The <code title=css-pe-backdrop>::backdrop</code> pseudo-element can be used
+to create a backdrop that hides the underlying document for an element in a
+<span>top layer</span> (such as an element that is displayed fullscreen).
 
 <p>It does not inherit from any element and is not
 inherited from. No restrictions are made on what properties apply to this

@@ -10,8 +10,8 @@
 
  <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-12-july-2013">Living Standard — Last Updated
-  <time class="dt-published" datetime="20130712">12 July 2013</time>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-7-november-2013">Living Standard — Last Updated
+  <time class="dt-published" datetime="20131107">7 November 2013</time>
  </h2>
 
  <dl>
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 July 2013, the editors have made this specification available
+7 November 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -128,7 +128,7 @@ specification is the
 have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn> and
 <dfn id="fullscreen-element-stack">fullscreen element stack</dfn>. Unless otherwise stated the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is unset and the
-<a href="#fullscreen-element-stack">fullscreen element stack</a> is empty.
+<a href="#fullscreen-element-stack">fullscreen element stack</a> is an initially empty ordered set.
 
 <p class="note">HTML defines the exact conditions under which the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
@@ -147,10 +147,10 @@ defined by HTML as well.
 
 <p>To <dfn id="concept-fullscreen-add" title="concept-fullscreen-add">add</dfn> an
 <var title="">element</var> on a <var title="">document</var>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>, add it on top of
+<a href="#fullscreen-element-stack">fullscreen element stack</a>, add, or move if already present, it on top of
 <var title="">document</var>'s
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>'s
-<a href="#top-layer">top layer</a>, and then add it on top of
+<a href="#top-layer">top layer</a>, and then add, or move if already present, it on top of
 <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
 <p>To <dfn id="concept-fullscreen-remove" title="concept-fullscreen-remove">remove</dfn> an
@@ -470,14 +470,14 @@ associated viewport and therefore also one <a href="#top-layer">top layer</a>.
 <p class="note">The terminology used in this and following subsection attempts
 to match CSS 2.1 Appendix E.
 
-<p>The <a href="#top-layer">top layer</a> consists of a stack of elements, rendered in
-the order they have been added to the stack. The last element added to the
-stack is rendered closest to the user.
+<p>The <a href="#top-layer">top layer</a> consists of an ordered set of elements, rendered in the
+order they have been added to the set. The last element added is rendered closest to the
+user.
 
 <p class="note">The <code title="">z-index</code> property has no effect in the
 <a href="#top-layer">top layer</a>.
 
-<p>An element in this stack has the following <dfn id="characteristics">characteristics</dfn>:
+<p>An element in a <a href="#top-layer">top layer</a> has the following <dfn id="characteristics">characteristics</dfn>:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -511,17 +511,16 @@ stack is rendered closest to the user.
 
 <h3 id="::backdrop-pseudo-element"><span class="secno">6.2 </span><code title="">::backdrop</code> pseudo-element</h3>
 
-<p>Each element in the <a href="#top-layer">top layer</a>'s stack has a
+<p>Each element in a <a href="#top-layer">top layer</a> has a
 <dfn id="css-pe-backdrop" title="css-pe-backdrop"><code>::backdrop</code></dfn> pseudo-element.
 This pseudo-element is a box rendered immediately below the element (and
-above the element below the element in the stack, if any), within the same
+above the element before the element in the set, if any), within the same
 <a href="#top-layer">top layer</a>. This pseudo-element box has the same <a href="#characteristics">characteristics</a>
 as any element box in the <a href="#top-layer">top layer</a>.
 
-<p class="note">The <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
-pseudo-element can be used to create a backdrop that hides the underlying
-document for an element in the <a href="#top-layer">top layer</a>'s stack (such as an
-element that is displayed fullscreen).
+<p class="note">The <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element can be used
+to create a backdrop that hides the underlying document for an element in a
+<a href="#top-layer">top layer</a> (such as an element that is displayed fullscreen).
 
 <p>It does not inherit from any element and is not
 inherited from. No restrictions are made on what properties apply to this
