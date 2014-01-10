@@ -233,6 +233,23 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dom.sp
  <var title="">document</var> from being displayed fullscreen.
 </dl>
 
+<p>To <dfn id="go-fullscreen">go fullscreen</dfn> with an
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> <var title="">element</var>,
+a <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var title="">document</var>,
+and a <var title="">top-level document flag</var>, run these steps:
+
+<ol>
+ <li><p>If <var title="">top-level document flag</var> is set and <var title="">document</var>'s
+ <a href="#fullscreen-element-stack">fullscreen element stack</a> is empty, resize its viewport to match the
+ dimensions of the screen and optionally display a message indicating how the user resize
+ the viewport back to its "normal" dimensions.
+
+ <li><p><a href="#concept-fullscreen-add" title="concept-fullscreen-add">Add</a> <var title="">element</var> on
+ <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+ <code>fullscreenchange</code> on <var title="">document</var>.
+</ol>
+
 <p>The
 <dfn id="dom-element-requestfullscreen" title="dom-Element-requestFullscreen"><code>requestFullscreen()</code></dfn>
 method must run these steps:
@@ -288,42 +305,36 @@ method must run these steps:
  <!-- XXX order terminology -->
 
  <li>
-  <p>For each <var title="">document</var> in <var title="">docs</var>, run these
+  <p>For each <var title="">document</var> in <var title="">docs</var>, in order, run these
   substeps:
 
   <ol>
+   <li><p>Let <var title="">top-level document flag</var> be set if <var title="">document</var>
+   is the first <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> in
+   <var title="">docs</var>, and unset otherwise.
+
    <li><p>Let <var title="">following document</var> be the
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> after
    <var title="">document</var> in <var title="">docs</var>, or null if there is
    no such document.
 
    <li><p>If <var title="">following document</var> is null,
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-   <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
-   <a href="#context-object">context object</a> on
-   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> on the <var title="">document</var>.
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to <a href="#go-fullscreen">go fullscreen</a> with
+   <a href="#context-object">context object</a>, <var title="">document</var>, and
+   <var title="">top-level document flag</var> if set.
 
    <li><p>Otherwise, if <var title="">document</var>'s
    <a href="#fullscreen-element-stack">fullscreen element stack</a> is either empty or its top
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is not
    <var title="">following document</var>'s
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>,
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to
-   <a href="#concept-fullscreen-add" title="concept-fullscreen-add">add</a>
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">queue a task</a> to <a href="#go-fullscreen">go fullscreen</a> with
    <var title="">following document</var>'s
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> on
-   <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> on <var title="">document</var>.
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>,
+   <var title="">document</var>, and <var title="">top-level document flag</var> if set.
 
-   <li><p>Otherwise, do nothing for this <var title="">document</var>. It stays
-   the same.
+   <li><p>Otherwise, do nothing for <var title="">document</var>. It stays the same.
   </ol>
-
- <li><p>Optionally, display a message indicating how the user can exit
- displaying the <a href="#context-object">context object</a> fullscreen.
 </ol>
 
 <p>The
@@ -392,9 +403,7 @@ method must run these steps:
     <a href="#fullscreen-element-stack">fullscreen element stack</a> could have been removed from
     <var title="">doc</var>.
 
-   <li><p><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a>
-   named <code>fullscreenchange</code> on <var title="">doc</var>.
+   <li><p>Let <var title="">lastDoc</var> be <var title="">doc</var>.
 
    <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
    empty and <var title="">doc</var>'s
@@ -402,9 +411,19 @@ method must run these steps:
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, set
    <var title="">doc</var> to that
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>, and to
+   null otherwise.
 
-   <li><p>Otherwise, set <var title="">doc</var> to null.
+   <li>
+    <p><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these subsubsteps:
+
+    <ol>
+     <li><p>If <var title="">doc</var> is null, resize <var title="">lastDoc</var>'s viewport to
+     its "normal" dimensions.
+
+     <li><p><a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a>
+     named <code>fullscreenchange</code> on <var title="">lastDoc</var>.
+    </ol>
   </ol>
 </ol>
 
@@ -617,6 +636,7 @@ Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
 <i title="">fantasai</i>,
+Giuseppe Pascale,
 Glenn Maynard,
 Ian Hickson,
 João Eiras,
