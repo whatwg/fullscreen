@@ -10,8 +10,8 @@
 
  <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-7-november-2013">Living Standard — Last Updated
-  <time class="dt-published" datetime="20131107">7 November 2013</time>
+ <h2 class="no-num no-toc" id="living-standard-—-last-updated-10-january-2014">Living Standard — Last Updated
+  <time class="dt-published" datetime="20140110">10 January 2014</time>
  </h2>
 
  <dl>
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-7 November 2013, the editors have made this specification available
+10 January 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -484,7 +484,8 @@ user.
 
  <li><p>Its parent stacking context is the root stacking context.
 
- <li><p>Its containing block is the initial containing block.
+ <li><p>If its <code title="">position</code> property computes to <code title="">fixed</code>,
+ its containing block is the viewport, and the initial containing block otherwise.
 
  <li>
   <p>It is rendered as an atomic unit as if it were a sibling of the root
@@ -599,7 +600,7 @@ content from third parties to go fullscreen without explicit permission.
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
 <dt id="refsWEBIDL">[WEBIDL]
-<dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, Cameron McCormack. W3C.
+<dd><cite><a href="http://heycam.github.io/webidl/">Web IDL</a></cite>, Cameron McCormack. W3C.
 
 </dl></div>
 

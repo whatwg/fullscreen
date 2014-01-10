@@ -470,7 +470,8 @@ user.
 
  <li><p>Its parent stacking context is the root stacking context.
 
- <li><p>Its containing block is the initial containing block.
+ <li><p>If its <code title>position</code> property computes to <code title>fixed</code>,
+ its containing block is the viewport, and the initial containing block otherwise.
 
  <li>
   <p>It is rendered as an atomic unit as if it were a sibling of the root
