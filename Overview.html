@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="en-US"><head>
-  <meta charset="utf-8">
+<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
   <title>Fullscreen API Standard</title>
   <link href="//www.whatwg.org/style/specification" rel="stylesheet">
   <link href="//resources.whatwg.org/logo-fullscreen.svg" rel="icon">
- </head>
  <body class="h-entry">
 
 <div class="head">
 
  <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
+
+<hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc" id="living-standard-—-last-updated-10-january-2014">Living Standard — Last Updated
-  <time class="dt-published" datetime="20140110">10 January 2014</time>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 27 June 2014
  </h2>
+</hgroup>
 
  <dl>
   <dt>This Version:
@@ -21,7 +21,7 @@
  <dt>Participate:</dt>
  <dd>Send feedback to
   <a href="http://www.whatwg.org/mailing-list" rel="discussion">whatwg@whatwg.org</a>
-  <!--(<a href=XXX>archives</a>)--> or
+  (<a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/">archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---" rel="issues">open bugs</a>)
  <dd><a href="http://wiki.whatwg.org/wiki/IRC" rel="discussion">IRC: #whatwg on Freenode</a>
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-10 January 2014, the editors have made this specification available
+27 June 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -241,8 +241,8 @@ and a <var title="">top-level document flag</var>, run these steps:
 <ol>
  <li><p>If <var title="">top-level document flag</var> is set and <var title="">document</var>'s
  <a href="#fullscreen-element-stack">fullscreen element stack</a> is empty, resize its viewport to match the
- dimensions of the screen and optionally display a message indicating how the user resize
- the viewport back to its "normal" dimensions.
+ dimensions of the screen and optionally display a message indicating how the user can
+ resize the viewport back to its "normal" dimensions.
 
  <li><p><a href="#concept-fullscreen-add" title="concept-fullscreen-add">Add</a> <var title="">element</var> on
  <var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
@@ -644,6 +644,7 @@ Josh Soref,
 Matt Falkenhagen,
 Øyvind Stenhaug,
 Pat Ladd,
+Philip Jägenstedt,
 Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbjørn Vik,

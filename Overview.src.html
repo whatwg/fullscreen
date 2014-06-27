@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang=en-US>
- <head>
   <meta charset=utf-8>
   <title>Fullscreen API Standard</title>
   <link rel=stylesheet href=//www.whatwg.org/style/specification>
   <link rel=icon href=//resources.whatwg.org/logo-fullscreen.svg>
- </head>
  <body class=h-entry>
 
 <div class=head>
 
  <p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-fullscreen.svg width=100 height=100></a></p>
+
+<hgroup>
  <h1 class=p-name>Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard &mdash; Last Updated
-  <time class=dt-published datetime="[CDATE: YYYYMMDD]">[DATE: 01 Jan 1901]</time>
+ <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 01 Jan 1901]
  </h2>
+</hgroup>
 
  <dl>
   <dt>This Version:
@@ -23,7 +23,7 @@
  <dt>Participate:</dt>
  <dd>Send feedback to
   <a rel=discussion href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
-  <!--(<a href=XXX>archives</a>)--> or
+  (<a href=http://lists.w3.org/Archives/Public/public-whatwg-archive/>archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
   (<a rel=issues href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">open bugs</a>)
  <dd><a rel=discussion href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
@@ -227,8 +227,8 @@ and a <var title>top-level document flag</var>, run these steps:
 <ol>
  <li><p>If <var title>top-level document flag</var> is set and <var title>document</var>'s
  <span>fullscreen element stack</span> is empty, resize its viewport to match the
- dimensions of the screen and optionally display a message indicating how the user resize
- the viewport back to its "normal" dimensions.
+ dimensions of the screen and optionally display a message indicating how the user can
+ resize the viewport back to its "normal" dimensions.
 
  <li><p><span title=concept-fullscreen-add>Add</span> <var title>element</var> on
  <var title>document</var>'s <span>fullscreen element stack</span> and
@@ -615,6 +615,7 @@ Josh Soref,
 Matt Falkenhagen,
 Øyvind Stenhaug,
 Pat Ladd,
+Philip Jägenstedt,
 Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbj&oslash;rn Vik,
