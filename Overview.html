@@ -10,7 +10,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 27 June 2014
+ <h2 class="no-num no-toc">Living Standard — Last Updated 28 July 2014
  </h2>
 </hgroup>
 
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-27 June 2014, the editors have made this specification available
+28 July 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -385,24 +385,6 @@ method must run these steps:
   <p>While <var title="">doc</var> is not null, run these substeps:
 
   <ol>
-   <li>
-    <p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
-    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of
-    <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
-
-    <p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
-    non-empty and the
-    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> now at
-    the top is either not <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#in-a-document">in a document</a> or
-    its
-    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>
-    is not <var title="">doc</var>, run these substeps again.
-
-    <p class="note">This is needed because a non-top
-    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
-    <a href="#fullscreen-element-stack">fullscreen element stack</a> could have been removed from
-    <var title="">doc</var>.
-
    <li><p>Let <var title="">lastDoc</var> be <var title="">doc</var>.
 
    <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is
@@ -418,6 +400,21 @@ method must run these steps:
     <p><a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these subsubsteps:
 
     <ol>
+     <li>
+      <p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
+      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of
+      <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+
+      <p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is non-empty and
+      the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> now at the top
+      is either not <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#in-a-document">in a document</a> or its
+      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> is not
+      <var title="">doc</var>, run this step again.
+
+      <p class="note">This is needed because a non-top
+      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
+      <a href="#fullscreen-element-stack">fullscreen element stack</a> could have been removed from <var title="">doc</var>.
+
      <li><p>If <var title="">doc</var> is null, resize <var title="">lastDoc</var>'s viewport to
      its "normal" dimensions.
 

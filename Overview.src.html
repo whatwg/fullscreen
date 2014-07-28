@@ -371,24 +371,6 @@ method must run these steps:
   <p>While <var title>doc</var> is not null, run these substeps:
 
   <ol>
-   <li>
-    <p><span title=concept-fullscreen-remove>Remove</span> the top
-    <span data-anolis-spec=dom title=concept-element>element</span> of
-    <var title>doc</var>'s <span>fullscreen element stack</span>.
-
-    <p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
-    non-empty and the
-    <span data-anolis-spec=dom title=concept-element>element</span> now at
-    the top is either not <span data-anolis-spec=dom>in a document</span> or
-    its
-    <span data-anolis-spec=dom title=concept-node-document>node document</span>
-    is not <var title>doc</var>, run these substeps again.
-
-    <p class=note>This is needed because a non-top
-    <span data-anolis-spec=dom title=concept-element>element</span> in the
-    <span>fullscreen element stack</span> could have been removed from
-    <var title>doc</var>.
-
    <li><p>Let <var title>lastDoc</var> be <var title>doc</var>.
 
    <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
@@ -404,6 +386,21 @@ method must run these steps:
     <p><span data-anolis-spec=html>Queue a task</span> to run these subsubsteps:
 
     <ol>
+     <li>
+      <p><span title=concept-fullscreen-remove>Remove</span> the top
+      <span data-anolis-spec=dom title=concept-element>element</span> of
+      <var title>doc</var>'s <span>fullscreen element stack</span>.
+
+      <p>If <var title>doc</var>'s <span>fullscreen element stack</span> is non-empty and
+      the <span data-anolis-spec=dom title=concept-element>element</span> now at the top
+      is either not <span data-anolis-spec=dom>in a document</span> or its
+      <span data-anolis-spec=dom title=concept-node-document>node document</span> is not
+      <var title>doc</var>, run this step again.
+
+      <p class=note>This is needed because a non-top
+      <span data-anolis-spec=dom title=concept-element>element</span> in the
+      <span>fullscreen element stack</span> could have been removed from <var title>doc</var>.
+
      <li><p>If <var title>doc</var> is null, resize <var title>lastDoc</var>'s viewport to
      its "normal" dimensions.
 
