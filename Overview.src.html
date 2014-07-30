@@ -157,18 +157,21 @@ it from <var title>document</var>'s
 
 <hr>
 
-<p>To <dfn>fully exit fullscreen</dfn> act as if the
-<code title=dom-Document-exitFullscreen>exitFullscreen()</code> method
-was invoked on the
-<span data-anolis-spec=html>top-level browsing context</span>'s
-<span data-anolis-spec=dom title=concept-document>document</span> and
-subsequently <span title=concept-fullscreen-empty>empty</span> that
-<span data-anolis-spec=dom title=concept-document>document</span>'s
-<span>fullscreen element stack</span>.
+<p>To <dfn>fully exit fullscreen</dfn>, run these steps:
 
-<p class=note>Since a <code title>fullscreenchange</code> event will be
-dispatched regardless, emptying the <span>fullscreen element stack</span>
-per above is fine.
+<ol>
+ <li><p>Let <var title>doc</var> be the
+ <span data-anolis-spec=html>top-level browsing context</span>'s
+ <span data-anolis-spec=dom title=concept-document>document</span>.
+
+ <li><p><span title=concept-fullscreen-remove>Remove</span>
+ <span data-anolis-spec=dom title=concept-element>elements</span> from
+ <var title>doc</var>'s <span>fullscreen element stack</span> until there is one
+ <span data-anolis-spec=dom title=concept-element>element</span> left.
+
+ <li><p>Act as if the <code title=dom-Document-exitFullscreen>exitFullscreen()</code>
+ method was invoked on <var title>doc</var>.
+</ol>
 
 <p class=note>HTML invokes the <span>fully exit fullscreen</span> algorithm for
 <span data-anolis-spec=html title=navigate>navigation</span>.
@@ -220,105 +223,109 @@ partial interface <span data-anolis-spec=dom>Document</span> {
  <var title>document</var> from being displayed fullscreen.
 </dl>
 
-<p>To <dfn>go fullscreen</dfn> with an
-<span data-anolis-spec=dom title=concept-element>element</span> <var title>element</var>,
-a <span data-anolis-spec=dom title=concept-document>document</span> <var title>document</var>,
-and a <var title>top-level document flag</var>, run these steps:
+<p>A <dfn>fullscreen element ready check</dfn> for an <var title>element</var> returns
+true if any of the following is true, and false otherwise:
 
-<ol>
- <li><p>If <var title>top-level document flag</var> is set and <var title>document</var>'s
- <span>fullscreen element stack</span> is empty, resize its viewport to match the
- dimensions of the screen and optionally display a message indicating how the user can
- resize the viewport back to its "normal" dimensions.
+<ul>
+ <li><p><var title>element</var> is <span data-anolis-spec=dom>in a document</span>.
 
- <li><p><span title=concept-fullscreen-add>Add</span> <var title>element</var> on
- <var title>document</var>'s <span>fullscreen element stack</span> and
- <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
- <code>fullscreenchange</code> on <var title>document</var>.
-</ol>
+ <li><p><var title>element</var>'s
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+ <span>fullscreen enabled flag</span> is set.
+ <!-- The fullscreen enabled flag is propagated properly by HTML -->
+
+ <li><p><var title>element</var>'s
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>
+ <span>fullscreen element stack</span> is either empty or its top
+ <span data-anolis-spec=dom title=concept-element>element</span> is an
+ <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span> of the
+ <span>context object</span>.
+</ul>
 
 <p>The
 <dfn title=dom-Element-requestFullscreen><code>requestFullscreen()</code></dfn>
 method must run these steps:
 
 <ol>
+ <li><p>Let <var title>pending</var> be the <span>context object</span>.
+
+ <li><p>Let <var title>error</var> be false.
+
  <li>
-  <p>If any of the following conditions are true,
-  <span data-anolis-spec=html>queue a task</span> to
-  <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
-  named <code>fullscreenerror</code> on the <span>context object</span>'s
-  <span data-anolis-spec=dom title=concept-node-document>node document</span>, and then terminate these steps:
+  <p>If any of the following conditions are true, set <var title>error</var> to true:
 
   <ul>
-   <li><p>The <span>context object</span> is not
-   <span data-anolis-spec=dom>in a document</span>.
-
-   <li><p>The <span>context object</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-   <span>fullscreen enabled flag</span> is unset.
-   <!-- The fullscreen enabled flag is propagated properly by HTML -->
-
-   <li><p>The <span>context object</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>
-   <span>fullscreen element stack</span> is not empty and its top
-   <span data-anolis-spec=dom title=concept-element>element</span> is not an
-   <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span> of
-   the <span>context object</span>.
+   <li><p>The <span>fullscreen element ready check</span> for <var title>pending</var>
+   returns false.
 
    <li><p>A <span>descendant browsing context</span>'s
    <span data-anolis-spec=dom title=concept-document>document</span> has a
    non-empty <span>fullscreen element stack</span>.
+   <!-- cross-process -->
 
    <li><p>This algorithm is not
    <span data-anolis-spec=html>allowed to show a popup</span>.
 
-   <li><p>There is a previously-established user preference, security risk,
-   or platform limitation.
+   <li><p>There is a previously-established user preference, security risk, or platform
+   limitation.
+   <!-- cross-process -->
   </ul>
+
+ <li><p>Let <var title>fullscreenElements</var> be a set initially consisting of
+ <var title>pending</var>.
+
+ <li><p>Let <var title>topLevelViewport</var> be <var title>pending</var>'s
+ <span data-anolis-spec=html>top-level browsing context</span>'s
+ <span data-anolis-spec=dom title=concept-document>document</span>'s viewport.
+ <!-- cross-process -->
+
+ <li><p>If <var title>error</var> is false: While the last element in
+ <var title>fullscreenElements</var> is in a
+ <span data-anolis-spec=html>nested browsing context</span>, append its
+ <span data-anolis-spec=html>browsing context container</span> to
+ <var title>fullscreenElements</var>.
+ <!-- cross-process -->
 
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>Let <var title>doc</var> be <var title>element</var>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>.
-
- <li><p>Let <var title>docs</var> be all <var title>doc</var>'s
- <span data-anolis-spec=html>ancestor browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>documents</span> (if any)
- and <var title>doc</var>, in order of furthest away from
- <var title>doc</var> to <var title>doc</var>.
- <!-- XXX order terminology -->
+ <li><p>If <var title>error</var> is false: Resize <var title>topLevelViewport</var>'s
+ dimensions to match the dimensions of the screen of the output device. Optionally display
+ a message how the end user can revert this.
 
  <li>
-  <p>For each <var title>document</var> in <var title>docs</var>, in order, run these
-  substeps:
+  <p>As part of the next <span>animation frame task</span>, run these substeps for each
+  <span data-anolis-dom title=concept-element>element</span> <var title>element</var> in
+  <var title>fullscreenElements</var>, from last to first:
 
   <ol>
-   <li><p>Let <var title>top-level document flag</var> be set if <var title>document</var>
-   is the first <span data-anolis-spec=dom title=concept-document>document</span> in
-   <var title>docs</var>, and unset otherwise.
+   <li><p>Let <var title>doc</var> be <var title>element</var>'s
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>.
 
-   <li><p>Let <var title>following document</var> be the
-   <span data-anolis-spec=dom title=concept-document>document</span> after
-   <var title>document</var> in <var title>docs</var>, or null if there is
-   no such document.
+   <li><p>If either <var title>error</var> is true or the
+   <span>fullscreen element ready check</span> for <var title>element</var> returns false,
+   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
+   <code>fullscreenerror</code> on <var title>doc</var>, and then terminate these steps.
 
-   <li><p>If <var title>following document</var> is null,
-   <span data-anolis-spec=html>queue a task</span> to <span>go fullscreen</span> with
-   <span>context object</span>, <var title>document</var>, and
-   <var title>top-level document flag</var> if set.
+   <li>
+    <p>If <var title>element</var> is on top of <var title>doc</var>'s
+    <span>fullscreen element stack</span>, terminate these substeps.
 
-   <li><p>Otherwise, if <var title>document</var>'s
-   <span>fullscreen element stack</span> is either empty or its top
-   <span data-anolis-spec=dom title=concept-element>element</span> is not
-   <var title>following document</var>'s
-   <span data-anolis-spec=html>browsing context container</span>,
-   <span data-anolis-spec=html>queue a task</span> to <span>go fullscreen</span> with
-   <var title>following document</var>'s
-   <span data-anolis-spec=html>browsing context container</span>,
-   <var title>document</var>, and <var title>top-level document flag</var> if set.
+    <p class=note>No need to notify observers when nothing has changed.
 
-   <li><p>Otherwise, do nothing for <var title>document</var>. It stays the same.
+   <li><p><span title=concept-fullscreen-add>Add</span> <var title>element</var> on
+   <var title>doc</var>'s <span>fullscreen element stack</span>.
+
+   <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named
+   <code>fullscreenchange</code> on <var title>doc</var>.
   </ol>
+
+  <p class=XXX><span>Animation frame task</span> is not really defined yet, including
+  relative order within that task, see
+  <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
+
+  <p class=note>Implementations with out-of-process
+  <span data-anolis-spec=html title="browsing context">browsing contexts</span> are left
+  as an exercise to the reader. Input welcome on potential improvements.
 </ol>
 
 <p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
@@ -329,8 +336,7 @@ attribute must return true if the <span>context object</span> has its
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
 attribute must return the top
 <span data-anolis-spec=dom title=concept-element>element</span> of the
-<span>context object</span>'s
-<span>fullscreen element stack</span>, or null otherwise.
+<span>context object</span>'s <span>fullscreen element stack</span>, and null otherwise.
 
 <p>The
 <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn>
@@ -339,47 +345,43 @@ method must run these steps:
 <ol>
  <li><p>Let <var title>doc</var> be the <span>context object</span>.
 
- <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
- empty, terminate these steps.
-
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>Let <var title>descendants</var> be all the <var title>doc</var>'s
- <span data-anolis-spec=html>descendant browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>documents</span> with a
- non-empty <span>fullscreen element stack</span> (if any), ordered so that
- the child of the <var title>doc</var> is last and the
- <span data-anolis-spec=dom title=concept-document>document</span> furthest
- away from the <var title>doc</var> is first.
- <!-- XXX order terminology -->
-
- <li><p>For each <var title>descendant</var> in
- <var title>descendants</var>,
- <span data-anolis-spec=html>queue a task</span> to
- <span title=concept-fullscreen-empty>empty</span>
- <var title>descendant</var>'s <span>fullscreen element stack</span> and
- <span data-anolis-spec=dom title=concept-event-fire>fire an event</span>
- named <code>fullscreenchange</code> on <var title>descendant</var>.
-
  <li>
-  <p>While <var title>doc</var> is not null, run these substeps:
+  <p>As part of the next <span>animation frame task</span>, run these substeps:
 
   <ol>
-   <li><p>Let <var title>lastDoc</var> be <var title>doc</var>.
+   <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is empty,
+   terminate these steps.
 
-   <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is
-   empty and <var title>doc</var>'s
-   <span data-anolis-spec=html>browsing context</span> has a
-   <span data-anolis-spec=html>browsing context container</span>, set
-   <var title>doc</var> to that
-   <span data-anolis-spec=html>browsing context container</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>, and to
-   null otherwise.
+   <li><p>Let <var title>descendants</var> be all the <var title>doc</var>'s
+   <span data-anolis-spec=html>descendant browsing context</span>'s
+   <span data-anolis-spec=dom title=concept-document>documents</span> with a non-empty
+   <span>fullscreen element stack</span> (if any), in
+   <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
+   <!-- cross-process -->
+
+   <li><p>For each <var title>descendant</var> in <var title>descendants</var>,
+   <span title=concept-fullscreen-empty>empty</span> <var title>descendant</var>'s
+   <span>fullscreen element stack</span> and
+   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
+   <code>fullscreenchange</code> on <var title>descendant</var>.
 
    <li>
-    <p><span data-anolis-spec=html>Queue a task</span> to run these subsubsteps:
+    <p>Then, while <var title>doc</var> is not null, run these subsubsteps:
 
     <ol>
+     <li><p>Let <var title>lastDoc</var> be <var title>doc</var>.
+
+     <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is empty and
+     <var title>doc</var>'s <span data-anolis-spec=html>browsing context</span> has a
+     <span data-anolis-spec=html>browsing context container</span>, set
+     <var title>doc</var> to that
+     <span data-anolis-spec=html>browsing context container</span>'s
+     <span data-anolis-spec=dom title=concept-node-document>node document</span>, and to
+     null otherwise.
+     <!-- cross-process -->
+
      <li>
       <p><span title=concept-fullscreen-remove>Remove</span> the top
       <span data-anolis-spec=dom title=concept-element>element</span> of
@@ -389,18 +391,24 @@ method must run these steps:
       the <span data-anolis-spec=dom title=concept-element>element</span> now at the top
       is either not <span data-anolis-spec=dom>in a document</span> or its
       <span data-anolis-spec=dom title=concept-node-document>node document</span> is not
-      <var title>doc</var>, run this step again.
+      <var title>doc</var>, run this subsubstep again.
 
       <p class=note>This is needed because a non-top
       <span data-anolis-spec=dom title=concept-element>element</span> in the
       <span>fullscreen element stack</span> could have been removed from <var title>doc</var>.
 
-     <li><p>If <var title>doc</var> is null, resize <var title>lastDoc</var>'s viewport to
-     its "normal" dimensions.
-
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span>
      named <code>fullscreenchange</code> on <var title>lastDoc</var>.
     </ol>
+
+   <li><p>Let <var title>topLevelDoc</var> be <var title>doc</var>'s
+   <span data-anolis-spec=html>top-level browsing context</span>'s
+   <span data-anolis-spec=dom title=concept-document>document</span>.
+   <!-- cross-process -->
+
+   <li><p>If <var title>topLevelDoc</var>'s <span>fullscreen element stack</span> is
+   empty, asynchronously resize <var title>topLevelDoc</var>'s viewport to its "normal"
+   dimensions.
   </ol>
 </ol>
 
