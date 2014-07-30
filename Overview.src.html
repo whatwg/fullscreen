@@ -254,10 +254,9 @@ method must run these steps:
    <span data-anolis-spec=dom>in a document</span>.
 
    <li><p>The <span>context object</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>, or an
-   <span data-anolis-spec=html>ancestor browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>document</span> does
-   not have the <span>fullscreen enabled flag</span> set.
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+   <span>fullscreen enabled flag</span> is unset.
+   <!-- The fullscreen enabled flag is propagated properly by HTML -->
 
    <li><p>The <span>context object</span>'s
    <span data-anolis-spec=dom title=concept-node-document>node document</span>
@@ -322,12 +321,10 @@ method must run these steps:
   </ol>
 </ol>
 
-<p>The
-<dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
-attribute must return true if the <span>context object</span> and all
-<span data-anolis-spec=html>ancestor browsing context</span>'s
-<span data-anolis-spec=dom title=concept-document>documents</span> have
-their <span>fullscreen enabled flag</span> set, or false otherwise.
+<p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
+attribute must return true if the <span>context object</span> has its
+<span>fullscreen enabled flag</span> set, and false otherwise.
+<!-- The fullscreen enabled flag is propagated properly by HTML -->
 
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
 attribute must return the top
