@@ -293,9 +293,9 @@ method must run these steps:
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s viewport.
  <!-- cross-process -->
 
- <li><p>If <var title="">error</var> is false: While the last element in
+ <li><p>If <var title="">error</var> is false: While the first element in
  <var title="">fullscreenElements</var> is in a
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a>, append its
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#nested-browsing-context">nested browsing context</a>, prepend its
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> to
  <var title="">fullscreenElements</var>.
  <!-- cross-process -->
@@ -309,7 +309,7 @@ method must run these steps:
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps for each
   <span data-anolis-dom="" title="concept-element">element</span> <var title="">element</var> in
-  <var title="">fullscreenElements</var>, from last to first:
+  <var title="">fullscreenElements</var>, in order:
 
   <ol>
    <li><p>Let <var title="">doc</var> be <var title="">element</var>'s

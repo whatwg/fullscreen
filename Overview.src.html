@@ -279,9 +279,9 @@ method must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>'s viewport.
  <!-- cross-process -->
 
- <li><p>If <var title>error</var> is false: While the last element in
+ <li><p>If <var title>error</var> is false: While the first element in
  <var title>fullscreenElements</var> is in a
- <span data-anolis-spec=html>nested browsing context</span>, append its
+ <span data-anolis-spec=html>nested browsing context</span>, prepend its
  <span data-anolis-spec=html>browsing context container</span> to
  <var title>fullscreenElements</var>.
  <!-- cross-process -->
@@ -295,7 +295,7 @@ method must run these steps:
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps for each
   <span data-anolis-dom title=concept-element>element</span> <var title>element</var> in
-  <var title>fullscreenElements</var>, from last to first:
+  <var title>fullscreenElements</var>, in order:
 
   <ol>
    <li><p>Let <var title>doc</var> be <var title>element</var>'s
