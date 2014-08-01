@@ -363,7 +363,7 @@ method must run these steps:
  <li><p>If <var title>doc</var>'s <span>fullscreen element stack</span> is empty,
  terminate these steps.
 
- <li><p>Let <var title>resized</var> be false.
+ <li><p>Let <var title>resize</var> be false.
 
  <li><p>Let <var title>parentDocs</var> be an ordered set consisting of
  <var title>doc</var>'s <span data-anolis-spec=html>ancestor browsing context</span>'s
@@ -378,11 +378,13 @@ method must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>.
  <!-- cross-process -->
 
+ <li><p>If <var title>topLevelDoc</var> is in <var title>parentDocs</var>, set
+ <var title>resize</var> to true.
+
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>If <var title>topLevelDoc</var> is in <var title>parentDocs</var>, resize
- <var title>topLevelDoc</var>'s viewport to its "normal" dimensions and set
- <var title>resized</var> to true.
+ <li><p>If <var title>resize</var> is true, resize <var title>topLevelDoc</var>'s viewport
+ to its "normal" dimensions.
 
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps:
@@ -401,13 +403,13 @@ method must run these steps:
    <var title>exitDocs</var>.
    <!-- cross-process -->
 
-   <li><p>If <var title>resized</var> is true and <var title>topLevelDoc</var> is not in
+   <li><p>If <var title>resize</var> is true and <var title>topLevelDoc</var> is not in
    <var title>exitDocs</var>, <span>fully exit fullscreen</span> and terminate these
    steps.
 
    <li>
     <p>If <var title>exitDocs</var>'s first
-    <span data-anolis-spec=dom title=concept-document>document</span> has
+    <span data-anolis-spec=dom title=concept-document>document</span> has a
     <span data-anolis-spec=html>browsing context container</span>, let
     <var title>topDoc</var> be that
     <span data-anolis-spec=html>browsing context container</span>'s
