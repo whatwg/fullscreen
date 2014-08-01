@@ -192,12 +192,22 @@ it from <var title="">document</var>'s
 <a href="#refsHTML">[HTML]</a>
 
 <p>If an <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
-at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a> is
+<var title="">element</var> in a <a href="#fullscreen-element-stack">fullscreen element stack</a> is
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#node-is-removed" title="node is removed">removed</a> from a
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, act as if the
-<a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method
-was invoked on that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+<var title="">document</var>, run these steps:
 <!-- XXX reference DOM mutation -->
+
+<ol>
+ <li><p>If <var title="">element</var> was at the top of <var title="">document</var>'s
+ <a href="#fullscreen-element-stack">fullscreen element stack</a>, act as if the
+ <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method was invoked on
+ that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
+
+ <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
+ <var title="">element</var> from <var title="">document</var>'s
+ <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+</ol>
 
 <hr>
 
@@ -401,20 +411,9 @@ method must run these steps:
      null otherwise.
      <!-- cross-process -->
 
-     <li>
-      <p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
-      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of
-      <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
-
-      <p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is non-empty and
-      the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> now at the top
-      is either not <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#in-a-document">in a document</a> or its
-      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> is not
-      <var title="">doc</var>, run this subsubstep again.
-
-      <p class="note">This is needed because a non-top
-      <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
-      <a href="#fullscreen-element-stack">fullscreen element stack</a> could have been removed from <var title="">doc</var>.
+     <li><p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
+     <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of
+     <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 
      <li><p><a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a>
      named <code>fullscreenchange</code> on <var title="">lastDoc</var>.

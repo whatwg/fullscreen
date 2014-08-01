@@ -178,12 +178,22 @@ it from <var title>document</var>'s
 <span data-anolis-ref>HTML</span>
 
 <p>If an <span data-anolis-spec=dom title=concept-element>element</span>
-at the top of a <span>fullscreen element stack</span> is
+<var title>element</var> in a <span>fullscreen element stack</span> is
 <span data-anolis-spec=dom title="node is removed">removed</span> from a
-<span data-anolis-spec=dom title=concept-document>document</span>, act as if the
-<code title=dom-Document-exitFullscreen>exitFullscreen()</code> method
-was invoked on that <span data-anolis-spec=dom title=concept-document>document</span>.
+<span data-anolis-spec=dom title=concept-document>document</span>
+<var title>document</var>, run these steps:
 <!-- XXX reference DOM mutation -->
+
+<ol>
+ <li><p>If <var title>element</var> was at the top of <var title>document</var>'s
+ <span>fullscreen element stack</span>, act as if the
+ <code title=dom-Document-exitFullscreen>exitFullscreen()</code> method was invoked on
+ that <span data-anolis-spec=dom title=concept-document>document</span>.
+
+ <li><p>Otherwise, <span title=concept-fullscreen-remove>remove</span>
+ <var title>element</var> from <var title>document</var>'s
+ <span>fullscreen element stack</span>.
+</ol>
 
 <hr>
 
@@ -387,20 +397,9 @@ method must run these steps:
      null otherwise.
      <!-- cross-process -->
 
-     <li>
-      <p><span title=concept-fullscreen-remove>Remove</span> the top
-      <span data-anolis-spec=dom title=concept-element>element</span> of
-      <var title>doc</var>'s <span>fullscreen element stack</span>.
-
-      <p>If <var title>doc</var>'s <span>fullscreen element stack</span> is non-empty and
-      the <span data-anolis-spec=dom title=concept-element>element</span> now at the top
-      is either not <span data-anolis-spec=dom>in a document</span> or its
-      <span data-anolis-spec=dom title=concept-node-document>node document</span> is not
-      <var title>doc</var>, run this subsubstep again.
-
-      <p class=note>This is needed because a non-top
-      <span data-anolis-spec=dom title=concept-element>element</span> in the
-      <span>fullscreen element stack</span> could have been removed from <var title>doc</var>.
+     <li><p><span title=concept-fullscreen-remove>Remove</span> the top
+     <span data-anolis-spec=dom title=concept-element>element</span> of
+     <var title>doc</var>'s <span>fullscreen element stack</span>.
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span>
      named <code>fullscreenchange</code> on <var title>lastDoc</var>.
