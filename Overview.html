@@ -322,8 +322,8 @@ method must run these steps:
 
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps for each
-  <span data-anolis-dom="" title="concept-element">element</span> <var title="">element</var> in
-  <var title="">fullscreenElements</var>, in order:
+  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> <var title="">element</var>
+  in <var title="">fullscreenElements</var>, in order:
 
   <ol>
    <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
@@ -413,6 +413,7 @@ method must run these steps:
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, prepend that
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
    <var title="">exitDocs</var>.
+   <!-- cross-process -->
 
    <li><p>If <var title="">resized</var> is true and <var title="">topLevelDoc</var> is not in
    <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> and terminate these
@@ -425,6 +426,7 @@ method must run these steps:
     <var title="">topDoc</var> be that
     <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
     <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
+    <!-- cross-process -->
 
     <p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a> the top
     <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> from
@@ -438,7 +440,8 @@ method must run these steps:
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> from
    <var title="">exitDoc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenchange</code> on <var title="">exitDoc</var>
+   <code>fullscreenchange</code> on <var title="">exitDoc</var>.
+   <!-- cross-process -->
 
    <li><p>For each <var title="">doc</var>'s
    <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s

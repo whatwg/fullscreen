@@ -308,8 +308,8 @@ method must run these steps:
 
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps for each
-  <span data-anolis-dom title=concept-element>element</span> <var title>element</var> in
-  <var title>fullscreenElements</var>, in order:
+  <span data-anolis-spec=dom title=concept-element>element</span> <var title>element</var>
+  in <var title>fullscreenElements</var>, in order:
 
   <ol>
    <li><p>Let <var title>doc</var> be <var title>element</var>'s
@@ -399,6 +399,7 @@ method must run these steps:
    <span data-anolis-spec=dom title=concept-element>element</span>, prepend that
    <span data-anolis-spec=dom title=concept-node-document>node document</span> to
    <var title>exitDocs</var>.
+   <!-- cross-process -->
 
    <li><p>If <var title>resized</var> is true and <var title>topLevelDoc</var> is not in
    <var title>exitDocs</var>, <span>fully exit fullscreen</span> and terminate these
@@ -411,6 +412,7 @@ method must run these steps:
     <var title>topDoc</var> be that
     <span data-anolis-spec=html>browsing context container</span>'s
     <span data-anolis-spec=dom title=concept-node-document>node document</span>.
+    <!-- cross-process -->
 
     <p><span title=concept-fullscreen-remove>Remove</span> the top
     <span data-anolis-spec=dom title=concept-element>element</span> from
@@ -424,7 +426,8 @@ method must run these steps:
    <span data-anolis-spec=dom title=concept-element>element</span> from
    <var title>exitDoc</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenchange</code> on <var title>exitDoc</var>
+   <code>fullscreenchange</code> on <var title>exitDoc</var>.
+   <!-- cross-process -->
 
    <li><p>For each <var title>doc</var>'s
    <span data-anolis-spec=html>descendant browsing context</span>'s
