@@ -199,6 +199,12 @@ at the top of a <a href="#fullscreen-element-stack">fullscreen element stack</a>
 was invoked on that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
 <!-- XXX reference DOM mutation -->
 
+<hr>
+
+<p><dfn id="fullscreen-is-supported">Fullscreen is supported</dfn> if there is no previously-established user
+preference, security risk, or platform limitation.
+<!-- cross-process -->
+
 
 <h2 id="api"><span class="secno">4 </span>API</h2>
 
@@ -223,7 +229,7 @@ partial interface <a class="external" data-anolis-spec="dom" href="http://dom.sp
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
  <dd><p>Returns true if <var title="">document</var> has the ability to display
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>
- fullscreen, or false otherwise.
+ fullscreen and <a href="#fullscreen-is-supported">fullscreen is supported</a>, or false otherwise.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
  <dd><p>Returns the
@@ -280,9 +286,7 @@ method must run these steps:
    <li><p>This algorithm is not
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>.
 
-   <li><p>There is a previously-established user preference, security risk, or platform
-   limitation.
-   <!-- cross-process -->
+   <li><p><a href="#fullscreen-is-supported" title="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
   </ul>
 
  <li><p>Let <var title="">fullscreenElements</var> be a set initially consisting of
@@ -344,7 +348,8 @@ method must run these steps:
 
 <p>The <dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
 attribute must return true if the <a href="#context-object">context object</a> has its
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set, and false otherwise.
+<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set and <a href="#fullscreen-is-supported">fullscreen is supported</a>, and
+false otherwise.
 <!-- The fullscreen enabled flag is propagated properly by HTML -->
 
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
@@ -629,11 +634,11 @@ content from third parties to go fullscreen without explicit permission.
 
 <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-<p>Many thanks to Robert O'Callahan for designing the initial model and
-being awesome.
+<p>Many thanks to Robert O'Callahan for designing the initial model and being awesome.
 <!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
 
 <p>Thanks to
+
 Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
@@ -641,6 +646,7 @@ Edward O'Connor,
 Giuseppe Pascale,
 Glenn Maynard,
 Ian Hickson,
+Ignacio Solla,
 João Eiras,
 Josh Soref,
 Matt Falkenhagen,

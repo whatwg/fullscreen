@@ -185,6 +185,12 @@ at the top of a <span>fullscreen element stack</span> is
 was invoked on that <span data-anolis-spec=dom title=concept-document>document</span>.
 <!-- XXX reference DOM mutation -->
 
+<hr>
+
+<p><dfn>Fullscreen is supported</dfn> if there is no previously-established user
+preference, security risk, or platform limitation.
+<!-- cross-process -->
+
 
 <h2>API</h2>
 
@@ -209,7 +215,7 @@ partial interface <span data-anolis-spec=dom>Document</span> {
  <dt><code><var title>document</var> . <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span></code>
  <dd><p>Returns true if <var title>document</var> has the ability to display
  <span data-anolis-spec=dom title=concept-element>elements</span>
- fullscreen, or false otherwise.
+ fullscreen and <span>fullscreen is supported</span>, or false otherwise.
 
  <dt><code><var title>document</var> . <span title=dom-Document-fullscreenElement>fullscreenElement</span></code>
  <dd><p>Returns the
@@ -266,9 +272,7 @@ method must run these steps:
    <li><p>This algorithm is not
    <span data-anolis-spec=html>allowed to show a popup</span>.
 
-   <li><p>There is a previously-established user preference, security risk, or platform
-   limitation.
-   <!-- cross-process -->
+   <li><p><span title="Fullscreen is supported">Fullscreen is <em>not</em> supported</span>.
   </ul>
 
  <li><p>Let <var title>fullscreenElements</var> be a set initially consisting of
@@ -330,7 +334,8 @@ method must run these steps:
 
 <p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
 attribute must return true if the <span>context object</span> has its
-<span>fullscreen enabled flag</span> set, and false otherwise.
+<span>fullscreen enabled flag</span> set and <span>fullscreen is supported</span>, and
+false otherwise.
 <!-- The fullscreen enabled flag is propagated properly by HTML -->
 
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
@@ -600,11 +605,11 @@ content from third parties to go fullscreen without explicit permission.
 
 <h2 class=no-num>Acknowledgments</h2>
 
-<p>Many thanks to Robert O'Callahan for designing the initial model and
-being awesome.
+<p>Many thanks to Robert O'Callahan for designing the initial model and being awesome.
 <!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
 
 <p>Thanks to
+
 Chris Pearce,
 Darin Fisher,
 Edward O'Connor,
@@ -612,6 +617,7 @@ Edward O'Connor,
 Giuseppe Pascale,
 Glenn Maynard,
 Ian Hickson,
+Ignacio Solla,
 João Eiras,
 Josh Soref,
 Matt Falkenhagen,
