@@ -488,8 +488,8 @@ user.
 
  <li><p>Its parent stacking context is the root stacking context.
 
- <li><p>If its <code title>position</code> property computes to <code title>fixed</code>,
- its containing block is the viewport, and the initial containing block otherwise.
+ <li><p>If it consists of multiple layout boxes, the first box is used.
+ <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=24523 -->
 
  <li>
   <p>It is rendered as an atomic unit as if it were a sibling of the root
@@ -497,6 +497,9 @@ user.
 
   <p class=note>Ancestor elements with overflow, opacity, masks, etc. cannot
   affect it.
+
+ <li><p>If its <code title>position</code> property computes to <code title>fixed</code>,
+ its containing block is the viewport, and the initial containing block otherwise.
 
  <li><p>It is not rendered if it, or an ancestor, has the
  <code title>display</code> property set to <code title>none</code>.
@@ -612,6 +615,7 @@ Ian Hickson,
 João Eiras,
 Josh Soref,
 Matt Falkenhagen,
+Mihai Balan,
 Øyvind Stenhaug,
 Pat Ladd,
 Philip Jägenstedt,
