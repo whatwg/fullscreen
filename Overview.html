@@ -10,7 +10,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 1 August 2014
+ <h2 class="no-num no-toc">Living Standard — Last Updated 12 August 2014
  </h2>
 </hgroup>
 
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 August 2014, the editors have made this specification available
+12 August 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -270,6 +270,14 @@ true if all of the following are true, and false otherwise:
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is an
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-ancestor" title="concept-tree-ancestor">ancestor</a> of the
  <a href="#context-object">context object</a>.
+
+ <li><p>The <a href="#context-object">context object</a> has no
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-ancestor" title="concept-tree-ancestor">ancestor</a>
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> whose
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element-local-name" title="concept-element-local-name">local name</a> is
+ <code title="">iframe</code> and
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element-namespace" title="concept-element-namespace">namespace</a> is the
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#html-namespace">HTML namespace</a>.
 </ul>
 
 <p>The
@@ -287,11 +295,6 @@ method must run these steps:
   <ul>
    <li><p>The <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var title="">pending</var>
    returns false.
-
-   <li><p>A <a href="#descendant-browsing-context">descendant browsing context</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
-   non-empty <a href="#fullscreen-element-stack">fullscreen element stack</a>.
-   <!-- cross-process -->
 
    <li><p>This algorithm is not
    <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>.

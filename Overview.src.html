@@ -256,6 +256,14 @@ true if all of the following are true, and false otherwise:
  <span data-anolis-spec=dom title=concept-element>element</span> is an
  <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span> of the
  <span>context object</span>.
+
+ <li><p>The <span>context object</span> has no
+ <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span>
+ <span data-anolis-spec=dom title=concept-element>element</span> whose
+ <span data-anolis-spec=dom title=concept-element-local-name>local name</span> is
+ <code title>iframe</code> and
+ <span data-anolis-spec=dom title=concept-element-namespace>namespace</span> is the
+ <span data-anolis-spec=dom>HTML namespace</span>.
 </ul>
 
 <p>The
@@ -273,11 +281,6 @@ method must run these steps:
   <ul>
    <li><p>The <span>fullscreen element ready check</span> for <var title>pending</var>
    returns false.
-
-   <li><p>A <span>descendant browsing context</span>'s
-   <span data-anolis-spec=dom title=concept-document>document</span> has a
-   non-empty <span>fullscreen element stack</span>.
-   <!-- cross-process -->
 
    <li><p>This algorithm is not
    <span data-anolis-spec=html>allowed to show a popup</span>.
