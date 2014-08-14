@@ -180,21 +180,21 @@ it from <var title>document</var>'s
 <span data-anolis-spec=html title=navigate>navigation</span>.
 <span data-anolis-ref>HTML</span>
 
-<p>If an <span data-anolis-spec=dom title=concept-element>element</span>
-<var title>element</var> in a <span>fullscreen element stack</span> is
-<span data-anolis-spec=dom title="node is removed">removed</span> from a
-<span data-anolis-spec=dom title=concept-document>document</span>
-<var title>document</var>, run these steps:
-<!-- XXX reference DOM mutation -->
+<p>Whenever the
+<span data-anolis-spec=dom title=concept-node-remove-ext>removing steps</span> run with an
+<var>oldNode</var> and <var>oldNode</var> is an
+<span data-anolis-spec=dom title=concept-element>element</span>, run these steps:</p>
 
 <ol>
- <li><p>If <var title>element</var> was at the top of <var title>document</var>'s
+ <li><p>If <var title>oldNode</var> is at the top of its
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen element stack</span>, act as if the
  <code title=dom-Document-exitFullscreen>exitFullscreen()</code> method was invoked on
  that <span data-anolis-spec=dom title=concept-document>document</span>.
 
  <li><p>Otherwise, <span title=concept-fullscreen-remove>remove</span>
- <var title>element</var> from <var title>document</var>'s
+ <var title>element</var> from its
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen element stack</span>.
 </ol>
 
@@ -270,10 +270,14 @@ returns true if all of the following are true, and false otherwise:
  <span data-anolis-spec=dom title=concept-element-namespace>namespace</span> is the
  <span data-anolis-spec=dom>HTML namespace</span>.
 
- <li><p>If <var title>element</var>'s <span data-anolis-spec=html>browsing context</span>
- has a <span data-anolis-spec=html>browsing context container</span>, the
+ <li><p><var title>element</var>'s
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+ <span data-anolis-spec=html>browsing context</span> either has a
+ <span data-anolis-spec=html>browsing context container</span> and the
  <span>fullscreen element ready check</span> returns true for <var title>element</var>'s
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span data-anolis-spec=html>browsing context</span>'s
+ <span data-anolis-spec=html>browsing context container</span>, or it has no
  <span data-anolis-spec=html>browsing context container</span>.
  <!-- cross-process, recursive -->
 </ul>

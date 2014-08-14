@@ -194,21 +194,21 @@ it from <var title="">document</var>'s
 <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#navigate" title="navigate">navigation</a>.
 <a href="#refsHTML">[HTML]</a>
 
-<p>If an <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
-<var title="">element</var> in a <a href="#fullscreen-element-stack">fullscreen element stack</a> is
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#node-is-removed" title="node is removed">removed</a> from a
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
-<var title="">document</var>, run these steps:
-<!-- XXX reference DOM mutation -->
+<p>Whenever the
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-remove-ext" title="concept-node-remove-ext">removing steps</a> run with an
+<var>oldNode</var> and <var>oldNode</var> is an
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, run these steps:</p>
 
 <ol>
- <li><p>If <var title="">element</var> was at the top of <var title="">document</var>'s
+ <li><p>If <var title="">oldNode</var> is at the top of its
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#fullscreen-element-stack">fullscreen element stack</a>, act as if the
  <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method was invoked on
  that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
 
  <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
- <var title="">element</var> from <var title="">document</var>'s
+ <var title="">element</var> from its
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 </ol>
 
@@ -284,10 +284,14 @@ returns true if all of the following are true, and false otherwise:
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element-namespace" title="concept-element-namespace">namespace</a> is the
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#html-namespace">HTML namespace</a>.
 
- <li><p>If <var title="">element</var>'s <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>
- has a <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, the
+ <li><p><var title="">element</var>'s
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a> either has a
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> and the
  <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> returns true for <var title="">element</var>'s
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context">browsing context</a>'s
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, or it has no
  <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>.
  <!-- cross-process, recursive -->
 </ul>
