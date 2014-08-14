@@ -257,8 +257,9 @@ true if all of the following are true, and false otherwise:
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen element stack</span> is either empty or its top
  <span data-anolis-spec=dom title=concept-element>element</span> is an
- <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span> of
- <var title>element</var>.
+ <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span>
+ of <var title>element</var>.
+ <!-- If /element/ is on top, nothing happens -->
 
  <li><p><var title>element</var> has no
  <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span>
@@ -267,6 +268,13 @@ true if all of the following are true, and false otherwise:
  <code title>iframe</code> and
  <span data-anolis-spec=dom title=concept-element-namespace>namespace</span> is the
  <span data-anolis-spec=dom>HTML namespace</span>.
+
+ <li><p>If <var title>element</var>'s <span data-anolis-spec=html>browsing context</span>
+ has a <span data-anolis-spec=html>browsing context container</span>, the
+ <span>fullscreen element ready check</span> returns true for <var title>element</var>'s
+ <span data-anolis-spec=html>browsing context</span>'s
+ <span data-anolis-spec=html>browsing context container</span>.
+ <!-- cross-process, recursive -->
 </ul>
 
 <p>The
@@ -321,16 +329,16 @@ method must run these steps:
    <li><p>Let <var title>doc</var> be <var title>element</var>'s
    <span data-anolis-spec=dom title=concept-node-document>node document</span>.
 
-   <li><p>If either <var title>error</var> is true or the
-   <span>fullscreen element ready check</span> for <var title>element</var> returns false,
-   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenerror</code> on <var title>doc</var>, and then terminate these steps.
-
    <li>
     <p>If <var title>element</var> is on top of <var title>doc</var>'s
     <span>fullscreen element stack</span>, terminate these substeps.
 
     <p class=note>No need to notify observers when nothing has changed.
+
+   <li><p>If either <var title>error</var> is true or the
+   <span>fullscreen element ready check</span> for <var title>element</var> returns false,
+   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
+   <code>fullscreenerror</code> on <var title>doc</var>, and then terminate these steps.
 
    <li><p><span title=concept-fullscreen-add>Add</span> <var title>element</var> on
    <var title>doc</var>'s <span>fullscreen element stack</span>.
