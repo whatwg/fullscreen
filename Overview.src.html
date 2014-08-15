@@ -182,8 +182,9 @@ it from <var title>document</var>'s
 
 <p>Whenever the
 <span data-anolis-spec=dom title=concept-node-remove-ext>removing steps</span> run with an
-<var>oldNode</var> and <var>oldNode</var> is an
-<span data-anolis-spec=dom title=concept-element>element</span>, run these steps:</p>
+<var>oldNode</var> and <var>oldNode</var> is in its
+<span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+<span>fullscreen element stack</span>, run these steps:</p>
 
 <ol>
  <li><p>If <var title>oldNode</var> is at the top of its
@@ -193,7 +194,7 @@ it from <var title>document</var>'s
  that <span data-anolis-spec=dom title=concept-document>document</span>.
 
  <li><p>Otherwise, <span title=concept-fullscreen-remove>remove</span>
- <var title>element</var> from its
+ <var title>oldNode</var> from its
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen element stack</span>.
 </ol>

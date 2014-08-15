@@ -196,8 +196,9 @@ it from <var title="">document</var>'s
 
 <p>Whenever the
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-remove-ext" title="concept-node-remove-ext">removing steps</a> run with an
-<var>oldNode</var> and <var>oldNode</var> is an
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, run these steps:</p>
+<var>oldNode</var> and <var>oldNode</var> is in its
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+<a href="#fullscreen-element-stack">fullscreen element stack</a>, run these steps:</p>
 
 <ol>
  <li><p>If <var title="">oldNode</var> is at the top of its
@@ -207,7 +208,7 @@ it from <var title="">document</var>'s
  that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
 
  <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
- <var title="">element</var> from its
+ <var title="">oldNode</var> from its
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#fullscreen-element-stack">fullscreen element stack</a>.
 </ol>
