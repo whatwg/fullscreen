@@ -10,7 +10,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 15 August 2014
+ <h2 class="no-num no-toc">Living Standard — Last Updated 26 August 2014
  </h2>
 </hgroup>
 
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 August 2014, the editors have made this specification available
+26 August 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -387,6 +387,25 @@ attribute must return the top
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of the
 <a href="#context-object">context object</a>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and null otherwise.
 
+<p>To <dfn id="collect-ancestors">collect ancestors</dfn> given a
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var title="">doc</var>,
+run these steps:
+
+<ol>
+ <li><p>Let <var title="">docs</var> be an ordered set consisting of <var title="">doc</var>.
+
+ <li><p>While <var title="">docs</var>'s last
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> whose
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+ <a href="#fullscreen-element-stack">fullscreen element stack</a> consists of one
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, append that
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
+ <var title="">docs</var>.
+
+ <li><p>Return <var title="">docs</var>.
+</ol>
+
 <p>The
 <dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
 method must run these steps:
@@ -399,12 +418,8 @@ method must run these steps:
 
  <li><p>Let <var title="">resize</var> be false.
 
- <li><p>Let <var title="">parentDocs</var> be an ordered set consisting of
- <var title="">doc</var>'s <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> with a
- <a href="#fullscreen-element-stack">fullscreen element stack</a> consisting of one
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> (if any), in
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
+ <li><p>Let <var title="">docs</var> be the result of
+ <a href="#collect-ancestors" title="collect ancestors">collecting ancestors</a> given <var title="">doc</var>.
  <!-- cross-process -->
 
  <li><p>Let <var title="">topLevelDoc</var> be <var title="">doc</var>'s
@@ -412,7 +427,7 @@ method must run these steps:
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
  <!-- cross-process -->
 
- <li><p>If <var title="">topLevelDoc</var> is in <var title="">parentDocs</var>, set
+ <li><p>If <var title="">topLevelDoc</var> is in <var title="">docs</var>, set
  <var title="">resize</var> to true.
 
  <li><p>Return, and run the remaining steps asynchronously.
@@ -424,17 +439,8 @@ method must run these steps:
   <p>As part of the next <span>animation frame task</span>, run these substeps:
 
   <ol>
-   <li><p>Let <var title="">exitDocs</var> be an ordered set consisting of
-   <var title="">doc</var>.
-
-   <li><p>While <var title="">exitDocs</var>'s last
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a> whose
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-   <a href="#fullscreen-element-stack">fullscreen element stack</a> consists of one
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, append that
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
-   <var title="">exitDocs</var>.
+   <li><p>Let <var title="">exitDocs</var> be the result of
+   <a href="#collect-ancestors" title="collect ancestors">collecting ancestors</a> given <var title="">doc</var>.
    <!-- cross-process -->
 
    <li><p>If <var title="">resize</var> is true and <var title="">topLevelDoc</var> is not in

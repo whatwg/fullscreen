@@ -373,6 +373,25 @@ attribute must return the top
 <span data-anolis-spec=dom title=concept-element>element</span> of the
 <span>context object</span>'s <span>fullscreen element stack</span>, and null otherwise.
 
+<p>To <dfn>collect ancestors</dfn> given a
+<span data-anolis-spec=dom title=concept-document>document</span> <var title>doc</var>,
+run these steps:
+
+<ol>
+ <li><p>Let <var title>docs</var> be an ordered set consisting of <var title>doc</var>.
+
+ <li><p>While <var title>docs</var>'s last
+ <span data-anolis-spec=dom title=concept-document>document</span> has a
+ <span data-anolis-spec=html>browsing context container</span> whose
+ <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+ <span>fullscreen element stack</span> consists of one
+ <span data-anolis-spec=dom title=concept-element>element</span>, append that
+ <span data-anolis-spec=dom title=concept-node-document>node document</span> to
+ <var title>docs</var>.
+
+ <li><p>Return <var title>docs</var>.
+</ol>
+
 <p>The
 <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn>
 method must run these steps:
@@ -385,12 +404,8 @@ method must run these steps:
 
  <li><p>Let <var title>resize</var> be false.
 
- <li><p>Let <var title>parentDocs</var> be an ordered set consisting of
- <var title>doc</var>'s <span data-anolis-spec=html>ancestor browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>documents</span> with a
- <span>fullscreen element stack</span> consisting of one
- <span data-anolis-spec=dom title=concept-element>element</span> (if any), in
- <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
+ <li><p>Let <var title>docs</var> be the result of
+ <span title="collect ancestors">collecting ancestors</span> given <var title>doc</var>.
  <!-- cross-process -->
 
  <li><p>Let <var title>topLevelDoc</var> be <var title>doc</var>'s
@@ -398,7 +413,7 @@ method must run these steps:
  <span data-anolis-spec=dom title=concept-document>document</span>.
  <!-- cross-process -->
 
- <li><p>If <var title>topLevelDoc</var> is in <var title>parentDocs</var>, set
+ <li><p>If <var title>topLevelDoc</var> is in <var title>docs</var>, set
  <var title>resize</var> to true.
 
  <li><p>Return, and run the remaining steps asynchronously.
@@ -410,17 +425,8 @@ method must run these steps:
   <p>As part of the next <span>animation frame task</span>, run these substeps:
 
   <ol>
-   <li><p>Let <var title>exitDocs</var> be an ordered set consisting of
-   <var title>doc</var>.
-
-   <li><p>While <var title>exitDocs</var>'s last
-   <span data-anolis-spec=dom title=concept-document>document</span> has a
-   <span data-anolis-spec=html>browsing context container</span> whose
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-   <span>fullscreen element stack</span> consists of one
-   <span data-anolis-spec=dom title=concept-element>element</span>, append that
-   <span data-anolis-spec=dom title=concept-node-document>node document</span> to
-   <var title>exitDocs</var>.
+   <li><p>Let <var title>exitDocs</var> be the result of
+   <span title="collect ancestors">collecting ancestors</span> given <var title>doc</var>.
    <!-- cross-process -->
 
    <li><p>If <var title>resize</var> is true and <var title>topLevelDoc</var> is not in
