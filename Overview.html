@@ -453,20 +453,29 @@ method must run these steps:
    <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> and terminate these
    steps.
 
-   <li><p>For each <var title="">doc</var>'s
+   <li><p>Let <var title="">descendantDocs</var> be <var title="">doc</var>'s
    <a data-anolis-spec="html" href="#descendant-browsing-context">descendant browsing context</a>'s
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
    <var title="">descendantDoc</var> with a non-empty
    <a href="#fullscreen-element-stack">fullscreen element stack</a> (if any), in <em>reverse</em>
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>,
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
+   <!-- cross-process -->
+
+   <li><p>Let <var title="">topDoc</var> be null, if <var title="">exitDocs</var>'s last
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has <em>no</em>
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, and that
+   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> otherwise.
+   <!-- cross-process -->
+
+   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>,
    <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a> <var title="">descendantDoc</var>'s
    <a href="#fullscreen-element-stack">fullscreen element stack</a> and
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenchange</code> on <var title="">descendantDoc</var>.
    <!-- cross-process -->
 
-   <li><p>For each <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
-   <var title="">exitDoc</var> in <var title="">exitDocs</var>, in order,
+   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>,
    <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a> the top
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> from
    <var title="">exitDoc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
@@ -474,12 +483,7 @@ method must run these steps:
    <code>fullscreenchange</code> on <var title="">exitDoc</var>.
    <!-- cross-process -->
 
-   <li><p>If <var title="">exitDocs</var>'s last
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>, let
-   <var title="">topDoc</var> be that
-   <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
-   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>, and then
+   <li><p>If <var title="">topDoc</var> is non-null,
    <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a> the top
    <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> from
    <var title="">topDoc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
