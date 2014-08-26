@@ -319,16 +319,14 @@ method must run these steps:
    <li><p><a href="#fullscreen-is-supported" title="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
   </ul>
 
- <li><p>Let <var title="">topLevelViewport</var> be <var title="">pending</var>'s
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s viewport.
- <!-- cross-process -->
-
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>If <var title="">error</var> is false: Resize <var title="">topLevelViewport</var>'s
+ <li><p>If <var title="">error</var> is false: Resize <var title="">pending</var>'s
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s viewport's
  dimensions to match the dimensions of the screen of the output device. Optionally display
  a message how the end user can revert this.
+ <!-- cross-process -->
 
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps:

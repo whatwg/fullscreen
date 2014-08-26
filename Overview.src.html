@@ -305,16 +305,14 @@ method must run these steps:
    <li><p><span title="Fullscreen is supported">Fullscreen is <em>not</em> supported</span>.
   </ul>
 
- <li><p>Let <var title>topLevelViewport</var> be <var title>pending</var>'s
- <span data-anolis-spec=html>top-level browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span>'s viewport.
- <!-- cross-process -->
-
  <li><p>Return, and run the remaining steps asynchronously.
 
- <li><p>If <var title>error</var> is false: Resize <var title>topLevelViewport</var>'s
+ <li><p>If <var title>error</var> is false: Resize <var title>pending</var>'s
+ <span data-anolis-spec=html>top-level browsing context</span>'s
+ <span data-anolis-spec=dom title=concept-document>document</span>'s viewport's
  dimensions to match the dimensions of the screen of the output device. Optionally display
  a message how the end user can revert this.
+ <!-- cross-process -->
 
  <li>
   <p>As part of the next <span>animation frame task</span>, run these substeps:
