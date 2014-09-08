@@ -438,19 +438,20 @@ method must run these steps:
    <var title>exitDocs</var>, <span>fully exit fullscreen</span> and terminate these
    steps.
 
+   <li><p>If <var title>exitDocs</var>'s last
+   <span data-anolis-spec=dom title=concept-document>document</span> has a
+   <span data-anolis-spec=html>browsing context container</span>, append that
+   <span data-anolis-spec=html>browsing context container</span>'s
+   <span data-anolis-spec=dom title=concept-node-document>node document</span> to
+   <var title>exitDocs</var>.
+   <!-- cross-process -->
+
    <li><p>Let <var title>descendantDocs</var> be an ordered set consisting of
    <var title>doc</var>'s
    <span data-anolis-spec=html title="descendant browsing context">descendant browsing contexts</span>'
    <span data-anolis-spec=dom title=concept-document>documents</span> with a non-empty
    <span>fullscreen element stack</span> (if any), in <em>reverse</em>
    <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
-   <!-- cross-process -->
-
-   <li><p>Let <var title>topDoc</var> be null, if <var title>exitDocs</var>'s last
-   <span data-anolis-spec=dom title=concept-document>document</span> has <em>no</em>
-   <span data-anolis-spec=html>browsing context container</span>, and that
-   <span data-anolis-spec=html>browsing context container</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span> otherwise.
    <!-- cross-process -->
 
    <li><p>For each <var title>descendantDoc</var> in <var title>descendantDocs</var>,
@@ -466,14 +467,6 @@ method must run these steps:
    <var title>exitDoc</var>'s <span>fullscreen element stack</span> and
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
    <code>fullscreenchange</code> on <var title>exitDoc</var>.
-   <!-- cross-process -->
-
-   <li><p>If <var title>topDoc</var> is non-null,
-   <span title=concept-fullscreen-remove>remove</span> the top
-   <span data-anolis-spec=dom title=concept-element>element</span> from
-   <var title>topDoc</var>'s <span>fullscreen element stack</span> and
-   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenchange</code> on <var title>topDoc</var>.
    <!-- cross-process -->
   </ol>
 </ol>
