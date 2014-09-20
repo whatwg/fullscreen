@@ -1,16 +1,16 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
   <title>Fullscreen API Standard</title>
-  <link href="//www.whatwg.org/style/specification" rel="stylesheet">
+  <link href="//whatwg.org/style/specification" rel="stylesheet">
   <link href="//resources.whatwg.org/logo-fullscreen.svg" rel="icon">
  <body class="h-entry">
 
 <div class="head">
 
- <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
+ <p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 15 September 2014
+ <h2 class="no-num no-toc">Living Standard — Last Updated 20 September 2014
  </h2>
 </hgroup>
 
@@ -20,7 +20,7 @@
 
  <dt>Participate:</dt>
  <dd>Send feedback to
-  <a href="//www.whatwg.org/mailing-list" rel="discussion">whatwg@whatwg.org</a>
+  <a href="//whatwg.org/mailing-list" rel="discussion">whatwg@whatwg.org</a>
   (<a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/">archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---" rel="issues">open bugs</a>)
@@ -45,7 +45,7 @@
 <p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 September 2014, the editors have made this specification available
+20 September 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -196,21 +196,32 @@ it from <var title="">document</var>'s
 
 <p>Whenever the
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-remove-ext" title="concept-node-remove-ext">removing steps</a> run with an
-<var>oldNode</var> and <var>oldNode</var> is in its
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>, run these steps:</p>
+<var>oldNode</var>, run these steps:
 
 <ol>
- <li><p>If <var title="">oldNode</var> is at the top of its
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#fullscreen-element-stack">fullscreen element stack</a>, act as if the
- <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method was invoked on
- that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
-
- <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
- <var title="">oldNode</var> from its
+ <li><p>Let <var title="">nodes</var> be <var title="">oldNode</var>'s
+ <span title="concept-tree-inclusive-descendant">inclusive descendants</span>, in
+ <span title="concept-tree-order">tree order</span> that are also in
+ <var title="">oldNode</var>'s
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+
+ <li>
+  <p>For each <var title="">node</var> in <var title="">nodes</var>, run these substeps:
+
+  <ol>
+   <li><p>If <var title="">node</var> is at the top of its
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+   <a href="#fullscreen-element-stack">fullscreen element stack</a>, act as if the
+   <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method was invoked on
+   that <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> and terminate
+   these steps.
+
+   <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
+   <var title="">node</var> from its
+   <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+   <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+  </ol>
 </ol>
 
 <hr>
@@ -722,4 +733,4 @@ Vincent Scheib
 for also being awesome.
 
 
-<script id="head" src="//www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
+<script id="head" src="//resources.whatwg.org/dfn.js"></script>

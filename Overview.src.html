@@ -2,13 +2,13 @@
 <html lang=en-US>
   <meta charset=utf-8>
   <title>Fullscreen API Standard</title>
-  <link rel=stylesheet href=//www.whatwg.org/style/specification>
+  <link rel=stylesheet href=//whatwg.org/style/specification>
   <link rel=icon href=//resources.whatwg.org/logo-fullscreen.svg>
  <body class=h-entry>
 
 <div class=head>
 
- <p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-fullscreen.svg width=100 height=100></a></p>
+ <p><a class=logo href=//whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-fullscreen.svg width=100 height=100></a></p>
 
 <hgroup>
  <h1 class=p-name>Fullscreen API</h1>
@@ -22,7 +22,7 @@
 
  <dt>Participate:</dt>
  <dd>Send feedback to
-  <a rel=discussion href="//www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
+  <a rel=discussion href="//whatwg.org/mailing-list">whatwg@whatwg.org</a>
   (<a href=http://lists.w3.org/Archives/Public/public-whatwg-archive/>archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=Fullscreen">file a bug</a>
   (<a rel=issues href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">open bugs</a>)
@@ -182,21 +182,32 @@ it from <var title>document</var>'s
 
 <p>Whenever the
 <span data-anolis-spec=dom title=concept-node-remove-ext>removing steps</span> run with an
-<var>oldNode</var> and <var>oldNode</var> is in its
-<span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-<span>fullscreen element stack</span>, run these steps:</p>
+<var>oldNode</var>, run these steps:
 
 <ol>
- <li><p>If <var title>oldNode</var> is at the top of its
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span>fullscreen element stack</span>, act as if the
- <code title=dom-Document-exitFullscreen>exitFullscreen()</code> method was invoked on
- that <span data-anolis-spec=dom title=concept-document>document</span>.
-
- <li><p>Otherwise, <span title=concept-fullscreen-remove>remove</span>
- <var title>oldNode</var> from its
+ <li><p>Let <var title>nodes</var> be <var title>oldNode</var>'s
+ <span title=concept-tree-inclusive-descendant>inclusive descendants</span>, in
+ <span title=concept-tree-order>tree order</span> that are also in
+ <var title>oldNode</var>'s
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen element stack</span>.
+
+ <li>
+  <p>For each <var title>node</var> in <var title>nodes</var>, run these substeps:
+
+  <ol>
+   <li><p>If <var title>node</var> is at the top of its
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+   <span>fullscreen element stack</span>, act as if the
+   <code title=dom-Document-exitFullscreen>exitFullscreen()</code> method was invoked on
+   that <span data-anolis-spec=dom title=concept-document>document</span> and terminate
+   these steps.
+
+   <li><p>Otherwise, <span title=concept-fullscreen-remove>remove</span>
+   <var title>node</var> from its
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+   <span>fullscreen element stack</span>.
+  </ol>
 </ol>
 
 <hr>
@@ -693,4 +704,4 @@ Vincent Scheib
 for also being awesome.
 
 
-<script id=head src=//www.whatwg.org/specs/web-apps/current-work/dfn.js></script>
+<script id=head src=//resources.whatwg.org/dfn.js></script>
