@@ -270,9 +270,8 @@ returns true if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
-<p>The
-<dfn title=dom-Element-requestFullscreen><code>requestFullscreen()</code></dfn>
-method must run these steps:
+<p>The <dfn title=dom-Element-requestFullscreen><code>requestFullscreen()</code></dfn>
+method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var title>pending</var> be the <span>context object</span>.
@@ -355,13 +354,13 @@ method must run these steps:
 </ol>
 
 <p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
-attribute must return true if the <span>context object</span> has its
+attribute's getter must return true if the <span>context object</span> has its
 <span>fullscreen enabled flag</span> set and <span>fullscreen is supported</span>, and
 false otherwise.
 <!-- The fullscreen enabled flag is propagated properly by HTML -->
 
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
-attribute must return the top
+attribute's getter must return the top
 <span data-anolis-spec=dom title=concept-element>element</span> of the
 <span>context object</span>'s <span>fullscreen element stack</span>, and null otherwise.
 
@@ -386,7 +385,7 @@ run these steps:
 
 <p>The
 <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var title>doc</var> be the <span>context object</span>.
