@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 14 October 2014</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 17 March 2015</h2>
 </hgroup>
 
  <dl>
@@ -449,7 +449,7 @@ method, when invoked, must run these steps:
 
    <li><p>Let <var title="">descendantDocs</var> be an ordered set consisting of
    <var title="">doc</var>'s
-   <a data-anolis-spec="html" href="#descendant-browsing-context" title="descendant browsing context">descendant browsing contexts</a>'
+   <a href="#descendant-browsing-context" title="descendant browsing context">descendant browsing contexts</a>'
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> with a non-empty
    <a href="#fullscreen-element-stack">fullscreen element stack</a> (if any), in <em>reverse</em>
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
@@ -625,6 +625,7 @@ section uses this term -->
   width:100% !important;
   height:100% !important;
   object-fit:contain !important;
+  transform:none !important;
 }
 
 iframe:fullscreen {
