@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 8 May 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 2 July 2015</h2>
 </hgroup>
 
  <dl>
@@ -101,11 +101,11 @@ and only if <var title="">B</var> is an
 specification is the
 <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#user-interaction-task-source">user interaction task source</a>.
 
+<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
+<dfn id="fullscreen-flag">fullscreen flag</dfn>. Unless stated otherwise it is unset.
+
 <p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
-have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn> and
-<dfn id="fullscreen-element-stack">fullscreen element stack</dfn>. Unless otherwise stated the
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is unset and the
-<a href="#fullscreen-element-stack">fullscreen element stack</a> is an initially empty ordered set.
+have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless otherwise it is unset.
 
 <p class="note">HTML defines the exact conditions under which the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
@@ -122,29 +122,21 @@ defined by HTML as well.
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn id="concept-fullscreen-add" title="concept-fullscreen-add">add</dfn> an
-<var title="">element</var> on a <var title="">document</var>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>, add, or move if already present, it on top of
-<var title="">document</var>'s
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>'s
-<a href="#top-layer">top layer</a>, and then add, or move if already present, it on top of
-<var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+<p>To <dfn id="fullscreen">fullscreen</dfn> an <var title="">element</var> within a
+<var title="">document</var>, set the <var title="">element</var>'s
+<a href="#fullscreen-flag">fullscreen flag</a>, and add, or move if already present, it on top of
+<var title="">document</var>'s <a href="#top-layer">top layer</a>.
 
-<p>To <dfn id="concept-fullscreen-remove" title="concept-fullscreen-remove">remove</dfn> an
-<var title="">element</var> from a <var title="">document</var>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>, remove it from
-<var title="">document</var>'s
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>'s
-<a href="#top-layer">top layer</a>, and then remove it from
-<var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+<p>To <dfn id="unfullscreen-an-element">unfullscreen an <var title="">element</var></dfn> within a
+<var title="">document</var>, unset the <var title="">element</var>'s
+<a href="#fullscreen-flag">fullscreen flag</a>, and remove it from <var title="">document</var>'s
+<a href="#top-layer">top layer</a>.
 
-<p>To <dfn id="concept-fullscreen-empty" title="concept-fullscreen-empty">empty</dfn> a
-<var title="">document</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, remove
-all the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> in
-it from <var title="">document</var>'s
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>'s
-<a href="#top-layer">top layer</a>, and then empty <var title="">document</var>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a>.
+<p>To <dfn id="unfullscreen-a-document">unfullscreen a <var title="">document</var></dfn>,
+<a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen</a> all
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>, within
+<var title="">document</var>'s <a href="#top-layer">top layer</a>, whose <a href="#fullscreen-flag">fullscreen flag</a> is
+set.
 
 <hr>
 
@@ -155,16 +147,15 @@ it from <var title="">document</var>'s
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
 
- <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is empty,
- terminate these steps.
+ <li><p>If <var title="">doc</var>'s <a href="#top-layer">top layer</a> contains no
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> whose
+ <a href="#fullscreen-flag">fullscreen flag</a> is set, terminate these steps.
 
- <li><p><a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">Remove</a>
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> from
- <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> until only the top
+ <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> within
+ <var title="">doc</var> until only the top
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is left.
 
- <li><p>Act as if the <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a>
- method was invoked on <var title="">doc</var>.
+ <li><p>Run <a href="#exit-fullscreen">exit fullscreen</a> with <var title="">doc</var>.
 </ol>
 
 <p class="note">HTML invokes the <a href="#fully-exit-fullscreen">fully exit fullscreen</a> algorithm for
@@ -177,11 +168,9 @@ it from <var title="">document</var>'s
 
 <ol>
  <li><p>Let <var title="">nodes</var> be <var title="">oldNode</var>'s
- <span title="concept-tree-inclusive-descendant">inclusive descendants</span>, in
- <span title="concept-tree-order">tree order</span> that are also in
- <var title="">oldNode</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+ <span title="concept-tree-inclusive-descendant">inclusive descendants</span> that have
+ their <a href="#fullscreen-flag">fullscreen flag</a> set, in
+ <span title="concept-tree-order">tree order</span>.
 
  <li>
   <p>For each <var title="">node</var> in <var title="">nodes</var>, run these substeps:
@@ -189,15 +178,13 @@ it from <var title="">document</var>'s
   <ol>
    <li><p>If <var title="">node</var> is at the top of its
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-   <a href="#fullscreen-element-stack">fullscreen element stack</a>, act as if the
-   <a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a> method was invoked on
-   that <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> and terminate
-   these steps.
+   <a href="#top-layer">top layer</a>, run <a href="#exit-fullscreen">exit fullscreen</a> on that
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> and terminate these
+   steps.
 
-   <li><p>Otherwise, <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a>
-   <var title="">node</var> from its
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-   <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+   <li><p>Otherwise,
+   <a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen <var title="">node</var></a> within
+   its <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
   </ol>
 </ol>
 
@@ -259,10 +246,12 @@ returns true if all of the following are true, and false otherwise:
 
  <li><p><var title="">element</var>'s
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#fullscreen-element-stack">fullscreen element stack</a> is either empty or its top
+ <a href="#top-layer">top layer</a> contains no
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> whose
+ <a href="#fullscreen-flag">fullscreen flag</a> is or its top
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is an
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a>
- of <var title="">element</var>.
+ of <var title="">element</var>, which has its <a href="#fullscreen-flag">fullscreen flag</a> set.
  <!-- If /element/ is on top, nothing happens -->
 
  <li><p><var title="">element</var> has no
@@ -347,12 +336,12 @@ method, when invoked, must run these steps:
 
      <li>
       <p>If <var title="">element</var> is on top of <var title="">doc</var>'s
-      <a href="#fullscreen-element-stack">fullscreen element stack</a>, terminate these substeps.
+      <a href="#top-layer">top layer</a> and its <a href="#fullscreen-flag">fullscreen flag</a> is set, terminate these
+      substeps.
 
       <p class="note">No need to notify observers when nothing has changed.
 
-     <li><p><a href="#concept-fullscreen-add" title="concept-fullscreen-add">Add</a> <var title="">element</var> on
-     <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>.
+     <li><p><a href="#fullscreen">Fullscreen</a> <var title="">element</var> within <var title="">doc</var>.
 
      <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
      <code>fullscreenchange</code> on <var title="">doc</var>.
@@ -377,7 +366,9 @@ false otherwise.
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
 attribute's getter must return the top
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of the
-<a href="#context-object">context object</a>'s <a href="#fullscreen-element-stack">fullscreen element stack</a>, and null otherwise.
+<a href="#context-object">context object</a>'s <a href="#top-layer">top layer</a> if that
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> has its
+<a href="#fullscreen-flag">fullscreen flag</a> set, and null otherwise.
 
 <p>To <dfn id="collect-ancestors">collect ancestors</dfn> given a
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var title="">doc</var>,
@@ -390,23 +381,24 @@ run these steps:
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> whose
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#fullscreen-element-stack">fullscreen element stack</a> consists of one
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, append that
+ <a href="#top-layer">top layer</a> consists of a single
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> and that single
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> has its
+ <a href="#fullscreen-flag">fullscreen flag</a> set, append that
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
  <var title="">docs</var>.
 
  <li><p>Return <var title="">docs</var>.
 </ol>
 
-<p>The
-<dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
-method, when invoked, must run these steps:
+<p>To <dfn id="exit-fullscreen">exit fullscreen</dfn>, given a
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var>doc</var>, run
+these steps:
 
 <ol>
- <li><p>Let <var title="">doc</var> be the <a href="#context-object">context object</a>.
-
- <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> is empty,
- terminate these steps.
+ <li><p>If <var title="">doc</var>'s <a href="#top-layer">top layer</a> contains no
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> whose
+ <a href="#fullscreen-flag">fullscreen flag</a> is set, terminate these steps.
 
  <li><p>Let <var title="">resize</var> be false.
 
@@ -450,27 +442,41 @@ method, when invoked, must run these steps:
    <li><p>Let <var title="">descendantDocs</var> be an ordered set consisting of
    <var title="">doc</var>'s
    <a href="#descendant-browsing-context" title="descendant browsing context">descendant browsing contexts</a>'
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> with a non-empty
-   <a href="#fullscreen-element-stack">fullscreen element stack</a> (if any), in <em>reverse</em>
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> whose
+   <a href="#top-layer">top layer</a> consists of at least one
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> with its
+   <a href="#fullscreen-flag">fullscreen flag</a> set (if any), in <em>reverse</em>
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
    <!-- cross-process -->
 
    <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>,
-   <a href="#concept-fullscreen-empty" title="concept-fullscreen-empty">empty</a> <var title="">descendantDoc</var>'s
-   <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+   <a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var title="">descendantDoc</var></a>
+   and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenchange</code> on <var title="">descendantDoc</var>.
    <!-- cross-process -->
 
-   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>,
-   <a href="#concept-fullscreen-remove" title="concept-fullscreen-remove">remove</a> the top
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> from
-   <var title="">exitDoc</var>'s <a href="#fullscreen-element-stack">fullscreen element stack</a> and
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenchange</code> on <var title="">exitDoc</var>.
-   <!-- cross-process -->
+   <li>
+    <p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, run these
+    subsubsteps:
+
+    <ol>
+     <li><p>Let <var>element</var> be <var title="">exitDoc</var>'s <a href="#top-layer">top layer</a>'s
+     top <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
+
+     <li><p><a href="#unfullscreen-an-element" title="unfullscreen an element">Unfullscreen <var>element</var></a>
+     within <var>exitDoc</var>.
+
+     <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
+     <code>fullscreenchange</code> on <var title="">exitDoc</var>.
+    </ol>
+    <!-- cross-process -->
   </ol>
 </ol>
+
+<p>The
+<dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
+method, when invoked, must <a href="#exit-fullscreen">exit fullscreen</a> with the
+<a href="#context-object">context object</a>.
 
 <hr>
 
@@ -527,7 +533,7 @@ here is sketchy as hell.
 <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a>
 of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after step 10 in
 the painting order, and is therefore rendered closest to the user within a
-viewport. Each <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> has one
+viewport. Each <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has one
 associated viewport and therefore also one <a href="#top-layer">top layer</a>.
 <a href="#refsCSS">[CSS]</a>
 
@@ -601,10 +607,10 @@ pseudo-element either.
 <h3 id=":fullscreen-pseudo-class"><span class="secno">6.3 </span><code title="">:fullscreen</code> pseudo-class</h3>
 
 <p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
-pseudo-class must match the top
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> of the
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s
-<a href="#fullscreen-element-stack">fullscreen element stack</a> (if any).
+pseudo-class must match an <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
+whose <a href="#fullscreen-flag">fullscreen flag</a> is set and is at the top of its
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+<a href="#top-layer">top layer</a>.
 
 
 <h3 id="user-agent-level-style-sheet-defaults"><span class="secno">6.4 </span>User-agent level style sheet defaults</h3>
