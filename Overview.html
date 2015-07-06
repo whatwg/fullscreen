@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 2 July 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 6 July 2015</h2>
 </hgroup>
 
  <dl>
@@ -151,9 +151,10 @@ set.
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> whose
  <a href="#fullscreen-flag">fullscreen flag</a> is set, terminate these steps.
 
- <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> within
- <var title="">doc</var> until only the top
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is left.
+ <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> whose
+ <a href="#fullscreen-flag">fullscreen flag</a> is set, within <var>doc</var>'s <a href="#top-layer">top layer</a>,
+ except for the current top
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
 
  <li><p>Run <a href="#exit-fullscreen">exit fullscreen</a> with <var title="">doc</var>.
 </ol>
@@ -248,7 +249,7 @@ returns true if all of the following are true, and false otherwise:
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#top-layer">top layer</a> contains no
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> whose
- <a href="#fullscreen-flag">fullscreen flag</a> is or its top
+ <a href="#fullscreen-flag">fullscreen flag</a> is set, or its top
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> is an
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a>
  of <var title="">element</var>, which has its <a href="#fullscreen-flag">fullscreen flag</a> set.
@@ -710,8 +711,9 @@ Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbjørn Vik,
 Simon Pieters,
-Tab Atkins, and
-Vincent Scheib
+Tab Atkins,
+Vincent Scheib, and
+Xidorn Quan
 for also being awesome.
 
 <p>This standard is written by

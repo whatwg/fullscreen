@@ -138,8 +138,8 @@ set.
 
  <li><p><span title="Unfullscreen an element">Unfullscreen elements</span> whose
  <span>fullscreen flag</span> is set, within <var>doc</var>'s <span>top layer</span>,
- until only the top <span data-anolis-spec=dom title=concept-element>element</span> in
- <var>doc</var>'s <span>top layer</span> is left.
+ except for the current top
+ <span data-anolis-spec=dom title=concept-element>element</span>.
 
  <li><p>Run <span>exit fullscreen</span> with <var title>doc</var>.
 </ol>
@@ -234,7 +234,7 @@ returns true if all of the following are true, and false otherwise:
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>top layer</span> contains no
  <span data-anolis-spec=dom title=concept-element>elements</span> whose
- <span>fullscreen flag</span> is or its top
+ <span>fullscreen flag</span> is set, or its top
  <span data-anolis-spec=dom title=concept-element>element</span> is an
  <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span>
  of <var title>element</var>, which has its <span>fullscreen flag</span> set.
@@ -681,8 +681,9 @@ Rafał Chłodnicki,
 Rune Lillesveen,
 Sigbj&oslash;rn Vik,
 Simon Pieters,
-Tab Atkins, and
-Vincent Scheib
+Tab Atkins,
+Vincent Scheib, and
+Xidorn Quan
 for also being awesome.
 
 <p>This standard is written by
