@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 6 July 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 13 July 2015</h2>
 </hgroup>
 
  <dl>
@@ -638,6 +638,10 @@ section uses this term -->
 iframe:fullscreen {
   border:none !important;
   padding:0 !important;
+}
+
+::backdrop {
+  display:block !important;
 }
 
 *|*:fullscreen::backdrop {
