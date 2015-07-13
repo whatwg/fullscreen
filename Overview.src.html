@@ -93,6 +93,12 @@ specification is the
 have an associated <dfn>fullscreen enabled flag</dfn>. Unless stated otherwise it is
 unset.
 
+<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
+have an associated <dfn>fullscreen element</dfn>. The <span>fullscreen element</span> is
+the topmost <span data-anolis-spec=dom title=concept-element>element</span> in the
+<span data-anolis-spec=dom title=concept-document>document</span>'s <span>top layer</span>
+whose <span>fullscreen flag</span> is set, if any, and null otherwise.
+
 <p class=note>HTML defines the exact conditions under which the
 <span>fullscreen enabled flag</span> is set. A
 <span data-anolis-spec=dom title=concept-document>document</span> from a
@@ -131,15 +137,12 @@ set.
  <span data-anolis-spec=html>top-level browsing context</span>'s
  <span data-anolis-spec=dom title=concept-document>document</span>.
 
- <li><p>If <var title>doc</var>'s <span>top layer</span> contains no
- <span data-anolis-spec=dom title=concept-element>elements</span> whose
- <span>fullscreen flag</span> is set, terminate these steps.
+ <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, terminate these
+ steps.
 
  <li><p><span title="Unfullscreen an element">Unfullscreen elements</span> whose
  <span>fullscreen flag</span> is set, within <var>doc</var>'s <span>top layer</span>,
- except for the topmost
- <span data-anolis-spec=dom title=concept-element>element</span> whose
- <span>fullscreen flag</span> is set.
+ except for <var>doc</var>'s <span>fullscreen element</span>.
 
  <li><p>Run <span>exit fullscreen</span> with <var title>doc</var>.
 </ol>
@@ -162,9 +165,9 @@ set.
   <p>For each <var title>node</var> in <var title>nodes</var>, run these substeps:
 
   <ol>
-   <li><p>If <var title>node</var> is at the top of its
+   <li><p>If <var title>node</var> is its
    <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-   <span>top layer</span>, run <span>exit fullscreen</span> on that
+   <span>fullscreen element</span>, run <span>exit fullscreen</span> on that
    <span data-anolis-spec=dom title=concept-document>document</span> and terminate these
    steps.
 
@@ -232,13 +235,10 @@ returns true if all of the following are true, and false otherwise:
 
  <li><p><var title>element</var>'s
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span>top layer</span> contains no
- <span data-anolis-spec=dom title=concept-element>elements</span> whose
- <span>fullscreen flag</span> is set, or its top
- <span data-anolis-spec=dom title=concept-element>element</span> is an
+ <span>fullscreen element</span> is null, or is an
  <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span>
- of <var title>element</var>, which has its <span>fullscreen flag</span> set.
- <!-- If /element/ is on top, nothing happens -->
+ of <var title>element</var>.
+ <!-- If /element/ is the fullscreen element, nothing happens -->
 
  <li><p><var title>element</var> has no
  <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span>
@@ -321,9 +321,8 @@ method, when invoked, must run these steps:
      <span data-anolis-spec=dom title=concept-node-document>node document</span>.
 
      <li>
-      <p>If <var title>element</var> is on top of <var title>doc</var>'s
-      <span>top layer</span> and its <span>fullscreen flag</span> is set, terminate these
-      substeps.
+      <p>If <var title>element</var> is <var title>doc</var>'s
+      <span>fullscreen element</span>, terminate these substeps.
 
       <p class=note>No need to notify observers when nothing has changed.
 
@@ -351,11 +350,8 @@ false otherwise.
 <!-- The fullscreen enabled flag is propagated properly by HTML -->
 
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
-attribute's getter must return the top
-<span data-anolis-spec=dom title=concept-element>element</span> of the
-<span>context object</span>'s <span>top layer</span> if that
-<span data-anolis-spec=dom title=concept-element>element</span> has its
-<span>fullscreen flag</span> set, and null otherwise.
+attribute's getter must return <span>context object</span>'s
+<span>fullscreen element</span>.
 
 <p>To <dfn>collect ancestors</dfn> given a
 <span data-anolis-spec=dom title=concept-document>document</span> <var title>doc</var>,
@@ -369,8 +365,7 @@ run these steps:
  <span data-anolis-spec=html>browsing context container</span> whose
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>top layer</span> consists of a single
- <span data-anolis-spec=dom title=concept-element>element</span> and that single
- <span data-anolis-spec=dom title=concept-element>element</span> has its
+ <span data-anolis-spec=dom title=concept-element>element</span> that has its
  <span>fullscreen flag</span> set, append that
  <span data-anolis-spec=dom title=concept-node-document>node document</span> to
  <var title>docs</var>.
@@ -383,9 +378,8 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <var title>doc</var>'s <span>top layer</span> contains no
- <span data-anolis-spec=dom title=concept-element>elements</span> whose
- <span>fullscreen flag</span> is set, terminate these steps.
+ <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, terminate these
+ steps.
 
  <li><p>Let <var title>resize</var> be false.
 
@@ -430,9 +424,7 @@ these steps:
    <var title>doc</var>'s
    <span title="descendant browsing context">descendant browsing contexts</span>'
    <span data-anolis-spec=dom title=concept-document>documents</span> whose
-   <span>top layer</span> consists of at least one
-   <span data-anolis-spec=dom title=concept-element>element</span> with its
-   <span>fullscreen flag</span> set (if any), in <em>reverse</em>
+   <span>fullscreen element</span> is non-null, if any, in <em>reverse</em>
    <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
    <!-- cross-process -->
 
@@ -447,8 +439,8 @@ these steps:
     subsubsteps:
 
     <ol>
-     <li><p>Let <var>element</var> be <var title>exitDoc</var>'s <span>top layer</span>'s
-     top <span data-anolis-spec=dom title=concept-element>element</span>.
+     <li><p>Let <var>element</var> be <var title>exitDoc</var>'s
+     <span>fullscreen element</span>.
 
      <li><p><span title="unfullscreen an element">Unfullscreen <var>element</var></span>
      within <var>exitDoc</var>.
@@ -594,10 +586,11 @@ pseudo-element either.
 <h3><code title>:fullscreen</code> pseudo-class</h3>
 
 <p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
-pseudo-class must match an <span data-anolis-spec=dom title=concept-element>element</span>
-whose <span>fullscreen flag</span> is set and is at the top of its
+pseudo-class must match any
+<span data-anolis-spec=dom title=concept-element>element</span> that is that
+<span data-anolis-spec=dom title=concept-element>element</span>'s
 <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-<span>top layer</span>.
+<span>fullscreen element</span>.
 
 
 <h3>User-agent level style sheet defaults</h3>
