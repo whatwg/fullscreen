@@ -326,10 +326,11 @@ method, when invoked, must run these steps:
    <var title="">fullscreenElements</var>.
    <!-- cross-process -->
 
+   <li><p>Let <var>eventDocs</var> be an empty list.
+
    <li>
-    <p>Then for each <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>
-    <var title="">element</var> in <var title="">fullscreenElements</var>, in order, run these
-    subsubsteps:
+    <p>For each <var title="">element</var> in <var title="">fullscreenElements</var>, in order,
+    run these subsubsteps:
 
     <ol>
      <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
@@ -337,16 +338,19 @@ method, when invoked, must run these steps:
 
      <li>
       <p>If <var title="">element</var> is <var title="">doc</var>'s
-      <a href="#fullscreen-element">fullscreen element</a>, terminate these substeps.
+      <a href="#fullscreen-element">fullscreen element</a>, terminate these subsubsteps.
 
       <p class="note">No need to notify observers when nothing has changed.
 
+     <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
+
      <li><p><a href="#fullscreen-an-element" title="Fullscreen an element">Fullscreen <var>element</var></a>
      within <var title="">doc</var>.
-
-     <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
-     <code>fullscreenchange</code> on <var title="">doc</var>.
     </ol>
+
+   <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order,
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+   <code>fullscreenchange</code> on <var title="">doc</var>.
   </ol>
 
   <p class="XXX"><span>Animation frame task</span> is not really defined yet, including
@@ -443,27 +447,24 @@ these steps:
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
    <!-- cross-process -->
 
-   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>,
-   <a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var title="">descendantDoc</var></a>
-   and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>, in
+   order,
+   <a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var title="">descendantDoc</var></a>.
+   <!-- cross-process -->
+
+   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, in order,
+   <a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s
+   <a href="#fullscreen-element">fullscreen element</a>.
+
+   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>, in
+   order, <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenchange</code> on <var title="">descendantDoc</var>.
    <!-- cross-process -->
 
-   <li>
-    <p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, run these
-    subsubsteps:
-
-    <ol>
-     <li><p>Let <var>element</var> be <var title="">exitDoc</var>'s
-     <a href="#fullscreen-element">fullscreen element</a>.
-
-     <li><p><a href="#unfullscreen-an-element" title="unfullscreen an element">Unfullscreen <var>element</var></a>
-     within <var>exitDoc</var>.
-
-     <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
-     <code>fullscreenchange</code> on <var title="">exitDoc</var>.
-    </ol>
-    <!-- cross-process -->
+   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, in order,
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
+   <code>fullscreenchange</code> on <var title="">exitDoc</var>.
+   <!-- cross-process -->
   </ol>
 </ol>
 
