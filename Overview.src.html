@@ -93,12 +93,6 @@ specification is the
 have an associated <dfn>fullscreen enabled flag</dfn>. Unless stated otherwise it is
 unset.
 
-<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
-have an associated <dfn>fullscreen element</dfn>. The <span>fullscreen element</span> is
-the topmost <span data-anolis-spec=dom title=concept-element>element</span> in the
-<span data-anolis-spec=dom title=concept-document>document</span>'s <span>top layer</span>
-whose <span>fullscreen flag</span> is set, if any, and null otherwise.
-
 <p class=note>HTML defines the exact conditions under which the
 <span>fullscreen enabled flag</span> is set. A
 <span data-anolis-spec=dom title=concept-document>document</span> from a
@@ -113,6 +107,12 @@ defined by HTML as well.
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
 -->
+
+<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
+have an associated <dfn>fullscreen element</dfn>. The <span>fullscreen element</span> is
+the topmost <span data-anolis-spec=dom title=concept-element>element</span> in the
+<span data-anolis-spec=dom title=concept-document>document</span>'s <span>top layer</span>
+whose <span>fullscreen flag</span> is set, if any, and null otherwise.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn> within a <var title>document</var>, set
 the <var title>element</var>'s <span>fullscreen flag</span>, and add, or move if already

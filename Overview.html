@@ -108,12 +108,6 @@ specification is the
 have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless stated otherwise it is
 unset.
 
-<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
-have an associated <dfn id="fullscreen-element">fullscreen element</dfn>. The <a href="#fullscreen-element">fullscreen element</a> is
-the topmost <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s <a href="#top-layer">top layer</a>
-whose <a href="#fullscreen-flag">fullscreen flag</a> is set, if any, and null otherwise.
-
 <p class="note">HTML defines the exact conditions under which the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> from a
@@ -128,6 +122,12 @@ defined by HTML as well.
   not set for <iframe>, createDocument();
   set for <iframe allowfullscreen>
 -->
+
+<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
+have an associated <dfn id="fullscreen-element">fullscreen element</dfn>. The <a href="#fullscreen-element">fullscreen element</a> is
+the topmost <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s <a href="#top-layer">top layer</a>
+whose <a href="#fullscreen-flag">fullscreen flag</a> is set, if any, and null otherwise.
 
 <p>To <dfn id="fullscreen-an-element">fullscreen an <var>element</var></dfn> within a <var title="">document</var>, set
 the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a>, and add, or move if already
