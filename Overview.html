@@ -105,7 +105,8 @@ specification is the
 <dfn id="fullscreen-flag">fullscreen flag</dfn>. Unless stated otherwise it is unset.
 
 <p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
-have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless otherwise it is unset.
+have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless stated otherwise it is
+unset.
 
 <p class="note">HTML defines the exact conditions under which the
 <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
@@ -122,17 +123,15 @@ defined by HTML as well.
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn id="fullscreen">fullscreen</dfn> an <var title="">element</var> within a
-<var title="">document</var>, set the <var title="">element</var>'s
-<a href="#fullscreen-flag">fullscreen flag</a>, and add, or move if already present, it on top of
+<p>To <dfn id="fullscreen-an-element">fullscreen an <var>element</var></dfn> within a <var title="">document</var>, set
+the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a>, and add, or move if already
+present, it on top of <var title="">document</var>'s <a href="#top-layer">top layer</a>.
+
+<p>To <dfn id="unfullscreen-an-element">unfullscreen an <var>element</var></dfn> within a <var title="">document</var>,
+unset the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a>, and remove it from
 <var title="">document</var>'s <a href="#top-layer">top layer</a>.
 
-<p>To <dfn id="unfullscreen-an-element">unfullscreen an <var title="">element</var></dfn> within a
-<var title="">document</var>, unset the <var title="">element</var>'s
-<a href="#fullscreen-flag">fullscreen flag</a>, and remove it from <var title="">document</var>'s
-<a href="#top-layer">top layer</a>.
-
-<p>To <dfn id="unfullscreen-a-document">unfullscreen a <var title="">document</var></dfn>,
+<p>To <dfn id="unfullscreen-a-document">unfullscreen a <var>document</var></dfn>,
 <a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen</a> all
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>, within
 <var title="">document</var>'s <a href="#top-layer">top layer</a>, whose <a href="#fullscreen-flag">fullscreen flag</a> is
@@ -153,8 +152,9 @@ set.
 
  <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> whose
  <a href="#fullscreen-flag">fullscreen flag</a> is set, within <var>doc</var>'s <a href="#top-layer">top layer</a>,
- except for the current top
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
+ except for the topmost
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> whose
+ <a href="#fullscreen-flag">fullscreen flag</a> is set.
 
  <li><p>Run <a href="#exit-fullscreen">exit fullscreen</a> with <var title="">doc</var>.
 </ol>
@@ -342,7 +342,8 @@ method, when invoked, must run these steps:
 
       <p class="note">No need to notify observers when nothing has changed.
 
-     <li><p><a href="#fullscreen">Fullscreen</a> <var title="">element</var> within <var title="">doc</var>.
+     <li><p><a href="#fullscreen-an-element" title="Fullscreen an element">Fullscreen <var>element</var></a>
+     within <var title="">doc</var>.
 
      <li><p><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">Fire an event</a> named
      <code>fullscreenchange</code> on <var title="">doc</var>.

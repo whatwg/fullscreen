@@ -90,7 +90,8 @@ specification is the
 <dfn>fullscreen flag</dfn>. Unless stated otherwise it is unset.
 
 <p>All <span data-anolis-spec=dom title=concept-document>documents</span>
-have an associated <dfn>fullscreen enabled flag</dfn>. Unless otherwise it is unset.
+have an associated <dfn>fullscreen enabled flag</dfn>. Unless stated otherwise it is
+unset.
 
 <p class=note>HTML defines the exact conditions under which the
 <span>fullscreen enabled flag</span> is set. A
@@ -107,17 +108,15 @@ defined by HTML as well.
   set for <iframe allowfullscreen>
 -->
 
-<p>To <dfn>fullscreen</dfn> an <var title>element</var> within a
-<var title>document</var>, set the <var title>element</var>'s
-<span>fullscreen flag</span>, and add, or move if already present, it on top of
+<p>To <dfn>fullscreen an <var>element</var></dfn> within a <var title>document</var>, set
+the <var title>element</var>'s <span>fullscreen flag</span>, and add, or move if already
+present, it on top of <var title>document</var>'s <span>top layer</span>.
+
+<p>To <dfn>unfullscreen an <var>element</var></dfn> within a <var title>document</var>,
+unset the <var title>element</var>'s <span>fullscreen flag</span>, and remove it from
 <var title>document</var>'s <span>top layer</span>.
 
-<p>To <dfn>unfullscreen an <var title>element</var></dfn> within a
-<var title>document</var>, unset the <var title>element</var>'s
-<span>fullscreen flag</span>, and remove it from <var title>document</var>'s
-<span>top layer</span>.
-
-<p>To <dfn>unfullscreen a <var title>document</var></dfn>,
+<p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <span title="unfullscreen an element">unfullscreen</span> all
 <span data-anolis-spec=dom title=concept-element>elements</span>, within
 <var title>document</var>'s <span>top layer</span>, whose <span>fullscreen flag</span> is
@@ -138,8 +137,9 @@ set.
 
  <li><p><span title="Unfullscreen an element">Unfullscreen elements</span> whose
  <span>fullscreen flag</span> is set, within <var>doc</var>'s <span>top layer</span>,
- except for the current top
- <span data-anolis-spec=dom title=concept-element>element</span>.
+ except for the topmost
+ <span data-anolis-spec=dom title=concept-element>element</span> whose
+ <span>fullscreen flag</span> is set.
 
  <li><p>Run <span>exit fullscreen</span> with <var title>doc</var>.
 </ol>
@@ -327,7 +327,8 @@ method, when invoked, must run these steps:
 
       <p class=note>No need to notify observers when nothing has changed.
 
-     <li><p><span>Fullscreen</span> <var title>element</var> within <var title>doc</var>.
+     <li><p><span title="Fullscreen an element">Fullscreen <var>element</var></span>
+     within <var title>doc</var>.
 
      <li><p><span data-anolis-spec=dom title=concept-event-fire>Fire an event</span> named
      <code>fullscreenchange</code> on <var title>doc</var>.
