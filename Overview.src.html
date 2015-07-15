@@ -115,12 +115,14 @@ the topmost <span data-anolis-spec=dom title=concept-element>element</span> in t
 whose <span>fullscreen flag</span> is set, if any, and null otherwise.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn> within a <var title>document</var>, set
-the <var title>element</var>'s <span>fullscreen flag</span>, and add, or move if already
-present, it on top of <var title>document</var>'s <span>top layer</span>.
+the <var title>element</var>'s <span>fullscreen flag</span> and
+<span title=concept-top-layer-add>add</span> it to <var title>document</var>'s
+<span>top layer</span>.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn> within a <var title>document</var>,
-unset the <var title>element</var>'s <span>fullscreen flag</span>, and remove it from
-<var title>document</var>'s <span>top layer</span>.
+unset the <var title>element</var>'s <span>fullscreen flag</span> and
+<span title=concept-top-layer-remove>remove</span> it from <var title>document</var>'s
+<span>top layer</span>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <span title="unfullscreen an element">unfullscreen</span> all
@@ -232,13 +234,6 @@ returns true if all of the following are true, and false otherwise:
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
  <span>fullscreen enabled flag</span> is set.
  <!-- The fullscreen enabled flag is propagated properly by HTML -->
-
- <li><p><var title>element</var>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span>fullscreen element</span> is null, or is an
- <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span>
- of <var title>element</var>.
- <!-- If /element/ is the fullscreen element, nothing happens -->
 
  <li><p><var title>element</var> has no
  <span data-anolis-spec=dom title=concept-tree-ancestor>ancestor</span>
@@ -564,6 +559,13 @@ user.
  <code title>left</code>, <code title>right</code>, and
  <code title>top</code> is zero.
 </ul>
+
+<p>To <dfn title=concept-top-layer-add>add</dfn> an <var>element</var> to a
+<var title>top layer</var>, add, or move if already present, <var>element</var> on top of
+<var title>top layer</var>.
+
+<p>To <dfn title=concept-top-layer-remove>remove</dfn> an <var>element</var> from a
+<var title>top layer</var>, remove <var>element</var> from <var title>top layer</var>.
 
 
 <h3><code title>::backdrop</code> pseudo-element</h3>
