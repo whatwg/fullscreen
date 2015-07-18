@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 15 July 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 18 July 2015</h2>
 </hgroup>
 
  <dl>
@@ -367,14 +367,17 @@ false otherwise.
 attribute's getter must return <a href="#context-object">context object</a>'s
 <a href="#fullscreen-element">fullscreen element</a>.
 
-<p>To <dfn id="collect-ancestors">collect ancestors</dfn> given a
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var title="">doc</var>,
+<p>To <dfn id="collect-documents-to-unfullscreen">collect documents to unfullscreen</dfn> given <var title="">doc</var>,
 run these steps:
 
 <ol>
- <li><p>Let <var title="">docs</var> be an ordered set consisting of <var title="">doc</var>.
+ <li><p>If <var>doc</var>'s <a href="#top-layer">top layer</a> consists of more than a single
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
+ <a href="#fullscreen-flag">fullscreen flag</a> set, return the empty set.
 
- <li><p>While <var title="">docs</var>'s last
+ <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
+
+ <li><p>While <var>docs</var>'s last
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> whose
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
@@ -382,9 +385,9 @@ run these steps:
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
  <a href="#fullscreen-flag">fullscreen flag</a> set, append that
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
- <var title="">docs</var>.
+ <var>docs</var>.
 
- <li><p>Return <var title="">docs</var>.
+ <li><p>Return <var>docs</var>.
 </ol>
 
 <p>To <dfn id="exit-fullscreen">exit fullscreen</dfn>, given a
@@ -398,7 +401,8 @@ these steps:
  <li><p>Let <var title="">resize</var> be false.
 
  <li><p>Let <var title="">docs</var> be the result of
- <a href="#collect-ancestors" title="collect ancestors">collecting ancestors</a> given <var title="">doc</var>.
+ <a href="#collect-documents-to-unfullscreen" title="collect documents to unfullscreen">collecting documents to unfullscreen</a>
+ given <var title="">doc</var>.
  <!-- cross-process -->
 
  <li><p>Let <var title="">topLevelDoc</var> be <var title="">doc</var>'s
@@ -418,13 +422,17 @@ these steps:
   <p>As part of the next <span>animation frame task</span>, run these substeps:
 
   <ol>
-   <li><p>Let <var title="">exitDocs</var> be the result of
-   <a href="#collect-ancestors" title="collect ancestors">collecting ancestors</a> given <var title="">doc</var>.
+   <li><p>Let <var>exitDocs</var> be the result of
+   <a href="#collect-documents-to-unfullscreen" title="collect documents to unfullscreen">collecting documents to unfullscreen</a>
+   given <var>doc</var>.
    <!-- cross-process -->
 
    <li><p>If <var title="">resize</var> is true and <var title="">topLevelDoc</var> is not in
    <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> and terminate these
    steps.
+
+   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
+   <var>exitDocs</var>.
 
    <li><p>If <var title="">exitDocs</var>'s last
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a

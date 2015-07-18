@@ -352,14 +352,17 @@ false otherwise.
 attribute's getter must return <span>context object</span>'s
 <span>fullscreen element</span>.
 
-<p>To <dfn>collect ancestors</dfn> given a
-<span data-anolis-spec=dom title=concept-document>document</span> <var title>doc</var>,
+<p>To <dfn>collect documents to unfullscreen</dfn> given <var title>doc</var>,
 run these steps:
 
 <ol>
- <li><p>Let <var title>docs</var> be an ordered set consisting of <var title>doc</var>.
+ <li><p>If <var>doc</var>'s <span>top layer</span> consists of more than a single
+ <span data-anolis-spec=dom title=concept-element>element</span> that has its
+ <span>fullscreen flag</span> set, return the empty set.
 
- <li><p>While <var title>docs</var>'s last
+ <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
+
+ <li><p>While <var>docs</var>'s last
  <span data-anolis-spec=dom title=concept-document>document</span> has a
  <span data-anolis-spec=html>browsing context container</span> whose
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
@@ -367,9 +370,9 @@ run these steps:
  <span data-anolis-spec=dom title=concept-element>element</span> that has its
  <span>fullscreen flag</span> set, append that
  <span data-anolis-spec=dom title=concept-node-document>node document</span> to
- <var title>docs</var>.
+ <var>docs</var>.
 
- <li><p>Return <var title>docs</var>.
+ <li><p>Return <var>docs</var>.
 </ol>
 
 <p>To <dfn>exit fullscreen</dfn>, given a
@@ -383,7 +386,8 @@ these steps:
  <li><p>Let <var title>resize</var> be false.
 
  <li><p>Let <var title>docs</var> be the result of
- <span title="collect ancestors">collecting ancestors</span> given <var title>doc</var>.
+ <span title="collect documents to unfullscreen">collecting documents to unfullscreen</span>
+ given <var title>doc</var>.
  <!-- cross-process -->
 
  <li><p>Let <var title>topLevelDoc</var> be <var title>doc</var>'s
@@ -403,13 +407,17 @@ these steps:
   <p>As part of the next <span>animation frame task</span>, run these substeps:
 
   <ol>
-   <li><p>Let <var title>exitDocs</var> be the result of
-   <span title="collect ancestors">collecting ancestors</span> given <var title>doc</var>.
+   <li><p>Let <var>exitDocs</var> be the result of
+   <span title="collect documents to unfullscreen">collecting documents to unfullscreen</span>
+   given <var>doc</var>.
    <!-- cross-process -->
 
    <li><p>If <var title>resize</var> is true and <var title>topLevelDoc</var> is not in
    <var title>exitDocs</var>, <span>fully exit fullscreen</span> and terminate these
    steps.
+
+   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
+   <var>exitDocs</var>.
 
    <li><p>If <var title>exitDocs</var>'s last
    <span data-anolis-spec=dom title=concept-document>document</span> has a
