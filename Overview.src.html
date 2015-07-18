@@ -159,8 +159,8 @@ set.
 
 <ol>
  <li><p>Let <var title>nodes</var> be <var title>oldNode</var>'s
- <span title=concept-tree-inclusive-descendant>inclusive descendants</span> that have
- their <span>fullscreen flag</span> set, in
+ <span data-anolis-spec=dom title=concept-tree-inclusive-descendant>inclusive descendants</span>
+ that have their <span>fullscreen flag</span> set, in
  <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
 
  <li>
@@ -178,6 +178,10 @@ set.
    its <span data-anolis-spec=dom title=concept-node-document>node document</span>.
   </ol>
 </ol>
+
+<p>Whenever the <span data-anolis-spec=html>unloading document cleanup steps</span> run
+with a <var>doc</var>,
+<span title="unfullscreen a document">unfullscreen <var>doc</var></span>.
 
 <hr>
 

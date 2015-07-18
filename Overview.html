@@ -174,8 +174,8 @@ set.
 
 <ol>
  <li><p>Let <var title="">nodes</var> be <var title="">oldNode</var>'s
- <span title="concept-tree-inclusive-descendant">inclusive descendants</span> that have
- their <a href="#fullscreen-flag">fullscreen flag</a> set, in
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-descendant" title="concept-tree-inclusive-descendant">inclusive descendants</a>
+ that have their <a href="#fullscreen-flag">fullscreen flag</a> set, in
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
 
  <li>
@@ -193,6 +193,10 @@ set.
    its <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
   </ol>
 </ol>
+
+<p>Whenever the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run
+with a <var>doc</var>,
+<a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var>doc</var></a>.
 
 <hr>
 
