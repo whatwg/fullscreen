@@ -218,8 +218,9 @@ partial interface <a class="external" data-anolis-spec="dom" href="https://dom.s
 };</pre>
 
 <dl class="domintro">
- <dt><code><var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
- <dd><p>Displays <var title="">element</var> fullscreen.
+ <dt><code><var>promise</var> = <var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
+ <dd><p>Displays <var title="">element</var> fullscreen and fulfills <var>promise</var> when
+ done.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
  <dd><p>Returns true if <var title="">document</var> has the ability to display
@@ -227,15 +228,11 @@ partial interface <a class="external" data-anolis-spec="dom" href="https://dom.s
  fullscreen and <a href="#fullscreen-is-supported">fullscreen is supported</a>, or false otherwise.
 
  <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
- <dd><p>Returns the
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that is
- displayed fullscreen, or null if there is no such
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>.
+ <dd><p>Returns <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a>.
 
- <dt><code><var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
- <dd><p>Stops any
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> within
- <var title="">document</var> from being displayed fullscreen.
+ <dt><code><var>promise</var> = <var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
+ <dd><p>Stops <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> from being
+ displayed fullscreen and fulfills <var>promise</var> when done.
 </dl>
 
 <p>A <dfn id="fullscreen-element-ready-check">fullscreen element ready check</dfn> for an
