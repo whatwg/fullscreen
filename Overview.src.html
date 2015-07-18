@@ -189,14 +189,14 @@ preference, security risk, or platform limitation.
 <h2>API</h2>
 
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
-  void <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
+  Promise&lt;void> <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
 };
 
 partial interface <span data-anolis-spec=dom>Document</span> {
   readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
   readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
 
-  void <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
+  Promise&lt;void> <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
 
   attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenchange>onfullscreenchange</span>;
   attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenerror>onfullscreenerror</span>;
@@ -263,6 +263,8 @@ method, when invoked, must run these steps:
 
  <li><p>Let <var title>error</var> be false.
 
+ <li><p>Let <var>promise</var> be a new promise.
+
  <li>
   <p>If any of the following conditions are true, set <var title>error</var> to true:
 
@@ -276,7 +278,8 @@ method, when invoked, must run these steps:
    <li><p><span title="Fullscreen is supported">Fullscreen is <em>not</em> supported</span>.
   </ul>
 
- <li><p>Return, and run the remaining steps asynchronously.
+ <li><p>Return <var>promise</var>, and run the remaining steps
+ <span data-anolis-spec=html>in parallel</span>.
 
  <li><p>If <var title>error</var> is false: Resize <var title>pending</var>'s
  <span data-anolis-spec=html>top-level browsing context</span>'s
@@ -293,8 +296,9 @@ method, when invoked, must run these steps:
    <span>fullscreen element ready check</span> for <var title>pending</var> returns false,
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
    <code>fullscreenerror</code> on <var title>pending</var>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span> and
-   terminate these steps.
+   <span data-anolis-spec=dom title=concept-node-document>node document</span>,
+   reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these
+   steps.
    <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p>Let <var title>fullscreenElements</var> be an ordered set initially consisting
@@ -331,6 +335,8 @@ method, when invoked, must run these steps:
    <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order,
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
    <code>fullscreenchange</code> on <var title>doc</var>.
+
+   <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
   <p class=XXX><span>Animation frame task</span> is not really defined yet, including
@@ -380,8 +386,11 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, terminate these
- steps.
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, reject
+ <var>promise</var> with a <code>TypeError</code> exception, and return
+ <var>promise</var>.
 
  <li><p>Let <var title>resize</var> be false.
 
@@ -398,7 +407,8 @@ these steps:
  <li><p>If <var title>topLevelDoc</var> is in <var title>docs</var>, set
  <var title>resize</var> to true.
 
- <li><p>Return, and run the remaining steps asynchronously.
+ <li><p>Return <var>promise</var>, and run the remaining steps
+ <span data-anolis-spec=html>in parallel</span>.
 
  <li><p>If <var title>resize</var> is true, resize <var title>topLevelDoc</var>'s viewport
  to its "normal" dimensions.
@@ -413,8 +423,8 @@ these steps:
    <!-- cross-process -->
 
    <li><p>If <var title>resize</var> is true and <var title>topLevelDoc</var> is not in
-   <var title>exitDocs</var>, <span>fully exit fullscreen</span> and terminate these
-   steps.
+   <var title>exitDocs</var>, <span>fully exit fullscreen</span>, reject
+   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
 
    <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
    <var>exitDocs</var>.
@@ -453,6 +463,8 @@ these steps:
    <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
    <code>fullscreenchange</code> on <var title>exitDoc</var>.
    <!-- cross-process -->
+
+   <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
   <p class=note>This results in events being fired from the innermost to the outermost
@@ -461,8 +473,8 @@ these steps:
 
 <p>The
 <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn>
-method, when invoked, must <span>exit fullscreen</span> with the
-<span>context object</span>.
+method, when invoked, must return the result of running <span>exit fullscreen</span> with
+the <span>context object</span>.
 
 <hr>
 

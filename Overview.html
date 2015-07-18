@@ -204,14 +204,14 @@ preference, security risk, or platform limitation.
 <h2 id="api"><span class="secno">4 </span>API</h2>
 
 <pre class="idl">partial interface <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#element">Element</a> {
-  void <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
+  Promise&lt;void&gt; <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
 };
 
 partial interface <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#document">Document</a> {
   readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
   readonly attribute <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
 
-  void <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
+  Promise&lt;void&gt; <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
 
   attribute <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenchange" title="handler-document-onfullscreenchange">onfullscreenchange</a>;
   attribute <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenerror" title="handler-document-onfullscreenerror">onfullscreenerror</a>;
@@ -278,6 +278,8 @@ method, when invoked, must run these steps:
 
  <li><p>Let <var title="">error</var> be false.
 
+ <li><p>Let <var>promise</var> be a new promise.
+
  <li>
   <p>If any of the following conditions are true, set <var title="">error</var> to true:
 
@@ -291,7 +293,8 @@ method, when invoked, must run these steps:
    <li><p><a href="#fullscreen-is-supported" title="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
   </ul>
 
- <li><p>Return, and run the remaining steps asynchronously.
+ <li><p>Return <var>promise</var>, and run the remaining steps
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>.
 
  <li><p>If <var title="">error</var> is false: Resize <var title="">pending</var>'s
  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
@@ -308,8 +311,9 @@ method, when invoked, must run these steps:
    <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var title="">pending</var> returns false,
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenerror</code> on <var title="">pending</var>'s
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> and
-   terminate these steps.
+   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>,
+   reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these
+   steps.
    <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p>Let <var title="">fullscreenElements</var> be an ordered set initially consisting
@@ -346,6 +350,8 @@ method, when invoked, must run these steps:
    <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order,
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenchange</code> on <var title="">doc</var>.
+
+   <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
   <p class="XXX"><span>Animation frame task</span> is not really defined yet, including
@@ -395,8 +401,11 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, terminate these
- steps.
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, reject
+ <var>promise</var> with a <code>TypeError</code> exception, and return
+ <var>promise</var>.
 
  <li><p>Let <var title="">resize</var> be false.
 
@@ -413,7 +422,8 @@ these steps:
  <li><p>If <var title="">topLevelDoc</var> is in <var title="">docs</var>, set
  <var title="">resize</var> to true.
 
- <li><p>Return, and run the remaining steps asynchronously.
+ <li><p>Return <var>promise</var>, and run the remaining steps
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>.
 
  <li><p>If <var title="">resize</var> is true, resize <var title="">topLevelDoc</var>'s viewport
  to its "normal" dimensions.
@@ -428,8 +438,8 @@ these steps:
    <!-- cross-process -->
 
    <li><p>If <var title="">resize</var> is true and <var title="">topLevelDoc</var> is not in
-   <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> and terminate these
-   steps.
+   <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a>, reject
+   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
 
    <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
    <var>exitDocs</var>.
@@ -468,6 +478,8 @@ these steps:
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
    <code>fullscreenchange</code> on <var title="">exitDoc</var>.
    <!-- cross-process -->
+
+   <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
   <p class="note">This results in events being fired from the innermost to the outermost
@@ -476,8 +488,8 @@ these steps:
 
 <p>The
 <dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
-method, when invoked, must <a href="#exit-fullscreen">exit fullscreen</a> with the
-<a href="#context-object">context object</a>.
+method, when invoked, must return the result of running <a href="#exit-fullscreen">exit fullscreen</a> with
+the <a href="#context-object">context object</a>.
 
 <hr>
 
