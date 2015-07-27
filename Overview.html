@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 18 July 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 27 July 2015</h2>
 </hgroup>
 
  <dl>
@@ -18,11 +18,11 @@
  (<a href="https://github.com/whatwg/fullscreen/issues/new">file an issue</a>,
  <a href="https://github.com/whatwg/fullscreen/issues">open issues</a>,
  <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=Fullscreen&amp;resolution=---">legacy open bugs</a>)
- <dd><a href="//wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dd><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/fullscreen/commits">GitHub whatwg/fullscreen/commits</a></dd>
- <dd><a href="https://twitter.com/FullscreenAPI">@FullscreenAPI</a>
+ <dd><a href="https://twitter.com/fullscreenapi">@FullscreenAPI</a>
  </dl>
 
 <script async="" src="https://resources.whatwg.org/file-bug.js"></script>
@@ -104,6 +104,10 @@ specification is the
 <p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
 <dfn id="fullscreen-flag">fullscreen flag</dfn>. Unless stated otherwise it is unset.
 
+<p>All <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a>
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
+<dfn id="iframe-fullscreen-flag">iframe fullscreen flag</dfn>. Unless stated otherwise it is unset.
+
 <p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
 have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless stated otherwise it is
 unset.
@@ -136,6 +140,7 @@ the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a>
 
 <p>To <dfn id="unfullscreen-an-element">unfullscreen an <var>element</var></dfn> within a <var title="">document</var>,
 unset the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a> and
+<a href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and
 <a href="#concept-top-layer-remove" title="concept-top-layer-remove">remove</a> it from <var title="">document</var>'s
 <a href="#top-layer">top layer</a>.
 
@@ -344,6 +349,11 @@ method, when invoked, must run these steps:
 
      <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
 
+     <li><p>If <var title="">element</var> is <var title="">pending</var> and
+     <var title="">pending</var> is an <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a>
+     <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, set
+     <var title="">element</var>'s <a href="#iframe-fullscreen-flag">iframe fullscreen flag</a>.
+
      <li><p><a href="#fullscreen-an-element" title="Fullscreen an element">Fullscreen <var>element</var></a>
      within <var title="">doc</var>.
     </ol>
@@ -390,7 +400,8 @@ run these steps:
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
  <a href="#top-layer">top layer</a> consists of a single
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
- <a href="#fullscreen-flag">fullscreen flag</a> set, append that
+ <a href="#fullscreen-flag">fullscreen flag</a> set and does not have its
+ <a href="#iframe-fullscreen-flag">iframe fullscreen flag</a> set (if any), append that
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
  <var>docs</var>.
 
@@ -734,6 +745,7 @@ Mihai Balan,
 Pat Ladd,
 Philip Jägenstedt,
 Rafał Chłodnicki,
+Riff Jiang,
 Rune Lillesveen,
 Sigbjørn Vik,
 Simon Pieters,
