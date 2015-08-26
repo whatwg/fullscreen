@@ -625,9 +625,12 @@ pseudo-element either.
 
 <p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
 pseudo-class must match any
-<span data-anolis-spec=dom title=concept-element>element</span> that is that
-<span data-anolis-spec=dom title=concept-element>element</span>'s
-<span data-anolis-spec=dom title=concept-node-document>node document</span>'s
+<span data-anolis-spec=dom title=concept-element>element</span> that has its
+<span>fullscreen flag</span> set.
+
+<p class="note no-backref">This makes it different from the
+<code title=dom-Document-fullscreenElement>fullscreenElement</code> API, which returns a
+<span data-anolis-spec=dom title=concept-document>document</span>'s
 <span>fullscreen element</span>.
 
 

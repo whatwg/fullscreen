@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 19 August 2015</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 26 August 2015</h2>
 </hgroup>
 
  <dl>
@@ -640,9 +640,12 @@ pseudo-element either.
 
 <p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
 pseudo-class must match any
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that is that
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>'s
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
+<a href="#fullscreen-flag">fullscreen flag</a> set.
+
+<p class="note no-backref">This makes it different from the
+<a href="#dom-document-fullscreenelement"><code title="dom-Document-fullscreenElement">fullscreenElement</code></a> API, which returns a
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s
 <a href="#fullscreen-element">fullscreen element</a>.
 
 
