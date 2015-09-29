@@ -664,7 +664,7 @@ iframe:fullscreen {
   display:block !important;
 }
 
-*|*:fullscreen::backdrop {
+*|*:not(:root):fullscreen::backdrop {
   position:fixed;
   top:0; right:0; bottom:0; left:0;
   background:black;
