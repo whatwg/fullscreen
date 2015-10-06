@@ -583,17 +583,18 @@ user.
  <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=24523 -->
 
  <li>
-  <p>It is rendered as an atomic unit as if it were a sibling of the root
-  element.
+  <p>It is rendered as an atomic unit as if it were a sibling of its
+  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-root" title="concept-tree-root">root</a>.
 
-  <p class="note">Ancestor elements with overflow, opacity, masks, etc. cannot
-  affect it.
+  <p class="note"><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-ancestor" title="concept-tree-ancestor">Ancestor</a> elements with
+  overflow, opacity, masks, etc. cannot affect it.
 
  <li><p>If its <code title="">position</code> property computes to <code title="">fixed</code>,
  its containing block is the viewport, and the initial containing block otherwise.
 
- <li><p>It is not rendered if it, or an ancestor, has the
- <code title="">display</code> property set to <code title="">none</code>.
+ <li><p>It, and its <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element, are not rendered
+ if its <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a>
+ has the <code title="">display</code> property set to <code title="">none</code>.
 
  <li><p>If its specified <code title="">position</code> property is
  <code title="">static</code> or <code title="">relative</code>, it computes to
