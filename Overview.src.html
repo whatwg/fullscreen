@@ -137,26 +137,20 @@ set.
 
 <hr>
 
-<p>To <dfn>fully exit fullscreen</dfn>, run these steps:
+<p>To <dfn>fully exit fullscreen</dfn> a
+<span data-anolis-spec=dom title=concept-document>document</span> <var>document</var>, run these
+steps:
 
 <ol>
- <li><p>Let <var title>doc</var> be the
- <span data-anolis-spec=html>top-level browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span>.
-
- <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, terminate these
+ <li><p>If <var>document</var>'s <span>fullscreen element</span> is null, terminate these
  steps.
 
  <li><p><span title="Unfullscreen an element">Unfullscreen elements</span> whose
- <span>fullscreen flag</span> is set, within <var>doc</var>'s <span>top layer</span>,
- except for <var>doc</var>'s <span>fullscreen element</span>.
+ <span>fullscreen flag</span> is set, within <var>document</var>'s <span>top layer</span>, except
+ for <var>document</var>'s <span>fullscreen element</span>.
 
- <li><p>Run <span>exit fullscreen</span> with <var title>doc</var>.
+ <li><p><span>Exit fullscreen</span> <var>document</var>.
 </ol>
-
-<p class=note>HTML invokes the <span>fully exit fullscreen</span> algorithm for
-<span data-anolis-spec=html title=navigate>navigation</span>.
-<span data-anolis-ref>HTML</span>
 
 <p>Whenever the
 <span data-anolis-spec=dom title=concept-node-remove-ext>removing steps</span> run with an
@@ -174,7 +168,7 @@ set.
   <ol>
    <li><p>If <var title>node</var> is its
    <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-   <span>fullscreen element</span>, run <span>exit fullscreen</span> on that
+   <span>fullscreen element</span>, <span>exit fullscreen</span> that
    <span data-anolis-spec=dom title=concept-document>document</span> and terminate these
    steps.
 
@@ -184,9 +178,8 @@ set.
   </ol>
 </ol>
 
-<p>Whenever the <span data-anolis-spec=html>unloading document cleanup steps</span> run
-with a <var>doc</var>,
-<span title="unfullscreen a document">unfullscreen <var>doc</var></span>.
+<p>Whenever the <span data-anolis-spec=html>unloading document cleanup steps</span> run with a
+<var>document</var>, <span>fully exit fullscreen</span> <var>document</var>.
 
 <hr>
 
@@ -393,9 +386,8 @@ run these steps:
  <li><p>Return <var>docs</var>.
 </ol>
 
-<p>To <dfn>exit fullscreen</dfn>, given a
-<span data-anolis-spec=dom title=concept-document>document</span> <var>doc</var>, run
-these steps:
+<p>To <dfn>exit fullscreen</dfn> a <span data-anolis-spec=dom title=concept-document>document</span>
+<var>doc</var>, run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -434,9 +426,9 @@ these steps:
    given <var>doc</var>.
    <!-- cross-process -->
 
-   <li><p>If <var title>resize</var> is true and <var title>topLevelDoc</var> is not in
-   <var title>exitDocs</var>, <span>fully exit fullscreen</span>, reject
-   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
+   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>,
+   <span>fully exit fullscreen</span> <var>topLevelDoc</var>, reject <var>promise</var> with a
+   <code>TypeError</code> exception, and terminate these steps.
 
    <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
    <var>exitDocs</var>.
@@ -483,10 +475,9 @@ these steps:
   document.
 </ol>
 
-<p>The
-<dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn>
-method, when invoked, must return the result of running <span>exit fullscreen</span> with
-the <span>context object</span>.
+<p>The <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn> method, when
+invoked, must return the result of running <span>exit fullscreen</span> on the
+<span>context object</span>.
 
 <hr>
 
@@ -522,7 +513,9 @@ in terms of
 <p>If the end user instructs the user agent to end a fullscreen session
 initiated via
 <code title=dom-Element-requestFullscreen>requestFullscreen()</code>,
-<span>fully exit fullscreen</span>.
+<span>fully exit fullscreen</span> the
+<span data-anolis-spec=html>top-level browsing context</span>'s
+<span data-anolis-spec=dom title=concept-document>document</span>.
 
 
 

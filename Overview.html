@@ -152,26 +152,20 @@ set.
 
 <hr>
 
-<p>To <dfn id="fully-exit-fullscreen">fully exit fullscreen</dfn>, run these steps:
+<p>To <dfn id="fully-exit-fullscreen">fully exit fullscreen</dfn> a
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var>document</var>, run these
+steps:
 
 <ol>
- <li><p>Let <var title="">doc</var> be the
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
-
- <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, terminate these
+ <li><p>If <var>document</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, terminate these
  steps.
 
  <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> whose
- <a href="#fullscreen-flag">fullscreen flag</a> is set, within <var>doc</var>'s <a href="#top-layer">top layer</a>,
- except for <var>doc</var>'s <a href="#fullscreen-element">fullscreen element</a>.
+ <a href="#fullscreen-flag">fullscreen flag</a> is set, within <var>document</var>'s <a href="#top-layer">top layer</a>, except
+ for <var>document</var>'s <a href="#fullscreen-element">fullscreen element</a>.
 
- <li><p>Run <a href="#exit-fullscreen">exit fullscreen</a> with <var title="">doc</var>.
+ <li><p><a href="#exit-fullscreen">Exit fullscreen</a> <var>document</var>.
 </ol>
-
-<p class="note">HTML invokes the <a href="#fully-exit-fullscreen">fully exit fullscreen</a> algorithm for
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#navigate" title="navigate">navigation</a>.
-<a href="#refsHTML">[HTML]</a>
 
 <p>Whenever the
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-remove-ext" title="concept-node-remove-ext">removing steps</a> run with an
@@ -189,7 +183,7 @@ set.
   <ol>
    <li><p>If <var title="">node</var> is its
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-   <a href="#fullscreen-element">fullscreen element</a>, run <a href="#exit-fullscreen">exit fullscreen</a> on that
+   <a href="#fullscreen-element">fullscreen element</a>, <a href="#exit-fullscreen">exit fullscreen</a> that
    <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> and terminate these
    steps.
 
@@ -199,9 +193,8 @@ set.
   </ol>
 </ol>
 
-<p>Whenever the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run
-with a <var>doc</var>,
-<a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var>doc</var></a>.
+<p>Whenever the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run with a
+<var>document</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>document</var>.
 
 <hr>
 
@@ -408,9 +401,8 @@ run these steps:
  <li><p>Return <var>docs</var>.
 </ol>
 
-<p>To <dfn id="exit-fullscreen">exit fullscreen</dfn>, given a
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var>doc</var>, run
-these steps:
+<p>To <dfn id="exit-fullscreen">exit fullscreen</dfn> a <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
+<var>doc</var>, run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -449,9 +441,9 @@ these steps:
    given <var>doc</var>.
    <!-- cross-process -->
 
-   <li><p>If <var title="">resize</var> is true and <var title="">topLevelDoc</var> is not in
-   <var title="">exitDocs</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a>, reject
-   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
+   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>,
+   <a href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
+   <code>TypeError</code> exception, and terminate these steps.
 
    <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
    <var>exitDocs</var>.
@@ -498,10 +490,9 @@ these steps:
   document.
 </ol>
 
-<p>The
-<dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn>
-method, when invoked, must return the result of running <a href="#exit-fullscreen">exit fullscreen</a> with
-the <a href="#context-object">context object</a>.
+<p>The <dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn> method, when
+invoked, must return the result of running <a href="#exit-fullscreen">exit fullscreen</a> on the
+<a href="#context-object">context object</a>.
 
 <hr>
 
@@ -537,7 +528,9 @@ in terms of
 <p>If the end user instructs the user agent to end a fullscreen session
 initiated via
 <a href="#dom-element-requestfullscreen"><code title="dom-Element-requestFullscreen">requestFullscreen()</code></a>,
-<a href="#fully-exit-fullscreen">fully exit fullscreen</a>.
+<a href="#fully-exit-fullscreen">fully exit fullscreen</a> the
+<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
 
 
 
