@@ -549,7 +549,8 @@ user.
 <p class=note>The <code title>z-index</code> property has no effect in the
 <span>top layer</span>.
 
-<p>An element in a <span>top layer</span> has the following <dfn>characteristics</dfn>:
+<p>Each element and <code title=css-pe-backdrop>::backdrop</code> pseudo-element in a
+<span>top layer</span> has the following characteristics:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -569,9 +570,10 @@ user.
  <li><p>If its <code title>position</code> property computes to <code title>fixed</code>,
  its containing block is the viewport, and the initial containing block otherwise.
 
- <li><p>It, and its <code title=css-pe-backdrop>::backdrop</code> pseudo-element, are not rendered
- if its <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span>
- has the <code title>display</code> property set to <code title>none</code>.
+ <li><p>If it is an element, it and its <code title=css-pe-backdrop>::backdrop</code>
+ pseudo-element are not rendered if its
+ <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span> has the
+ <code title>display</code> property set to <code title>none</code>.
 
  <li><p>If its specified <code title>display</code> property is <code title>contents</code>, it
  computes to <code title>block</code>.
@@ -602,8 +604,7 @@ user.
 <dfn title=css-pe-backdrop><code>::backdrop</code></dfn> pseudo-element.
 This pseudo-element is a box rendered immediately below the element (and
 above the element before the element in the set, if any), within the same
-<span>top layer</span>. This pseudo-element box has the same <span>characteristics</span>
-as any element box in the <span>top layer</span>.
+<span>top layer</span>.
 
 <p class=note>The <code title=css-pe-backdrop>::backdrop</code> pseudo-element can be used
 to create a backdrop that hides the underlying document for an element in a
@@ -656,9 +657,12 @@ iframe:fullscreen {
   padding:0 !important;
 }
 
-*|*:not(:root):fullscreen::backdrop {
+::backdrop {
   position:fixed;
   top:0; right:0; bottom:0; left:0;
+}
+
+*|*:not(:root):fullscreen::backdrop {
   background:black;
 }</pre>
 

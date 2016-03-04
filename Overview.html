@@ -564,7 +564,8 @@ user.
 <p class="note">The <code title="">z-index</code> property has no effect in the
 <a href="#top-layer">top layer</a>.
 
-<p>An element in a <a href="#top-layer">top layer</a> has the following <dfn id="characteristics">characteristics</dfn>:
+<p>Each element and <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element in a
+<a href="#top-layer">top layer</a> has the following characteristics:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -584,9 +585,10 @@ user.
  <li><p>If its <code title="">position</code> property computes to <code title="">fixed</code>,
  its containing block is the viewport, and the initial containing block otherwise.
 
- <li><p>It, and its <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element, are not rendered
- if its <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a>
- has the <code title="">display</code> property set to <code title="">none</code>.
+ <li><p>If it is an element, it and its <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
+ pseudo-element are not rendered if its
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a> has the
+ <code title="">display</code> property set to <code title="">none</code>.
 
  <li><p>If its specified <code title="">display</code> property is <code title="">contents</code>, it
  computes to <code title="">block</code>.
@@ -617,8 +619,7 @@ user.
 <dfn id="css-pe-backdrop" title="css-pe-backdrop"><code>::backdrop</code></dfn> pseudo-element.
 This pseudo-element is a box rendered immediately below the element (and
 above the element before the element in the set, if any), within the same
-<a href="#top-layer">top layer</a>. This pseudo-element box has the same <a href="#characteristics">characteristics</a>
-as any element box in the <a href="#top-layer">top layer</a>.
+<a href="#top-layer">top layer</a>.
 
 <p class="note">The <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element can be used
 to create a backdrop that hides the underlying document for an element in a
@@ -671,9 +672,12 @@ iframe:fullscreen {
   padding:0 !important;
 }
 
-*|*:not(:root):fullscreen::backdrop {
+::backdrop {
   position:fixed;
   top:0; right:0; bottom:0; left:0;
+}
+
+*|*:not(:root):fullscreen::backdrop {
   background:black;
 }</pre>
 
