@@ -190,8 +190,8 @@ preference, security risk, or platform limitation.
 };
 
 partial interface <span data-anolis-spec=dom>Document</span> {
-  readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
-  readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
+  [Replaceable] readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
+  [Replaceable] readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
 
   Promise&lt;void> <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
 
