@@ -192,6 +192,7 @@ preference, security risk, or platform limitation.
 partial interface <span data-anolis-spec=dom>Document</span> {
   [LenientSetter] readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
   [LenientSetter] readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
+  [LenientSetter] readonly attribute boolean <span title=dom-Document-fullscreen>fullscreen</span>; // historical
 
   Promise&lt;void> <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
 
@@ -363,6 +364,13 @@ false otherwise.
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
 attribute's getter must return <span>context object</span>'s
 <span>fullscreen element</span>.
+
+<p>The <dfn title=dom-Document-fullscreen><code>fullscreen</code></dfn> attribute's getter must
+return false if <span>context object</span>'s <span>fullscreen element</span> is null, and true
+otherwise.
+
+<p class="note">Use <code title=dom-Document-fullscreenElement>document.fullscreenElement</code>
+instead.
 
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var title>doc</var>,
 run these steps:

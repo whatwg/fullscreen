@@ -207,6 +207,7 @@ preference, security risk, or platform limitation.
 partial interface <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#document">Document</a> {
   [LenientSetter] readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
   [LenientSetter] readonly attribute <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
+  [LenientSetter] readonly attribute boolean <a href="#dom-document-fullscreen" title="dom-Document-fullscreen">fullscreen</a>; // historical
 
   Promise&lt;void&gt; <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
 
@@ -378,6 +379,13 @@ false otherwise.
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
 attribute's getter must return <a href="#context-object">context object</a>'s
 <a href="#fullscreen-element">fullscreen element</a>.
+
+<p>The <dfn id="dom-document-fullscreen" title="dom-Document-fullscreen"><code>fullscreen</code></dfn> attribute's getter must
+return false if <a href="#context-object">context object</a>'s <a href="#fullscreen-element">fullscreen element</a> is null, and true
+otherwise.
+
+<p class="note">Use <a href="#dom-document-fullscreenelement"><code title="dom-Document-fullscreenElement">document.fullscreenElement</code></a>
+instead.
 
 <p>To <dfn id="collect-documents-to-unfullscreen">collect documents to unfullscreen</dfn> given <var title="">doc</var>,
 run these steps:
