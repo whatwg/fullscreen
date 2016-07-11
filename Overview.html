@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 20 July 2016</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 21 July 2016</h2>
 </hgroup>
 
  <dl>
@@ -195,6 +195,15 @@ steps:
 
 <p><dfn id="fullscreen-is-supported">Fullscreen is supported</dfn> if there is no previously-established user
 preference, security risk, or platform limitation.
+
+<p>An algorithm is <dfn id="allowed-to-request-fullscreen">allowed to request fullscreen</dfn> if one of the following is true:
+
+ <ul>
+  <li><p>The algorithm is <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>.
+
+  <li><p>The algorithm is
+  <a class="external" data-anolis-spec="screen-orientation" href="https://w3c.github.io/screen-orientation/#dfn-triggered-by-a-user-generated-orientation-change">triggered by a user generated orientation change</a>.
+ </ul>
 <!-- cross-process -->
 
 
@@ -281,10 +290,9 @@ method, when invoked, must run these steps:
    <li><p>The <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var title="">pending</var>
    returns false.
 
-   <li><p>This algorithm is not
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#allowed-to-show-a-popup">allowed to show a popup</a>.
-
    <li><p><a href="#fullscreen-is-supported" title="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
+
+   <li><p>This algorithm is not <a href="#allowed-to-request-fullscreen">allowed to request fullscreen</a>.
   </ul>
 
  <li><p>Return <var>promise</var>, and run the remaining steps
@@ -750,6 +758,7 @@ João Eiras,
 Josh Soref,
 Matt Falkenhagen,
 Mihai Balan,
+Mounir Lamouri,
 Øyvind Stenhaug,
 Pat Ladd,
 Philip Jägenstedt,
