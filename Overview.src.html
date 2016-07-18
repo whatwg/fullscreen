@@ -658,8 +658,10 @@ section uses this term -->
   max-height:none !important;
   width:100% !important;
   height:100% !important;
-  object-fit:contain !important;
   transform:none !important;
+
+  /* intentionally not !important */
+  object-fit:contain;
 }
 
 iframe:fullscreen {
