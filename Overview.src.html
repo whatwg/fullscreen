@@ -180,6 +180,15 @@ steps:
 
 <p><dfn>Fullscreen is supported</dfn> if there is no previously-established user
 preference, security risk, or platform limitation.
+
+<p>An algorithm is <dfn>allowed to request fullscreen</dfn> if one of the following is true:
+
+ <ul>
+  <li><p>The algorithm is <span data-anolis-spec=html>triggered by user activation</span>.
+
+  <li><p>The algorithm is
+  <span data-anolis-spec=screen-orientation>triggered by a user generated orientation change</span>.
+ </ul>
 <!-- cross-process -->
 
 
@@ -266,10 +275,9 @@ method, when invoked, must run these steps:
    <li><p>The <span>fullscreen element ready check</span> for <var title>pending</var>
    returns false.
 
-   <li><p>This algorithm is not
-   <span data-anolis-spec=html>allowed to show a popup</span>.
-
    <li><p><span title="Fullscreen is supported">Fullscreen is <em>not</em> supported</span>.
+
+   <li><p>This algorithm is not <span>allowed to request fullscreen</span>.
   </ul>
 
  <li><p>Return <var>promise</var>, and run the remaining steps
@@ -714,6 +722,7 @@ João Eiras,
 Josh Soref,
 Matt Falkenhagen,
 Mihai Balan,
+Mounir Lamouri,
 Øyvind Stenhaug,
 Pat Ladd,
 Philip Jägenstedt,
