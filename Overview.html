@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 21 July 2016</h2>
+ <h2 class="no-num no-toc">Living Standard — Last Updated 12 August 2016</h2>
 </hgroup>
 
  <dl>
@@ -103,25 +103,6 @@ and only if <var title="">B</var> is an
 <p>All <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a>
 <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
 <dfn id="iframe-fullscreen-flag">iframe fullscreen flag</dfn>. Unless stated otherwise it is unset.
-
-<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
-have an associated <dfn id="fullscreen-enabled-flag">fullscreen enabled flag</dfn>. Unless stated otherwise it is
-unset.
-
-<p class="note">HTML defines the exact conditions under which the
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set. A
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> from a
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a> will have it set. For a
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a> it is only set if the
-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a> element that is responsible for creating the
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a> has its
-<a href="https://html.spec.whatwg.org/multipage/embedded-content.html#attr-iframe-allowfullscreen"><code class="external" data-anolis-spec="html">allowfullscreen</code></a> attribute set. That attribute is
-defined by HTML as well.
-<a href="#refsHTML">[HTML]</a>
-<!--
-  not set for <iframe>, createDocument();
-  set for <iframe allowfullscreen>
--->
 
 <p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
 have an associated <dfn id="fullscreen-element">fullscreen element</dfn>. The <a href="#fullscreen-element">fullscreen element</a> is
@@ -256,10 +237,9 @@ returns true if all of the following are true, and false otherwise:
 
  <li><p><var title="">element</var> is <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#in-a-document">in a document</a>.
 
- <li><p><var title="">element</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> is set.
- <!-- The fullscreen enabled flag is propagated properly by HTML -->
+ <li><p><var title="">element</var>'s <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>
+ is <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
+ attribute name <code>allowfullscreen</code>.
 
  <li><p><var title="">element</var>'s
  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
@@ -371,10 +351,10 @@ method, when invoked, must run these steps:
 </ol>
 
 <p>The <dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
-attribute's getter must return true if the <a href="#context-object">context object</a> has its
-<a href="#fullscreen-enabled-flag">fullscreen enabled flag</a> set and <a href="#fullscreen-is-supported">fullscreen is supported</a>, and
-false otherwise.
-<!-- The fullscreen enabled flag is propagated properly by HTML -->
+attribute's getter must return true if the <a href="#context-object">context object</a> is
+<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
+attribute name <code>allowfullscreen</code> and <a href="#fullscreen-is-supported">fullscreen is supported</a>,
+and false otherwise.
 
 <p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
 attribute's getter must return <a href="#context-object">context object</a>'s
