@@ -90,25 +90,6 @@ and only if <var title>B</var> is an
 <dfn>iframe fullscreen flag</dfn>. Unless stated otherwise it is unset.
 
 <p>All <span data-anolis-spec=dom title=concept-document>documents</span>
-have an associated <dfn>fullscreen enabled flag</dfn>. Unless stated otherwise it is
-unset.
-
-<p class=note>HTML defines the exact conditions under which the
-<span>fullscreen enabled flag</span> is set. A
-<span data-anolis-spec=dom title=concept-document>document</span> from a
-<span data-anolis-spec=html>top-level browsing context</span> will have it set. For a
-<span data-anolis-spec=html>nested browsing context</span> it is only set if the
-<code data-anolis-spec=html>iframe</code> element that is responsible for creating the
-<span data-anolis-spec=html>nested browsing context</span> has its
-<code data-anolis-spec=html>allowfullscreen</code> attribute set. That attribute is
-defined by HTML as well.
-<span data-anolis-ref>HTML</span>
-<!--
-  not set for <iframe>, createDocument();
-  set for <iframe allowfullscreen>
--->
-
-<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
 have an associated <dfn>fullscreen element</dfn>. The <span>fullscreen element</span> is
 the topmost <span data-anolis-spec=dom title=concept-element>element</span> in the
 <span data-anolis-spec=dom title=concept-document>document</span>'s <span>top layer</span>
@@ -241,10 +222,9 @@ returns true if all of the following are true, and false otherwise:
 
  <li><p><var title>element</var> is <span data-anolis-spec=dom>in a document</span>.
 
- <li><p><var title>element</var>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span>fullscreen enabled flag</span> is set.
- <!-- The fullscreen enabled flag is propagated properly by HTML -->
+ <li><p><var title>element</var>'s <span data-anolis-spec=dom title=concept-node-document>node document</span>
+ is <span data-anolis-spec=html>allowed to use</span> the feature indicated by
+ attribute name <code>allowfullscreen</code>.
 
  <li><p><var title>element</var>'s
  <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
@@ -356,10 +336,10 @@ method, when invoked, must run these steps:
 </ol>
 
 <p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
-attribute's getter must return true if the <span>context object</span> has its
-<span>fullscreen enabled flag</span> set and <span>fullscreen is supported</span>, and
-false otherwise.
-<!-- The fullscreen enabled flag is propagated properly by HTML -->
+attribute's getter must return true if the <span>context object</span> is
+<span data-anolis-spec=html>allowed to use</span> the feature indicated by
+attribute name <code>allowfullscreen</code> and <span>fullscreen is supported</span>,
+and false otherwise.
 
 <p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
 attribute's getter must return <span>context object</span>'s
