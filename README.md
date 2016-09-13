@@ -16,10 +16,18 @@ started, leave a comment on the issue or ask around [on IRC](https://wiki.whatwg
 ### Pull requests
 
 See the [html repository's README](https://github.com/whatwg/html/blob/master/README.md) for the
-general guidelines. Note that `source` is `Overview.src.html` and "Acknowledgements" is
-"Acknowledgments" here (I know). Also, the Fullscreen API Standard uses
-[Anolis](https://wiki.whatwg.org/wiki/Anolis) to generate `Overview.html`. (Do not worry if using
-that tool is too complicated, your pull request does not need to contain the generated HTML.)
+general guidelines.
+
+Please add your name to the Acknowledgments section in your first pull request, even for trivial
+fixes. The names are sorted lexicographically.
+
+To generate `fullscreen.html`, [bikeshed](https://github.com/tabatkins/bikeshed) can be used. Do not worry
+if using that tool is too complicated; your pull request does not need to contain the generated HTML
+to be accepted. If you _do_ want to use it, the easiest way is probably via the HTTP API:
+
+```
+curl https://api.csswg.org/bikeshed/ -f -F file=@fullscreen.bs > fullscreen.html
+```
 
 ### Merge policy
 
