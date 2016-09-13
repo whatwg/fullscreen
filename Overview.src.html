@@ -44,7 +44,7 @@ fullscreen.
 
 
 
-<h2>Conformance</h2>
+<h2 id=conformance>Conformance</h2>
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
 Everything else in this specification is normative.
@@ -58,7 +58,7 @@ not appear in all uppercase letters in this specification.
 
 
 
-<h2>Terminology</h2>
+<h2 id=terminology>Terminology</h2>
 
 <p>Most terminology used in this specification is from CSS, DOM, HTML, and
 Web IDL.
@@ -80,7 +80,7 @@ and only if <var title>B</var> is an
 
 
 
-<h2>Model</h2>
+<h2 id=model>Model</h2>
 
 <p>All <span data-anolis-spec=dom title=concept-element>elements</span> have an associated
 <dfn>fullscreen flag</dfn>. Unless stated otherwise it is unset.
@@ -173,7 +173,7 @@ preference, security risk, or platform limitation.
 <!-- cross-process -->
 
 
-<h2>API</h2>
+<h2 id=api>API</h2>
 
 <pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
   Promise&lt;void> <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
@@ -216,8 +216,8 @@ returns true if all of the following are true, and false otherwise:
  <li><p><var title>element</var>'s
  <span data-anolis-spec=dom title=concept-element-namespace>namespace</span> is the
  <span data-anolis-spec=dom>HTML namespace</span> or <var>element</var> is an
- <a href="https://www.w3.org/TR/SVG11/struct.html#SVGElement">SVG <code>svg</code></a> or
- <a href="https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel">MathML <code>math</code></a>
+ <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
+ <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
  element. <span data-anolis-ref>SVG</span> <span data-anolis-ref>MATHML</span>
 
  <li><p><var title>element</var> is <span data-anolis-spec=dom>in a document</span>.
@@ -349,7 +349,7 @@ attribute's getter must return <span>context object</span>'s
 return false if <span>context object</span>'s <span>fullscreen element</span> is null, and true
 otherwise.
 
-<p class="note">Use <code title=dom-Document-fullscreenElement>document.fullscreenElement</code>
+<p class=note>Use <code title=dom-Document-fullscreenElement>document.fullscreenElement</code>
 instead.
 
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var title>doc</var>,
@@ -484,16 +484,16 @@ that must be supported on
 	 <th><span data-anolis-spec=html>event handler event type</span>
  <tbody>
 	<tr>
-	 <td><dfn title="handler-document-onfullscreenchange"><code>onfullscreenchange</code></dfn>
-	 <td><code title="event-document-fullscreenchange">fullscreenchange</code>
+	 <td><dfn title=handler-document-onfullscreenchange><code>onfullscreenchange</code></dfn>
+	 <td><code title=event-document-fullscreenchange>fullscreenchange</code>
 	<tr>
-	 <td><dfn title="handler-document-onfullscreenerror"><code>onfullscreenerror</code></dfn>
-	 <td><code title="event-document-fullscreenerror">fullscreenerror</code>
+	 <td><dfn title=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
+	 <td><code title=event-document-fullscreenerror>fullscreenerror</code>
 </table>
 
 
 
-<h2>UI</h2>
+<h2 id=ui>UI</h2>
 
 <p>User agents are encouraged to implement native media fullscreen controls
 in terms of
@@ -509,7 +509,7 @@ initiated via
 
 
 
-<h2>Rendering</h2>
+<h2 id=rendering>Rendering</h2>
 
 <p>This section is to be interpreted equivalently to the Rendering section
 of HTML. <span data-anolis-ref>HTML</span>
@@ -520,7 +520,7 @@ pseudo-element as part of CSS' stacking context model. Patching CSS as done
 here is sketchy as hell.
 
 
-<h3>New stacking layer</h3>
+<h3 id=new-stacking-layer>New stacking layer</h3>
 
 <p>This specification introduces a new stacking layer to the
 <a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a>
@@ -588,7 +588,7 @@ user.
 <var title>top layer</var>, remove <var>element</var> from <var title>top layer</var>.
 
 
-<h3><code title>::backdrop</code> pseudo-element</h3>
+<h3 id=::backdrop-pseudo-element><code title>::backdrop</code> pseudo-element</h3>
 
 <p>Each element in a <span>top layer</span> has a
 <dfn title=css-pe-backdrop><code>::backdrop</code></dfn> pseudo-element.
@@ -608,7 +608,7 @@ pseudo-element either.
      hooks for this stuff which make it normative. -->
 
 
-<h3><code title>:fullscreen</code> pseudo-class</h3>
+<h3 id=:fullscreen-pseudo-class><code title>:fullscreen</code> pseudo-class</h3>
 
 <p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
 pseudo-class must match any
@@ -621,7 +621,7 @@ pseudo-class must match any
 <span>fullscreen element</span>.
 
 
-<h3>User-agent level style sheet defaults</h3>
+<h3 id=user-agent-level-style-sheet-defaults>User-agent level style sheet defaults</h3>
 <!-- HTML's "The CSS user agent style sheet and presentational hints"
 section uses this term -->
 
@@ -660,7 +660,7 @@ iframe:fullscreen {
 
 
 
-<h2>Security and Privacy Considerations</h2>
+<h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
 
 <p>User agents should ensure, e.g. by means of an overlay, that the end user
 is aware something is displayed fullscreen. User agents should provide a
@@ -683,7 +683,7 @@ content from third parties to go fullscreen without explicit permission.
 
 
 
-<h2 class=no-num>Acknowledgments</h2>
+<h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 <p>Many thanks to Robert O'Callahan for designing the initial model and being awesome.
 <!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
@@ -708,7 +708,7 @@ Philip Jägenstedt,
 Rafał Chłodnicki,
 Riff Jiang,
 Rune Lillesveen,
-Sigbj&oslash;rn Vik,
+Sigbjørn Vik,
 Simon Pieters,
 Tab Atkins,
 Theresa O'Connor,
@@ -720,9 +720,9 @@ for also being awesome.
 <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
-<a lang="tr" href="http://tantek.com/">Tantek Çelik</a>
+<a lang=tr href=http://tantek.com/>Tantek Çelik</a>
 (<a class="p-org org h-org h-card" href=https://www.mozilla.org/>Mozilla</a>,
-<a href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>) sorted out legal
+<a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal
 hassles.
 
 <p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to
