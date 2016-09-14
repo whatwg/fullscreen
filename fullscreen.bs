@@ -1,547 +1,453 @@
-<!doctype html>
-<html lang=en-US>
-<meta charset=utf-8>
-<title>Fullscreen API Standard</title>
-<link rel=stylesheet href=https://whatwg.org/style/specification>
-<link rel=icon href=https://resources.whatwg.org/logo-fullscreen.svg>
+<pre class=metadata>
+Title: Fullscreen API Standard
+Group: WHATWG
+H1: Fullscreen API
+Shortname: fullscreen
+Status: LS
+No Editor: true
+Abstract: The Fullscreen API standard defines an API for elements to display themselves fullscreen.
+Logo: https://resources.whatwg.org/logo-fullscreen.svg
+Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
+!Participate: <a href=https://github.com/whatwg/fullscreen>GitHub whatwg/fullscreen</a> (<a href=https://github.com/whatwg/fullscreen/issues/new>file an issue</a>, <a href=https://github.com/whatwg/fullscreen/issues>open issues</a>)
+!Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
+!Commits: <a href=https://github.com/whatwg/fullscreen/commits>GitHub whatwg/fullscreen/commits</a>
+!Commits: <a href=https://twitter.com/fullscreenapi>@fullscreenapi</a>
+</pre>
 
-<div class=head>
-
-<p><a class=logo href=https://whatwg.org/><img alt=WHATWG src=https://resources.whatwg.org/logo-fullscreen.svg width=100 height=100></a></p>
-
-<hgroup>
- <h1 class=p-name>Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 01 Jan 1901]</h2>
-</hgroup>
-
- <dl>
- <dt>Participate:</dt>
- <dd><a href=https://github.com/whatwg/fullscreen>GitHub whatwg/fullscreen</a>
- (<a href=https://github.com/whatwg/fullscreen/issues/new>file an issue</a>,
- <a href=https://github.com/whatwg/fullscreen/issues>open issues</a>)
- <dd><a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
-
- <dt>Commits:
- <dd><a href=https://github.com/whatwg/fullscreen/commits>GitHub whatwg/fullscreen/commits</a></dd>
- <dd><a href=https://twitter.com/fullscreenapi>@fullscreenapi</a>
- </dl>
-
-<script src=https://resources.whatwg.org/file-bug.js async></script>
+<script src=https://resources.whatwg.org/file-issue.js async></script>
 <script id=head src=https://resources.whatwg.org/dfn.js defer></script>
 
-</div>
+<pre class=link-defaults>
+spec:dom; type:dfn; for:/; text:element
+spec:dom; type:interface; text:Document
+</pre>
 
+<pre class=anchors>
+urlPrefix: https://html.spec.whatwg.org/multipage/
+    type: dfn
+        urlPrefix: browsers.html
+            text: ancestor browsing context
+            text: browsing context container
+            text: unloading document cleanup steps
+urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
+    type: dfn
+        text: triggered by a user generated orientation change
+</pre>
 
-
-<h2 class="no-num no-toc">Abstract</h2>
-<p>The Fullscreen API standard defines an API for elements to display themselves
-fullscreen.
-
-
-
-<h2 class="no-num no-toc">Table of Contents</h2>
-<!--toc-->
+<pre class=biblio>
+{
+    "CSS": {
+        "aliasOf": "CSS2"
+    }
+}
+</pre>
 
 
 
 <h2 id=conformance>Conformance</h2>
-<p>All diagrams, examples, and notes in this specification are
-non-normative, as are all sections explicitly marked non-normative.
-Everything else in this specification is normative.
 
-<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
-"OPTIONAL" in the normative parts of this specification are to be
-interpreted as described in RFC2119. For readability, these words do
-not appear in all uppercase letters in this specification.
-<span data-anolis-ref>RFC2119</span>
+<p>All diagrams, examples, and notes in this specification are non-normative, as are all sections
+explicitly marked non-normative. Everything else in this specification is normative.
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL NOT",--> "SHOULD", "SHOULD
+NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do not appear in all uppercase
+letters in this specification. [[!RFC2119]]
 
 
 
 <h2 id=terminology>Terminology</h2>
 
-<p>Most terminology used in this specification is from CSS, DOM, HTML, and
-Web IDL.
-<span data-anolis-ref>CSS</span>
-<span data-anolis-ref>DOM</span>
-<span data-anolis-ref>HTML</span>
-<span data-anolis-ref>WEBIDL</span>
+<p>Most terminology used in this specification is from CSS, DOM, HTML, and Web IDL. [[!CSS]]
+[[!DOM]] [[!HTML]] [[!WEBIDL]]
 
-<p>The term <dfn>context object</dfn> means the object on which the method
-or attribute being discussed was called. When the
-<span>context object</span> is unambiguous, the term can be omitted.
+<p>The term <dfn>context object</dfn> means the object on which the method or attribute being
+discussed was called. When the <a>context object</a> is unambiguous, the term can be omitted.
 
-<p>A <span data-anolis-spec=html>browsing context</span> <var title>A</var>
-is called a <dfn>descendant browsing context</dfn> of a
-<span data-anolis-spec=html>browsing context</span> <var title>B</var> if
-and only if <var title>B</var> is an
-<span data-anolis-spec=html>ancestor browsing context</span> of
-<var title>A</var>.
+<p>A <a>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn> of a
+<a>browsing context</a> <var>B</var> if and only if <var>B</var> is an
+<a>ancestor browsing context</a> of <var>A</var>.
 
 
 
 <h2 id=model>Model</h2>
 
-<p>All <span data-anolis-spec=dom title=concept-element>elements</span> have an associated
-<dfn>fullscreen flag</dfn>. Unless stated otherwise it is unset.
+<p>All <a>elements</a> have an associated <dfn>fullscreen flag</dfn>. Unless stated otherwise it is
+unset.
 
-<p>All <code data-anolis-spec=html>iframe</code>
-<span data-anolis-spec=dom title=concept-element>elements</span> have an associated
-<dfn>iframe fullscreen flag</dfn>. Unless stated otherwise it is unset.
+<p>All <{iframe}> <a>elements</a> have an associated <dfn>iframe fullscreen flag</dfn>. Unless
+stated otherwise it is unset.
 
-<p>All <span data-anolis-spec=dom title=concept-document>documents</span>
-have an associated <dfn>fullscreen element</dfn>. The <span>fullscreen element</span> is
-the topmost <span data-anolis-spec=dom title=concept-element>element</span> in the
-<span data-anolis-spec=dom title=concept-document>document</span>'s <span>top layer</span>
-whose <span>fullscreen flag</span> is set, if any, and null otherwise.
+<p>All <a>documents</a> have an associated <dfn>fullscreen element</dfn>. The
+<a>fullscreen element</a> is the topmost <a>element</a> in the <a>document</a>'s <a>top layer</a>
+whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
-<p>To <dfn>fullscreen an <var>element</var></dfn> within a <var title>document</var>, set
-the <var title>element</var>'s <span>fullscreen flag</span> and
-<span title=concept-top-layer-add>add</span> it to <var title>document</var>'s
-<span>top layer</span>.
+<p>To <dfn>fullscreen an <var>element</var></dfn> within a <var>document</var>, set the
+<var>element</var>'s <a>fullscreen flag</a> and <a>add</a> it to <var>document</var>'s
+<a>top layer</a>.
 
-<p>To <dfn>unfullscreen an <var>element</var></dfn> within a <var title>document</var>,
-unset the <var title>element</var>'s <span>fullscreen flag</span> and
-<span>iframe fullscreen flag</span> (if any), and
-<span title=concept-top-layer-remove>remove</span> it from <var title>document</var>'s
-<span>top layer</span>.
+<p>To <dfn>unfullscreen an <var>element</var></dfn> within a <var>document</var>, unset the
+<var>element</var>'s <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
+<a>remove</a> it from <var>document</var>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
-<span title="unfullscreen an element">unfullscreen</span> all
-<span data-anolis-spec=dom title=concept-element>elements</span>, within
-<var title>document</var>'s <span>top layer</span>, whose <span>fullscreen flag</span> is
-set.
+<a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
+<a>top layer</a>, whose <a>fullscreen flag</a> is set.
 
 <hr>
 
-<p>To <dfn>fully exit fullscreen</dfn> a
-<span data-anolis-spec=dom title=concept-document>document</span> <var>document</var>, run these
-steps:
+<p>To <dfn>fully exit fullscreen</dfn> a <a>document</a> <var>document</var>, run these steps:
 
 <ol>
- <li><p>If <var>document</var>'s <span>fullscreen element</span> is null, terminate these
- steps.
+ <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
 
- <li><p><span title="Unfullscreen an element">Unfullscreen elements</span> whose
- <span>fullscreen flag</span> is set, within <var>document</var>'s <span>top layer</span>, except
- for <var>document</var>'s <span>fullscreen element</span>.
+ <li><p><a lt="Unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
+ set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
+ <a>fullscreen element</a>.
 
- <li><p><span>Exit fullscreen</span> <var>document</var>.
+ <li><p><a>Exit fullscreen</a> <var>document</var>.
 </ol>
 
-<p>Whenever the
-<span data-anolis-spec=dom title=concept-node-remove-ext>removing steps</span> run with an
-<var>oldNode</var>, run these steps:
+<p>Whenever the <a>removing steps</a> run with an <var>oldNode</var>, run these steps:
 
 <ol>
- <li><p>Let <var title>nodes</var> be <var title>oldNode</var>'s
- <span data-anolis-spec=dom title=concept-tree-inclusive-descendant>inclusive descendants</span>
- that have their <span>fullscreen flag</span> set, in
- <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
+ <li><p>Let <var>nodes</var> be <var>oldNode</var>'s <a>inclusive descendants</a> that have their
+ <a>fullscreen flag</a> set, in <a>tree order</a>.
 
  <li>
-  <p>For each <var title>node</var> in <var title>nodes</var>, run these substeps:
+  <p>For each <var>node</var> in <var>nodes</var>, run these substeps:
 
   <ol>
-   <li><p>If <var title>node</var> is its
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
-   <span>fullscreen element</span>, <span>exit fullscreen</span> that
-   <span data-anolis-spec=dom title=concept-document>document</span>.
+   <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
+   <a>exit fullscreen</a> that <a>document</a>.
 
-   <li><p>Otherwise,
-   <span title="unfullscreen an element">unfullscreen <var title>node</var></span> within
-   its <span data-anolis-spec=dom title=concept-node-document>node document</span>.
+   <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a> within its
+   <a>node document</a>.
   </ol>
 </ol>
 
-<p>Whenever the <span data-anolis-spec=html>unloading document cleanup steps</span> run with a
-<var>document</var>, <span>fully exit fullscreen</span> <var>document</var>.
+<p>Whenever the <a>unloading document cleanup steps</a> run with a <var>document</var>,
+<a>fully exit fullscreen</a> <var>document</var>.
 
 <hr>
 
-<p><dfn>Fullscreen is supported</dfn> if there is no previously-established user
-preference, security risk, or platform limitation.
+<p><dfn>Fullscreen is supported</dfn> if there is no previously-established user preference,
+security risk, or platform limitation.
 
 <p>An algorithm is <dfn>allowed to request fullscreen</dfn> if one of the following is true:
 
  <ul>
-  <li><p>The algorithm is <span data-anolis-spec=html>triggered by user activation</span>.
+  <li><p>The algorithm is <a>triggered by user activation</a>.
 
-  <li><p>The algorithm is
-  <span data-anolis-spec=screen-orientation>triggered by a user generated orientation change</span>.
+  <li><p>The algorithm is <a>triggered by a user generated orientation change</a>.
  </ul>
 <!-- cross-process -->
 
 
+
 <h2 id=api>API</h2>
 
-<pre class=idl>partial interface <span data-anolis-spec=dom>Element</span> {
-  Promise&lt;void> <span title=dom-Element-requestFullscreen>requestFullscreen</span>();
+<pre class=idl>
+partial interface Element {
+  Promise&lt;void> requestFullscreen();
 };
 
-partial interface <span data-anolis-spec=dom>Document</span> {
-  [LenientSetter] readonly attribute boolean <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span>;
-  [LenientSetter] readonly attribute <span data-anolis-spec=dom>Element</span>? <span title=dom-Document-fullscreenElement>fullscreenElement</span>;
-  [LenientSetter] readonly attribute boolean <span title=dom-Document-fullscreen>fullscreen</span>; // historical
+partial interface Document {
+  [LenientSetter] readonly attribute boolean fullscreenEnabled;
+  [LenientSetter] readonly attribute Element? fullscreenElement;
+  [LenientSetter] readonly attribute boolean fullscreen; // historical
 
-  Promise&lt;void> <span title=dom-Document-exitFullscreen>exitFullscreen</span>();
+  Promise&lt;void> exitFullscreen();
 
-  attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenchange>onfullscreenchange</span>;
-  attribute <span data-anolis-spec=html>EventHandler</span> <span title=handler-document-onfullscreenerror>onfullscreenerror</span>;
-};</pre>
+  attribute EventHandler onfullscreenchange;
+  attribute EventHandler onfullscreenerror;
+};
+</pre>
 
 <dl class=domintro>
- <dt><code><var>promise</var> = <var title>element</var> . <span title=dom-Element-requestFullscreen>requestFullscreen</span>()</code>
- <dd><p>Displays <var title>element</var> fullscreen and fulfills <var>promise</var> when
- done.
+ <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
+ <dd><p>Displays <var>element</var> fullscreen and fulfills <var>promise</var> when done.
 
- <dt><code><var title>document</var> . <span title=dom-Document-fullscreenEnabled>fullscreenEnabled</span></code>
- <dd><p>Returns true if <var title>document</var> has the ability to display
- <span data-anolis-spec=dom title=concept-element>elements</span>
- fullscreen and <span>fullscreen is supported</span>, or false otherwise.
+ <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
+ <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
+ and <a>fullscreen is supported</a>, or false otherwise.
 
- <dt><code><var title>document</var> . <span title=dom-Document-fullscreenElement>fullscreenElement</span></code>
- <dd><p>Returns <var title>document</var>'s <span>fullscreen element</span>.
+ <dt><code><var>document</var> . {{Document/fullscreenElement}}</code>
+ <dd><p>Returns <var>document</var>'s <a>fullscreen element</a>.
 
- <dt><code><var>promise</var> = <var title>document</var> . <span title=dom-Document-exitFullscreen>exitFullscreen</span>()</code>
- <dd><p>Stops <var title>document</var>'s <span>fullscreen element</span> from being
- displayed fullscreen and fulfills <var>promise</var> when done.
+ <dt><code><var>promise</var> = <var>document</var> . {{Document/exitFullscreen()}}</code>
+ <dd><p>Stops <var>document</var>'s <a>fullscreen element</a> from being displayed fullscreen and
+ fulfills <var>promise</var> when done.
 </dl>
 
-<p>A <dfn>fullscreen element ready check</dfn> for an
-<span data-anolis-spec=dom title=concept-element>element</span> <var title>element</var>
-returns true if all of the following are true, and false otherwise:
+<p>A <dfn>fullscreen element ready check</dfn> for an <a>element</a> <var>element</var> returns true
+if all of the following are true, and false otherwise:
 
 <ul>
- <li><p><var title>element</var>'s
- <span data-anolis-spec=dom title=concept-element-namespace>namespace</span> is the
- <span data-anolis-spec=dom>HTML namespace</span> or <var>element</var> is an
+
+ <li><p><var>element</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
+ <var>element</var> is an
  <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
  <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
- element. <span data-anolis-ref>SVG</span> <span data-anolis-ref>MATHML</span>
+ element. [[!SVG]] [[!MATHML]]
 
- <li><p><var title>element</var> is <span data-anolis-spec=dom>in a document</span>.
+ <li><p><var>element</var> is <a>in a document</a>.
 
- <li><p><var title>element</var>'s <span data-anolis-spec=dom title=concept-node-document>node document</span>
- is <span data-anolis-spec=html>allowed to use</span> the feature indicated by
+ <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>.
 
- <li><p><var title>element</var>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span data-anolis-spec=html>browsing context</span> either has a
- <span data-anolis-spec=html>browsing context container</span> and the
- <span>fullscreen element ready check</span> returns true for <var title>element</var>'s
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span data-anolis-spec=html>browsing context</span>'s
- <span data-anolis-spec=html>browsing context container</span>, or it has no
- <span data-anolis-spec=html>browsing context container</span>.
+ <li><p><var>element</var>'s <a>node document</a>'s <a>browsing context</a> either has a
+ <a>browsing context container</a> and the <a>fullscreen element ready check</a> returns true for
+ <var>element</var>'s <a>node document</a>'s <a>browsing context</a>'s
+ <a>browsing context container</a>, or it has no <a>browsing context container</a>.
  <!-- cross-process, recursive -->
 </ul>
 
-<p>The <dfn title=dom-Element-requestFullscreen><code>requestFullscreen()</code></dfn>
-method, when invoked, must run these steps:
+<p>The <dfn method for=Element><code>requestFullscreen()</code></dfn> method, when invoked, must run
+these steps:
 
 <ol>
- <li><p>Let <var title>pending</var> be the <span>context object</span>.
+ <li><p>Let <var>pending</var> be the <a>context object</a>.
 
- <li><p>Let <var title>error</var> be false.
+ <li><p>Let <var>error</var> be false.
 
  <li><p>Let <var>promise</var> be a new promise.
 
  <li>
-  <p>If any of the following conditions are true, set <var title>error</var> to true:
+  <p>If any of the following conditions are true, set <var>error</var> to true:
 
   <ul>
-   <li><p>The <span>fullscreen element ready check</span> for <var title>pending</var>
-   returns false.
+   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns false.
 
-   <li><p><span title="Fullscreen is supported">Fullscreen is <em>not</em> supported</span>.
+   <li><p><a lt="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
 
-   <li><p>This algorithm is not <span>allowed to request fullscreen</span>.
+   <li><p>This algorithm is not <a>allowed to request fullscreen</a>.
   </ul>
 
- <li><p>Return <var>promise</var>, and run the remaining steps
- <span data-anolis-spec=html>in parallel</span>.
+ <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var title>error</var> is false: Resize <var title>pending</var>'s
- <span data-anolis-spec=html>top-level browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span>'s viewport's
- dimensions to match the dimensions of the screen of the output device. Optionally display
- a message how the end user can revert this.
+ <li><p>If <var>error</var> is false: Resize <var>pending</var>'s
+ <a>top-level browsing context</a>'s <a>document</a>'s viewport's dimensions to match the dimensions
+ of the screen of the output device. Optionally display a message how the end user can revert this.
  <!-- cross-process -->
 
  <li>
-  <p>As part of the next <span>animation frame task</span>, run these substeps:
+  <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
-   <li><p>If either <var title>error</var> is true or the
-   <span>fullscreen element ready check</span> for <var title>pending</var> returns false,
-   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenerror</code> on <var title>pending</var>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span>,
-   reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these
-   steps.
+   <li><p>If either <var>error</var> is true or the <a>fullscreen element ready check</a> for
+   <var>pending</var> returns false, <a>fire an event</a> named <code>fullscreenerror</code> on
+   <var>pending</var>'s <a>node document</a>, reject <var>promise</var> with a
+   <code>TypeError</code> exception, and terminate these steps.
    <!-- cross-process; check is only needed on pending as it is recursive already -->
 
-   <li><p>Let <var title>fullscreenElements</var> be an ordered set initially consisting
-   of <var title>pending</var>.
+   <li><p>Let <var>fullscreenElements</var> be an ordered set initially consisting of
+   <var>pending</var>.
 
-   <li><p>While the first element in <var title>fullscreenElements</var> is in a
-   <span data-anolis-spec=html>nested browsing context</span>, prepend its
-   <span data-anolis-spec=html>browsing context container</span> to
-   <var title>fullscreenElements</var>.
+   <li><p>While the first element in <var>fullscreenElements</var> is in a
+   <a>nested browsing context</a>, prepend its <a>browsing context container</a> to
+   <var>fullscreenElements</var>.
    <!-- cross-process -->
 
    <li><p>Let <var>eventDocs</var> be an empty list.
 
    <li>
-    <p>For each <var title>element</var> in <var title>fullscreenElements</var>, in order,
-    run these subsubsteps:
+    <p>For each <var>element</var> in <var>fullscreenElements</var>, in order, run these
+    subsubsteps:
 
     <ol>
-     <li><p>Let <var title>doc</var> be <var title>element</var>'s
-     <span data-anolis-spec=dom title=concept-node-document>node document</span>.
+     <li><p>Let <var>doc</var> be <var>element</var>'s <a>node document</a>.
 
      <li>
-      <p>If <var title>element</var> is <var title>doc</var>'s
-      <span>fullscreen element</span>, terminate these subsubsteps.
+      <p>If <var>element</var> is <var>doc</var>'s <a>fullscreen element</a>, terminate these
+      subsubsteps.
 
       <p class=note>No need to notify observers when nothing has changed.
 
      <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
 
-     <li><p>If <var title>element</var> is <var title>pending</var> and
-     <var title>pending</var> is an <code data-anolis-spec=html>iframe</code>
-     <span data-anolis-spec=dom title=concept-element>element</span>, set
-     <var title>element</var>'s <span>iframe fullscreen flag</span>.
+     <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
+     <a>element</a>, set <var>element</var>'s <a>iframe fullscreen flag</a>.
 
-     <li><p><span title="Fullscreen an element">Fullscreen <var>element</var></span>
-     within <var title>doc</var>.
+     <li><p><a lt="Fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
 
-   <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order,
-   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenchange</code> on <var title>doc</var>.
+   <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order, <a>fire an event</a> named
+   <code>fullscreenchange</code> on <var>doc</var>.
 
    <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
-  <p class=XXX><span>Animation frame task</span> is not really defined yet, including
-  relative order within that task, see
-  <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
+  <p class=XXX><a>Animation frame task</a> is not really defined yet, including relative order
+  within that task, see <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
 
-  <p class=note>Implementations with out-of-process
-  <span data-anolis-spec=html title="browsing context">browsing contexts</span> are left
-  as an exercise to the reader. Input welcome on potential improvements.
+  <p class=note>Implementations with out-of-process <a>browsing contexts</a> are left as an exercise
+  to the reader. Input welcome on potential improvements.
 </ol>
 
-<p>The <dfn title=dom-Document-fullscreenEnabled><code>fullscreenEnabled</code></dfn>
-attribute's getter must return true if the <span>context object</span> is
-<span data-anolis-spec=html>allowed to use</span> the feature indicated by
-attribute name <code>allowfullscreen</code> and <span>fullscreen is supported</span>,
-and false otherwise.
+<p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
+return true if the <a>context object</a> is <a>allowed to use</a> the feature indicated by attribute
+name <code>allowfullscreen</code> and <a>fullscreen is supported</a>, and false otherwise.
 
-<p>The <dfn title=dom-Document-fullscreenElement><code>fullscreenElement</code></dfn>
-attribute's getter must return <span>context object</span>'s
-<span>fullscreen element</span>.
+<p>The <dfn attribute for=Document><code>fullscreenElement</code></dfn> attribute's getter must
+return <a>context object</a>'s <a>fullscreen element</a>.
 
-<p>The <dfn title=dom-Document-fullscreen><code>fullscreen</code></dfn> attribute's getter must
-return false if <span>context object</span>'s <span>fullscreen element</span> is null, and true
-otherwise.
+<p>The <dfn attribute for=Document><code>fullscreen</code></dfn> attribute's getter must return
+false if <a>context object</a>'s <a>fullscreen element</a> is null, and true otherwise.
 
-<p class=note>Use <code title=dom-Document-fullscreenElement>document.fullscreenElement</code>
-instead.
+<p class=note>Use
+<a attribute for=Document lt=fullscreenElement><code>document.fullscreenElement</code></a> instead.
 
-<p>To <dfn>collect documents to unfullscreen</dfn> given <var title>doc</var>,
-run these steps:
+<p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
 
 <ol>
- <li><p>If <var>doc</var>'s <span>top layer</span> consists of more than a single
- <span data-anolis-spec=dom title=concept-element>element</span> that has its
- <span>fullscreen flag</span> set, return the empty set.
+ <li><p>If <var>doc</var>'s <a>top layer</a> consists of more than a single <a>element</a> that has
+ its <a>fullscreen flag</a> set, return the empty set.
 
  <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
 
- <li><p>While <var>docs</var>'s last
- <span data-anolis-spec=dom title=concept-document>document</span> has a
- <span data-anolis-spec=html>browsing context container</span> whose
- <span data-anolis-spec=dom title=concept-node-document>node document</span>'s
- <span>top layer</span> consists of a single
- <span data-anolis-spec=dom title=concept-element>element</span> that has its
- <span>fullscreen flag</span> set and does not have its
- <span>iframe fullscreen flag</span> set (if any), append that
- <span data-anolis-spec=dom title=concept-node-document>node document</span> to
- <var>docs</var>.
+ <li><p>While <var>docs</var>'s last <a>document</a> has a <a>browsing context container</a> whose
+ <a>node document</a>'s <a>top layer</a> consists of a single <a>element</a> that has its
+ <a>fullscreen flag</a> set and does not have its <a>iframe fullscreen flag</a> set (if any), append
+ that <a>node document</a> to <var>docs</var>.
 
  <li><p>Return <var>docs</var>.
 </ol>
 
-<p>To <dfn>exit fullscreen</dfn> a <span data-anolis-spec=dom title=concept-document>document</span>
-<var>doc</var>, run these steps:
+<p>To <dfn>exit fullscreen</dfn> a <a>document</a> <var>doc</var>, run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>If <var title>doc</var>'s <span>fullscreen element</span> is null, reject
- <var>promise</var> with a <code>TypeError</code> exception, and return
- <var>promise</var>.
+ <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, reject <var>promise</var> with a
+ <code>TypeError</code> exception, and return <var>promise</var>.
 
- <li><p>Let <var title>resize</var> be false.
+ <li><p>Let <var>resize</var> be false.
 
- <li><p>Let <var title>docs</var> be the result of
- <span title="collect documents to unfullscreen">collecting documents to unfullscreen</span>
- given <var title>doc</var>.
+ <li><p>Let <var>docs</var> be the result of
+ <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
+ <var>doc</var>.
  <!-- cross-process -->
 
- <li><p>Let <var title>topLevelDoc</var> be <var title>doc</var>'s
- <span data-anolis-spec=html>top-level browsing context</span>'s
- <span data-anolis-spec=dom title=concept-document>document</span>.
+ <li><p>Let <var>topLevelDoc</var> be <var>doc</var>'s <a>top-level browsing context</a>'s
+ <a>document</a>.
  <!-- cross-process -->
 
- <li><p>If <var title>topLevelDoc</var> is in <var title>docs</var>, set
- <var title>resize</var> to true.
+ <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, set <var>resize</var> to true.
 
- <li><p>Return <var>promise</var>, and run the remaining steps
- <span data-anolis-spec=html>in parallel</span>.
+ <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var title>resize</var> is true, resize <var title>topLevelDoc</var>'s viewport
- to its "normal" dimensions.
+ <li><p>If <var>resize</var> is true, resize <var>topLevelDoc</var>'s viewport to its "normal"
+ dimensions.
 
  <li>
-  <p>As part of the next <span>animation frame task</span>, run these substeps:
+  <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
+
    <li><p>Let <var>exitDocs</var> be the result of
-   <span title="collect documents to unfullscreen">collecting documents to unfullscreen</span>
-   given <var>doc</var>.
+   <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
+   <var>doc</var>.
    <!-- cross-process -->
 
    <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>,
-   <span>fully exit fullscreen</span> <var>topLevelDoc</var>, reject <var>promise</var> with a
+   <a>fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
    <code>TypeError</code> exception, and terminate these steps.
 
-   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
-   <var>exitDocs</var>.
+   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to <var>exitDocs</var>.
 
-   <li><p>If <var title>exitDocs</var>'s last
-   <span data-anolis-spec=dom title=concept-document>document</span> has a
-   <span data-anolis-spec=html>browsing context container</span>, append that
-   <span data-anolis-spec=html>browsing context container</span>'s
-   <span data-anolis-spec=dom title=concept-node-document>node document</span> to
-   <var title>exitDocs</var>.
+   <li><p>If <var>exitDocs</var>'s last <a>document</a> has a <a>browsing context container</a>,
+   append that <a>browsing context container</a>'s <a>node document</a> to <var>exitDocs</var>.
    <!-- cross-process -->
 
-   <li><p>Let <var title>descendantDocs</var> be an ordered set consisting of
-   <var title>doc</var>'s
-   <span title="descendant browsing context">descendant browsing contexts</span>'
-   <span data-anolis-spec=dom title=concept-document>documents</span> whose
-   <span>fullscreen element</span> is non-null, if any, in <em>reverse</em>
-   <span data-anolis-spec=dom title=concept-tree-order>tree order</span>.
+   <li><p>Let <var>descendantDocs</var> be an ordered set consisting of <var>doc</var>'s
+   <a>descendant browsing contexts</a>' <a>documents</a> whose <a>fullscreen element</a> is
+   non-null, if any, in <em>reverse</em> <a>tree order</a>.
    <!-- cross-process -->
 
-   <li><p>For each <var title>descendantDoc</var> in <var title>descendantDocs</var>, in
-   order,
-   <span title="unfullscreen a document">unfullscreen <var title>descendantDoc</var></span>.
+   <li><p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order,
+   <a lt="unfullscreen a document">unfullscreen <var>descendantDoc</var></a>.
    <!-- cross-process -->
 
-   <li><p>For each <var title>exitDoc</var> in <var title>exitDocs</var>, in order,
-   <span title="unfullscreen an element">unfullscreen</span> <var>exitDoc</var>'s
-   <span>fullscreen element</span>.
+   <li><p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order,
+   <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
 
-   <li><p>For each <var title>descendantDoc</var> in <var title>descendantDocs</var>, in
-   order, <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenchange</code> on <var title>descendantDoc</var>.
+   <li><p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order,
+   <a>fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>.
    <!-- cross-process -->
 
-   <li><p>For each <var title>exitDoc</var> in <var title>exitDocs</var>, in order,
-   <span data-anolis-spec=dom title=concept-event-fire>fire an event</span> named
-   <code>fullscreenchange</code> on <var title>exitDoc</var>.
+   <li><p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a>fire an event</a> named
+   <code>fullscreenchange</code> on <var>exitDoc</var>.
    <!-- cross-process -->
 
    <li><p>Fulfill <var>promise</var> with undefined.
   </ol>
 
-  <p class=note>This results in events being fired from the innermost to the outermost
-  document.
+  <p class=note>This results in events being fired from the innermost to the outermost document.
 </ol>
 
-<p>The <dfn title=dom-Document-exitFullscreen><code>exitFullscreen()</code></dfn> method, when
-invoked, must return the result of running <span>exit fullscreen</span> on the
-<span>context object</span>.
+<p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method, when invoked, must
+return the result of running <a>exit fullscreen</a> on the <a>context object</a>.
 
 <hr>
 
-<p>The following are the <span data-anolis-spec=html>event handlers</span> (and their
-corresponding
-<span data-anolis-spec=html title="event handler event type">event handler event types</span>)
-that must be supported on
-<span data-anolis-spec=dom title=concept-document>documents</span> as attributes:
+<p>The following are the <a>event handlers</a> (and their corresponding
+<a>event handler event types</a>) that must be supported on <a>documents</a> as attributes:
 
 <table>
  <thead>
 	<tr>
-	 <th><span data-anolis-spec=html title="event handlers">event handler</span>
-	 <th><span data-anolis-spec=html>event handler event type</span>
+	 <th><a lt="event handlers">event handler</a>
+	 <th><a>event handler event type</a>
  <tbody>
 	<tr>
-	 <td><dfn title=handler-document-onfullscreenchange><code>onfullscreenchange</code></dfn>
-	 <td><code title=event-document-fullscreenchange>fullscreenchange</code>
+	 <td><dfn attribute for=Document id=handler-document-onfullscreenchange><code>onfullscreenchange</code></dfn>
+	 <td><code>fullscreenchange</code>
 	<tr>
-	 <td><dfn title=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
-	 <td><code title=event-document-fullscreenerror>fullscreenerror</code>
+	 <td><dfn attribute for=Document id=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
+	 <td><code>fullscreenerror</code>
 </table>
 
 
 
 <h2 id=ui>UI</h2>
 
-<p>User agents are encouraged to implement native media fullscreen controls
-in terms of
-<code title=dom-Element-requestFullscreen>requestFullscreen()</code> and
-<code title=dom-Document-exitFullscreen>exitFullscreen()</code>.
+<p>User agents are encouraged to implement native media fullscreen controls in terms of
+{{Element/requestFullscreen()}} and {{Document/exitFullscreen()}}.
 
-<p>If the end user instructs the user agent to end a fullscreen session
-initiated via
-<code title=dom-Element-requestFullscreen>requestFullscreen()</code>,
-<span>fully exit fullscreen</span> the
-<span data-anolis-spec=html>top-level browsing context</span>'s
-<span data-anolis-spec=dom title=concept-document>document</span>.
+<p>If the end user instructs the user agent to end a fullscreen session initiated via
+{{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> the
+<a>top-level browsing context</a>'s <a>document</a>.
 
 
 
 <h2 id=rendering>Rendering</h2>
 
-<p>This section is to be interpreted equivalently to the Rendering section
-of HTML. <span data-anolis-ref>HTML</span>
+<p>This section is to be interpreted equivalently to the Rendering section of HTML. [[!HTML]]
 
-<p class=XXX>Long term CSS will define the <span>top layer</span> concept
-and its associated <code title=css-pe-backdrop>::backdrop</code>
-pseudo-element as part of CSS' stacking context model. Patching CSS as done
-here is sketchy as hell.
+<p class=XXX>Long term CSS will define the <a>top layer</a> concept and its associated
+<a><code>::backdrop</code></a> pseudo-element as part of CSS' stacking context model. Patching CSS
+as done here is sketchy as hell.
 
 
 <h3 id=new-stacking-layer>New stacking layer</h3>
 
 <p>This specification introduces a new stacking layer to the
-<a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a>
-of CSS 2.1. It is called the <dfn>top layer</dfn>, comes after step 10 in
-the painting order, and is therefore rendered closest to the user within a
-viewport. Each <span data-anolis-spec=dom title=concept-document>document</span> has one
-associated viewport and therefore also one <span>top layer</span>.
-<span data-anolis-ref>CSS</span>
+<a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
+2.1. It is called the <dfn export>top layer</dfn>, comes after step 10 in the painting order, and is
+therefore rendered closest to the user within a viewport. Each <a>document</a> has one associated
+viewport and therefore also one <a>top layer</a>. [[!CSS]]
 
-<p class=note>The terminology used in this and following subsection attempts
-to match CSS 2.1 Appendix E.
+<p class=note>The terminology used in this and following subsection attempts to match CSS 2.1
+Appendix E.
 
-<p>The <span>top layer</span> consists of an ordered set of elements, rendered in the
-order they have been added to the set. The last element added is rendered closest to the
-user.
+<p>The <a>top layer</a> consists of an ordered set of elements, rendered in the order they have been
+added to the set. The last element added is rendered closest to the user.
 
-<p class=note>The <code title>z-index</code> property has no effect in the
-<span>top layer</span>.
+<p class=note>The <code>z-index</code> property has no effect in the <a>top layer</a>.
 
-<p>Each element and <code title=css-pe-backdrop>::backdrop</code> pseudo-element in a
-<span>top layer</span> has the following characteristics:
+<p>Each element and <a><code>::backdrop</code></a> pseudo-element in a <a>top layer</a> has the
+following characteristics:
 
 <ul>
  <li><p>It generates a new stacking context.
@@ -552,80 +458,69 @@ user.
  <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=24523 -->
 
  <li>
-  <p>It is rendered as an atomic unit as if it were a sibling of its
-  <span data-anolis-spec=dom title=concept-tree-root>root</span>.
+  <p>It is rendered as an atomic unit as if it were a sibling of its <a for=tree>root</a>.
 
-  <p class=note><span data-anolis-spec=dom title=concept-tree-ancestor>Ancestor</span> elements with
-  overflow, opacity, masks, etc. cannot affect it.
+  <p class=note><a for=tree>Ancestor</a> elements with overflow, opacity, masks, etc. cannot affect
+  it.
 
- <li><p>If its <code title>position</code> property computes to <code title>fixed</code>,
- its containing block is the viewport, and the initial containing block otherwise.
+ <li><p>If its <code>position</code> property computes to <code>fixed</code>, its containing block
+ is the viewport, and the initial containing block otherwise.
 
- <li><p>If it is an element, it and its <code title=css-pe-backdrop>::backdrop</code>
- pseudo-element are not rendered if its
- <span data-anolis-spec=dom title=concept-tree-inclusive-ancestor>inclusive ancestor</span> has the
- <code title>display</code> property set to <code title>none</code>.
+ <li><p>If it is an element, it and its <a><code>::backdrop</code></a> pseudo-element are not
+ rendered if its <a>inclusive ancestor</a> has the <code>display</code> property set to
+ <code>none</code>.
 
- <li><p>If its specified <code title>display</code> property is <code title>contents</code>, it
- computes to <code title>block</code>.
+ <li><p>If its specified <code>display</code> property is <code>contents</code>, it computes to
+ <code>block</code>.
 
- <li><p>If its specified <code title>position</code> property is not <code title>absolute</code> or
- <code title>fixed</code>, it computes to <code title>absolute</code>.
+ <li><p>If its specified <code>position</code> property is not <code>absolute</code> or
+ <code>fixed</code>, it computes to <code>absolute</code>.
 
- <li><p>Its outline, if any, is to be rendered before step 10 in the
- painting order.
+ <li><p>Its outline, if any, is to be rendered before step 10 in the painting order.
 
- <li><p>Unless overridden by another specification, its static position for
- <code title>left</code>, <code title>right</code>, and
- <code title>top</code> is zero.
+ <li><p>Unless overridden by another specification, its static position for <code>left</code>,
+ <code>right</code>, and <code>top</code> is zero.
 </ul>
 
-<p>To <dfn title=concept-top-layer-add>add</dfn> an <var>element</var> to a
-<var title>top layer</var>, add, or move if already present, <var>element</var> on top of
-<var title>top layer</var>.
+<p>To <dfn export for="top layer" id=concept-top-layer-add>add</dfn> an <var>element</var> to a
+<var>top layer</var>, add, or move if already present, <var>element</var> on top of
+<var>top layer</var>.
 
-<p>To <dfn title=concept-top-layer-remove>remove</dfn> an <var>element</var> from a
-<var title>top layer</var>, remove <var>element</var> from <var title>top layer</var>.
-
-
-<h3 id=::backdrop-pseudo-element><code title>::backdrop</code> pseudo-element</h3>
-
-<p>Each element in a <span>top layer</span> has a
-<dfn title=css-pe-backdrop><code>::backdrop</code></dfn> pseudo-element.
-This pseudo-element is a box rendered immediately below the element (and
-above the element before the element in the set, if any), within the same
-<span>top layer</span>.
-
-<p class=note>The <code title=css-pe-backdrop>::backdrop</code> pseudo-element can be used
-to create a backdrop that hides the underlying document for an element in a
-<span>top layer</span> (such as an element that is displayed fullscreen).
-
-<p>It does not inherit from any element and is not
-inherited from. No restrictions are made on what properties apply to this
-pseudo-element either.
-
-<!-- That this is not in a more normative prose is because CSS should have
-     hooks for this stuff which make it normative. -->
+<p>To <dfn export for="top layer" id=concept-top-layer-remove>remove</dfn> an <var>element</var> from a
+<var>top layer</var>, remove <var>element</var> from <var>top layer</var>.
 
 
-<h3 id=:fullscreen-pseudo-class><code title>:fullscreen</code> pseudo-class</h3>
+<h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
 
-<p>The <dfn title=css-pc-fullscreen><code>:fullscreen</code></dfn>
-pseudo-class must match any
-<span data-anolis-spec=dom title=concept-element>element</span> that has its
-<span>fullscreen flag</span> set.
+<p>Each element in a <a>top layer</a> has a <dfn id=css-pe-backdrop><code>::backdrop</code></dfn>
+pseudo-element. This pseudo-element is a box rendered immediately below the element (and above the
+element before the element in the set, if any), within the same <a>top layer</a>.
 
-<p class="note no-backref">This makes it different from the
-<code title=dom-Document-fullscreenElement>fullscreenElement</code> API, which returns a
-<span data-anolis-spec=dom title=concept-document>document</span>'s
-<span>fullscreen element</span>.
+<p class=note>The <a><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
+that hides the underlying document for an element in a <a>top layer</a> (such as an element that is
+displayed fullscreen).
+
+<p>It does not inherit from any element and is not inherited from. No restrictions are made on what
+properties apply to this pseudo-element either.
+
+<!-- That this is not in a more normative prose is because CSS should have hooks for this stuff
+     which make it normative. -->
+
+
+<h3 id=:fullscreen-pseudo-class><code>:fullscreen</code> pseudo-class</h3>
+
+<p>The <dfn id=css-pc-fullscreen><code>:fullscreen</code></dfn> pseudo-class must match any
+<a>element</a> that has its <a>fullscreen flag</a> set.
+
+<p class="note no-backref">This makes it different from the {{Document/fullscreenElement}} API,
+which returns a <a>document</a>'s <a>fullscreen element</a>.
 
 
 <h3 id=user-agent-level-style-sheet-defaults>User-agent level style sheet defaults</h3>
-<!-- HTML's "The CSS user agent style sheet and presentational hints"
-section uses this term -->
+<!-- HTML's "The CSS user agent style sheet and presentational hints" section uses this term -->
 
-<pre class=css>@namespace "http://www.w3.org/1999/xhtml";
+<pre class=css>
+@namespace "http://www.w3.org/1999/xhtml";
 
 *|*:not(:root):fullscreen {
   position:fixed !important;
@@ -656,30 +551,26 @@ iframe:fullscreen {
 
 *|*:not(:root):fullscreen::backdrop {
   background:black;
-}</pre>
+}
+</pre>
 
 
 
 <h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
 
-<p>User agents should ensure, e.g. by means of an overlay, that the end user
-is aware something is displayed fullscreen. User agents should provide a
-means of exiting fullscreen that always works and advertise this to the
-user. This is to prevent a site from spoofing the end user by recreating the
-user agent or even operating system environment when fullscreen. See also
-the definition of
-<code title=dom-Element-requestFullscreen>requestFullscreen()</code>.
+<p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
+displayed fullscreen. User agents should provide a means of exiting fullscreen that always works and
+advertise this to the user. This is to prevent a site from spoofing the end user by recreating the
+user agent or even operating system environment when fullscreen. See also the definition of
+{{Element/requestFullscreen()}}.
 
-<p>To enable content in a
-<span data-anolis-spec=html>nested browsing context</span> to go fullscreen,
-it needs to be specifically allowed via the <code>allowfullscreen</code>
-attribute of the HTML <code>iframe</code> element. This prevents e.g.
-content from third parties to go fullscreen without explicit permission.
+<p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
+specifically allowed via the <code>allowfullscreen</code> attribute of the HTML <{iframe}> element.
+This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
 
 
-<h2 class=no-num>References</h2>
-<div id=anolis-references></div>
+<div data-fill-with=references></div>
 
 
 
@@ -692,7 +583,7 @@ content from third parties to go fullscreen without explicit permission.
 Andy Earnshaw,
 Chris Pearce,
 Darin Fisher,
-<i title>fantasai</i>,
+<i>fantasai</i>,
 Giuseppe Pascale,
 Glenn Maynard,
 Ian Hickson,
@@ -716,15 +607,13 @@ Vincent Scheib, and
 Xidorn Quan
 for also being awesome.
 
-<p>This standard is written by
-<a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
+<p>This standard is written by <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
 <a lang=tr href=http://tantek.com/>Tantek Çelik</a>
 (<a class="p-org org h-org h-card" href=https://www.mozilla.org/>Mozilla</a>,
-<a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal
-hassles.
+<a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal hassles.
 
-<p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to
-the extent possible under law, the editor has waived all copyright and related or
-neighboring rights to this work.
+<p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to the extent
+possible under law, the editor has waived all copyright and related or neighboring rights to this
+work.

@@ -1,645 +1,430 @@
-<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
-<title>Fullscreen API Standard</title>
-<link href="https://whatwg.org/style/specification" rel="stylesheet">
-<link href="https://resources.whatwg.org/logo-fullscreen.svg" rel="icon">
-
-<div class="head">
-
-<p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg" width="100"></a></p>
-
-<hgroup>
- <h1 class="p-name">Fullscreen API</h1>
- <h2 class="no-num no-toc">Living Standard — Last Updated 13 September 2016</h2>
-</hgroup>
-
- <dl>
- <dt>Participate:</dt>
- <dd><a href="https://github.com/whatwg/fullscreen">GitHub whatwg/fullscreen</a>
- (<a href="https://github.com/whatwg/fullscreen/issues/new">file an issue</a>,
- <a href="https://github.com/whatwg/fullscreen/issues">open issues</a>)
- <dd><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
-
- <dt>Commits:
- <dd><a href="https://github.com/whatwg/fullscreen/commits">GitHub whatwg/fullscreen/commits</a></dd>
- <dd><a href="https://twitter.com/fullscreenapi">@fullscreenapi</a>
- </dl>
-
-<script async="" src="https://resources.whatwg.org/file-bug.js"></script>
+<!doctype html><html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta content="#3c790a" name="theme-color">
+  <title>Fullscreen API Standard</title>
+  <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
+  <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
+  <link href="https://resources.whatwg.org/logo-fullscreen.svg" rel="icon">
+  <meta content="Bikeshed 1.0.0" name="generator">
+<style>/* style-syntax-highlighting */
+pre.idl.highlight { color: #708090; }
+        .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+        code.highlight { padding: .1em; border-radius: .3em; }
+        pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+        .highlight .c { color: #708090 } /* Comment */
+        .highlight .k { color: #990055 } /* Keyword */
+        .highlight .l { color: #000000 } /* Literal */
+        .highlight .n { color: #0077aa } /* Name */
+        .highlight .o { color: #999999 } /* Operator */
+        .highlight .p { color: #999999 } /* Punctuation */
+        .highlight .cm { color: #708090 } /* Comment.Multiline */
+        .highlight .cp { color: #708090 } /* Comment.Preproc */
+        .highlight .c1 { color: #708090 } /* Comment.Single */
+        .highlight .cs { color: #708090 } /* Comment.Special */
+        .highlight .kc { color: #990055 } /* Keyword.Constant */
+        .highlight .kd { color: #990055 } /* Keyword.Declaration */
+        .highlight .kn { color: #990055 } /* Keyword.Namespace */
+        .highlight .kp { color: #990055 } /* Keyword.Pseudo */
+        .highlight .kr { color: #990055 } /* Keyword.Reserved */
+        .highlight .kt { color: #990055 } /* Keyword.Type */
+        .highlight .ld { color: #000000 } /* Literal.Date */
+        .highlight .m { color: #000000 } /* Literal.Number */
+        .highlight .s { color: #a67f59 } /* Literal.String */
+        .highlight .na { color: #0077aa } /* Name.Attribute */
+        .highlight .nc { color: #0077aa } /* Name.Class */
+        .highlight .no { color: #0077aa } /* Name.Constant */
+        .highlight .nd { color: #0077aa } /* Name.Decorator */
+        .highlight .ni { color: #0077aa } /* Name.Entity */
+        .highlight .ne { color: #0077aa } /* Name.Exception */
+        .highlight .nf { color: #0077aa } /* Name.Function */
+        .highlight .nl { color: #0077aa } /* Name.Label */
+        .highlight .nn { color: #0077aa } /* Name.Namespace */
+        .highlight .py { color: #0077aa } /* Name.Property */
+        .highlight .nt { color: #669900 } /* Name.Tag */
+        .highlight .nv { color: #222222 } /* Name.Variable */
+        .highlight .ow { color: #999999 } /* Operator.Word */
+        .highlight .mb { color: #000000 } /* Literal.Number.Bin */
+        .highlight .mf { color: #000000 } /* Literal.Number.Float */
+        .highlight .mh { color: #000000 } /* Literal.Number.Hex */
+        .highlight .mi { color: #000000 } /* Literal.Number.Integer */
+        .highlight .mo { color: #000000 } /* Literal.Number.Oct */
+        .highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
+        .highlight .sc { color: #a67f59 } /* Literal.String.Char */
+        .highlight .sd { color: #a67f59 } /* Literal.String.Doc */
+        .highlight .s2 { color: #a67f59 } /* Literal.String.Double */
+        .highlight .se { color: #a67f59 } /* Literal.String.Escape */
+        .highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
+        .highlight .si { color: #a67f59 } /* Literal.String.Interpol */
+        .highlight .sx { color: #a67f59 } /* Literal.String.Other */
+        .highlight .sr { color: #a67f59 } /* Literal.String.Regex */
+        .highlight .s1 { color: #a67f59 } /* Literal.String.Single */
+        .highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
+        .highlight .vc { color: #0077aa } /* Name.Variable.Class */
+        .highlight .vg { color: #0077aa } /* Name.Variable.Global */
+        .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+        .highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
+        </style>
+ <body class="h-entry status-LS">
+  <div class="head">
+   <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
+   <hgroup>
+    <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-14">14 September 2016</time></span></h2>
+   </hgroup>
+   <div data-fill-with="spec-metadata">
+    <dl>
+     <dt>Participate:
+     <dd><span><a href="https://github.com/whatwg/fullscreen">GitHub whatwg/fullscreen</a> (<a href="https://github.com/whatwg/fullscreen/issues/new">file an issue</a>, <a href="https://github.com/whatwg/fullscreen/issues">open issues</a>)</span>
+     <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
+     <dt>Commits:
+     <dd><span><a href="https://github.com/whatwg/fullscreen/commits">GitHub whatwg/fullscreen/commits</a></span>
+     <dd><span><a href="https://twitter.com/fullscreenapi">@fullscreenapi</a></span>
+    </dl>
+   </div>
+   <div data-fill-with="warning"></div>
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+  <div class="p-summary" data-fill-with="abstract">
+   <p>The Fullscreen API standard defines an API for elements to display themselves fullscreen.</p>
+  </div>
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
+    <li><a href="#conformance"><span class="secno">1</span> <span class="content">Conformance</span></a>
+    <li><a href="#terminology"><span class="secno">2</span> <span class="content">Terminology</span></a>
+    <li><a href="#model"><span class="secno">3</span> <span class="content">Model</span></a>
+    <li><a href="#api"><span class="secno">4</span> <span class="content">API</span></a>
+    <li><a href="#ui"><span class="secno">5</span> <span class="content">UI</span></a>
+    <li>
+     <a href="#rendering"><span class="secno">6</span> <span class="content">Rendering</span></a>
+     <ol class="toc">
+      <li><a href="#new-stacking-layer"><span class="secno">6.1</span> <span class="content">New stacking layer</span></a>
+      <li><a href="#::backdrop-pseudo-element"><span class="secno">6.2</span> <span class="content"><code>::backdrop</code> pseudo-element</span></a>
+      <li><a href="#:fullscreen-pseudo-class"><span class="secno">6.3</span> <span class="content"><code>:fullscreen</code> pseudo-class</span></a>
+      <li><a href="#user-agent-level-style-sheet-defaults"><span class="secno">6.4</span> <span class="content">User-agent level style sheet defaults</span></a>
+     </ol>
+    <li><a href="#security-and-privacy-considerations"><span class="secno">7</span> <span class="content">Security and Privacy Considerations</span></a>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ol class="toc">
+      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+     </ol>
+    <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
+   </ol>
+  </nav>
+  <main>
+<script async="" src="https://resources.whatwg.org/file-issue.js"></script>
 <script defer="" id="head" src="https://resources.whatwg.org/dfn.js"></script>
-
-</div>
-
-
-
-<h2 class="no-num no-toc" id="abstract">Abstract</h2>
-<p>The Fullscreen API standard defines an API for elements to display themselves
-fullscreen.
-
-
-
-<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
-
-<!--begin-toc-->
-<ol class="toc">
- <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
- <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
- <li><a href="#model"><span class="secno">3 </span>Model</a></li>
- <li><a href="#api"><span class="secno">4 </span>API</a></li>
- <li><a href="#ui"><span class="secno">5 </span>UI</a></li>
- <li><a href="#rendering"><span class="secno">6 </span>Rendering</a>
-  <ol>
-   <li><a href="#new-stacking-layer"><span class="secno">6.1 </span>New stacking layer</a></li>
-   <li><a href="#::backdrop-pseudo-element"><span class="secno">6.2 </span><code title="">::backdrop</code> pseudo-element</a></li>
-   <li><a href="#:fullscreen-pseudo-class"><span class="secno">6.3 </span><code title="">:fullscreen</code> pseudo-class</a></li>
-   <li><a href="#user-agent-level-style-sheet-defaults"><span class="secno">6.4 </span>User-agent level style sheet defaults</a></ol></li>
- <li><a href="#security-and-privacy-considerations"><span class="secno">7 </span>Security and Privacy Considerations</a></li>
- <li><a class="no-num" href="#references">References</a></li>
- <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
-<!--end-toc-->
-
-
-
-<h2 id="conformance"><span class="secno">1 </span>Conformance</h2>
-<p>All diagrams, examples, and notes in this specification are
-non-normative, as are all sections explicitly marked non-normative.
-Everything else in this specification is normative.
-
-<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
-"OPTIONAL" in the normative parts of this specification are to be
-interpreted as described in RFC2119. For readability, these words do
-not appear in all uppercase letters in this specification.
-<a href="#refsRFC2119">[RFC2119]</a>
-
-
-
-<h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
-
-<p>Most terminology used in this specification is from CSS, DOM, HTML, and
-Web IDL.
-<a href="#refsCSS">[CSS]</a>
-<a href="#refsDOM">[DOM]</a>
-<a href="#refsHTML">[HTML]</a>
-<a href="#refsWEBIDL">[WEBIDL]</a>
-
-<p>The term <dfn id="context-object">context object</dfn> means the object on which the method
-or attribute being discussed was called. When the
-<a href="#context-object">context object</a> is unambiguous, the term can be omitted.
-
-<p>A <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var title="">A</var>
-is called a <dfn id="descendant-browsing-context">descendant browsing context</dfn> of a
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var title="">B</var> if
-and only if <var title="">B</var> is an
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a> of
-<var title="">A</var>.
-
-
-
-<h2 id="model"><span class="secno">3 </span>Model</h2>
-
-<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
-<dfn id="fullscreen-flag">fullscreen flag</dfn>. Unless stated otherwise it is unset.
-
-<p>All <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a>
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a> have an associated
-<dfn id="iframe-fullscreen-flag">iframe fullscreen flag</dfn>. Unless stated otherwise it is unset.
-
-<p>All <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a>
-have an associated <dfn id="fullscreen-element">fullscreen element</dfn>. The <a href="#fullscreen-element">fullscreen element</a> is
-the topmost <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> in the
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s <a href="#top-layer">top layer</a>
-whose <a href="#fullscreen-flag">fullscreen flag</a> is set, if any, and null otherwise.
-
-<p>To <dfn id="fullscreen-an-element">fullscreen an <var>element</var></dfn> within a <var title="">document</var>, set
-the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a> and
-<a href="#concept-top-layer-add" title="concept-top-layer-add">add</a> it to <var title="">document</var>'s
-<a href="#top-layer">top layer</a>.
-
-<p>To <dfn id="unfullscreen-an-element">unfullscreen an <var>element</var></dfn> within a <var title="">document</var>,
-unset the <var title="">element</var>'s <a href="#fullscreen-flag">fullscreen flag</a> and
-<a href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and
-<a href="#concept-top-layer-remove" title="concept-top-layer-remove">remove</a> it from <var title="">document</var>'s
-<a href="#top-layer">top layer</a>.
-
-<p>To <dfn id="unfullscreen-a-document">unfullscreen a <var>document</var></dfn>,
-<a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen</a> all
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>, within
-<var title="">document</var>'s <a href="#top-layer">top layer</a>, whose <a href="#fullscreen-flag">fullscreen flag</a> is
-set.
-
-<hr>
-
-<p>To <dfn id="fully-exit-fullscreen">fully exit fullscreen</dfn> a
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> <var>document</var>, run these
-steps:
-
-<ol>
- <li><p>If <var>document</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, terminate these
- steps.
-
- <li><p><a href="#unfullscreen-an-element" title="Unfullscreen an element">Unfullscreen elements</a> whose
- <a href="#fullscreen-flag">fullscreen flag</a> is set, within <var>document</var>'s <a href="#top-layer">top layer</a>, except
- for <var>document</var>'s <a href="#fullscreen-element">fullscreen element</a>.
-
- <li><p><a href="#exit-fullscreen">Exit fullscreen</a> <var>document</var>.
-</ol>
-
-<p>Whenever the
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-remove-ext" title="concept-node-remove-ext">removing steps</a> run with an
-<var>oldNode</var>, run these steps:
-
-<ol>
- <li><p>Let <var title="">nodes</var> be <var title="">oldNode</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-descendant" title="concept-tree-inclusive-descendant">inclusive descendants</a>
- that have their <a href="#fullscreen-flag">fullscreen flag</a> set, in
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
-
- <li>
-  <p>For each <var title="">node</var> in <var title="">nodes</var>, run these substeps:
-
-  <ol>
-   <li><p>If <var title="">node</var> is its
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
-   <a href="#fullscreen-element">fullscreen element</a>, <a href="#exit-fullscreen">exit fullscreen</a> that
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
-
-   <li><p>Otherwise,
-   <a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen <var title="">node</var></a> within
-   its <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
-  </ol>
-</ol>
-
-<p>Whenever the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run with a
-<var>document</var>, <a href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>document</var>.
-
-<hr>
-
-<p><dfn id="fullscreen-is-supported">Fullscreen is supported</dfn> if there is no previously-established user
-preference, security risk, or platform limitation.
-
-<p>An algorithm is <dfn id="allowed-to-request-fullscreen">allowed to request fullscreen</dfn> if one of the following is true:
-
- <ul>
-  <li><p>The algorithm is <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>.
-
-  <li><p>The algorithm is
-  <a class="external" data-anolis-spec="screen-orientation" href="https://w3c.github.io/screen-orientation/#dfn-triggered-by-a-user-generated-orientation-change">triggered by a user generated orientation change</a>.
- </ul>
-<!-- cross-process -->
-
-
-<h2 id="api"><span class="secno">4 </span>API</h2>
-
-<pre class="idl">partial interface <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#element">Element</a> {
-  Promise&lt;void&gt; <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>();
+   <h2 class="heading settled" data-level="1" id="conformance"><span class="secno">1. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
+   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections
+explicitly marked non-normative. Everything else in this specification is normative. </p>
+   <p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD
+NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do not appear in all uppercase
+letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+   <h2 class="heading settled" data-level="2" id="terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <p>Most terminology used in this specification is from CSS, DOM, HTML, and Web IDL. <a data-link-type="biblio" href="#biblio-css">[CSS]</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> </p>
+   <p>The term <dfn data-dfn-type="dfn" data-noexport="" id="context-object">context object<a class="self-link" href="#context-object"></a></dfn> means the object on which the method or attribute being
+discussed was called. When the <a data-link-type="dfn" href="#context-object">context object</a> is unambiguous, the term can be omitted. </p>
+   <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var>A</var> is called a <dfn data-dfn-type="dfn" data-noexport="" id="descendant-browsing-context">descendant browsing context<a class="self-link" href="#descendant-browsing-context"></a></dfn> of a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var>B</var> if and only if <var>B</var> is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a> of <var>A</var>. </p>
+   <h2 class="heading settled" data-level="3" id="model"><span class="secno">3. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
+   <p>All <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-flag">fullscreen flag<a class="self-link" href="#fullscreen-flag"></a></dfn>. Unless stated otherwise it is
+unset. </p>
+   <p>All <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="iframe-fullscreen-flag">iframe fullscreen flag<a class="self-link" href="#iframe-fullscreen-flag"></a></dfn>. Unless
+stated otherwise it is unset. </p>
+   <p>All <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-element">fullscreen element<a class="self-link" href="#fullscreen-element"></a></dfn>. The <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is the topmost <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> in the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a> whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set, if any, and null otherwise. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-an-element">fullscreen an <var>element</var><a class="self-link" href="#fullscreen-an-element"></a></dfn> within a <var>document</var>, set the <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#concept-top-layer-add">add</a> it to <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-an-element">unfullscreen an <var>element</var><a class="self-link" href="#unfullscreen-an-element"></a></dfn> within a <var>document</var>, unset the <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and <a data-link-type="dfn" href="#concept-top-layer-remove">remove</a> it from <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-a-document">unfullscreen a <var>document</var><a class="self-link" href="#unfullscreen-a-document"></a></dfn>, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> all <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a>, within <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>, whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
+   <hr>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fully-exit-fullscreen">fully exit fullscreen<a class="self-link" href="#fully-exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>document</var>, run these steps: </p>
+   <ol>
+    <li>
+     <p>If <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, terminate these steps. </p>
+    <li>
+     <p><a data-link-type="dfn" href="#unfullscreen-an-element">Unfullscreen elements</a> whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is
+ set, within <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>, except for <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+    <li>
+     <p><a data-link-type="dfn" href="#exit-fullscreen">Exit fullscreen</a> <var>document</var>. </p>
+   </ol>
+   <p>Whenever the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-remove-ext">removing steps</a> run with an <var>oldNode</var>, run these steps: </p>
+   <ol>
+    <li>
+     <p>Let <var>nodes</var> be <var>oldNode</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-descendant">inclusive descendants</a> that have their <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-order">tree order</a>. </p>
+    <li>
+     <p>For each <var>node</var> in <var>nodes</var>, run these substeps: </p>
+     <ol>
+      <li>
+       <p>If <var>node</var> is its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>, <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>. </p>
+      <li>
+       <p>Otherwise, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen <var>node</var></a> within its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>. </p>
+     </ol>
+   </ol>
+   <p>Whenever the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run with a <var>document</var>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>document</var>. </p>
+   <hr>
+   <p><dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-is-supported">Fullscreen is supported<a class="self-link" href="#fullscreen-is-supported"></a></dfn> if there is no previously-established user preference,
+security risk, or platform limitation. </p>
+   <p>An algorithm is <dfn data-dfn-type="dfn" data-noexport="" id="allowed-to-request-fullscreen">allowed to request fullscreen<a class="self-link" href="#allowed-to-request-fullscreen"></a></dfn> if one of the following is true: </p>
+   <ul>
+    <li>
+     <p>The algorithm is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#triggered-by-user-activation">triggered by user activation</a>. </p>
+    <li>
+     <p>The algorithm is <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation/#dfn-triggered-by-a-user-generated-orientation-change">triggered by a user generated orientation change</a>. </p>
+   </ul>
+   <h2 class="heading settled" data-level="4" id="api"><span class="secno">4. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
+<pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#element">Element</a> {
+  <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-element-requestfullscreen">requestFullscreen</a>();
 };
 
-partial interface <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#document">Document</a> {
-  [LenientSetter] readonly attribute boolean <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a>;
-  [LenientSetter] readonly attribute <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#element">Element</a>? <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a>;
-  [LenientSetter] readonly attribute boolean <a href="#dom-document-fullscreen" title="dom-Document-fullscreen">fullscreen</a>; // historical
-
-  Promise&lt;void&gt; <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>();
-
-  attribute <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenchange" title="handler-document-onfullscreenchange">onfullscreenchange</a>;
-  attribute <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-document-onfullscreenerror" title="handler-document-onfullscreenerror">onfullscreenerror</a>;
-};</pre>
-
-<dl class="domintro">
- <dt><code><var>promise</var> = <var title="">element</var> . <a href="#dom-element-requestfullscreen" title="dom-Element-requestFullscreen">requestFullscreen</a>()</code>
- <dd><p>Displays <var title="">element</var> fullscreen and fulfills <var>promise</var> when
- done.
-
- <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled">fullscreenEnabled</a></code>
- <dd><p>Returns true if <var title="">document</var> has the ability to display
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">elements</a>
- fullscreen and <a href="#fullscreen-is-supported">fullscreen is supported</a>, or false otherwise.
-
- <dt><code><var title="">document</var> . <a href="#dom-document-fullscreenelement" title="dom-Document-fullscreenElement">fullscreenElement</a></code>
- <dd><p>Returns <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a>.
-
- <dt><code><var>promise</var> = <var title="">document</var> . <a href="#dom-document-exitfullscreen" title="dom-Document-exitFullscreen">exitFullscreen</a>()</code>
- <dd><p>Stops <var title="">document</var>'s <a href="#fullscreen-element">fullscreen element</a> from being
- displayed fullscreen and fulfills <var>promise</var> when done.
-</dl>
-
-<p>A <dfn id="fullscreen-element-ready-check">fullscreen element ready check</dfn> for an
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> <var title="">element</var>
-returns true if all of the following are true, and false otherwise:
-
-<ul>
- <li><p><var title="">element</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element-namespace" title="concept-element-namespace">namespace</a> is the
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#html-namespace">HTML namespace</a> or <var>element</var> is an
- <a href="https://www.w3.org/TR/SVG11/struct.html#SVGElement">SVG <code>svg</code></a> or
- <a href="https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel">MathML <code>math</code></a>
- element. <a href="#refsSVG">[SVG]</a> <a href="#refsMATHML">[MATHML]</a>
-
- <li><p><var title="">element</var> is <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#in-a-document">in a document</a>.
-
- <li><p><var title="">element</var>'s <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>
- is <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
- attribute name <code>allowfullscreen</code>.
-
- <li><p><var title="">element</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> either has a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> and the
- <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> returns true for <var title="">element</var>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>, or it has no
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>.
- <!-- cross-process, recursive -->
-</ul>
-
-<p>The <dfn id="dom-element-requestfullscreen" title="dom-Element-requestFullscreen"><code>requestFullscreen()</code></dfn>
-method, when invoked, must run these steps:
-
-<ol>
- <li><p>Let <var title="">pending</var> be the <a href="#context-object">context object</a>.
-
- <li><p>Let <var title="">error</var> be false.
-
- <li><p>Let <var>promise</var> be a new promise.
-
- <li>
-  <p>If any of the following conditions are true, set <var title="">error</var> to true:
-
-  <ul>
-   <li><p>The <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var title="">pending</var>
-   returns false.
-
-   <li><p><a href="#fullscreen-is-supported" title="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
-
-   <li><p>This algorithm is not <a href="#allowed-to-request-fullscreen">allowed to request fullscreen</a>.
-  </ul>
-
- <li><p>Return <var>promise</var>, and run the remaining steps
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>.
-
- <li><p>If <var title="">error</var> is false: Resize <var title="">pending</var>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s viewport's
- dimensions to match the dimensions of the screen of the output device. Optionally display
- a message how the end user can revert this.
- <!-- cross-process -->
-
- <li>
-  <p>As part of the next <span>animation frame task</span>, run these substeps:
-
-  <ol>
-   <li><p>If either <var title="">error</var> is true or the
-   <a href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var title="">pending</var> returns false,
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenerror</code> on <var title="">pending</var>'s
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>,
-   reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these
-   steps.
-   <!-- cross-process; check is only needed on pending as it is recursive already -->
-
-   <li><p>Let <var title="">fullscreenElements</var> be an ordered set initially consisting
-   of <var title="">pending</var>.
-
-   <li><p>While the first element in <var title="">fullscreenElements</var> is in a
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a>, prepend its
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> to
-   <var title="">fullscreenElements</var>.
-   <!-- cross-process -->
-
-   <li><p>Let <var>eventDocs</var> be an empty list.
-
-   <li>
-    <p>For each <var title="">element</var> in <var title="">fullscreenElements</var>, in order,
-    run these subsubsteps:
-
-    <ol>
-     <li><p>Let <var title="">doc</var> be <var title="">element</var>'s
-     <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>.
-
-     <li>
-      <p>If <var title="">element</var> is <var title="">doc</var>'s
-      <a href="#fullscreen-element">fullscreen element</a>, terminate these subsubsteps.
-
-      <p class="note">No need to notify observers when nothing has changed.
-
-     <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
-
-     <li><p>If <var title="">element</var> is <var title="">pending</var> and
-     <var title="">pending</var> is an <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element"><code class="external" data-anolis-spec="html">iframe</code></a>
-     <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a>, set
-     <var title="">element</var>'s <a href="#iframe-fullscreen-flag">iframe fullscreen flag</a>.
-
-     <li><p><a href="#fullscreen-an-element" title="Fullscreen an element">Fullscreen <var>element</var></a>
-     within <var title="">doc</var>.
-    </ol>
-
-   <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order,
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenchange</code> on <var title="">doc</var>.
-
-   <li><p>Fulfill <var>promise</var> with undefined.
-  </ol>
-
-  <p class="XXX"><span>Animation frame task</span> is not really defined yet, including
-  relative order within that task, see
-  <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440">bug 26440</a>.
-
-  <p class="note">Implementations with out-of-process
-  <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context" title="browsing context">browsing contexts</a> are left
-  as an exercise to the reader. Input welcome on potential improvements.
-</ol>
-
-<p>The <dfn id="dom-document-fullscreenenabled" title="dom-Document-fullscreenEnabled"><code>fullscreenEnabled</code></dfn>
-attribute's getter must return true if the <a href="#context-object">context object</a> is
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
-attribute name <code>allowfullscreen</code> and <a href="#fullscreen-is-supported">fullscreen is supported</a>,
-and false otherwise.
-
-<p>The <dfn id="dom-document-fullscreenelement" title="dom-Document-fullscreenElement"><code>fullscreenElement</code></dfn>
-attribute's getter must return <a href="#context-object">context object</a>'s
-<a href="#fullscreen-element">fullscreen element</a>.
-
-<p>The <dfn id="dom-document-fullscreen" title="dom-Document-fullscreen"><code>fullscreen</code></dfn> attribute's getter must
-return false if <a href="#context-object">context object</a>'s <a href="#fullscreen-element">fullscreen element</a> is null, and true
-otherwise.
-
-<p class="note">Use <a href="#dom-document-fullscreenelement"><code title="dom-Document-fullscreenElement">document.fullscreenElement</code></a>
-instead.
-
-<p>To <dfn id="collect-documents-to-unfullscreen">collect documents to unfullscreen</dfn> given <var title="">doc</var>,
-run these steps:
-
-<ol>
- <li><p>If <var>doc</var>'s <a href="#top-layer">top layer</a> consists of more than a single
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
- <a href="#fullscreen-flag">fullscreen flag</a> set, return the empty set.
-
- <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
-
- <li><p>While <var>docs</var>'s last
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> whose
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a>'s
- <a href="#top-layer">top layer</a> consists of a single
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
- <a href="#fullscreen-flag">fullscreen flag</a> set and does not have its
- <a href="#iframe-fullscreen-flag">iframe fullscreen flag</a> set (if any), append that
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
- <var>docs</var>.
-
- <li><p>Return <var>docs</var>.
-</ol>
-
-<p>To <dfn id="exit-fullscreen">exit fullscreen</dfn> a <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>
-<var>doc</var>, run these steps:
-
-<ol>
- <li><p>Let <var>promise</var> be a new promise.
-
- <li><p>If <var title="">doc</var>'s <a href="#fullscreen-element">fullscreen element</a> is null, reject
- <var>promise</var> with a <code>TypeError</code> exception, and return
- <var>promise</var>.
-
- <li><p>Let <var title="">resize</var> be false.
-
- <li><p>Let <var title="">docs</var> be the result of
- <a href="#collect-documents-to-unfullscreen" title="collect documents to unfullscreen">collecting documents to unfullscreen</a>
- given <var title="">doc</var>.
- <!-- cross-process -->
-
- <li><p>Let <var title="">topLevelDoc</var> be <var title="">doc</var>'s
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
- <!-- cross-process -->
-
- <li><p>If <var title="">topLevelDoc</var> is in <var title="">docs</var>, set
- <var title="">resize</var> to true.
-
- <li><p>Return <var>promise</var>, and run the remaining steps
- <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>.
-
- <li><p>If <var title="">resize</var> is true, resize <var title="">topLevelDoc</var>'s viewport
- to its "normal" dimensions.
-
- <li>
-  <p>As part of the next <span>animation frame task</span>, run these substeps:
-
-  <ol>
-   <li><p>Let <var>exitDocs</var> be the result of
-   <a href="#collect-documents-to-unfullscreen" title="collect documents to unfullscreen">collecting documents to unfullscreen</a>
-   given <var>doc</var>.
-   <!-- cross-process -->
-
-   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>,
-   <a href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
-   <code>TypeError</code> exception, and terminate these steps.
-
-   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to
-   <var>exitDocs</var>.
-
-   <li><p>If <var title="">exitDocs</var>'s last
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has a
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>, append that
-   <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>'s
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-node-document" title="concept-node-document">node document</a> to
-   <var title="">exitDocs</var>.
-   <!-- cross-process -->
-
-   <li><p>Let <var title="">descendantDocs</var> be an ordered set consisting of
-   <var title="">doc</var>'s
-   <a href="#descendant-browsing-context" title="descendant browsing context">descendant browsing contexts</a>'
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> whose
-   <a href="#fullscreen-element">fullscreen element</a> is non-null, if any, in <em>reverse</em>
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-order" title="concept-tree-order">tree order</a>.
-   <!-- cross-process -->
-
-   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>, in
-   order,
-   <a href="#unfullscreen-a-document" title="unfullscreen a document">unfullscreen <var title="">descendantDoc</var></a>.
-   <!-- cross-process -->
-
-   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, in order,
-   <a href="#unfullscreen-an-element" title="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s
-   <a href="#fullscreen-element">fullscreen element</a>.
-
-   <li><p>For each <var title="">descendantDoc</var> in <var title="">descendantDocs</var>, in
-   order, <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenchange</code> on <var title="">descendantDoc</var>.
-   <!-- cross-process -->
-
-   <li><p>For each <var title="">exitDoc</var> in <var title="">exitDocs</var>, in order,
-   <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-event-fire" title="concept-event-fire">fire an event</a> named
-   <code>fullscreenchange</code> on <var title="">exitDoc</var>.
-   <!-- cross-process -->
-
-   <li><p>Fulfill <var>promise</var> with undefined.
-  </ol>
-
-  <p class="note">This results in events being fired from the innermost to the outermost
-  document.
-</ol>
-
-<p>The <dfn id="dom-document-exitfullscreen" title="dom-Document-exitFullscreen"><code>exitFullscreen()</code></dfn> method, when
-invoked, must return the result of running <a href="#exit-fullscreen">exit fullscreen</a> on the
-<a href="#context-object">context object</a>.
-
-<hr>
-
-<p>The following are the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their
-corresponding
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" title="event handler event type">event handler event types</a>)
-that must be supported on
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">documents</a> as attributes:
-
-<table>
- <thead>
-	<tr>
-	 <th><a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" title="event handlers">event handler</a>
-	 <th><a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
- <tbody>
-	<tr>
-	 <td><dfn id="handler-document-onfullscreenchange" title="handler-document-onfullscreenchange"><code>onfullscreenchange</code></dfn>
-	 <td><code title="event-document-fullscreenchange">fullscreenchange</code>
-	<tr>
-	 <td><dfn id="handler-document-onfullscreenerror" title="handler-document-onfullscreenerror"><code>onfullscreenerror</code></dfn>
-	 <td><code title="event-document-fullscreenerror">fullscreenerror</code>
-</table>
-
-
-
-<h2 id="ui"><span class="secno">5 </span>UI</h2>
-
-<p>User agents are encouraged to implement native media fullscreen controls
-in terms of
-<a href="#dom-element-requestfullscreen"><code title="dom-Element-requestFullscreen">requestFullscreen()</code></a> and
-<a href="#dom-document-exitfullscreen"><code title="dom-Document-exitFullscreen">exitFullscreen()</code></a>.
-
-<p>If the end user instructs the user agent to end a fullscreen session
-initiated via
-<a href="#dom-element-requestfullscreen"><code title="dom-Element-requestFullscreen">requestFullscreen()</code></a>,
-<a href="#fully-exit-fullscreen">fully exit fullscreen</a> the
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>'s
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>.
-
-
-
-<h2 id="rendering"><span class="secno">6 </span>Rendering</h2>
-
-<p>This section is to be interpreted equivalently to the Rendering section
-of HTML. <a href="#refsHTML">[HTML]</a>
-
-<p class="XXX">Long term CSS will define the <a href="#top-layer">top layer</a> concept
-and its associated <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
-pseudo-element as part of CSS' stacking context model. Patching CSS as done
-here is sketchy as hell.
-
-
-<h3 id="new-stacking-layer"><span class="secno">6.1 </span>New stacking layer</h3>
-
-<p>This specification introduces a new stacking layer to the
-<a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a>
-of CSS 2.1. It is called the <dfn id="top-layer">top layer</dfn>, comes after step 10 in
-the painting order, and is therefore rendered closest to the user within a
-viewport. Each <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> has one
-associated viewport and therefore also one <a href="#top-layer">top layer</a>.
-<a href="#refsCSS">[CSS]</a>
-
-<p class="note">The terminology used in this and following subsection attempts
-to match CSS 2.1 Appendix E.
-
-<p>The <a href="#top-layer">top layer</a> consists of an ordered set of elements, rendered in the
-order they have been added to the set. The last element added is rendered closest to the
-user.
-
-<p class="note">The <code title="">z-index</code> property has no effect in the
-<a href="#top-layer">top layer</a>.
-
-<p>Each element and <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element in a
-<a href="#top-layer">top layer</a> has the following characteristics:
-
-<ul>
- <li><p>It generates a new stacking context.
-
- <li><p>Its parent stacking context is the root stacking context.
-
- <li><p>If it consists of multiple layout boxes, the first box is used.
- <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=24523 -->
-
- <li>
-  <p>It is rendered as an atomic unit as if it were a sibling of its
-  <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-root" title="concept-tree-root">root</a>.
-
-  <p class="note"><a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-ancestor" title="concept-tree-ancestor">Ancestor</a> elements with
-  overflow, opacity, masks, etc. cannot affect it.
-
- <li><p>If its <code title="">position</code> property computes to <code title="">fixed</code>,
- its containing block is the viewport, and the initial containing block otherwise.
-
- <li><p>If it is an element, it and its <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a>
- pseudo-element are not rendered if its
- <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor" title="concept-tree-inclusive-ancestor">inclusive ancestor</a> has the
- <code title="">display</code> property set to <code title="">none</code>.
-
- <li><p>If its specified <code title="">display</code> property is <code title="">contents</code>, it
- computes to <code title="">block</code>.
-
- <li><p>If its specified <code title="">position</code> property is not <code title="">absolute</code> or
- <code title="">fixed</code>, it computes to <code title="">absolute</code>.
-
- <li><p>Its outline, if any, is to be rendered before step 10 in the
- painting order.
-
- <li><p>Unless overridden by another specification, its static position for
- <code title="">left</code>, <code title="">right</code>, and
- <code title="">top</code> is zero.
-</ul>
-
-<p>To <dfn id="concept-top-layer-add" title="concept-top-layer-add">add</dfn> an <var>element</var> to a
-<var title="">top layer</var>, add, or move if already present, <var>element</var> on top of
-<var title="">top layer</var>.
-
-<p>To <dfn id="concept-top-layer-remove" title="concept-top-layer-remove">remove</dfn> an <var>element</var> from a
-<var title="">top layer</var>, remove <var>element</var> from <var title="">top layer</var>.
-
-
-<h3 id="::backdrop-pseudo-element"><span class="secno">6.2 </span><code title="">::backdrop</code> pseudo-element</h3>
-
-<p>Each element in a <a href="#top-layer">top layer</a> has a
-<dfn id="css-pe-backdrop" title="css-pe-backdrop"><code>::backdrop</code></dfn> pseudo-element.
-This pseudo-element is a box rendered immediately below the element (and
-above the element before the element in the set, if any), within the same
-<a href="#top-layer">top layer</a>.
-
-<p class="note">The <a href="#css-pe-backdrop"><code title="css-pe-backdrop">::backdrop</code></a> pseudo-element can be used
-to create a backdrop that hides the underlying document for an element in a
-<a href="#top-layer">top layer</a> (such as an element that is displayed fullscreen).
-
-<p>It does not inherit from any element and is not
-inherited from. No restrictions are made on what properties apply to this
-pseudo-element either.
-
-<!-- That this is not in a more normative prose is because CSS should have
-     hooks for this stuff which make it normative. -->
-
-
-<h3 id=":fullscreen-pseudo-class"><span class="secno">6.3 </span><code title="">:fullscreen</code> pseudo-class</h3>
-
-<p>The <dfn id="css-pc-fullscreen" title="css-pc-fullscreen"><code>:fullscreen</code></dfn>
-pseudo-class must match any
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-element" title="concept-element">element</a> that has its
-<a href="#fullscreen-flag">fullscreen flag</a> set.
-
-<p class="note no-backref">This makes it different from the
-<a href="#dom-document-fullscreenelement"><code title="dom-Document-fullscreenElement">fullscreenElement</code></a> API, which returns a
-<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>'s
-<a href="#fullscreen-element">fullscreen element</a>.
-
-
-<h3 id="user-agent-level-style-sheet-defaults"><span class="secno">6.4 </span>User-agent level style sheet defaults</h3>
-<!-- HTML's "The CSS user agent style sheet and presentational hints"
-section uses this term -->
-
+<span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#document">Document</a> {
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreenenabled">fullscreenEnabled</a>;
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element">Element</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Element?" href="#dom-document-fullscreenelement">fullscreenElement</a>;
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreen">fullscreen</a>; // historical
+
+  <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-document-exitfullscreen">exitFullscreen</a>();
+
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenchange">onfullscreenchange</a>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenerror">onfullscreenerror</a>;
+};
+</pre>
+   <dl class="domintro">
+    <dt><code><var>promise</var> = <var>element</var> . <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code></code> 
+    <dd>
+     <p>Displays <var>element</var> fullscreen and fulfills <var>promise</var> when done. </p>
+    <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenenabled">fullscreenEnabled</a></code></code> 
+    <dd>
+     <p>Returns true if <var>document</var> has the ability to display <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> fullscreen
+ and <a data-link-type="dfn" href="#fullscreen-is-supported">fullscreen is supported</a>, or false otherwise. </p>
+    <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code></code> 
+    <dd>
+     <p>Returns <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+    <dt><code><var>promise</var> = <var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-exitfullscreen">exitFullscreen()</a></code></code> 
+    <dd>
+     <p>Stops <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> from being displayed fullscreen and
+ fulfills <var>promise</var> when done. </p>
+   </dl>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-element-ready-check">fullscreen element ready check<a class="self-link" href="#fullscreen-element-ready-check"></a></dfn> for an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> returns true
+if all of the following are true, and false otherwise: </p>
+   <ul>
+    <li>
+     <p><var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element-namespace">namespace</a> is the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#html-namespace">HTML namespace</a> or <var>element</var> is an <a href="https://www.w3.org/TR/SVG11/struct.html#SVGElement">SVG <code>svg</code></a> or <a href="https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel">MathML <code>math</code></a> element. <a data-link-type="biblio" href="#biblio-svg">[SVG]</a> <a data-link-type="biblio" href="#biblio-mathml">[MATHML]</a> </p>
+    <li>
+     <p><var>element</var> is <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#in-a-document">in a document</a>. </p>
+    <li>
+     <p><var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
+ attribute name <code>allowfullscreen</code>. </p>
+    <li>
+     <p><var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> either has a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> and the <a data-link-type="dfn" href="#fullscreen-element-ready-check">fullscreen element ready check</a> returns true for <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>, or it has no <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>. </p>
+   </ul>
+   <p>The <dfn class="idl-code" data-dfn-for="Element" data-dfn-type="method" data-export="" id="dom-element-requestfullscreen"><code>requestFullscreen()</code><a class="self-link" href="#dom-element-requestfullscreen"></a></dfn> method, when invoked, must run
+these steps: </p>
+   <ol>
+    <li>
+     <p>Let <var>pending</var> be the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+    <li>
+     <p>Let <var>error</var> be false. </p>
+    <li>
+     <p>Let <var>promise</var> be a new promise. </p>
+    <li>
+     <p>If any of the following conditions are true, set <var>error</var> to true: </p>
+     <ul>
+      <li>
+       <p>The <a data-link-type="dfn" href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var>pending</var> returns false. </p>
+      <li>
+       <p><a data-link-type="dfn" href="#fullscreen-is-supported">Fullscreen is <em>not</em> supported</a>. </p>
+      <li>
+       <p>This algorithm is not <a data-link-type="dfn" href="#allowed-to-request-fullscreen">allowed to request fullscreen</a>. </p>
+     </ul>
+    <li>
+     <p>Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. </p>
+    <li>
+     <p>If <var>error</var> is false: Resize <var>pending</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s viewport’s dimensions to match the dimensions
+ of the screen of the output device. Optionally display a message how the end user can revert this. </p>
+    <li>
+     <p>As part of the next <a data-link-type="dfn">animation frame task</a>, run these substeps: </p>
+     <ol>
+      <li>
+       <p>If either <var>error</var> is true or the <a data-link-type="dfn" href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var>pending</var> returns false, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenerror</code> on <var>pending</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>, reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps. </p>
+      <li>
+       <p>Let <var>fullscreenElements</var> be an ordered set initially consisting of <var>pending</var>. </p>
+      <li>
+       <p>While the first element in <var>fullscreenElements</var> is in a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a>, prepend its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> to <var>fullscreenElements</var>. </p>
+      <li>
+       <p>Let <var>eventDocs</var> be an empty list. </p>
+      <li>
+       <p>For each <var>element</var> in <var>fullscreenElements</var>, in order, run these
+    subsubsteps: </p>
+       <ol>
+        <li>
+         <p>Let <var>doc</var> be <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>. </p>
+        <li>
+         <p>If <var>element</var> is <var>doc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>, terminate these
+      subsubsteps. </p>
+         <p class="note" role="note">No need to notify observers when nothing has changed. </p>
+        <li>
+         <p>Otherwise, append <var>doc</var> to <var>eventDocs</var>. </p>
+        <li>
+         <p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a>, set <var>element</var>’s <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a>. </p>
+        <li>
+         <p><a data-link-type="dfn" href="#fullscreen-an-element">Fullscreen <var>element</var></a> within <var>doc</var>. </p>
+       </ol>
+      <li>
+       <p>For each <var>doc</var> in <var>eventDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>doc</var>. </p>
+      <li>
+       <p>Fulfill <var>promise</var> with undefined. </p>
+     </ol>
+     <p class="XXX"><a data-link-type="dfn">Animation frame task</a> is not really defined yet, including relative order
+  within that task, see <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440">bug 26440</a>. </p>
+     <p class="note" role="note">Implementations with out-of-process <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing contexts</a> are left as an exercise
+  to the reader. Input welcome on potential improvements. </p>
+   </ol>
+   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenenabled"><code>fullscreenEnabled</code><a class="self-link" href="#dom-document-fullscreenenabled"></a></dfn> attribute’s getter must
+return true if the <a data-link-type="dfn" href="#context-object">context object</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by attribute
+name <code>allowfullscreen</code> and <a data-link-type="dfn" href="#fullscreen-is-supported">fullscreen is supported</a>, and false otherwise. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenelement"><code>fullscreenElement</code><a class="self-link" href="#dom-document-fullscreenelement"></a></dfn> attribute’s getter must
+return <a data-link-type="dfn" href="#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreen"><code>fullscreen</code><a class="self-link" href="#dom-document-fullscreen"></a></dfn> attribute’s getter must return
+false if <a data-link-type="dfn" href="#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and true otherwise. </p>
+   <p class="note" role="note">Use <a class="idl-code" data-link-type="attribute" href="#dom-document-fullscreenelement"><code>document.fullscreenElement</code></a> instead. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="collect-documents-to-unfullscreen">collect documents to unfullscreen<a class="self-link" href="#collect-documents-to-unfullscreen"></a></dfn> given <var>doc</var>, run these steps: </p>
+   <ol>
+    <li>
+     <p>If <var>doc</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a> consists of more than a single <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has
+ its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, return the empty set. </p>
+    <li>
+     <p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>. </p>
+    <li>
+     <p>While <var>docs</var>’s last <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> has a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a> whose <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a> consists of a single <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set and does not have its <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a> set (if any), append
+ that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a> to <var>docs</var>. </p>
+    <li>
+     <p>Return <var>docs</var>. </p>
+   </ol>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="exit-fullscreen">exit fullscreen<a class="self-link" href="#exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>doc</var>, run these steps: </p>
+   <ol>
+    <li>
+     <p>Let <var>promise</var> be a new promise. </p>
+    <li>
+     <p>If <var>doc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, reject <var>promise</var> with a <code>TypeError</code> exception, and return <var>promise</var>. </p>
+    <li>
+     <p>Let <var>resize</var> be false. </p>
+    <li>
+     <p>Let <var>docs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var>. </p>
+    <li>
+     <p>Let <var>topLevelDoc</var> be <var>doc</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>. </p>
+    <li>
+     <p>If <var>topLevelDoc</var> is in <var>docs</var>, set <var>resize</var> to true. </p>
+    <li>
+     <p>Return <var>promise</var>, and run the remaining steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>. </p>
+    <li>
+     <p>If <var>resize</var> is true, resize <var>topLevelDoc</var>’s viewport to its "normal"
+ dimensions. </p>
+    <li>
+     <p>As part of the next <a data-link-type="dfn">animation frame task</a>, run these substeps: </p>
+     <ol>
+      <li>
+       <p>Let <var>exitDocs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var>. </p>
+      <li>
+       <p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps. </p>
+      <li>
+       <p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to <var>exitDocs</var>. </p>
+      <li>
+       <p>If <var>exitDocs</var>’s last <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> has a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>,
+   append that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context-container">browsing context container</a>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a> to <var>exitDocs</var>. </p>
+      <li>
+       <p>Let <var>descendantDocs</var> be an ordered set consisting of <var>doc</var>’s <a data-link-type="dfn" href="#descendant-browsing-context">descendant browsing contexts</a>' <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> whose <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is
+   non-null, if any, in <em>reverse</em> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-order">tree order</a>. </p>
+      <li>
+       <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="#unfullscreen-a-document">unfullscreen <var>descendantDoc</var></a>. </p>
+      <li>
+       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> <var>exitDoc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+      <li>
+       <p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>. </p>
+      <li>
+       <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>exitDoc</var>. </p>
+      <li>
+       <p>Fulfill <var>promise</var> with undefined. </p>
+     </ol>
+     <p class="note" role="note">This results in events being fired from the innermost to the outermost document. </p>
+   </ol>
+   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="method" data-export="" id="dom-document-exitfullscreen"><code>exitFullscreen()</code><a class="self-link" href="#dom-document-exitfullscreen"></a></dfn> method, when invoked, must
+return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> on the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+   <hr>
+   <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>) that must be supported on <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> as attributes: </p>
+   <table>
+    <thead>
+     <tr>
+      <th><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handler</a> 
+      <th><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a> 
+    <tbody>
+     <tr>
+      <td><dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="handler-document-onfullscreenchange"><code>onfullscreenchange</code><a class="self-link" href="#handler-document-onfullscreenchange"></a></dfn> 
+      <td><code>fullscreenchange</code> 
+     <tr>
+      <td><dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="handler-document-onfullscreenerror"><code>onfullscreenerror</code><a class="self-link" href="#handler-document-onfullscreenerror"></a></dfn> 
+      <td><code>fullscreenerror</code> 
+   </table>
+   <h2 class="heading settled" data-level="5" id="ui"><span class="secno">5. </span><span class="content">UI</span><a class="self-link" href="#ui"></a></h2>
+   <p>User agents are encouraged to implement native media fullscreen controls in terms of <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-document-exitfullscreen">exitFullscreen()</a></code>. </p>
+   <p>If the end user instructs the user agent to end a fullscreen session initiated via <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>. </p>
+   <h2 class="heading settled" data-level="6" id="rendering"><span class="secno">6. </span><span class="content">Rendering</span><a class="self-link" href="#rendering"></a></h2>
+   <p>This section is to be interpreted equivalently to the Rendering section of HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+   <p class="XXX">Long term CSS will define the <a data-link-type="dfn" href="#top-layer">top layer</a> concept and its associated <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element as part of CSS' stacking context model. Patching CSS
+as done here is sketchy as hell. </p>
+   <h3 class="heading settled" data-level="6.1" id="new-stacking-layer"><span class="secno">6.1. </span><span class="content">New stacking layer</span><a class="self-link" href="#new-stacking-layer"></a></h3>
+   <p>This specification introduces a new stacking layer to the <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a> of CSS
+2.1. It is called the <dfn data-dfn-type="dfn" data-export="" id="top-layer">top layer<a class="self-link" href="#top-layer"></a></dfn>, comes after step 10 in the painting order, and is
+therefore rendered closest to the user within a viewport. Each <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> has one associated
+viewport and therefore also one <a data-link-type="dfn" href="#top-layer">top layer</a>. <a data-link-type="biblio" href="#biblio-css">[CSS]</a> </p>
+   <p class="note" role="note">The terminology used in this and following subsection attempts to match CSS 2.1
+Appendix E. </p>
+   <p>The <a data-link-type="dfn" href="#top-layer">top layer</a> consists of an ordered set of elements, rendered in the order they have been
+added to the set. The last element added is rendered closest to the user. </p>
+   <p class="note" role="note">The <code>z-index</code> property has no effect in the <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>Each element and <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element in a <a data-link-type="dfn" href="#top-layer">top layer</a> has the
+following characteristics: </p>
+   <ul>
+    <li>
+     <p>It generates a new stacking context. </p>
+    <li>
+     <p>Its parent stacking context is the root stacking context. </p>
+    <li>
+     <p>If it consists of multiple layout boxes, the first box is used. </p>
+    <li>
+     <p>It is rendered as an atomic unit as if it were a sibling of its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root">root</a>. </p>
+     <p class="note" role="note"><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-ancestor">Ancestor</a> elements with overflow, opacity, masks, etc. cannot affect
+  it. </p>
+    <li>
+     <p>If its <code>position</code> property computes to <code>fixed</code>, its containing block
+ is the viewport, and the initial containing block otherwise. </p>
+    <li>
+     <p>If it is an element, it and its <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element are not
+ rendered if its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor">inclusive ancestor</a> has the <code>display</code> property set to <code>none</code>. </p>
+    <li>
+     <p>If its specified <code>display</code> property is <code>contents</code>, it computes to <code>block</code>. </p>
+    <li>
+     <p>If its specified <code>position</code> property is not <code>absolute</code> or <code>fixed</code>, it computes to <code>absolute</code>. </p>
+    <li>
+     <p>Its outline, if any, is to be rendered before step 10 in the painting order. </p>
+    <li>
+     <p>Unless overridden by another specification, its static position for <code>left</code>, <code>right</code>, and <code>top</code> is zero. </p>
+   </ul>
+   <p>To <dfn data-dfn-for="top layer" data-dfn-type="dfn" data-export="" id="concept-top-layer-add">add<a class="self-link" href="#concept-top-layer-add"></a></dfn> an <var>element</var> to a <var>top layer</var>, add, or move if already present, <var>element</var> on top of <var>top layer</var>. </p>
+   <p>To <dfn data-dfn-for="top layer" data-dfn-type="dfn" data-export="" id="concept-top-layer-remove">remove<a class="self-link" href="#concept-top-layer-remove"></a></dfn> an <var>element</var> from a <var>top layer</var>, remove <var>element</var> from <var>top layer</var>. </p>
+   <h3 class="heading settled" data-level="6.2" id="::backdrop-pseudo-element"><span class="secno">6.2. </span><span class="content"><code>::backdrop</code> pseudo-element</span><a class="self-link" href="#%3A%3Abackdrop-pseudo-element"></a></h3>
+   <p>Each element in a <a data-link-type="dfn" href="#top-layer">top layer</a> has a <dfn class="css" data-dfn-type="selector" data-export="" id="css-pe-backdrop"><code>::backdrop</code><a class="self-link" href="#css-pe-backdrop"></a></dfn> pseudo-element. This pseudo-element is a box rendered immediately below the element (and above the
+element before the element in the set, if any), within the same <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p class="note" role="note">The <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
+that hides the underlying document for an element in a <a data-link-type="dfn" href="#top-layer">top layer</a> (such as an element that is
+displayed fullscreen). </p>
+   <p>It does not inherit from any element and is not inherited from. No restrictions are made on what
+properties apply to this pseudo-element either. </p>
+   <h3 class="heading settled" data-level="6.3" id=":fullscreen-pseudo-class"><span class="secno">6.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
+   <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set. </p>
+   <p class="note no-backref" role="note">This makes it different from the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> API,
+which returns a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+   <h3 class="heading settled" data-level="6.4" id="user-agent-level-style-sheet-defaults"><span class="secno">6.4. </span><span class="content">User-agent level style sheet defaults</span><a class="self-link" href="#user-agent-level-style-sheet-defaults"></a></h3>
 <pre class="css">@namespace "http://www.w3.org/1999/xhtml";
 
 *|*:not(:root):fullscreen {
@@ -671,64 +456,42 @@ iframe:fullscreen {
 
 *|*:not(:root):fullscreen::backdrop {
   background:black;
-}</pre>
-
-
-
-<h2 id="security-and-privacy-considerations"><span class="secno">7 </span>Security and Privacy Considerations</h2>
-
-<p>User agents should ensure, e.g. by means of an overlay, that the end user
-is aware something is displayed fullscreen. User agents should provide a
-means of exiting fullscreen that always works and advertise this to the
-user. This is to prevent a site from spoofing the end user by recreating the
-user agent or even operating system environment when fullscreen. See also
-the definition of
-<a href="#dom-element-requestfullscreen"><code title="dom-Element-requestFullscreen">requestFullscreen()</code></a>.
-
-<p>To enable content in a
-<a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a> to go fullscreen,
-it needs to be specifically allowed via the <code>allowfullscreen</code>
-attribute of the HTML <code>iframe</code> element. This prevents e.g.
-content from third parties to go fullscreen without explicit permission.
-
-
-
-<h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsCSS">[CSS]
-<dd><cite><a href="https://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek Çelik, Ian Hickson et al.. W3C.
-
-<dt id="refsDOM">[DOM]
-<dd><cite><a href="https://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
-
-<dt id="refsHTML">[HTML]
-<dd><cite><a href="https://html.spec.whatwg.org/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
-
-<dt id="refsMATHML">[MATHML]
-<dd><cite><a href="https://www.w3.org/TR/MathML/">Mathematical Markup Language (MathML)</a></cite>, David Carlisle, Patrick Ion and Robert Miner. W3C.
-
-<dt id="refsRFC2119">[RFC2119]
-<dd><cite><a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
-
-<dt id="refsSVG">[SVG]
-<dd><cite><a href="https://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG)</a></cite>, O. Andersson, R. Berjon, E. Dahlström et al.. W3C.
-
-<dt id="refsWEBIDL">[WEBIDL]
-<dd><cite><a href="https://heycam.github.io/webidl/">Web IDL</a></cite>, Cameron McCormack. W3C.
-
-</dl></div>
-
-
-
-<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
-
-<p>Many thanks to Robert O'Callahan for designing the initial model and being awesome.
-<!-- https://wiki.mozilla.org/Gecko:FullScreenAPI -->
-
-<p>Thanks to
+}
+</pre>
+   <h2 class="heading settled" data-level="7" id="security-and-privacy-considerations"><span class="secno">7. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy-considerations"></a></h2>
+   <p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
+displayed fullscreen. User agents should provide a means of exiting fullscreen that always works and
+advertise this to the user. This is to prevent a site from spoofing the end user by recreating the
+user agent or even operating system environment when fullscreen. See also the definition of <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code>. </p>
+   <p>To enable content in a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#nested-browsing-context">nested browsing context</a> to go fullscreen, it needs to be
+specifically allowed via the <code>allowfullscreen</code> attribute of the HTML <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> element.
+This prevents e.g. content from third parties to go fullscreen without explicit permission. </p>
+   <div data-fill-with="references">
+    <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+    <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+    <dl>
+     <dt id="biblio-css">[CSS]
+     <dd>Bert Bos; et al. <a href="https://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="https://www.w3.org/TR/CSS2">https://www.w3.org/TR/CSS2</a>
+     <dt id="biblio-dom">[DOM]
+     <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+     <dt id="biblio-html">[HTML]
+     <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+     <dt id="biblio-mathml">[MATHML]
+     <dd>Patrick D F Ion; Robert R Miner. <a href="https://www.w3.org/TR/MathML/">Mathematical Markup Language (MathML) 1.01 Specification</a>. 7 July 1999. REC. URL: <a href="https://www.w3.org/TR/MathML/">https://www.w3.org/TR/MathML/</a>
+     <dt id="biblio-rfc2119">[RFC2119]
+     <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+     <dt id="biblio-svg">[SVG]
+     <dd>Jon Ferraiolo. <a href="https://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG) 1.0 Specification</a>. 4 September 2001. REC. URL: <a href="https://www.w3.org/TR/SVG/">https://www.w3.org/TR/SVG/</a>
+     <dt id="biblio-webidl">[WEBIDL]
+     <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 8 March 2016. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+    </dl>
+   </div>
+   <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+   <p>Many thanks to Robert O’Callahan for designing the initial model and being awesome. </p>
+   <p>Thanks to
 Andy Earnshaw,
 Chris Pearce,
-Darin Fisher,
-<i title="">fantasai</i>,
+Darin Fisher, <i>fantasai</i>,
 Giuseppe Pascale,
 Glenn Maynard,
 Ian Hickson,
@@ -747,20 +510,12 @@ Rune Lillesveen,
 Sigbjørn Vik,
 Simon Pieters,
 Tab Atkins,
-Theresa O'Connor,
+Theresa O’Connor,
 Vincent Scheib, and
 Xidorn Quan
-for also being awesome.
-
-<p>This standard is written by
-<a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
-(<a href="https://www.mozilla.org/">Mozilla</a>,
-<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).
-<a href="http://tantek.com/" lang="tr">Tantek Çelik</a>
-(<a class="p-org org h-org h-card" href="https://www.mozilla.org/">Mozilla</a>,
-<a href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>) sorted out legal
-hassles.
-
-<p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
-the extent possible under law, the editor has waived all copyright and related or
-neighboring rights to this work.
+for also being awesome. </p>
+   <p>This standard is written by <a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a> (<a href="https://www.mozilla.org/">Mozilla</a>, <a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>). <a href="http://tantek.com/" lang="tr">Tantek Çelik</a> (<a class="p-org org h-org h-card" href="https://www.mozilla.org/">Mozilla</a>, <a href="mailto:tantek@cs.stanford.edu">tantek@cs.stanford.edu</a>) sorted out legal hassles. </p>
+   <p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to the extent
+possible under law, the editor has waived all copyright and related or neighboring rights to this
+work. </p>
+  </main>
