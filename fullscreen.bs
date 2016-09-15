@@ -195,11 +195,6 @@ if all of the following are true, and false otherwise:
 
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>.
-
- <li><p><var>element</var>'s <a>node document</a>'s <a>browsing context</a> either has a
- <a>browsing context container</a> and the <a>fullscreen element ready check</a> returns true for
- <var>element</var>'s <a>node document</a>'s <a>browsing context</a>'s
- <a>browsing context container</a>, or it has no <a>browsing context container</a>.
  <!-- cross-process, recursive -->
 </ul>
 
