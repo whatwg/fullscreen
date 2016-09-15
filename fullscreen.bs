@@ -482,12 +482,11 @@ following characteristics:
  <code>right</code>, and <code>top</code> is zero.
 </ul>
 
-<p>To <dfn export for="top layer" id=concept-top-layer-add>add</dfn> an <var>element</var> to a
-<var>top layer</var>, add, or move if already present, <var>element</var> on top of
-<var>top layer</var>.
+<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>, add, or
+move if already present, <var>element</var> on top of <var>top layer</var>.
 
-<p>To <dfn export for="top layer" id=concept-top-layer-remove>remove</dfn> an <var>element</var> from a
-<var>top layer</var>, remove <var>element</var> from <var>top layer</var>.
+<p>To <dfn export for="top layer">remove</dfn> an <var>element</var> from a <var>top layer</var>,
+remove <var>element</var> from <var>top layer</var>.
 
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
