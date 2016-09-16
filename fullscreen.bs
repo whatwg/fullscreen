@@ -82,13 +82,12 @@ stated otherwise it is unset.
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a>document</a>'s <a>top layer</a>
 whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
-<p>To <dfn>fullscreen an <var>element</var></dfn> within a <var>document</var>, set the
-<var>element</var>'s <a>fullscreen flag</a> and <a>add</a> it to <var>document</var>'s
-<a>top layer</a>.
+<p>To <dfn>fullscreen an <var>element</var></dfn>, set the <var>element</var>'s
+<a>fullscreen flag</a> and <a>add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
-<p>To <dfn>unfullscreen an <var>element</var></dfn> within a <var>document</var>, unset the
-<var>element</var>'s <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
-<a>remove</a> it from <var>document</var>'s <a>top layer</a>.
+<p>To <dfn>unfullscreen an <var>element</var></dfn>, unset the <var>element</var>'s
+<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a>remove</a> it from
+its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
