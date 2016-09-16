@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-15">15 September 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-16">16 September 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -135,8 +135,8 @@ unset. </p>
    <p>All <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="iframe-fullscreen-flag">iframe fullscreen flag<a class="self-link" href="#iframe-fullscreen-flag"></a></dfn>. Unless
 stated otherwise it is unset. </p>
    <p>All <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-element">fullscreen element<a class="self-link" href="#fullscreen-element"></a></dfn>. The <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is the topmost <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> in the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a> whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set, if any, and null otherwise. </p>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-an-element">fullscreen an <var>element</var><a class="self-link" href="#fullscreen-an-element"></a></dfn> within a <var>document</var>, set the <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#top-layer-add">add</a> it to <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-an-element">unfullscreen an <var>element</var><a class="self-link" href="#unfullscreen-an-element"></a></dfn> within a <var>document</var>, unset the <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and <a data-link-type="dfn" href="#top-layer-remove">remove</a> it from <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-an-element">fullscreen an <var>element</var><a class="self-link" href="#fullscreen-an-element"></a></dfn>, set <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#top-layer-add">add</a> it to its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-an-element">unfullscreen an <var>element</var><a class="self-link" href="#unfullscreen-an-element"></a></dfn>, unset <var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> and <a data-link-type="dfn" href="#iframe-fullscreen-flag">iframe fullscreen flag</a> (if any), and <a data-link-type="dfn" href="#top-layer-remove">remove</a> it from its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="unfullscreen-a-document">unfullscreen a <var>document</var><a class="self-link" href="#unfullscreen-a-document"></a></dfn>, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen</a> all <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a>, within <var>document</var>’s <a data-link-type="dfn" href="#top-layer">top layer</a>, whose <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
    <hr>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fully-exit-fullscreen">fully exit fullscreen<a class="self-link" href="#fully-exit-fullscreen"></a></dfn> a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> <var>document</var>, run these steps: </p>
@@ -241,7 +241,7 @@ these steps: </p>
      <p>If <var>error</var> is false: Resize <var>pending</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s viewport’s dimensions to match the dimensions
  of the screen of the output device. Optionally display a message how the end user can revert this. </p>
     <li>
-     <p>As part of the next <a data-link-type="dfn">animation frame task</a>, run these substeps: </p>
+     <p>As part of the next <a data-link-type="dfn" href="#animation-frame-task">animation frame task</a>, run these substeps: </p>
      <ol>
       <li>
        <p>If either <var>error</var> is true or the <a data-link-type="dfn" href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var>pending</var> returns false, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenerror</code> on <var>pending</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>, reject <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps. </p>
@@ -273,7 +273,7 @@ these steps: </p>
       <li>
        <p>Fulfill <var>promise</var> with undefined. </p>
      </ol>
-     <p class="XXX"><a data-link-type="dfn">Animation frame task</a> is not really defined yet, including relative order
+     <p class="XXX"><dfn data-dfn-type="dfn" data-noexport="" id="animation-frame-task">Animation frame task<a class="self-link" href="#animation-frame-task"></a></dfn> is not really defined yet, including relative order
   within that task, see <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440">bug 26440</a>. </p>
      <p class="note" role="note">Implementations with out-of-process <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing contexts</a> are left as an exercise
   to the reader. Input welcome on potential improvements. </p>
@@ -319,7 +319,7 @@ false if <a data-link-type="dfn" href="#context-object">context object</a>’s <
      <p>If <var>resize</var> is true, resize <var>topLevelDoc</var>’s viewport to its "normal"
  dimensions. </p>
     <li>
-     <p>As part of the next <a data-link-type="dfn">animation frame task</a>, run these substeps: </p>
+     <p>As part of the next <a data-link-type="dfn" href="#animation-frame-task">animation frame task</a>, run these substeps: </p>
      <ol>
       <li>
        <p>Let <var>exitDocs</var> be the result of <a data-link-type="dfn" href="#collect-documents-to-unfullscreen">collecting documents to unfullscreen</a> given <var>doc</var>. </p>
@@ -510,6 +510,7 @@ Rune Lillesveen,
 Sigbjørn Vik,
 Simon Pieters,
 Tab Atkins,
+Takayoshi Kochi,
 Theresa O’Connor,
 Vincent Scheib, and
 Xidorn Quan
