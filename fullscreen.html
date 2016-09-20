@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-27">27 September 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-30">30 September 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -152,7 +152,7 @@ stated otherwise it is unset. </p>
    <p>Whenever the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-remove-ext">removing steps</a> run with an <var>oldNode</var>, run these steps: </p>
    <ol>
     <li>
-     <p>Let <var>nodes</var> be <var>oldNode</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-descendant">inclusive descendants</a> that have their <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-order">tree order</a>. </p>
+     <p>Let <var>nodes</var> be <var>oldNode</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-including-inclusive-descendant">shadow-including inclusive descendants</a> that have their <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set, in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-including-tree-order">shadow-including tree order</a>. </p>
     <li>
      <p>For each <var>node</var> in <var>nodes</var>, run these substeps: </p>
      <ol>
@@ -180,13 +180,16 @@ security risk, or platform limitation. </p>
 
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#document">Document</a> {
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreenenabled">fullscreenEnabled</a>;
-  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element">Element</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Element?" href="#dom-document-fullscreenelement">fullscreenElement</a>;
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="boolean" href="#dom-document-fullscreen">fullscreen</a>; // historical
 
   <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-document-exitfullscreen">exitFullscreen</a>();
 
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenchange">onfullscreenchange</a>;
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#handler-document-onfullscreenerror">onfullscreenerror</a>;
+};
+
+<span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#documentorshadowroot">DocumentOrShadowRoot</a> {
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#LenientSetter">LenientSetter</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element">Element</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Element?" href="#dom-document-fullscreenelement">fullscreenElement</a>;
 };
 </pre>
    <dl class="domintro">
@@ -197,19 +200,22 @@ security risk, or platform limitation. </p>
     <dd>
      <p>Returns true if <var>document</var> has the ability to display <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> fullscreen
  and <a data-link-type="dfn" href="#fullscreen-is-supported">fullscreen is supported</a>, or false otherwise. </p>
-    <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code></code> 
-    <dd>
-     <p>Returns <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
     <dt><code><var>promise</var> = <var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-exitfullscreen">exitFullscreen()</a></code></code> 
     <dd>
      <p>Stops <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> from being displayed fullscreen and
  fulfills <var>promise</var> when done. </p>
+    <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code></code> 
+    <dd>
+     <p>Returns <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+    <dt><code><var>shadowroot</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code></code> 
+    <dd>
+     <p>Returns <var>shadowroot</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
    </dl>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-element-ready-check">fullscreen element ready check<a class="self-link" href="#fullscreen-element-ready-check"></a></dfn> for an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> returns true
 if all of the following are true, and false otherwise: </p>
    <ul>
     <li>
-     <p><var>element</var> is <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#in-a-document">in a document</a>. </p>
+     <p><var>element</var> is <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected">connected</a>. </p>
     <li>
      <p><var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>. </p>
@@ -281,11 +287,21 @@ these steps: </p>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenenabled"><code>fullscreenEnabled</code><a class="self-link" href="#dom-document-fullscreenenabled"></a></dfn> attribute’s getter must
 return true if the <a data-link-type="dfn" href="#context-object">context object</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by attribute
 name <code>allowfullscreen</code> and <a data-link-type="dfn" href="#fullscreen-is-supported">fullscreen is supported</a>, and false otherwise. </p>
-   <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenelement"><code>fullscreenElement</code><a class="self-link" href="#dom-document-fullscreenelement"></a></dfn> attribute’s getter must
-return <a data-link-type="dfn" href="#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreen"><code>fullscreen</code><a class="self-link" href="#dom-document-fullscreen"></a></dfn> attribute’s getter must return
 false if <a data-link-type="dfn" href="#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and true otherwise. </p>
-   <p class="note" role="note">Use <a class="idl-code" data-link-type="attribute" href="#dom-document-fullscreenelement"><code>document.fullscreenElement</code></a> instead. </p>
+   <p class="note" role="note">Use the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> attribute instead. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="DocumentOrShadowRoot" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenelement"><code>fullscreenElement</code><a class="self-link" href="#dom-document-fullscreenelement"></a></dfn> attribute’s getter must run these steps: </p>
+   <ol>
+    <li>
+     <p>If the <a data-link-type="dfn" href="#context-object">context object</a> is a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-root">shadow root</a> and its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-documentfragment-host">host</a> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected">connected</a>, then return null.</p>
+    <li>
+     <p>Let <var>candidate</var> be the result of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#retarget">retargeting</a> <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> against the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+    <li>
+     <p>If <var>candidate</var> and the <a data-link-type="dfn" href="#context-object">context object</a> are in the same <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree">tree</a>, then
+ return <var>candidate</var>. </p>
+    <li>
+     <p>Return null. </p>
+   </ol>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="collect-documents-to-unfullscreen">collect documents to unfullscreen<a class="self-link" href="#collect-documents-to-unfullscreen"></a></dfn> given <var>doc</var>, run these steps: </p>
    <ol>
     <li>
@@ -398,7 +414,8 @@ following characteristics: </p>
  is the viewport, and the initial containing block otherwise. </p>
     <li>
      <p>If it is an element, it and its <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element are not
- rendered if its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor">inclusive ancestor</a> has the <code>display</code> property set to <code>none</code>. </p>
+ rendered if its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-including-inclusive-ancestor">shadow-including inclusive ancestor</a> has the <code>display</code> property
+ set to <code>none</code>. </p>
     <li>
      <p>If its specified <code>display</code> property is <code>contents</code>, it computes to <code>block</code>. </p>
     <li>
@@ -421,9 +438,14 @@ displayed fullscreen). </p>
    <p>It does not inherit from any element and is not inherited from. No restrictions are made on what
 properties apply to this pseudo-element either. </p>
    <h3 class="heading settled" data-level="6.3" id=":fullscreen-pseudo-class"><span class="secno">6.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
-   <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> that has its <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> set. </p>
-   <p class="note no-backref" role="note">This makes it different from the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> API,
-which returns a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
+   <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
+   <ul>
+    <li>
+     <p><var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
+    <li>
+     <p><var>element</var> is a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#element-shadow-host">shadow host</a> and the result of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#retarget">retargeting</a> its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> against <var>element</var> is <var>element</var>. </p>
+   </ul>
+   <p class="note no-backref" role="note">This makes it different from the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> API, which returns the topmost <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
    <h3 class="heading settled" data-level="6.4" id="user-agent-level-style-sheet-defaults"><span class="secno">6.4. </span><span class="content">User-agent level style sheet defaults</span><a class="self-link" href="#user-agent-level-style-sheet-defaults"></a></h3>
 <pre class="css">@namespace "http://www.w3.org/1999/xhtml";
 
