@@ -184,12 +184,6 @@ if all of the following are true, and false otherwise:
 
 <ul>
 
- <li><p><var>element</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
- <var>element</var> is an
- <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
- <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
- element. [[!SVG]] [[!MATHML]]
-
  <li><p><var>element</var> is <a>in a document</a>.
 
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
@@ -208,14 +202,20 @@ these steps:
  <li><p>Let <var>promise</var> be a new promise.
 
  <li>
-  <p>If any of the following conditions are true, set <var>error</var> to true:
+  <p>If any of the following conditions are false, then set <var>error</var> to true:
 
   <ul>
-   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns false.
+   <li><p><var>pending</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
+   <var>pending</var> is an
+   <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
+   <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
+   element. [[!SVG]] [[!MATHML]]
 
-   <li><p><a lt="Fullscreen is supported">Fullscreen is <em>not</em> supported</a>.
+   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
 
-   <li><p>This algorithm is not <a>allowed to request fullscreen</a>.
+   <li><p><a>Fullscreen is supported</a>.
+
+   <li><p>This algorithm is <a>allowed to request fullscreen</a>.
   </ul>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
@@ -261,7 +261,7 @@ these steps:
      <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
 
      <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
-     <a>element</a>, set <var>element</var>'s <a>iframe fullscreen flag</a>.
+     <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
 
      <li><p><a lt="Fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
@@ -327,7 +327,7 @@ false if <a>context object</a>'s <a>fullscreen element</a> is null, and true oth
  <a>document</a>.
  <!-- cross-process -->
 
- <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, set <var>resize</var> to true.
+ <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>resize</var> to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
