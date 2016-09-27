@@ -202,7 +202,7 @@ these steps:
  <li><p>Let <var>promise</var> be a new promise.
 
  <li>
-  <p>If any of the following conditions are false, set <var>error</var> to true:
+  <p>If any of the following conditions are false, then set <var>error</var> to true:
 
   <ul>
    <li><p><var>pending</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
@@ -261,7 +261,7 @@ these steps:
      <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
 
      <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
-     <a>element</a>, set <var>element</var>'s <a>iframe fullscreen flag</a>.
+     <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
 
      <li><p><a lt="Fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
@@ -327,7 +327,7 @@ false if <a>context object</a>'s <a>fullscreen element</a> is null, and true oth
  <a>document</a>.
  <!-- cross-process -->
 
- <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, set <var>resize</var> to true.
+ <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>resize</var> to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
