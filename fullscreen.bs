@@ -20,6 +20,7 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 <pre class=link-defaults>
 spec:dom; type:dfn; for:/; text:element
 spec:dom; type:interface; text:Document
+spec:page-visibility; type:dfn; text:hidden
 </pre>
 
 <pre class=anchors>
@@ -194,6 +195,8 @@ if all of the following are true, and false otherwise:
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>.
  <!-- cross-process, recursive -->
+
+ <li><p><var>element</var>'s <a>node document</a>'s <a>hidden</a> attribute returns false.
 </ul>
 
 <p>The <dfn method for=Element><code>requestFullscreen()</code></dfn> method, when invoked, must run
