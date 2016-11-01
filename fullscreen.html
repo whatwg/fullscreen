@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-30">30 September 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-01">1 November 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -162,7 +162,7 @@ stated otherwise it is unset. </p>
        <p>Otherwise, <a data-link-type="dfn" href="#unfullscreen-an-element">unfullscreen <var>node</var></a> within its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>. </p>
      </ol>
    </ol>
-   <p>Whenever the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> run with a <var>document</var>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>document</var>. </p>
+   <p>Whenever the <a data-link-type="dfn">unloading document cleanup steps</a> run with a <var>document</var>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> <var>document</var>. </p>
    <hr>
    <p><dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-is-supported">Fullscreen is supported<a class="self-link" href="#fullscreen-is-supported"></a></dfn> if there is no previously-established user preference,
 security risk, or platform limitation. </p>
@@ -281,8 +281,8 @@ these steps: </p>
      </ol>
      <p class="XXX"><dfn data-dfn-type="dfn" data-noexport="" id="animation-frame-task">Animation frame task<a class="self-link" href="#animation-frame-task"></a></dfn> is not really defined yet, including relative order
   within that task, see <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440">bug 26440</a>. </p>
-     <p class="note" role="note">Implementations with out-of-process <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing contexts</a> are left as an exercise
-  to the reader. Input welcome on potential improvements. </p>
+     <p class="note" role="note">Implementations with out-of-process <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing contexts</a> are left as an
+  exercise to the reader. Input welcome on potential improvements. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenenabled"><code>fullscreenEnabled</code><a class="self-link" href="#dom-document-fullscreenenabled"></a></dfn> attribute’s getter must
 return true if the <a data-link-type="dfn" href="#context-object">context object</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by attribute
@@ -430,15 +430,16 @@ move if already present, <var>element</var> on top of <var>top layer</var>. </p>
    <p>To <dfn data-dfn-for="top layer" data-dfn-type="dfn" data-export="" id="top-layer-remove">remove<a class="self-link" href="#top-layer-remove"></a></dfn> an <var>element</var> from a <var>top layer</var>,
 remove <var>element</var> from <var>top layer</var>. </p>
    <h3 class="heading settled" data-level="6.2" id="::backdrop-pseudo-element"><span class="secno">6.2. </span><span class="content"><code>::backdrop</code> pseudo-element</span><a class="self-link" href="#%3A%3Abackdrop-pseudo-element"></a></h3>
-   <p>Each element in a <a data-link-type="dfn" href="#top-layer">top layer</a> has a <dfn class="css" data-dfn-type="selector" data-export="" id="css-pe-backdrop"><code>::backdrop</code><a class="self-link" href="#css-pe-backdrop"></a></dfn> pseudo-element. This pseudo-element is a box rendered immediately below the element (and above the
-element before the element in the set, if any), within the same <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
+   <p>Each element in a <a data-link-type="dfn" href="#top-layer">top layer</a> has a <dfn class="css" data-dfn-type="selector" data-export="" id="css-pe-backdrop"><code>::backdrop</code><a class="self-link" href="#css-pe-backdrop"></a></dfn> pseudo-element. This pseudo-element
+is a box rendered immediately below the element (and above the element before the element in the
+set, if any), within the same <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
    <p class="note" role="note">The <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
 that hides the underlying document for an element in a <a data-link-type="dfn" href="#top-layer">top layer</a> (such as an element that is
 displayed fullscreen). </p>
    <p>It does not inherit from any element and is not inherited from. No restrictions are made on what
 properties apply to this pseudo-element either. </p>
    <h3 class="heading settled" data-level="6.3" id=":fullscreen-pseudo-class"><span class="secno">6.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
-   <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
    <ul>
     <li>
      <p><var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
@@ -505,7 +506,7 @@ This prevents e.g. content from third parties to go fullscreen without explicit 
      <dt id="biblio-svg">[SVG]
      <dd>Jon Ferraiolo. <a href="https://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG) 1.0 Specification</a>. 4 September 2001. REC. URL: <a href="https://www.w3.org/TR/SVG/">https://www.w3.org/TR/SVG/</a>
      <dt id="biblio-webidl">[WEBIDL]
-     <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 15 September 2016. PR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+     <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
     </dl>
    </div>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>

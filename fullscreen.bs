@@ -17,18 +17,12 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 <script src=https://resources.whatwg.org/file-issue.js async></script>
 <script id=head src=https://resources.whatwg.org/dfn.js defer></script>
 
-<pre class=link-defaults>
+<pre class=xlink-defaults>
 spec:dom; type:dfn; for:/; text:element
 spec:dom; type:interface; text:Document
 </pre>
 
 <pre class=anchors>
-urlPrefix: https://html.spec.whatwg.org/multipage/
-    type: dfn
-        urlPrefix: browsers.html
-            text: ancestor browsing context
-            text: browsing context container
-            text: unloading document cleanup steps
 urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
     type: dfn
         text: triggered by a user generated orientation change
@@ -64,8 +58,8 @@ letters in this specification. [[!RFC2119]]
 <p>The term <dfn>context object</dfn> means the object on which the method or attribute being
 discussed was called. When the <a>context object</a> is unambiguous, the term can be omitted.
 
-<p>A <a>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn> of a
-<a>browsing context</a> <var>B</var> if and only if <var>B</var> is an
+<p>A <a for=/>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn>
+of a <a for=/>browsing context</a> <var>B</var> if and only if <var>B</var> is an
 <a>ancestor browsing context</a> of <var>A</var>.
 
 
@@ -83,11 +77,11 @@ stated otherwise it is unset.
 whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>
-and <a>add</a> it to its <a>node document</a>'s <a>top layer</a>.
+and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a>remove</a> it from its
-<a>node document</a>'s <a>top layer</a>.
+<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for="top layer">remove</a>
+it from its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
@@ -280,8 +274,8 @@ these steps:
   <p class=XXX><dfn>Animation frame task</dfn> is not really defined yet, including relative order
   within that task, see <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
 
-  <p class=note>Implementations with out-of-process <a>browsing contexts</a> are left as an exercise
-  to the reader. Input welcome on potential improvements.
+  <p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
+  exercise to the reader. Input welcome on potential improvements.
 </ol>
 
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
@@ -503,9 +497,10 @@ remove <var>element</var> from <var>top layer</var>.
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
 
-<p>Each element in a <a>top layer</a> has a <dfn id=css-pe-backdrop><code>::backdrop</code></dfn>
-pseudo-element. This pseudo-element is a box rendered immediately below the element (and above the
-element before the element in the set, if any), within the same <a>top layer</a>.
+<p>Each element in a <a>top layer</a> has a
+<dfn id=css-pe-backdrop selector><code>::backdrop</code></dfn> pseudo-element. This pseudo-element
+is a box rendered immediately below the element (and above the element before the element in the
+set, if any), within the same <a>top layer</a>.
 
 <p class=note>The <a><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
 that hides the underlying document for an element in a <a>top layer</a> (such as an element that is
