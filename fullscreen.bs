@@ -15,7 +15,7 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
-<script id=head src=https://resources.whatwg.org/dfn.js defer></script>
+<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=link-defaults>
 spec:dom
@@ -442,7 +442,7 @@ as done here is sketchy as hell.
 <h3 id=new-stacking-layer>New stacking layer</h3>
 
 <p>This specification introduces a new stacking layer to the
-<a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
+<a href=https://www.w3.org/TR/CSS2/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
 2.1. It is called the <dfn export>top layer</dfn>, comes after step 10 in the painting order, and is
 therefore rendered closest to the user within a viewport. Each <a for=/>document</a> has one
 associated viewport and therefore also one <a>top layer</a>. [[!CSS]]
@@ -518,7 +518,7 @@ properties apply to this pseudo-element either.
 
 <h3 id=:fullscreen-pseudo-class><code>:fullscreen</code> pseudo-class</h3>
 
-<p>The <dfn id=css-pc-fullscreen><code>:fullscreen</code></dfn> pseudo-class must match any
+<p>The <dfn id=css-pc-fullscreen selector><code>:fullscreen</code></dfn> pseudo-class must match any
 <a>element</a> <var>element</var> for which one of the following conditions is true:
 
 <ul>

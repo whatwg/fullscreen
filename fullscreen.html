@@ -116,7 +116,7 @@ pre.idl.highlight { color: #708090; }
   </nav>
   <main>
 <script async="" src="https://resources.whatwg.org/file-issue.js"></script>
-<script defer="" id="head" src="https://resources.whatwg.org/dfn.js"></script>
+<script defer="" src="https://resources.whatwg.org/dfn.js"></script>
    <h2 class="heading settled" data-level="1" id="conformance"><span class="secno">1. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections
 explicitly marked non-normative. Everything else in this specification is normative. </p>
@@ -387,7 +387,7 @@ return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exi
    <p class="XXX">Long term CSS will define the <a data-link-type="dfn" href="#top-layer">top layer</a> concept and its associated <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element as part of CSS' stacking context model. Patching CSS
 as done here is sketchy as hell. </p>
    <h3 class="heading settled" data-level="6.1" id="new-stacking-layer"><span class="secno">6.1. </span><span class="content">New stacking layer</span><a class="self-link" href="#new-stacking-layer"></a></h3>
-   <p>This specification introduces a new stacking layer to the <a href="http://www.w3.org/TR/CSS21/zindex.html">Elaborate description of Stacking Contexts</a> of CSS
+   <p>This specification introduces a new stacking layer to the <a href="https://www.w3.org/TR/CSS2/zindex.html">Elaborate description of Stacking Contexts</a> of CSS
 2.1. It is called the <dfn data-dfn-type="dfn" data-export="" id="top-layer">top layer<a class="self-link" href="#top-layer"></a></dfn>, comes after step 10 in the painting order, and is
 therefore rendered closest to the user within a viewport. Each <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> has one
 associated viewport and therefore also one <a data-link-type="dfn" href="#top-layer">top layer</a>. <a data-link-type="biblio" href="#biblio-css">[CSS]</a> </p>
@@ -439,7 +439,7 @@ displayed fullscreen). </p>
    <p>It does not inherit from any element and is not inherited from. No restrictions are made on what
 properties apply to this pseudo-element either. </p>
    <h3 class="heading settled" data-level="6.3" id=":fullscreen-pseudo-class"><span class="secno">6.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
+   <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
    <ul>
     <li>
      <p><var>element</var>’s <a data-link-type="dfn" href="#fullscreen-flag">fullscreen flag</a> is set. </p>
