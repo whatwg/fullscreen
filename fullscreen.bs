@@ -15,20 +15,15 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
-<script id=head src=https://resources.whatwg.org/dfn.js defer></script>
+<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=link-defaults>
-spec:dom; type:dfn; for:/; text:element
-spec:dom; type:interface; text:Document
+spec:dom
+    type:dfn; for:/; text:element
+    type:interface; text:Document
 </pre>
 
 <pre class=anchors>
-urlPrefix: https://html.spec.whatwg.org/multipage/
-    type: dfn
-        urlPrefix: browsers.html
-            text: ancestor browsing context
-            text: browsing context container
-            text: unloading document cleanup steps
 urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
     type: dfn
         text: triggered by a user generated orientation change
@@ -64,8 +59,8 @@ letters in this specification. [[!RFC2119]]
 <p>The term <dfn>context object</dfn> means the object on which the method or attribute being
 discussed was called. When the <a>context object</a> is unambiguous, the term can be omitted.
 
-<p>A <a>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn> of a
-<a>browsing context</a> <var>B</var> if and only if <var>B</var> is an
+<p>A <a for=/>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn>
+of a <a for=/>browsing context</a> <var>B</var> if and only if <var>B</var> is an
 <a>ancestor browsing context</a> of <var>A</var>.
 
 
@@ -78,16 +73,16 @@ unset.
 <p>All <{iframe}> <a>elements</a> have an associated <dfn>iframe fullscreen flag</dfn>. Unless
 stated otherwise it is unset.
 
-<p>All <a>documents</a> have an associated <dfn>fullscreen element</dfn>. The
-<a>fullscreen element</a> is the topmost <a>element</a> in the <a>document</a>'s <a>top layer</a>
-whose <a>fullscreen flag</a> is set, if any, and null otherwise.
+<p>All <a for=/>documents</a> have an associated <dfn>fullscreen element</dfn>. The
+<a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
+<a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>
-and <a>add</a> it to its <a>node document</a>'s <a>top layer</a>.
+and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a>remove</a> it from its
-<a>node document</a>'s <a>top layer</a>.
+<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for="top layer">remove</a>
+it from its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
@@ -95,7 +90,7 @@ and <a>add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
 <hr>
 
-<p>To <dfn>fully exit fullscreen</dfn> a <a>document</a> <var>document</var>, run these steps:
+<p>To <dfn>fully exit fullscreen</dfn> a <a for=/>document</a> <var>document</var>, run these steps:
 
 <ol>
  <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
@@ -118,7 +113,7 @@ and <a>add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
   <ol>
    <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
-   <a>exit fullscreen</a> that <a>document</a>.
+   <a>exit fullscreen</a> that <a for=/>document</a>.
 
    <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a> within its
    <a>node document</a>.
@@ -226,8 +221,9 @@ these steps:
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
  <li><p>If <var>error</var> is false: Resize <var>pending</var>'s
- <a>top-level browsing context</a>'s <a>document</a>'s viewport's dimensions to match the dimensions
- of the screen of the output device. Optionally display a message how the end user can revert this.
+ <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
+ dimensions of the screen of the output device. Optionally display a message how the end user can
+ revert this.
  <!-- cross-process -->
 
  <li>
@@ -280,8 +276,8 @@ these steps:
   <p class=XXX><dfn>Animation frame task</dfn> is not really defined yet, including relative order
   within that task, see <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
 
-  <p class=note>Implementations with out-of-process <a>browsing contexts</a> are left as an exercise
-  to the reader. Input welcome on potential improvements.
+  <p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
+  exercise to the reader. Input welcome on potential improvements.
 </ol>
 
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
@@ -318,15 +314,15 @@ attribute's getter must run these steps:
 
  <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
 
- <li><p>While <var>docs</var>'s last <a>document</a> has a <a>browsing context container</a> whose
- <a>node document</a>'s <a>top layer</a> consists of a single <a>element</a> that has its
+ <li><p>While <var>docs</var>'s last <a for=/>document</a> has a <a>browsing context container</a>
+ whose <a>node document</a>'s <a>top layer</a> consists of a single <a>element</a> that has its
  <a>fullscreen flag</a> set and does not have its <a>iframe fullscreen flag</a> set (if any), append
  that <a>node document</a> to <var>docs</var>.
 
  <li><p>Return <var>docs</var>.
 </ol>
 
-<p>To <dfn>exit fullscreen</dfn> a <a>document</a> <var>doc</var>, run these steps:
+<p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var>, run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -342,7 +338,7 @@ attribute's getter must run these steps:
  <!-- cross-process -->
 
  <li><p>Let <var>topLevelDoc</var> be <var>doc</var>'s <a>top-level browsing context</a>'s
- <a>document</a>.
+ <a>active document</a>.
  <!-- cross-process -->
 
  <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>resize</var> to true.
@@ -368,12 +364,13 @@ attribute's getter must run these steps:
 
    <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to <var>exitDocs</var>.
 
-   <li><p>If <var>exitDocs</var>'s last <a>document</a> has a <a>browsing context container</a>,
-   append that <a>browsing context container</a>'s <a>node document</a> to <var>exitDocs</var>.
+   <li><p>If <var>exitDocs</var>'s last <a for=/>document</a> has a
+   <a>browsing context container</a>, append that <a>browsing context container</a>'s
+   <a>node document</a> to <var>exitDocs</var>.
    <!-- cross-process -->
 
    <li><p>Let <var>descendantDocs</var> be an ordered set consisting of <var>doc</var>'s
-   <a>descendant browsing contexts</a>' <a>documents</a> whose <a>fullscreen element</a> is
+   <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
    non-null, if any, in <em>reverse</em> <a>tree order</a>.
    <!-- cross-process -->
 
@@ -404,7 +401,7 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 <hr>
 
 <p>The following are the <a>event handlers</a> (and their corresponding
-<a>event handler event types</a>) that must be supported on <a>documents</a> as attributes:
+<a>event handler event types</a>) that must be supported on <a for=/>documents</a> as attributes:
 
 <table>
  <thead>
@@ -429,7 +426,7 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 
 <p>If the end user instructs the user agent to end a fullscreen session initiated via
 {{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> the
-<a>top-level browsing context</a>'s <a>document</a>.
+<a>top-level browsing context</a>'s <a>active document</a>.
 
 
 
@@ -445,10 +442,10 @@ as done here is sketchy as hell.
 <h3 id=new-stacking-layer>New stacking layer</h3>
 
 <p>This specification introduces a new stacking layer to the
-<a href=http://www.w3.org/TR/CSS21/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
+<a href=https://www.w3.org/TR/CSS2/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
 2.1. It is called the <dfn export>top layer</dfn>, comes after step 10 in the painting order, and is
-therefore rendered closest to the user within a viewport. Each <a>document</a> has one associated
-viewport and therefore also one <a>top layer</a>. [[!CSS]]
+therefore rendered closest to the user within a viewport. Each <a for=/>document</a> has one
+associated viewport and therefore also one <a>top layer</a>. [[!CSS]]
 
 <p class=note>The terminology used in this and following subsection attempts to match CSS 2.1
 Appendix E.
@@ -503,9 +500,10 @@ remove <var>element</var> from <var>top layer</var>.
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
 
-<p>Each element in a <a>top layer</a> has a <dfn id=css-pe-backdrop><code>::backdrop</code></dfn>
-pseudo-element. This pseudo-element is a box rendered immediately below the element (and above the
-element before the element in the set, if any), within the same <a>top layer</a>.
+<p>Each element in a <a>top layer</a> has a
+<dfn id=css-pe-backdrop selector><code>::backdrop</code></dfn> pseudo-element. This pseudo-element
+is a box rendered immediately below the element (and above the element before the element in the
+set, if any), within the same <a>top layer</a>.
 
 <p class=note>The <a><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
 that hides the underlying document for an element in a <a>top layer</a> (such as an element that is
@@ -520,7 +518,7 @@ properties apply to this pseudo-element either.
 
 <h3 id=:fullscreen-pseudo-class><code>:fullscreen</code> pseudo-class</h3>
 
-<p>The <dfn id=css-pc-fullscreen><code>:fullscreen</code></dfn> pseudo-class must match any
+<p>The <dfn id=css-pc-fullscreen selector><code>:fullscreen</code></dfn> pseudo-class must match any
 <a>element</a> <var>element</var> for which one of the following conditions is true:
 
 <ul>
