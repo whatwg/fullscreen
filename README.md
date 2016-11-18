@@ -15,19 +15,16 @@ started, leave a comment on the issue or ask around [on IRC](https://wiki.whatwg
 
 ### Pull requests
 
-See the [html repository's README](https://github.com/whatwg/html/blob/master/README.md) for the
-general guidelines.
+In short, change `fullscreen.bs` and submit your patch, with a
+[good commit message](https://github.com/erlang/otp/wiki/Writing-good-commit-messages). Consider
+reading through the [WHATWG FAQ](https://wiki.whatwg.org/wiki/FAQ) if you are new here.
 
 Please add your name to the Acknowledgments section in your first pull request, even for trivial
 fixes. The names are sorted lexicographically.
 
-To generate `fullscreen.html`, [bikeshed](https://github.com/tabatkins/bikeshed) can be used. Do not worry
-if using that tool is too complicated; your pull request does not need to contain the generated HTML
-to be accepted. If you _do_ want to use it, the easiest way is probably via the HTTP API:
-
-```
-curl https://api.csswg.org/bikeshed/ -f -F file=@fullscreen.bs > fullscreen.html
-```
+If you want to preview the spec locally, you can either use a locally installed copy of
+[Bikeshed](https://github.com/tabatkins/bikeshed) by running `make` or use the HTTP API version by
+running `make remote`.
 
 ### Merge policy
 
