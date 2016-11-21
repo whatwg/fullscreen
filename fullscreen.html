@@ -7,7 +7,7 @@
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-fullscreen.svg" rel="icon">
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 645534c1532bca4fdb4f3859efc66268a218d7c8" name="generator">
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
         .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-04">4 November 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-21">21 November 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -92,20 +92,19 @@ pre.idl.highlight { color: #708090; }
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#conformance"><span class="secno">1</span> <span class="content">Conformance</span></a>
-    <li><a href="#terminology"><span class="secno">2</span> <span class="content">Terminology</span></a>
-    <li><a href="#model"><span class="secno">3</span> <span class="content">Model</span></a>
-    <li><a href="#api"><span class="secno">4</span> <span class="content">API</span></a>
-    <li><a href="#ui"><span class="secno">5</span> <span class="content">UI</span></a>
+    <li><a href="#terminology"><span class="secno">1</span> <span class="content">Terminology</span></a>
+    <li><a href="#model"><span class="secno">2</span> <span class="content">Model</span></a>
+    <li><a href="#api"><span class="secno">3</span> <span class="content">API</span></a>
+    <li><a href="#ui"><span class="secno">4</span> <span class="content">UI</span></a>
     <li>
-     <a href="#rendering"><span class="secno">6</span> <span class="content">Rendering</span></a>
+     <a href="#rendering"><span class="secno">5</span> <span class="content">Rendering</span></a>
      <ol class="toc">
-      <li><a href="#new-stacking-layer"><span class="secno">6.1</span> <span class="content">New stacking layer</span></a>
-      <li><a href="#::backdrop-pseudo-element"><span class="secno">6.2</span> <span class="content"><code>::backdrop</code> pseudo-element</span></a>
-      <li><a href="#:fullscreen-pseudo-class"><span class="secno">6.3</span> <span class="content"><code>:fullscreen</code> pseudo-class</span></a>
-      <li><a href="#user-agent-level-style-sheet-defaults"><span class="secno">6.4</span> <span class="content">User-agent level style sheet defaults</span></a>
+      <li><a href="#new-stacking-layer"><span class="secno">5.1</span> <span class="content">New stacking layer</span></a>
+      <li><a href="#::backdrop-pseudo-element"><span class="secno">5.2</span> <span class="content"><code>::backdrop</code> pseudo-element</span></a>
+      <li><a href="#:fullscreen-pseudo-class"><span class="secno">5.3</span> <span class="content"><code>:fullscreen</code> pseudo-class</span></a>
+      <li><a href="#user-agent-level-style-sheet-defaults"><span class="secno">5.4</span> <span class="content">User-agent level style sheet defaults</span></a>
      </ol>
-    <li><a href="#security-and-privacy-considerations"><span class="secno">7</span> <span class="content">Security and Privacy Considerations</span></a>
+    <li><a href="#security-and-privacy-considerations"><span class="secno">6</span> <span class="content">Security and Privacy Considerations</span></a>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -117,19 +116,11 @@ pre.idl.highlight { color: #708090; }
   <main>
 <script async="" src="https://resources.whatwg.org/file-issue.js"></script>
 <script defer="" src="https://resources.whatwg.org/dfn.js"></script>
-   <h2 class="heading settled" data-level="1" id="conformance"><span class="secno">1. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections
-explicitly marked non-normative. Everything else in this specification is normative. </p>
-   <p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD
-NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be
-interpreted as described in RFC2119. For readability, these words do not appear in all uppercase
-letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
-   <h2 class="heading settled" data-level="2" id="terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <h2 class="heading settled" data-level="1" id="terminology"><span class="secno">1. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <p>This specification depends on the Infra Standard. <a data-link-type="biblio" href="#biblio-infra">[INFRA]</a> </p>
    <p>Most terminology used in this specification is from CSS, DOM, HTML, and Web IDL. <a data-link-type="biblio" href="#biblio-css">[CSS]</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> </p>
-   <p>The term <dfn data-dfn-type="dfn" data-noexport="" id="context-object">context object<a class="self-link" href="#context-object"></a></dfn> means the object on which the method or attribute being
-discussed was called. When the <a data-link-type="dfn" href="#context-object">context object</a> is unambiguous, the term can be omitted. </p>
    <p>A <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var>A</var> is called a <dfn data-dfn-type="dfn" data-noexport="" id="descendant-browsing-context">descendant browsing context<a class="self-link" href="#descendant-browsing-context"></a></dfn> of a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing context</a> <var>B</var> if and only if <var>B</var> is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#ancestor-browsing-context">ancestor browsing context</a> of <var>A</var>. </p>
-   <h2 class="heading settled" data-level="3" id="model"><span class="secno">3. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
+   <h2 class="heading settled" data-level="2" id="model"><span class="secno">2. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <p>All <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="fullscreen-flag">fullscreen flag<a class="self-link" href="#fullscreen-flag"></a></dfn>. Unless stated otherwise it is
 unset. </p>
    <p>All <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="iframe-fullscreen-flag">iframe fullscreen flag<a class="self-link" href="#iframe-fullscreen-flag"></a></dfn>. Unless
@@ -173,7 +164,7 @@ security risk, or platform limitation. </p>
     <li>
      <p>The algorithm is <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation/#dfn-triggered-by-a-user-generated-orientation-change">triggered by a user generated orientation change</a>. </p>
    </ul>
-   <h2 class="heading settled" data-level="4" id="api"><span class="secno">4. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
+   <h2 class="heading settled" data-level="3" id="api"><span class="secno">3. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#element">Element</a> {
   <span class="kt">Promise</span>&lt;<span class="kt">void</span>> <a class="nv idl-code" data-link-type="method" href="#dom-element-requestfullscreen">requestFullscreen</a>();
 };
@@ -224,7 +215,7 @@ if all of the following are true, and false otherwise: </p>
 these steps: </p>
    <ol>
     <li>
-     <p>Let <var>pending</var> be the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+     <p>Let <var>pending</var> be the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>. </p>
     <li>
      <p>Let <var>error</var> be false. </p>
     <li>
@@ -233,7 +224,7 @@ these steps: </p>
      <p>If any of the following conditions are false, then set <var>error</var> to true: </p>
      <ul>
       <li>
-       <p><var>pending</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element-namespace">namespace</a> is the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#html-namespace">HTML namespace</a> or <var>pending</var> is an <a href="https://www.w3.org/TR/SVG11/struct.html#SVGElement">SVG <code>svg</code></a> or <a href="https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel">MathML <code>math</code></a> element. <a data-link-type="biblio" href="#biblio-svg">[SVG]</a> <a data-link-type="biblio" href="#biblio-mathml">[MATHML]</a> </p>
+       <p><var>pending</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element-namespace">namespace</a> is the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#html-namespace">HTML namespace</a> or <var>pending</var> is an <a href="https://www.w3.org/TR/SVG11/struct.html#SVGElement">SVG <code>svg</code></a> or <a href="https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel">MathML <code>math</code></a> element. <a data-link-type="biblio" href="#biblio-svg">[SVG]</a> <a data-link-type="biblio" href="#biblio-mathml">[MATHML]</a> </p>
       <li>
        <p>The <a data-link-type="dfn" href="#fullscreen-element-ready-check">fullscreen element ready check</a> for <var>pending</var> returns true. </p>
       <li>
@@ -286,19 +277,19 @@ these steps: </p>
   exercise to the reader. Input welcome on potential improvements. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenenabled"><code>fullscreenEnabled</code><a class="self-link" href="#dom-document-fullscreenenabled"></a></dfn> attribute’s getter must
-return true if the <a data-link-type="dfn" href="#context-object">context object</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by attribute
+return true if the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/embedded-content.html#allowed-to-use">allowed to use</a> the feature indicated by attribute
 name <code>allowfullscreen</code> and <a data-link-type="dfn" href="#fullscreen-is-supported">fullscreen is supported</a>, and false otherwise. </p>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="dom-document-fullscreen"><code>fullscreen</code><a class="self-link" href="#dom-document-fullscreen"></a></dfn> attribute’s getter must return
-false if <a data-link-type="dfn" href="#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and true otherwise. </p>
+false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, and true otherwise. </p>
    <p class="note" role="note">Use the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> attribute instead. </p>
    <p>The <dfn class="idl-code" data-dfn-for="DocumentOrShadowRoot" data-dfn-type="attribute" data-export="" id="dom-document-fullscreenelement"><code>fullscreenElement</code><a class="self-link" href="#dom-document-fullscreenelement"></a></dfn> attribute’s getter must run these steps: </p>
    <ol>
     <li>
-     <p>If the <a data-link-type="dfn" href="#context-object">context object</a> is a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-root">shadow root</a> and its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-documentfragment-host">host</a> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected">connected</a>, then return null.</p>
+     <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-shadow-root">shadow root</a> and its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-documentfragment-host">host</a> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected">connected</a>, then return null.</p>
     <li>
-     <p>Let <var>candidate</var> be the result of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#retarget">retargeting</a> <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> against the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+     <p>Let <var>candidate</var> be the result of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#retarget">retargeting</a> <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> against the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>. </p>
     <li>
-     <p>If <var>candidate</var> and the <a data-link-type="dfn" href="#context-object">context object</a> are in the same <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree">tree</a>, then
+     <p>If <var>candidate</var> and the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> are in the same <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree">tree</a>, then
  return <var>candidate</var>. </p>
     <li>
      <p>Return null. </p>
@@ -363,7 +354,7 @@ false if <a data-link-type="dfn" href="#context-object">context object</a>’s <
      <p class="note" role="note">This results in events being fired from the innermost to the outermost document. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="Document" data-dfn-type="method" data-export="" id="dom-document-exitfullscreen"><code>exitFullscreen()</code><a class="self-link" href="#dom-document-exitfullscreen"></a></dfn> method, when invoked, must
-return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> on the <a data-link-type="dfn" href="#context-object">context object</a>. </p>
+return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exit fullscreen</a> on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>. </p>
    <hr>
    <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event handlers</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>) that must be supported on <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">documents</a> as attributes: </p>
    <table>
@@ -379,14 +370,14 @@ return the result of running <a data-link-type="dfn" href="#exit-fullscreen">exi
       <td><dfn class="idl-code" data-dfn-for="Document" data-dfn-type="attribute" data-export="" id="handler-document-onfullscreenerror"><code>onfullscreenerror</code><a class="self-link" href="#handler-document-onfullscreenerror"></a></dfn> 
       <td><code>fullscreenerror</code> 
    </table>
-   <h2 class="heading settled" data-level="5" id="ui"><span class="secno">5. </span><span class="content">UI</span><a class="self-link" href="#ui"></a></h2>
+   <h2 class="heading settled" data-level="4" id="ui"><span class="secno">4. </span><span class="content">UI</span><a class="self-link" href="#ui"></a></h2>
    <p>User agents are encouraged to implement native media fullscreen controls in terms of <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-document-exitfullscreen">exitFullscreen()</a></code>. </p>
    <p>If the end user instructs the user agent to end a fullscreen session initiated via <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code>, <a data-link-type="dfn" href="#fully-exit-fullscreen">fully exit fullscreen</a> the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">top-level browsing context</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#active-document">active document</a>. </p>
-   <h2 class="heading settled" data-level="6" id="rendering"><span class="secno">6. </span><span class="content">Rendering</span><a class="self-link" href="#rendering"></a></h2>
+   <h2 class="heading settled" data-level="5" id="rendering"><span class="secno">5. </span><span class="content">Rendering</span><a class="self-link" href="#rendering"></a></h2>
    <p>This section is to be interpreted equivalently to the Rendering section of HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <p class="XXX">Long term CSS will define the <a data-link-type="dfn" href="#top-layer">top layer</a> concept and its associated <a class="css" data-link-type="selector" href="#css-pe-backdrop"><code>::backdrop</code></a> pseudo-element as part of CSS' stacking context model. Patching CSS
 as done here is sketchy as hell. </p>
-   <h3 class="heading settled" data-level="6.1" id="new-stacking-layer"><span class="secno">6.1. </span><span class="content">New stacking layer</span><a class="self-link" href="#new-stacking-layer"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="new-stacking-layer"><span class="secno">5.1. </span><span class="content">New stacking layer</span><a class="self-link" href="#new-stacking-layer"></a></h3>
    <p>This specification introduces a new stacking layer to the <a href="https://www.w3.org/TR/CSS2/zindex.html">Elaborate description of Stacking Contexts</a> of CSS
 2.1. It is called the <dfn data-dfn-type="dfn" data-export="" id="top-layer">top layer<a class="self-link" href="#top-layer"></a></dfn>, comes after step 10 in the painting order, and is
 therefore rendered closest to the user within a viewport. Each <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a> has one
@@ -429,7 +420,7 @@ following characteristics: </p>
 move if already present, <var>element</var> on top of <var>top layer</var>. </p>
    <p>To <dfn data-dfn-for="top layer" data-dfn-type="dfn" data-export="" id="top-layer-remove">remove<a class="self-link" href="#top-layer-remove"></a></dfn> an <var>element</var> from a <var>top layer</var>,
 remove <var>element</var> from <var>top layer</var>. </p>
-   <h3 class="heading settled" data-level="6.2" id="::backdrop-pseudo-element"><span class="secno">6.2. </span><span class="content"><code>::backdrop</code> pseudo-element</span><a class="self-link" href="#%3A%3Abackdrop-pseudo-element"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="::backdrop-pseudo-element"><span class="secno">5.2. </span><span class="content"><code>::backdrop</code> pseudo-element</span><a class="self-link" href="#%3A%3Abackdrop-pseudo-element"></a></h3>
    <p>Each element in a <a data-link-type="dfn" href="#top-layer">top layer</a> has a <dfn class="css" data-dfn-type="selector" data-export="" id="css-pe-backdrop"><code>::backdrop</code><a class="self-link" href="#css-pe-backdrop"></a></dfn> pseudo-element. This pseudo-element
 is a box rendered immediately below the element (and above the element before the element in the
 set, if any), within the same <a data-link-type="dfn" href="#top-layer">top layer</a>. </p>
@@ -438,7 +429,7 @@ that hides the underlying document for an element in a <a data-link-type="dfn" h
 displayed fullscreen). </p>
    <p>It does not inherit from any element and is not inherited from. No restrictions are made on what
 properties apply to this pseudo-element either. </p>
-   <h3 class="heading settled" data-level="6.3" id=":fullscreen-pseudo-class"><span class="secno">6.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id=":fullscreen-pseudo-class"><span class="secno">5.3. </span><span class="content"><code>:fullscreen</code> pseudo-class</span><a class="self-link" href="#%3Afullscreen-pseudo-class"></a></h3>
    <p>The <dfn class="css" data-dfn-type="selector" data-export="" id="css-pc-fullscreen"><code>:fullscreen</code><a class="self-link" href="#css-pc-fullscreen"></a></dfn> pseudo-class must match any <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">element</a> <var>element</var> for which one of the following conditions is true: </p>
    <ul>
     <li>
@@ -447,7 +438,7 @@ properties apply to this pseudo-element either. </p>
      <p><var>element</var> is a <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#element-shadow-host">shadow host</a> and the result of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#retarget">retargeting</a> its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-document">node document</a>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> against <var>element</var> is <var>element</var>. </p>
    </ul>
    <p class="note no-backref" role="note">This makes it different from the <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code> API, which returns the topmost <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
-   <h3 class="heading settled" data-level="6.4" id="user-agent-level-style-sheet-defaults"><span class="secno">6.4. </span><span class="content">User-agent level style sheet defaults</span><a class="self-link" href="#user-agent-level-style-sheet-defaults"></a></h3>
+   <h3 class="heading settled" data-level="5.4" id="user-agent-level-style-sheet-defaults"><span class="secno">5.4. </span><span class="content">User-agent level style sheet defaults</span><a class="self-link" href="#user-agent-level-style-sheet-defaults"></a></h3>
 <pre class="css">@namespace "http://www.w3.org/1999/xhtml";
 
 *|*:not(:root):fullscreen {
@@ -481,7 +472,7 @@ iframe:fullscreen {
   background:black;
 }
 </pre>
-   <h2 class="heading settled" data-level="7" id="security-and-privacy-considerations"><span class="secno">7. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy-considerations"></a></h2>
+   <h2 class="heading settled" data-level="6" id="security-and-privacy-considerations"><span class="secno">6. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy-considerations"></a></h2>
    <p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
 displayed fullscreen. User agents should provide a means of exiting fullscreen that always works and
 advertise this to the user. This is to prevent a site from spoofing the end user by recreating the
@@ -498,11 +489,11 @@ This prevents e.g. content from third parties to go fullscreen without explicit 
      <dt id="biblio-dom">[DOM]
      <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
      <dt id="biblio-html">[HTML]
-     <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+     <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+     <dt id="biblio-infra">[INFRA]
+     <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
      <dt id="biblio-mathml">[MATHML]
      <dd>Patrick D F Ion; Robert R Miner. <a href="https://www.w3.org/TR/MathML/">Mathematical Markup Language (MathML) 1.01 Specification</a>. 7 July 1999. REC. URL: <a href="https://www.w3.org/TR/MathML/">https://www.w3.org/TR/MathML/</a>
-     <dt id="biblio-rfc2119">[RFC2119]
-     <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
      <dt id="biblio-svg">[SVG]
      <dd>Jon Ferraiolo. <a href="https://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG) 1.0 Specification</a>. 4 September 2001. REC. URL: <a href="https://www.w3.org/TR/SVG/">https://www.w3.org/TR/SVG/</a>
      <dt id="biblio-webidl">[WEBIDL]
