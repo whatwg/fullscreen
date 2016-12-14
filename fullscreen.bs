@@ -314,8 +314,8 @@ attribute's getter must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, reject <var>promise</var> with a
- <code>TypeError</code> exception, and return <var>promise</var>.
+ <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, fulfill <var>promise</var> with
+ undefined, and return <var>promise</var>.
 
  <li><p>Let <var>resize</var> be false.
 
@@ -339,6 +339,9 @@ attribute's getter must run these steps:
   <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
+
+   <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, fulfill <var>promise</var> with
+   undefined, and terminate these steps.
 
    <li><p>Let <var>exitDocs</var> be the result of
    <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
