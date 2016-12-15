@@ -312,7 +312,9 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
     <li>
      <p>Let <var>promise</var> be a new promise. </p>
     <li>
-     <p>If <var>doc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, reject <var>promise</var> with a <code>TypeError</code> exception, and return <var>promise</var>. </p>
+     <p>If <var>doc</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active">fully active</a>, then reject <var>promise</var> with a <code>TypeError</code> exception and return <var>promise</var>. </p>
+    <li>
+     <p>If <var>doc</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> is null, then reject <var>promise</var> with a <code>TypeError</code> exception and return <var>promise</var>. </p>
     <li>
      <p>Let <var>resize</var> be false. </p>
     <li>
