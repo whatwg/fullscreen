@@ -150,7 +150,7 @@ partial interface DocumentOrShadowRoot {
 
 <dl class=domintro>
  <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
- <dd><p>Displays <var>element</var> fullscreen and fulfills <var>promise</var> when done.
+ <dd><p>Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -158,7 +158,7 @@ partial interface DocumentOrShadowRoot {
 
  <dt><code><var>promise</var> = <var>document</var> . {{Document/exitFullscreen()}}</code>
  <dd><p>Stops <var>document</var>'s <a>fullscreen element</a> from being displayed fullscreen and
- fulfills <var>promise</var> when done.
+ resolves <var>promise</var> when done.
 
  <dt><code><var>document</var> . {{DocumentOrShadowRoot/fullscreenElement}}</code>
  <dd><p>Returns <var>document</var>'s <a>fullscreen element</a>.
@@ -257,7 +257,7 @@ these steps:
    <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order, <a>fire an event</a> named
    <code>fullscreenchange</code> on <var>doc</var>.
 
-   <li><p>Fulfill <var>promise</var> with undefined.
+   <li><p>Resolve <var>promise</var> with undefined.
   </ol>
 
   <p class=XXX><dfn>Animation frame task</dfn> is not really defined yet, including relative order
@@ -376,7 +376,7 @@ attribute's getter must run these steps:
    <code>fullscreenchange</code> on <var>exitDoc</var>.
    <!-- cross-process -->
 
-   <li><p>Fulfill <var>promise</var> with undefined.
+   <li><p>Resolve <var>promise</var> with undefined.
   </ol>
 
   <p class=note>This results in events being fired from the innermost to the outermost document.
