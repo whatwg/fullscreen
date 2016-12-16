@@ -7,7 +7,7 @@
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-fullscreen.svg" rel="icon">
-  <meta content="Bikeshed version 645534c1532bca4fdb4f3859efc66268a218d7c8" name="generator">
+  <meta content="Bikeshed version ef1890cdd543bf72ba03a0fa16211e40619adc83" name="generator">
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
         .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-fullscreen.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Fullscreen API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-21">21 November 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-12-16">16 December 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -186,7 +186,7 @@ security risk, or platform limitation. </p>
    <dl class="domintro">
     <dt><code><var>promise</var> = <var>element</var> . <code class="idl"><a data-link-type="idl" href="#dom-element-requestfullscreen">requestFullscreen()</a></code></code> 
     <dd>
-     <p>Displays <var>element</var> fullscreen and fulfills <var>promise</var> when done. </p>
+     <p>Displays <var>element</var> fullscreen and resolves <var>promise</var> when done. </p>
     <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenenabled">fullscreenEnabled</a></code></code> 
     <dd>
      <p>Returns true if <var>document</var> has the ability to display <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-element">elements</a> fullscreen
@@ -194,7 +194,7 @@ security risk, or platform limitation. </p>
     <dt><code><var>promise</var> = <var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-exitfullscreen">exitFullscreen()</a></code></code> 
     <dd>
      <p>Stops <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a> from being displayed fullscreen and
- fulfills <var>promise</var> when done. </p>
+ resolves <var>promise</var> when done. </p>
     <dt><code><var>document</var> . <code class="idl"><a data-link-type="idl" href="#dom-document-fullscreenelement">fullscreenElement</a></code></code> 
     <dd>
      <p>Returns <var>document</var>’s <a data-link-type="dfn" href="#fullscreen-element">fullscreen element</a>. </p>
@@ -269,7 +269,7 @@ these steps: </p>
       <li>
        <p>For each <var>doc</var> in <var>eventDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>doc</var>. </p>
       <li>
-       <p>Fulfill <var>promise</var> with undefined. </p>
+       <p>Resolve <var>promise</var> with undefined. </p>
      </ol>
      <p class="XXX"><dfn data-dfn-type="dfn" data-noexport="" id="animation-frame-task">Animation frame task<a class="self-link" href="#animation-frame-task"></a></dfn> is not really defined yet, including relative order
   within that task, see <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440">bug 26440</a>. </p>
@@ -349,7 +349,7 @@ false if <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-obje
       <li>
        <p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>fullscreenchange</code> on <var>exitDoc</var>. </p>
       <li>
-       <p>Fulfill <var>promise</var> with undefined. </p>
+       <p>Resolve <var>promise</var> with undefined. </p>
      </ol>
      <p class="note" role="note">This results in events being fired from the innermost to the outermost document. </p>
    </ol>
