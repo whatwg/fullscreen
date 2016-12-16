@@ -314,11 +314,9 @@ attribute's getter must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>If <var>doc</var> is not <a>fully active</a>, then reject <var>promise</var> with a
- <code>TypeError</code> exception and return <var>promise</var>.
-
- <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then reject <var>promise</var> with a
- <code>TypeError</code> exception and return <var>promise</var>.
+ <li><p>If <var>doc</var> is not <a>fully active</a> or <var>doc</var>'s <a>fullscreen element</a>
+ is null, then reject <var>promise</var> with a <code>TypeError</code> exception and return
+ <var>promise</var>.
 
  <li><p>Let <var>resize</var> be false.
 
