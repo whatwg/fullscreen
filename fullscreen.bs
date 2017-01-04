@@ -85,18 +85,6 @@ its <a>node document</a>'s <a>top layer</a>.
 
 <hr>
 
-<p>To <dfn>fully exit fullscreen</dfn> a <a for=/>document</a> <var>document</var>, run these steps:
-
-<ol>
- <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
-
- <li><p><a lt="Unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
- set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
- <a>fullscreen element</a>.
-
- <li><p><a>Exit fullscreen</a> <var>document</var>.
-</ol>
-
 <p>Whenever the <a>removing steps</a> run with a <var>removedNode</var>, run these steps:
 
 <ol>
@@ -109,7 +97,7 @@ its <a>node document</a>'s <a>top layer</a>.
 
   <ol>
    <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
-   <a>exit fullscreen</a> that <a for=/>document</a>.
+   <a>exit fullscreen</a> that <a for=/>document</a> with <var>fullyFlag</var> unset.
 
    <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a> within its
    <a>node document</a>.
@@ -117,7 +105,7 @@ its <a>node document</a>'s <a>top layer</a>.
 </ol>
 
 <p>Whenever the <a>unloading document cleanup steps</a> run with a <var>document</var>,
-<a>fully exit fullscreen</a> <var>document</var>.
+<a>exit fullscreen</a> <var>document</var> with <var>fullyFlag</var> set.
 
 <hr>
 
@@ -343,7 +331,8 @@ could be an open <{dialog}> element.
  in which case that document will still remain in fullscreen.
 </ol>
 
-<p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var>, run these steps:
+<p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var> with
+<var>fullyFlag</var>, run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -385,8 +374,8 @@ could be an open <{dialog}> element.
 
    <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is either not in
    <var>exitDocs</var>, or not a <a>simple fullscreen document</a>,
-   <a>fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
-   <code>TypeError</code> exception, and terminate these steps.
+   <a>exit fullscreen</a> <var>topLevelDoc</var> with <var>fullyFlag</var> set, reject
+   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
    <!-- cross-process -->
 
    <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
@@ -398,8 +387,16 @@ could be an open <{dialog}> element.
    <a lt="unfullscreen a document">unfullscreen <var>descendantDoc</var></a>.
    <!-- cross-process -->
 
-   <li><p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>,
-   <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
+   <li>
+    <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
+
+    <ol>
+     <li><p>If <var>exitDoc</var> is <var>doc</var> and <var>fullyFlag</var> is set, then
+     <a lt="unfullscreen a document">unfullscreen <var>doc</var></a>.
+
+     <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s
+     <a>fullscreen element</a>.
+    </ol>
 
    <li><p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>,
    <a>fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>.
@@ -416,7 +413,8 @@ could be an open <{dialog}> element.
 </ol>
 
 <p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method, when invoked, must
-return the result of running <a>exit fullscreen</a> on the <a>context object</a>.
+return the result of running <a>exit fullscreen</a> on the <a>context object</a> with
+<var>fullyFlag</var> unset.
 
 <hr>
 
@@ -445,8 +443,8 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 {{Element/requestFullscreen()}} and {{Document/exitFullscreen()}}.
 
 <p>If the end user instructs the user agent to end a fullscreen session initiated via
-{{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> the
-<a>top-level browsing context</a>'s <a>active document</a>.
+{{Element/requestFullscreen()}}, <a>exit fullscreen</a> the
+<a>top-level browsing context</a>'s <a>active document</a> with <var>fullyFlag</var> set.
 
 
 
