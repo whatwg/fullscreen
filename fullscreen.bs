@@ -295,18 +295,19 @@ attribute's getter must run these steps:
  <li><p>Return null.
 </ol>
 
+<p>A <a>document</a> is said to be a <dfn>simple fullscreen document</dfn> if its <a>top layer</a>
+consists of a single <a>element</a> that has its <a>fullscreen flag</a> set.
+
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
 
 <ol>
- <li><p>If <var>doc</var>'s <a>top layer</a> consists of more than a single <a>element</a> that has
- its <a>fullscreen flag</a> set, return the empty set.
+ <li><p>If <var>doc</var> is not a <a>simple fullscreen document</a>, return the empty set.
 
  <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
 
  <li><p>While <var>docs</var>'s last <a for=/>document</a> has a <a>browsing context container</a>
- whose <a>node document</a>'s <a>top layer</a> consists of a single <a>element</a> that has its
- <a>fullscreen flag</a> set and does not have its <a>iframe fullscreen flag</a> set (if any), append
- that <a>node document</a> to <var>docs</var>.
+ whose <a>node document</a> is a <a>simple fullscreen document</a> and does not have its
+ <a>iframe fullscreen flag</a> set (if any), append that <a>node document</a> to <var>docs</var>.
 
  <li><p>Return <var>docs</var>.
 </ol>
