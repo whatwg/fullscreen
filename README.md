@@ -40,4 +40,4 @@ If you can commit to this repository, see the
 ### Tests
 
 Tests can be found in the `fullscreen/` directory of
-[`w3c/web-platform-tests`](https://github.com/w3c/web-platform-tests).
+[`web-platform-tests`](https://github.com/w3c/web-platform-tests).
