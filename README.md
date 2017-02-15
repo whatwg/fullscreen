@@ -39,5 +39,5 @@ If you can commit to this repository, see the
 
 ### Tests
 
-Tests have not yet been created.
-[Contributions welcome!](https://github.com/w3c/web-platform-tests/issues/2656).
+Tests can be found in the `fullscreen/` directory of
+[`w3c/web-platform-tests`](https://github.com/w3c/web-platform-tests).

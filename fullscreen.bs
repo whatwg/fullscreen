@@ -13,6 +13,7 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 !Commits: <a href=https://github.com/whatwg/fullscreen/commits>GitHub whatwg/fullscreen/commits</a>
 !Commits: [SNAPSHOT-LINK]
 !Commits: <a href=https://twitter.com/fullscreenapi>@fullscreenapi</a>
+!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/fullscreen>web-platform-tests fullscreen/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/fullscreen>ongoing work</a>)
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
