@@ -296,18 +296,33 @@ attribute's getter must run these steps:
  <li><p>Return null.
 </ol>
 
+<p>A <a>document</a> is said to be a <dfn>simple fullscreen document</dfn> if there is exactly one
+<a>element</a> in its <a>top layer</a> that has its <a>fullscreen flag</a> set.
+
+<p class=note>A <a>document</a> with two <a>elements</a> in its <a>top layer</a> can be a
+<a>simple fullscreen document</a>. For example, in addition to the <a>fullscreen element</a> there
+could be an open <{dialog}> element.
+
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
 
 <ol>
- <li><p>If <var>doc</var>'s <a>top layer</a> consists of more than a single <a>element</a> that has
- its <a>fullscreen flag</a> set, return the empty set.
-
  <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
 
- <li><p>While <var>docs</var>'s last <a for=/>document</a> has a <a>browsing context container</a>
- whose <a>node document</a>'s <a>top layer</a> consists of a single <a>element</a> that has its
- <a>fullscreen flag</a> set and does not have its <a>iframe fullscreen flag</a> set (if any), append
- that <a>node document</a> to <var>docs</var>.
+ <li>
+  <p>While true:
+
+  <ol>
+   <li><p>Let <var>lastDoc</var> be <var>docs</var>'s last <a for=/>document</a>.
+
+   <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, break.
+
+   <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
+   any, and otherwise break.
+
+   <li><p>If <var>container</var>'s <a>iframe fullscreen flag</a> is set, break.
+
+   <li><p>Append <var>container</var>'s <a>node document</a> to <var>docs</var>.
+  </ol>
 
  <li><p>Return <var>docs</var>.
 </ol>
@@ -332,7 +347,8 @@ attribute's getter must run these steps:
  <a>active document</a>.
  <!-- cross-process -->
 
- <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>resize</var> to true.
+ <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, and it is a
+ <a>simple fullscreen document</a>, then set <var>resize</var> to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
@@ -349,15 +365,10 @@ attribute's getter must run these steps:
    <var>doc</var>.
    <!-- cross-process -->
 
-   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is not in <var>exitDocs</var>,
+   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is either not in
+   <var>exitDocs</var>, or not a <a>simple fullscreen document</a>,
    <a>fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
    <code>TypeError</code> exception, and terminate these steps.
-
-   <li><p>If <var>exitDocs</var> is the empty set, append <var>doc</var> to <var>exitDocs</var>.
-
-   <li><p>If <var>exitDocs</var>'s last <a for=/>document</a> has a
-   <a>browsing context container</a>, append that <a>browsing context container</a>'s
-   <a>node document</a> to <var>exitDocs</var>.
    <!-- cross-process -->
 
    <li><p>Let <var>descendantDocs</var> be an ordered set consisting of <var>doc</var>'s
