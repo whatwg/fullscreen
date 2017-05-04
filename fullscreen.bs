@@ -36,6 +36,9 @@ urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
 {
     "CSS": {
         "aliasOf": "CSS2"
+    },
+    "SVG": {
+        "aliasOf": "SVG11"
     }
 }
 </pre>
