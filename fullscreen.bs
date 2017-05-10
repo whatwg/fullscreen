@@ -24,6 +24,8 @@ Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
 spec:dom
     type:dfn; for:/; text:element
     type:interface; text:Document
+spec:infra
+    type:dfn; for:set; text:for each
 </pre>
 
 <pre class=anchors>
@@ -74,8 +76,8 @@ stated otherwise it is unset.
 and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for="top layer">remove</a>
-it from its <a>node document</a>'s <a>top layer</a>.
+<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for=set>remove</a> it from
+its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
@@ -102,7 +104,7 @@ it from its <a>node document</a>'s <a>top layer</a>.
  that have their <a>fullscreen flag</a> set, in <a>shadow-including tree order</a>.
 
  <li>
-  <p>For each <var>node</var> in <var>nodes</var>, run these substeps:
+  <p><a>For each</a> <var>node</var> in <var>nodes</var>, run these substeps:
 
   <ol>
    <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
@@ -229,18 +231,18 @@ these steps:
    <code>TypeError</code> exception, and terminate these steps.
    <!-- cross-process; check is only needed on pending as it is recursive already -->
 
-   <li><p>Let <var>fullscreenElements</var> be an ordered set initially consisting of
+   <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
    <var>pending</var>.
 
-   <li><p>While the first element in <var>fullscreenElements</var> is in a
-   <a>nested browsing context</a>, prepend its <a>browsing context container</a> to
+   <li><p><a>While</a> the first element in <var>fullscreenElements</var> is in a
+   <a>nested browsing context</a>: <a for=set>prepend</a> its <a>browsing context container</a> to
    <var>fullscreenElements</var>.
    <!-- cross-process -->
 
-   <li><p>Let <var>eventDocs</var> be an empty list.
+   <li><p>Let <var>eventDocs</var> be a new <a>ordered set</a>.
 
    <li>
-    <p>For each <var>element</var> in <var>fullscreenElements</var>, in order, run these
+    <p><a>For each</a> <var>element</var> in <var>fullscreenElements</var>, run these
     subsubsteps:
 
     <ol>
@@ -252,7 +254,7 @@ these steps:
 
       <p class=note>No need to notify observers when nothing has changed.
 
-     <li><p>Otherwise, append <var>doc</var> to <var>eventDocs</var>.
+     <li><p>Otherwise, <a for=set>append</a> <var>doc</var> to <var>eventDocs</var>.
 
      <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
      <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
@@ -260,8 +262,8 @@ these steps:
      <li><p><a lt="Fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
 
-   <li><p>For each <var>doc</var> in <var>eventDocs</var>, in order, <a>fire an event</a> named
-   <code>fullscreenchange</code> on <var>doc</var>.
+   <li><p><a>For each</a> <var>doc</var> in <var>eventDocs</var>, <a>fire an event</a>
+   named <code>fullscreenchange</code> on <var>doc</var>.
 
    <li><p>Resolve <var>promise</var> with undefined.
   </ol>
@@ -309,22 +311,22 @@ could be an open <{dialog}> element.
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
 
 <ol>
- <li><p>Let <var>docs</var> be an ordered set consisting of <var>doc</var>.
+ <li><p>Let <var>docs</var> be an <a>ordered set</a> consisting of <var>doc</var>.
 
  <li>
-  <p>While true:
+  <p><a>While</a> true:
 
   <ol>
    <li><p>Let <var>lastDoc</var> be <var>docs</var>'s last <a for=/>document</a>.
 
-   <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, break.
+   <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, <a>break</a>.
 
    <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
-   any, and otherwise break.
+   any, and otherwise <a>break</a>.
 
-   <li><p>If <var>container</var>'s <a>iframe fullscreen flag</a> is set, break.
+   <li><p>If <var>container</var>'s <a>iframe fullscreen flag</a> is set, <a>break</a>.
 
-   <li><p>Append <var>container</var>'s <a>node document</a> to <var>docs</var>.
+   <li><p><a for=set>Append</a> <var>container</var>'s <a>node document</a> to <var>docs</var>.
   </ol>
 
  <li><p>Return <var>docs</var>.
@@ -374,23 +376,23 @@ could be an open <{dialog}> element.
    <code>TypeError</code> exception, and terminate these steps.
    <!-- cross-process -->
 
-   <li><p>Let <var>descendantDocs</var> be an ordered set consisting of <var>doc</var>'s
+   <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
    <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
    non-null, if any, in <em>reverse</em> <a>tree order</a>.
    <!-- cross-process -->
 
-   <li><p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order,
+   <li><p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>,
    <a lt="unfullscreen a document">unfullscreen <var>descendantDoc</var></a>.
    <!-- cross-process -->
 
-   <li><p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order,
+   <li><p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>,
    <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
 
-   <li><p>For each <var>descendantDoc</var> in <var>descendantDocs</var>, in order,
+   <li><p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>,
    <a>fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>.
    <!-- cross-process -->
 
-   <li><p>For each <var>exitDoc</var> in <var>exitDocs</var>, in order, <a>fire an event</a> named
+   <li><p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>, <a>fire an event</a> named
    <code>fullscreenchange</code> on <var>exitDoc</var>.
    <!-- cross-process -->
 
@@ -455,8 +457,8 @@ associated viewport and therefore also one <a>top layer</a>. [[!CSS]]
 <p class=note>The terminology used in this and following subsection attempts to match CSS 2.1
 Appendix E.
 
-<p>The <a>top layer</a> consists of an ordered set of elements, rendered in the order they have been
-added to the set. The last element added is rendered closest to the user.
+<p>The <a>top layer</a> is an <a>ordered set</a> of elements, rendered in the order they appear in
+the set. The last element in the set is rendered last, and thus appears on top.
 
 <p class=note>The <code>z-index</code> property has no effect in the <a>top layer</a>.
 
@@ -496,11 +498,12 @@ following characteristics:
  <code>right</code>, and <code>top</code> is zero.
 </ul>
 
-<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>, add, or
-move if already present, <var>element</var> on top of <var>top layer</var>.
+<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>,
+<a for=set>remove</a> it from <var>top layer</var> and then <a for=set>append</a> it to
+<var>top layer</var>.
 
-<p>To <dfn export for="top layer">remove</dfn> an <var>element</var> from a <var>top layer</var>,
-remove <var>element</var> from <var>top layer</var>.
+<p class=note>In other words, <var>element</var> is moved to the end of <var>top layer</var> if it
+is already present.
 
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
