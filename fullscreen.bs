@@ -320,6 +320,8 @@ could be an open <{dialog}> element.
   <ol>
    <li><p>Let <var>lastDoc</var> be <var>docs</var>'s last <a for=/>document</a>.
 
+   <li><p>Assert: <var>lastDoc</var>'s <a>fullscreen element</a> is not null.
+
    <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, <a>break</a>.
 
    <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
@@ -331,6 +333,11 @@ could be an open <{dialog}> element.
   </ol>
 
  <li><p>Return <var>docs</var>.
+
+ <p class=note>This is the set of documents for which the <a>fullscreen element</a> will be
+ <a lt="unfullscreen an element">unfullscreened</a>, but the last document in <var>docs</var> might
+ have more than one <a>element</a> in its <a>top layer</a> with the <a>fullscreen flag</a> set,
+ in which case that document will still remain in fullscreen.
 </ol>
 
 <p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var>, run these steps:
@@ -365,6 +372,8 @@ could be an open <{dialog}> element.
   <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
+   <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var>
+   with undefined and terminate these steps.
 
    <li><p>Let <var>exitDocs</var> be the result of
    <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
