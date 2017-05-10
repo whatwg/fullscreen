@@ -97,14 +97,15 @@ its <a>node document</a>'s <a>top layer</a>.
  <li><p><a>Exit fullscreen</a> <var>document</var>.
 </ol>
 
-<p>Whenever the <a>removing steps</a> run with an <var>oldNode</var>, run these steps:
+<p>Whenever the <a>removing steps</a> run with a <var>removedNode</var>, run these steps:
 
 <ol>
- <li><p>Let <var>nodes</var> be <var>oldNode</var>'s <a>shadow-including inclusive descendants</a>
- that have their <a>fullscreen flag</a> set, in <a>shadow-including tree order</a>.
+ <li><p>Let <var>nodes</var> be <var>removedNode</var>'s
+ <a>shadow-including inclusive descendants</a> that have their <a>fullscreen flag</a> set, in
+ <a>shadow-including tree order</a>.
 
  <li>
-  <p><a>For each</a> <var>node</var> in <var>nodes</var>, run these substeps:
+  <p><a>For each</a> <var>node</var> in <var>nodes</var>:
 
   <ol>
    <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
