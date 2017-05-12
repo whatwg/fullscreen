@@ -193,9 +193,14 @@ these steps:
 <ol>
  <li><p>Let <var>pending</var> be the <a>context object</a>.
 
- <li><p>Let <var>error</var> be false.
+ <li><p>Let <var>pendingDoc</var> be <var>pending</var>'s <a>node document</a>.
 
  <li><p>Let <var>promise</var> be a new promise.
+
+ <li><p>If <var>pendingDoc</var> is not <a>fully active</a>, then reject <var>promise</var> with a
+ <code>TypeError</code> exception and return <var>promise</var>.
+
+ <li><p>Let <var>error</var> be false.
 
  <li>
   <p>If any of the following conditions are false, then set <var>error</var> to true:
@@ -216,7 +221,7 @@ these steps:
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pending</var>'s
+ <li><p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
  dimensions of the screen of the output device. Optionally display a message how the end user can
  revert this.
