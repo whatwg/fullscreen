@@ -90,7 +90,7 @@ its <a>node document</a>'s <a>top layer</a>.
 <ol>
  <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
 
- <li><p><a lt="Unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
+ <li><p><a lt="unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
  set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
  <a>fullscreen element</a>.
 
@@ -231,11 +231,19 @@ these steps:
   <p>As part of the next <a>animation frame task</a>, run these substeps:
 
   <ol>
-   <li><p>If either <var>error</var> is true or the <a>fullscreen element ready check</a> for
-   <var>pending</var> returns false, <a>fire an event</a> named <code>fullscreenerror</code> on
-   <var>pending</var>'s <a>node document</a>, reject <var>promise</var> with a
-   <code>TypeError</code> exception, and terminate these steps.
-   <!-- cross-process; check is only needed on pending as it is recursive already -->
+   <li>
+    <p>If any of the following conditions are false, then set <var>error</var> to true:
+
+    <ul>
+     <li><p><var>pending</var>'s <a>node document</a> is <var>pendingDoc</var>.
+
+     <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+     <!-- cross-process; check is only needed on pending as it is recursive already -->
+    </ul>
+
+   <li><p>If <var>error</var> is true, <a>fire an event</a> named <code>fullscreenerror</code> on
+   <var>pendingDoc</var>, reject <var>promise</var> with a <code>TypeError</code> exception, and
+   terminate these steps.
 
    <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
    <var>pending</var>.
@@ -263,7 +271,7 @@ these steps:
      <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
      <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
 
-     <li><p><a lt="Fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
+     <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
 
    <li><p><a>For each</a> <var>doc</var> in <var>eventDocs</var>, <a>fire an event</a>
