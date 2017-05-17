@@ -213,18 +213,26 @@ these steps:
    element. [[!SVG]] [[!MATHML]]
 
    <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p><a>Fullscreen is supported</a>.
 
    <li><p>This algorithm is <a>allowed to request fullscreen</a>.
   </ul>
 
+ <li><p>Let <var>topLevelDoc</var> be <var>pendingDoc</var>'s <a>top-level browsing context</a>'s
+ <a>active document</a>.
+ <!-- cross-process -->
+
+ <li><p>Let <var>resize</var> be true, if <var>error</var> is false and <var>topLevelDoc</var>'s
+ <a>fullscreen element</a> is null, and false otherwise.
+ <!-- cross-process -->
+
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
- <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
- dimensions of the screen of the output device. Optionally display a message how the end user can
- revert this.
+ <li><p>If <var>resize</var> is true: Resize <var>topLevelDoc</var>'s viewport's dimensions to match
+ the dimensions of the screen of the output device. Optionally display a message how the end user
+ can revert this.
  <!-- cross-process -->
 
  <li>
@@ -239,11 +247,28 @@ these steps:
 
      <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
      <!-- cross-process; check is only needed on pending as it is recursive already -->
+
+     <li><p><var>topLevelDoc</var>'s viewport matches the dimensions of the screen.
+     <!-- cross-process -->
     </ul>
 
-   <li><p>If <var>error</var> is true, <a>fire an event</a> named <code>fullscreenerror</code> on
-   <var>pendingDoc</var>, reject <var>promise</var> with a <code>TypeError</code> exception, and
-   terminate these steps.
+    <p class=note>For example, <var>pending</var> might have been moved to another document,
+    <code>allowfullscreen</code> attributes might have been removed, or <var>topLevelDoc</var> might
+    have exited fullscreen since {{Element/requestFullscreen()}} was invoked.
+
+   <li>
+    <p>If <var>error</var> is true:
+
+    <ol>
+     <li><p><a>Fire an event</a> named <code>fullscreenerror</code> on <var>pendingDoc</var>.
+
+     <li><p>Reject <var>promise</var> with a <code>TypeError</code> exception.
+
+     <li><p>Terminate these steps and run the following step <a>in parallel</a>.
+
+     <li><p>If <var>resize</var> is true, resize <var>topLevelDoc</var>'s viewport to its "normal"
+     dimensions.
+    </ol>
 
    <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
    <var>pending</var>.
