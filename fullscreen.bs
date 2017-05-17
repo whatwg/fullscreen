@@ -213,18 +213,26 @@ these steps:
    element. [[!SVG]] [[!MATHML]]
 
    <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <!-- cross-process; check is only needed on pending as it is recursive already -->
 
    <li><p><a>Fullscreen is supported</a>.
 
    <li><p>This algorithm is <a>allowed to request fullscreen</a>.
   </ul>
 
+ <li><p>Let <var>topLevelDoc</var> be <var>pendingDoc</var>'s <a>top-level browsing context</a>'s
+ <a>active document</a>.
+ <!-- cross-process -->
+
+ <li><p>Let <var>resize</var> be true, if <var>error</var> is false and <var>topLevelDoc</var>'s
+ <a>fullscreen element</a> is null, and false otherwise.
+ <!-- cross-process -->
+
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
- <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
- dimensions of the screen of the output device. Optionally display a message how the end user can
- revert this.
+ <li><p>If <var>resize</var> is true: Resize <var>topLevelDoc</var>'s viewport's dimensions to match
+ the dimensions of the screen of the output device. Optionally display a message how the end user
+ can revert this.
  <!-- cross-process -->
 
  <li>
