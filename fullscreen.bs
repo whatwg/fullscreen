@@ -182,6 +182,12 @@ if all of the following are true, and false otherwise:
 <ul>
  <li><p><var>element</var> is <a>connected</a>.
 
+ <li><p><var>element</var>'s <a>node document</a>'s <a>fullscreen element</a> is null, or is an
+ <a>inclusive ancestor</a> of <var>element</var>.
+ <!-- If /element/ is the fullscreen element, nothing happens -->
+
+ <li><p><var>element</var> has no <a>ancestor</a> <{iframe}> <a>element</a>.
+
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>.
  <!-- cross-process, recursive -->
