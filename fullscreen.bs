@@ -223,6 +223,8 @@ these steps:
    <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
    element. [[!SVG]] [[!MATHML]]
 
+   <li><p><var>pending</var> is not a <{dialog}> <a>element</a>.
+
    <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
 
    <li><p><a>Fullscreen is supported</a>.
