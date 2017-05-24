@@ -133,6 +133,20 @@ security risk, or platform limitation.
  </ul>
 <!-- cross-process -->
 
+<hr>
+
+<p>To <dfn>fire a fullscreen event</dfn> named <var>e</var> for an (<var>element</var>,
+<var>document</var>) <a>pair</a>, run these steps:
+
+<ol>
+ <li><p>Let <var>target</var> be <var>element</var> if <var>element</var> is <a>connected</a>
+ and its <a>node document</a> is <var>document</var>, and otherwise let <var>target</var> be
+ <var>document</var>.
+
+ <li><p><a>Fire an event</a> named <var>e</var>, with its {{Event/bubbles}} and {{Event/composed}}
+ attributes set to true, at <var>target</var>.
+</ol>
+
 
 
 <h2 id=api>API</h2>
@@ -140,6 +154,9 @@ security risk, or platform limitation.
 <pre class=idl>
 partial interface Element {
   Promise&lt;void> requestFullscreen();
+
+  attribute EventHandler onfullscreenchange;
+  attribute EventHandler onfullscreenerror;
 };
 
 partial interface Document {
@@ -156,6 +173,8 @@ partial interface DocumentOrShadowRoot {
   [LenientSetter] readonly attribute Element? fullscreenElement;
 };
 </pre>
+<!-- The event handler attributes are intentially not in a partial DocumentAndElementEventHandlers
+     interface, which is implemented by Document and HTMLElement, not Element. -->
 
 <dl class=domintro>
  <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
@@ -241,9 +260,9 @@ these steps:
      <!-- cross-process; check is only needed on pending as it is recursive already -->
     </ul>
 
-   <li><p>If <var>error</var> is true, <a>fire an event</a> named <code>fullscreenerror</code> on
-   <var>pendingDoc</var>, reject <var>promise</var> with a <code>TypeError</code> exception, and
-   terminate these steps.
+   <li><p>If <var>error</var> is true, <a>fire a fullscreen event</a> named
+   <code>fullscreenerror</code> for (<var>pending</var>, <var>pendingDoc</var>), reject
+   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
 
    <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
    <var>pending</var>.
@@ -253,7 +272,7 @@ these steps:
    <var>fullscreenElements</var>.
    <!-- cross-process -->
 
-   <li><p>Let <var>eventDocs</var> be a new <a>ordered set</a>.
+   <li><p>Let <var>eventPairs</var> be a new <a>ordered set</a>.
 
    <li>
     <p><a>For each</a> <var>element</var> in <var>fullscreenElements</var>:
@@ -266,7 +285,8 @@ these steps:
 
       <p class=note>No need to notify observers when nothing has changed.
 
-     <li><p>Otherwise, <a for=set>append</a> <var>doc</var> to <var>eventDocs</var>.
+     <li><p>Otherwise, <a for=set>append</a> (<var>element</var>, <var>doc</var>) to
+     <var>eventPairs</var>.
 
      <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
      <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
@@ -274,8 +294,10 @@ these steps:
      <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
     </ol>
 
-   <li><p><a>For each</a> <var>doc</var> in <var>eventDocs</var>, <a>fire an event</a>
-   named <code>fullscreenchange</code> on <var>doc</var>.
+   <li><p><a>For each</a> (<var>element</var>, <var>document</var>) in <var>eventPairs</var>:
+   <a>fire a fullscreen event</a> named <code>fullscreenchange</code> for (<var>element</var>,
+   <var>document</var>).
+  </ol>
 
    <li><p>Resolve <var>promise</var> with undefined.
   </ol>
@@ -397,25 +419,36 @@ could be an open <{dialog}> element.
    <code>TypeError</code> exception, and terminate these steps.
    <!-- cross-process -->
 
+   <li><p>Let <var>eventPairs</var> be a new <a>ordered set</a>.
+
    <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
    <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
    non-null, if any, in <em>reverse</em> <a>tree order</a>.
    <!-- cross-process -->
 
-   <li><p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>,
-   <a lt="unfullscreen a document">unfullscreen <var>descendantDoc</var></a>.
-   <!-- cross-process -->
+   <li>
+    <p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>:
 
-   <li><p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>,
-   <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
+    <ol>
+     <li><p><a for=set>Append</a> (<var>descendantDoc</var>'s <a>fullscreen element</a>,
+     <var>descendantDoc</var>) to <var>eventPairs</var>.
 
-   <li><p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>,
-   <a>fire an event</a> named <code>fullscreenchange</code> on <var>descendantDoc</var>.
-   <!-- cross-process -->
+     <li><p><a lt="unfullscreen a document">Unfullscreen <var>descendantDoc</var></a>.
+    </ol>
 
-   <li><p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>, <a>fire an event</a> named
-   <code>fullscreenchange</code> on <var>exitDoc</var>.
-   <!-- cross-process -->
+   <li>
+    <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
+
+     <ol>
+      <li><p><a for=set>Append</a> (<var>exitDoc</var>'s <a>fullscreen element</a>,
+      <var>exitDoc</var>) to <var>eventPairs</var>.
+
+       <li><p><a lt="unfullscreen an element">Unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
+     </ol>
+
+   <li><p><a>For each</a> (<var>element</var>, <var>document</var>) in <var>eventPairs</var>:
+   <a>fire a fullscreen event</a> named <code>fullscreenchange</code> for (<var>element</var>,
+   <var>document</var>).
 
    <li><p>Resolve <var>promise</var> with undefined.
   </ol>
@@ -429,7 +462,8 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 <hr>
 
 <p>The following are the <a>event handlers</a> (and their corresponding
-<a>event handler event types</a>) that must be supported on <a for=/>documents</a> as attributes:
+<a>event handler event types</a>) that must be supported by {{Element}} and {{Document}} objects as
+<a>event handler IDL attributes</a>:
 
 <table>
  <thead>
@@ -444,6 +478,9 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 	 <td><dfn attribute for=Document id=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
 	 <td><code>fullscreenerror</code>
 </table>
+
+<p class=note>These are not supported by {{ShadowRoot}} or {{Window}} objects, and there are no
+corresponding <a>event handler content attributes</a> for {{Element}} objects in any namespace.
 
 
 
