@@ -532,12 +532,14 @@ following characteristics:
  <code>right</code>, and <code>top</code> is zero.
 </ul>
 
-<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>,
-<a for=set>remove</a> it from <var>top layer</var> and then <a for=set>append</a> it to
-<var>top layer</var>.
+<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>, run
+these steps:
 
-<p class=note>In other words, <var>element</var> is moved to the end of <var>top layer</var> if it
-is already present.
+<ol>
+ <li><p>Assert: <var>top layer</var> does not <a for=set>contain</a> <var>element</var>.
+
+ <li><p><a for=set>Append</a> <var>element</var> to <var>top layer</var>.
+</ol>
 
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
