@@ -139,8 +139,8 @@ security risk, or platform limitation.
 
 <hr>
 
-<p>To <dfn>run the fullscreen rendering steps</dfn> for a <a>document</a> <var>document</var>, run
-these steps:
+<p>To <dfn>run the fullscreen steps</dfn> for a <a>document</a> <var>document</var>, run these
+steps:
 
 <ol>
  <li><p>Let <var>pairs</var> be <var>document</var>'s <a>list of pending fullscreen events</a>.
@@ -159,6 +159,8 @@ these steps:
    {{Event/composed}} attributes set to true, at <var>target</var>.
   </ol>
 </ol>
+
+<p class=note>These steps integrate with the <a>event loop</a> defined in HTML. [[!HTML]]
 
 
 
@@ -309,9 +311,7 @@ these steps:
   </ol>
 
   <p class=note>The order in which elements are <a lt="fullscreen an element">fullscreened</a>
-  is not observable, because the
-  <a lt="run the fullscreen rendering steps">fullscreen rendering steps</a> will run in
-  <a>tree order</a>.
+  is not observable, because the <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
 
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
@@ -450,8 +450,7 @@ could be an open <{dialog}> element.
   </ol>
 
  <p class=note>The order in which documents are <a lt="unfullscreen a document">unfullscreened</a>
- is not observable, because the
- <a lt="run the fullscreen rendering steps">fullscreen rendering steps</a> will run in
+ is not observable, because the <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
  <a>tree order</a>.
 
  <li><p>Resolve <var>promise</var> with undefined.
