@@ -26,6 +26,7 @@ spec:dom
     type:interface; text:Document
 spec:infra
     type:dfn; for:set; text:for each
+    type:dfn; text:string
 </pre>
 
 <pre class=anchors>
@@ -71,6 +72,9 @@ stated otherwise it is unset.
 <p>All <a for=/>documents</a> have an associated <dfn>fullscreen element</dfn>. The
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
 <a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
+
+<p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
+is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>pairs</a>. It is initially empty.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>
 and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
@@ -135,16 +139,25 @@ security risk, or platform limitation.
 
 <hr>
 
-<p>To <dfn>fire a fullscreen event</dfn> named <var>e</var> for an (<var>element</var>,
-<var>document</var>) <a>pair</a>, run these steps:
+<p>To <dfn>run the fullscreen rendering steps</dfn> for a <a>document</a> <var>document</var>, run
+these steps:
 
 <ol>
- <li><p>Let <var>target</var> be <var>element</var> if <var>element</var> is <a>connected</a>
- and its <a>node document</a> is <var>document</var>, and otherwise let <var>target</var> be
- <var>document</var>.
+ <li><p>Let <var>pairs</var> be <var>document</var>'s <a>list of pending fullscreen events</a>.
 
- <li><p><a>Fire an event</a> named <var>e</var>, with its {{Event/bubbles}} and {{Event/composed}}
- attributes set to true, at <var>target</var>.
+ <li><p><a for=set>Empty</a> <var>document</var>'s <a>list of pending fullscreen events</a>.
+
+ <li>
+  <p><a>For each</a> (<var>type</var>, <var>element</var>) in <var>pairs</var>:
+
+  <ol>
+   <li><p>Let <var>target</var> be <var>element</var> if <var>element</var> is <a>connected</a>
+   and its <a>node document</a> is <var>document</var>, and otherwise let <var>target</var> be
+   <var>document</var>.
+
+   <li><p><a>Fire an event</a> named <var>type</var>, with its {{Event/bubbles}} and
+   {{Event/composed}} attributes set to true, at <var>target</var>.
+  </ol>
 </ol>
 
 
@@ -247,67 +260,64 @@ these steps:
  <!-- cross-process -->
 
  <li>
-  <p>As part of the next <a>animation frame task</a>, run these substeps:
+  <p>If any of the following conditions are false, then set <var>error</var> to true:
+
+  <ul>
+   <li><p><var>pending</var>'s <a>node document</a> is <var>pendingDoc</var>.
+
+   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <!-- cross-process; check is only needed on pending as it is recursive already -->
+  </ul>
+
+ <li>
+  <p>If <var>error</var> is true:
 
   <ol>
-   <li>
-    <p>If any of the following conditions are false, then set <var>error</var> to true:
+   <li><p><a for=set>Append</a> (<code>fullscreenerror</code>, <var>pending</var>) to
+   <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
 
-    <ul>
-     <li><p><var>pending</var>'s <a>node document</a> is <var>pendingDoc</var>.
-
-     <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
-     <!-- cross-process; check is only needed on pending as it is recursive already -->
-    </ul>
-
-   <li><p>If <var>error</var> is true, <a>fire a fullscreen event</a> named
-   <code>fullscreenerror</code> for (<var>pending</var>, <var>pendingDoc</var>), reject
-   <var>promise</var> with a <code>TypeError</code> exception, and terminate these steps.
-
-   <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
-   <var>pending</var>.
-
-   <li><p><a>While</a> the first element in <var>fullscreenElements</var> is in a
-   <a>nested browsing context</a>: <a for=set>prepend</a> its <a>browsing context container</a> to
-   <var>fullscreenElements</var>.
-   <!-- cross-process -->
-
-   <li><p>Let <var>eventPairs</var> be a new <a>ordered set</a>.
-
-   <li>
-    <p><a>For each</a> <var>element</var> in <var>fullscreenElements</var>:
-
-    <ol>
-     <li><p>Let <var>doc</var> be <var>element</var>'s <a>node document</a>.
-
-     <li>
-      <p>If <var>element</var> is <var>doc</var>'s <a>fullscreen element</a>, <a>continue</a>.
-
-      <p class=note>No need to notify observers when nothing has changed.
-
-     <li><p>Otherwise, <a for=set>append</a> (<var>element</var>, <var>doc</var>) to
-     <var>eventPairs</var>.
-
-     <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
-     <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
-
-     <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
-    </ol>
-
-   <li><p><a>For each</a> (<var>element</var>, <var>document</var>) in <var>eventPairs</var>:
-   <a>fire a fullscreen event</a> named <code>fullscreenchange</code> for (<var>element</var>,
-   <var>document</var>).
+   <li><p>Reject <var>promise</var> with a <code>TypeError</code> exception and terminate these
+   steps.
   </ol>
 
-   <li><p>Resolve <var>promise</var> with undefined.
+ <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
+ <var>pending</var>.
+
+ <li><p><a>While</a> the first element in <var>fullscreenElements</var> is in a
+ <a>nested browsing context</a>: <a for=set>append</a> its <a>browsing context container</a> to
+ <var>fullscreenElements</var>.
+ <!-- cross-process -->
+
+ <li>
+  <p><a>For each</a> <var>element</var> in <var>fullscreenElements</var>:
+
+  <ol>
+   <li><p>Let <var>doc</var> be <var>element</var>'s <a>node document</a>.
+
+   <li>
+    <p>If <var>element</var> is <var>doc</var>'s <a>fullscreen element</a>, <a>continue</a>.
+
+    <p class=note>No need to notify observers when nothing has changed.
+
+   <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
+   <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
+
+   <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
+
+   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>element</var>) to
+   <var>doc</var>'s <a>list of pending fullscreen events</a>.
   </ol>
 
-  <p class=XXX><dfn>Animation frame task</dfn> is not really defined yet, including relative order
-  within that task, see <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=26440>bug 26440</a>.
+  <p class=note>The order in which elements are <a lt="fullscreen an element">fullscreened</a>
+  is not observable, because the
+  <a lt="run the fullscreen rendering steps">fullscreen rendering steps</a> will run in
+  <a>tree order</a>.
 
-  <p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
-  exercise to the reader. Input welcome on potential improvements.
+ <li><p>Resolve <var>promise</var> with undefined.
 </ol>
+
+<p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
+exercise to the reader. Input welcome on potential improvements.
 
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
 return true if the <a>context object</a> is <a>allowed to use</a> the feature indicated by attribute
@@ -394,66 +404,57 @@ could be an open <{dialog}> element.
  <!-- cross-process -->
 
  <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, and it is a
- <a>simple fullscreen document</a>, then set <var>resize</var> to true.
+ <a>simple fullscreen document</a>, then set <var>doc</var> to <var>topLevelDoc</var> and
+ <var>resize</var> to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>resize</var> is true, resize <var>topLevelDoc</var>'s viewport to its "normal"
- dimensions.
+ <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
+
+ <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var> with
+ undefined and terminate these steps.
+
+ <li><p>Let <var>exitDocs</var> be the result of
+ <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
+ <var>doc</var>.
+ <!-- cross-process -->
+
+ <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
+ <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
+ non-null, if any, in <a>tree order</a>.
+ <!-- cross-process -->
 
  <li>
-  <p>As part of the next <a>animation frame task</a>, run these substeps:
+  <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
 
   <ol>
-   <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var>
-   with undefined and terminate these steps.
+   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>exitDoc</var>'s
+   <a>fullscreen element</a>) to <var>exitDoc</var>'s <a>list of pending fullscreen events</a>.
 
-   <li><p>Let <var>exitDocs</var> be the result of
-   <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
-   <var>doc</var>.
-   <!-- cross-process -->
+   <li><p>If <var>resize</var> is true, <a lt="unfullscreen a document">unfullscreen
+   <var>exitDoc</var></a>.
 
-   <li><p>If <var>resize</var> is true and <var>topLevelDoc</var> is either not in
-   <var>exitDocs</var>, or not a <a>simple fullscreen document</a>,
-   <a>fully exit fullscreen</a> <var>topLevelDoc</var>, reject <var>promise</var> with a
-   <code>TypeError</code> exception, and terminate these steps.
-   <!-- cross-process -->
-
-   <li><p>Let <var>eventPairs</var> be a new <a>ordered set</a>.
-
-   <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
-   <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
-   non-null, if any, in <em>reverse</em> <a>tree order</a>.
-   <!-- cross-process -->
-
-   <li>
-    <p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>:
-
-    <ol>
-     <li><p><a for=set>Append</a> (<var>descendantDoc</var>'s <a>fullscreen element</a>,
-     <var>descendantDoc</var>) to <var>eventPairs</var>.
-
-     <li><p><a lt="unfullscreen a document">Unfullscreen <var>descendantDoc</var></a>.
-    </ol>
-
-   <li>
-    <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
-
-     <ol>
-      <li><p><a for=set>Append</a> (<var>exitDoc</var>'s <a>fullscreen element</a>,
-      <var>exitDoc</var>) to <var>eventPairs</var>.
-
-       <li><p><a lt="unfullscreen an element">Unfullscreen</a> <var>exitDoc</var>'s <a>fullscreen element</a>.
-     </ol>
-
-   <li><p><a>For each</a> (<var>element</var>, <var>document</var>) in <var>eventPairs</var>:
-   <a>fire a fullscreen event</a> named <code>fullscreenchange</code> for (<var>element</var>,
-   <var>document</var>).
-
-   <li><p>Resolve <var>promise</var> with undefined.
+   <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen</a> <var>exitDoc</var>'s
+   <a>fullscreen element</a>.
   </ol>
 
-  <p class=note>This results in events being fired from the innermost to the outermost document.
+ <li>
+  <p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>:
+
+  <ol>
+   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>descendantDoc</var>'s
+   <a>fullscreen element</a>) to <var>descendantDoc</var>'s
+   <a>list of pending fullscreen events</a>.
+
+   <li><p><a lt="unfullscreen a document">Unfullscreen <var>descendantDoc</var></a>.
+  </ol>
+
+ <p class=note>The order in which documents are <a lt="unfullscreen a document">unfullscreened</a>
+ is not observable, because the
+ <a lt="run the fullscreen rendering steps">fullscreen rendering steps</a> will run in
+ <a>tree order</a>.
+
+ <li><p>Resolve <var>promise</var> with undefined.
 </ol>
 
 <p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method, when invoked, must
