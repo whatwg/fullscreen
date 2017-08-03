@@ -493,6 +493,9 @@ corresponding <a>event handler content attributes</a> for {{Element}} objects in
 {{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> the
 <a>top-level browsing context</a>'s <a>active document</a>.
 
+<p>The user agent may end any fullscreen session without instruction from the end user
+or call to {{Document/exitFullscreen()}} whenever the user agent deems it necessary.
+
 
 
 <h2 id=rendering>Rendering</h2>
