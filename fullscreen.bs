@@ -216,8 +216,19 @@ if all of the following are true, and false otherwise:
 <ul>
  <li><p><var>element</var> is <a>connected</a>.
 
+ <li><p><var>element</var>'s <a>node document</a>'s <a>fullscreen element</a> is null, or is an
+ <a>inclusive ancestor</a> of <var>element</var>.
+ <!-- If /element/ is the fullscreen element, nothing happens -->
+
+ <li><p><var>element</var> has no <a>ancestor</a> <{iframe}> <a>element</a>.
+
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the feature indicated by
  attribute name <code>allowfullscreen</code>.
+ <!-- cross-process, recursive -->
+
+ <li><p><var>element</var>'s <a>node document</a>'s <a>browsing context</a> either has a
+ <a>browsing context container</a> and the <a>fullscreen element ready check</a> returns true for
+ that <a>browsing context container</a>, or it has no <a>browsing context container</a>.
  <!-- cross-process, recursive -->
 </ul>
 
@@ -245,6 +256,8 @@ these steps:
    <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
    <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
    element. [[!SVG]] [[!MATHML]]
+
+   <li><p><var>pending</var> is not a <{dialog}> <a>element</a>.
 
    <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
 
@@ -559,12 +572,14 @@ following characteristics:
  <code>right</code>, and <code>top</code> is zero.
 </ul>
 
-<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>,
-<a for=set>remove</a> it from <var>top layer</var> and then <a for=set>append</a> it to
-<var>top layer</var>.
+<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>, run
+these steps:
 
-<p class=note>In other words, <var>element</var> is moved to the end of <var>top layer</var> if it
-is already present.
+<ol>
+ <li><p>Assert: <var>top layer</var> does not <a for=set>contain</a> <var>element</var>.
+
+ <li><p><a for=set>Append</a> <var>element</var> to <var>top layer</var>.
+</ol>
 
 
 <h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
