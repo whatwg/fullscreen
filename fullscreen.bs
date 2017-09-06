@@ -91,6 +91,8 @@ its <a>node document</a>'s <a>top layer</a>.
 <p>Whenever the <a>removing steps</a> run with a <var>removedNode</var>, run these steps:
 
 <ol>
+ <li><p>Let <var>document</var> be <var>removedNode</var>'s <a>node document</a>.
+
  <li><p>Let <var>nodes</var> be <var>removedNode</var>'s
  <a>shadow-including inclusive descendants</a> that have their <a>fullscreen flag</a> set, in
  <a>shadow-including tree order</a>.
@@ -99,11 +101,18 @@ its <a>node document</a>'s <a>top layer</a>.
   <p><a>For each</a> <var>node</var> in <var>nodes</var>:
 
   <ol>
-   <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
-   <a>exit fullscreen</a> that <a for=/>document</a>.
+   <li><p>If <var>node</var> is <var>document</var>'s <a>fullscreen element</a>,
+   <a>exit fullscreen</a> <var>document</var>.
 
-   <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a> within its
-   <a>node document</a>.
+   <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a>.
+
+   <li>
+    <p>If <var>document</var>'s <a>top layer</a> <a for=set>contains</a> <var>node</var>,
+    <a for=set>remove</a> <var>node</var> from <var>document</var>'s <var>top layer</var>.
+
+    <p class=note>Other specifications can add and remove elements from <a>top layer</a>, so
+    <var>node</var> might not be <var>document</var>'s <a>fullscreen element</a>. For example,
+    <var>node</var> could be an open <{dialog}> element.
   </ol>
 </ol>
 
