@@ -629,6 +629,23 @@ iframe:fullscreen {
 
 
 
+<h2 id=feature-policy-integration>Feature Policy Integration</h2>
+
+<p>The Fullscreen API is a policy-controlled feature, as defined by [[!FEATURE-POLICY]].
+
+<ul>
+  <li>The feature name for the Fullscreen API is "fullscreen".
+  <li>The default allowlist for the Fullscreen API is '<code>self</code>'.
+</ul>
+
+<p>A document's <a>feature policy</a> determines whether any content in that document is allowed to
+go fullscreen. If disabled in any document, no content in the document will be <a>allowed to use</a>
+fullscreen. If enabled, content in the document will be <a>allowed to use</a> fullscreen.
+
+<p>The <code>allowfullscreen</code> attribute of the HTML <{iframe}> element affects the
+<a>container policy</a> for that frame, as described in [[FEATURE-POLICY#iframe-allowfullscreen-attribute]].
+
+
 <h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
 
 <p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
@@ -638,8 +655,12 @@ user agent or even operating system environment when fullscreen. See also the de
 {{Element/requestFullscreen()}}.
 
 <p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
-specifically allowed via the <code>allowfullscreen</code> attribute of the HTML <{iframe}> element.
-This prevents e.g. content from third parties to go fullscreen without explicit permission.
+specifically allowed via feature policy, either through the <code>allowfullscreen</code> attribute
+of the HTML <{iframe}> element, or an appropriate declaration in the <code>allow</code> attribute
+of the HTML <{iframe}> element, or through a <code>Feature-Policy</code> HTTP header delivered with
+the document through which it is nested.
+
+<p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
 
 
