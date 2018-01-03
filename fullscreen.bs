@@ -1,24 +1,10 @@
 <pre class=metadata>
-Title: Fullscreen API Standard
 Group: WHATWG
 H1: Fullscreen API
 Shortname: fullscreen
-Status: LS
-No Editor: true
+Text Macro: TWITTER fullscreenapi
 Abstract: The Fullscreen API standard defines an API for elements to display themselves fullscreen.
-Logo: https://resources.whatwg.org/logo-fullscreen.svg
-Boilerplate: omit feedback-header, omit conformance, omit index, omit idl-index
-!Participate: <a href=https://github.com/whatwg/fullscreen>GitHub whatwg/fullscreen</a> (<a href=https://github.com/whatwg/fullscreen/issues/new>file an issue</a>, <a href=https://github.com/whatwg/fullscreen/issues>open issues</a>)
-!Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
-!Commits: <a href=https://github.com/whatwg/fullscreen/commits>GitHub whatwg/fullscreen/commits</a>
-!Commits: [SNAPSHOT-LINK]
-!Commits: <a href=https://twitter.com/fullscreenapi>@fullscreenapi</a>
-!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/fullscreen>web-platform-tests fullscreen/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/fullscreen>ongoing work</a>)
 </pre>
-
-<script src=https://resources.whatwg.org/file-issue.js async></script>
-<script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
-<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=link-defaults>
 spec:dom
@@ -656,10 +642,6 @@ This prevents e.g. content from third parties to go fullscreen without explicit 
 
 
 
-<div data-fill-with=references></div>
-
-
-
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 <p>Many thanks to Robert O'Callahan for designing the initial model and being awesome.
@@ -700,7 +682,3 @@ for also being awesome.
 <a lang=tr href=http://tantek.com/>Tantek Çelik</a>
 (<a class="p-org org h-org h-card" href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal hassles.
-
-<p>Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to the extent
-possible under law, the editor has waived all copyright and related or neighboring rights to this
-work.
