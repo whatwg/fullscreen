@@ -4,6 +4,7 @@ H1: Fullscreen API
 Shortname: fullscreen
 Text Macro: TWITTER fullscreenapi
 Abstract: The Fullscreen API standard defines an API for elements to display themselves fullscreen.
+Translation: ja https://triple-underscore.github.io/fullscreen-ja.html
 </pre>
 
 <pre class=link-defaults>
@@ -672,6 +673,7 @@ Simon Pieters,
 Tab Atkins,
 Takayoshi Kochi,
 Theresa O'Connor,
+triple-underscore,
 Vincent Scheib, and
 Xidorn Quan
 for also being awesome.
