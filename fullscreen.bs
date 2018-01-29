@@ -391,8 +391,6 @@ could be an open <{dialog}> element.
  is null, then reject <var>promise</var> with a <code>TypeError</code> exception and return
  <var>promise</var>.
 
- <li><p>Let <var>resize</var> be false.
-
  <li><p>Let <var>docs</var> be the result of
  <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
  <var>doc</var>.
@@ -402,23 +400,38 @@ could be an open <{dialog}> element.
  <a>active document</a>.
  <!-- cross-process -->
 
+ <li><p>Let <var>pendingDoc</var> be <var>doc</var>.
+
+ <li><p>Let <var>resize</var> be false.
+
  <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, and it is a
- <a>simple fullscreen document</a>, then set <var>doc</var> to <var>topLevelDoc</var> and
+ <a>simple fullscreen document</a>, then set <var>pendingDoc</var> to <var>topLevelDoc</var> and
  <var>resize</var> to true.
+
+ <li><p>Let <var>pending</var> be <var>pendingDoc</var>'s <a>fullscreen element</a>.
+ <!-- cross-process -->
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
+ <li><p>If <var>resize</var> is true, resize <var>pendingDoc</var>'s viewport to its "normal"
+ dimensions.
 
- <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var> with
- undefined and terminate these steps.
+ <li>
+  <p>If <var>pendingDoc</var>'s <a>fullscreen element</a> is not <var>pending</var>:
+
+  <ol>
+   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>pending</var>) to
+   <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
+
+   <li><p>Resolve <var>promise</var> with undefined and terminate these steps.
+  </ol>
 
  <li><p>Let <var>exitDocs</var> be the result of
  <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
- <var>doc</var>.
+ <var>pendingDoc</var>.
  <!-- cross-process -->
 
- <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
+ <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>pendingDoc</var>'s
  <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
  non-null, if any, in <a>tree order</a>.
  <!-- cross-process -->
