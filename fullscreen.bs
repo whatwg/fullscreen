@@ -440,7 +440,6 @@ could be an open <{dialog}> element.
 
  <p class=note>The order in which documents are <a lt="unfullscreen a document">unfullscreened</a>
  is not observable, because the <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
- <a>tree order</a>.
 
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
