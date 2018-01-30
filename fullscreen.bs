@@ -334,13 +334,6 @@ attribute's getter must run these steps:
  <li><p>Return null.
 </ol>
 
-<p>A <a>document</a> is said to be a <dfn>simple fullscreen document</dfn> if there is exactly one
-<a>element</a> in its <a>top layer</a> that has its <a>fullscreen flag</a> set.
-
-<p class=note>A <a>document</a> with two <a>elements</a> in its <a>top layer</a> can be a
-<a>simple fullscreen document</a>. For example, in addition to the <a>fullscreen element</a> there
-could be an open <{dialog}> element.
-
 <p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
 
 <ol>
@@ -353,8 +346,6 @@ could be an open <{dialog}> element.
    <li><p>Let <var>lastDoc</var> be <var>docs</var>'s last <a for=/>document</a>.
 
    <li><p>Assert: <var>lastDoc</var>'s <a>fullscreen element</a> is not null.
-
-   <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, <a>break</a>.
 
    <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
    any, and otherwise <a>break</a>.
@@ -392,9 +383,8 @@ could be an open <{dialog}> element.
  <a>active document</a>.
  <!-- cross-process -->
 
- <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, and it is a
- <a>simple fullscreen document</a>, then set <var>doc</var> to <var>topLevelDoc</var> and
- <var>resize</var> to true.
+ <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>doc</var> to
+ <var>topLevelDoc</var> and <var>resize</var> to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
