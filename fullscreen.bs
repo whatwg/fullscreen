@@ -663,7 +663,6 @@ Mihai Balan,
 Mounir Lamouri,
 Øyvind Stenhaug,
 Pat Ladd,
-Philip Jägenstedt,
 Rafał Chłodnicki,
 Riff Jiang,
 Rune Lillesveen,
@@ -677,7 +676,10 @@ Vincent Scheib, and
 Xidorn Quan
 for also being awesome.
 
-<p>This standard is written by <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
+<p>This standard is edited by <a lang=sv href=https://foolip.org/>Philip Jägenstedt</a>
+(<a href=https://google.com/>Google</a>,
+<a href=mailto:philip@foolip.org>philip@foolip.org</a>). It was originally written by
+<a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
 <a lang=tr href=http://tantek.com/>Tantek Çelik</a>
