@@ -53,9 +53,6 @@ of a <a for=/>browsing context</a> <var>B</var> if and only if <var>B</var> is a
 <p>All <a for=/>documents</a> have an associated <dfn>fullscreen element</dfn>. It is initially
 null.
 
-<p>All <{iframe}> <a>elements</a> have an associated <dfn>iframe fullscreen flag</dfn>. Unless
-stated otherwise it is unset.
-
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>pairs</a>. It is initially empty.
 
@@ -63,9 +60,8 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>pairs</a>. It is 
 <a>fullscreen element</a> to <var>element</var> and <a for="top layer">add</a> <var>element</var> to
 <var>document</var>'s <a>top layer</a>.
 
-<p>To <dfn>unfullscreen a <var>document</var></dfn>, unset <var>document</var>'s
-<a>fullscreen element</a>'s <a>iframe fullscreen flag</a>, <a for=set>remove</a> it from
-its <var>document</var>'s <a>top layer</a>, and set it to null.
+<p>To <dfn>unfullscreen a <var>document</var></dfn>, <a for=set>remove</a> its
+<a>fullscreen element</a> from <a>top layer</a>, and set it to null.
 
 <hr>
 
@@ -263,9 +259,6 @@ these steps:
 
     <p class=note>No need to notify observers when nothing has changed.
 
-   <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
-   <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
-
    <li><p><a lt="fullscreen a document">Fullscreen <var>doc</var></a> with <var>element</var>.
 
    <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>element</var>) to
@@ -307,30 +300,6 @@ attribute's getter must run these steps:
  <li><p>Return null.
 </ol>
 
-<p>To <dfn>collect documents to unfullscreen</dfn> given <var>doc</var>, run these steps:
-
-<ol>
- <li><p>Let <var>docs</var> be an <a>ordered set</a> consisting of <var>doc</var>.
-
- <li>
-  <p><a>While</a> true:
-
-  <ol>
-   <li><p>Let <var>lastDoc</var> be <var>docs</var>'s last <a for=/>document</a>.
-
-   <li><p>Assert: <var>lastDoc</var>'s <a>fullscreen element</a> is not null.
-
-   <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
-   any, and otherwise <a>break</a>.
-
-   <li><p>If <var>container</var>'s <a>iframe fullscreen flag</a> is set, <a>break</a>.
-
-   <li><p><a for=set>Append</a> <var>container</var>'s <a>node document</a> to <var>docs</var>.
-  </ol>
-
- <li><p>Return <var>docs</var>.
-</ol>
-
 <p>To <dfn>exit fullscreen</dfn> a <a for=/>document</a> <var>doc</var>, run these steps:
 
 <ol>
@@ -340,46 +309,21 @@ attribute's getter must run these steps:
  is null, then reject <var>promise</var> with a <code>TypeError</code> exception and return
  <var>promise</var>.
 
- <li><p>Let <var>resize</var> be false.
-
- <li><p>Let <var>docs</var> be the result of
- <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
- <var>doc</var>.
- <!-- cross-process -->
-
  <li><p>Let <var>topLevelDoc</var> be <var>doc</var>'s <a>top-level browsing context</a>'s
  <a>active document</a>.
  <!-- cross-process -->
 
- <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, then set <var>doc</var> to
- <var>topLevelDoc</var> and <var>resize</var> to true.
-
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
+ <li><p>Resize <var>topLevelDoc</var>'s viewport to its "normal" dimensions.
 
- <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var> with
- undefined and terminate these steps.
+ <li><p>If <var>topLevelDoc</var>'s <a>fullscreen element</a> is null, then resolve
+ <var>promise</var> with undefined and terminate these steps.
 
- <li><p>Let <var>exitDocs</var> be the result of
- <a lt="collect documents to unfullscreen">collecting documents to unfullscreen</a> given
- <var>doc</var>.
+ <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of
+ <var>topLevelDoc</var>'s <a>descendant browsing contexts</a>' <a>active documents</a> whose
+ <a>fullscreen element</a> is non-null, if any, in <a>tree order</a>.
  <!-- cross-process -->
-
- <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
- <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
- non-null, if any, in <a>tree order</a>.
- <!-- cross-process -->
-
- <li>
-  <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
-
-  <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>exitDoc</var>'s
-   <a>fullscreen element</a>) to <var>exitDoc</var>'s <a>list of pending fullscreen events</a>.
-
-   <li><p><a lt="unfullscreen a document">Unfullscreen <var>exitDoc</var></a>.
-  </ol>
 
  <li>
   <p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>:
