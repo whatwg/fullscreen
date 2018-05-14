@@ -6,3 +6,6 @@ remote: fullscreen.bs
 
 deploy: fullscreen.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
+
+review: fullscreen.bs
+	curl --remote-name --fail https://resources.whatwg.org/build/review.sh && bash ./review.sh
