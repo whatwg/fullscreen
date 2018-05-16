@@ -79,33 +79,32 @@ its <a>node document</a>'s <a>top layer</a>.
 <p>To <dfn>fully exit fullscreen</dfn> a <a for=/>document</a> <var>document</var>, run these steps:
 
 <ol>
- <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
+ <li><p>Let <var>topLevelDoc</var> be <var>document</var>'s <a>top-level browsing context</a>'s
+ <a>active document</a>.
 
- <li><p><a lt="unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
- set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
- <a>fullscreen element</a>.
+ <li><p>If <var>topLevelDoc</var>'s <a>fullscreen element</a> is null, terminate these steps.
 
- <li><p><a>Exit fullscreen</a> <var>document</var>.
-</ol>
+ <li><p>Let <var>exitDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>.
 
-<p>Whenever the <a>removing steps</a> run with a <var>removedNode</var>, run these steps:
-
-<ol>
- <li><p>Let <var>nodes</var> be <var>removedNode</var>'s
- <a>shadow-including inclusive descendants</a> that have their <a>fullscreen flag</a> set, in
- <a>shadow-including tree order</a>.
+ <li><p>Append <var>topLevelDoc</var>'s <a>descendant browsing contexts</a>' <a>active documents</a>
+ whose <a>fullscreen element</a> are non-null, if any, in <a>tree order</a> to <var>exitDocs</var>.
 
  <li>
-  <p><a>For each</a> <var>node</var> in <var>nodes</var>:
+  <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
 
   <ol>
-   <li><p>If <var>node</var> is its <a>node document</a>'s <a>fullscreen element</a>,
-   <a>exit fullscreen</a> that <a for=/>document</a>.
+   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>exitDoc</var>'s
+   <a>fullscreen element</a>) to <var>exitDoc</var>'s <a>list of pending fullscreen events</a>.
 
-   <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a> within its
-   <a>node document</a>.
+   <li><p><a lt="unfullscreen a document">Unfullscreen <var>exitDoc</var></a>.
   </ol>
+
+ <li><p>Run the remaining steps <a>in parallel</a>.
+ <li><p>Resize <var>topLevelDoc</var>'s viewport to its "normal" dimensions.
 </ol>
+
+<p>Whenever the <a>removing steps</a> run with a <var>removedNode</var>,
+<a>fully exit fullscreen</a> <var>removedNode</var>'s <var>document</var>.
 
 <p>Whenever the <a>unloading document cleanup steps</a> run with a <var>document</var>,
 <a>fully exit fullscreen</a> <var>document</var>.
