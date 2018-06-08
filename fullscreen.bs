@@ -181,6 +181,8 @@ partial interface DocumentOrShadowRoot {
 <!-- The event handler attributes are intentially not in a partial DocumentAndElementEventHandlers
      interface, which is implemented by Document and HTMLElement, not Element. -->
 
+<wpt>interfaces.html</wpt>
+
 <dl class=domintro>
  <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
  <dd><p>Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
