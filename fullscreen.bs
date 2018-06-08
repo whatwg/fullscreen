@@ -688,3 +688,5 @@ for also being awesome.
 <a lang=tr href=http://tantek.com/>Tantek Çelik</a>
 (<a class="p-org org h-org h-card" href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal hassles.
+
+<wpt-rest></wpt-rest>
