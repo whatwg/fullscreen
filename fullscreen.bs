@@ -110,6 +110,17 @@ these steps:
   </ol>
 </ol>
 
+<wpt>
+ model/move-to-fullscreen-iframe-manual.html
+ model/move-to-iframe-manual.html
+ model/move-to-inactive-document-manual.html
+ model/remove-child-manual.html
+ model/remove-first-manual.html
+ model/remove-last-manual.html
+ model/remove-parent-manual.html
+ model/remove-single-manual.html
+</wpt>
+
 <p>Whenever the <a>unloading document cleanup steps</a> run with a <var>document</var>,
 <a>fully exit fullscreen</a> <var>document</var>.
 
@@ -213,6 +224,17 @@ if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
+<wpt>
+ api/element-ready-check-allowed-cross-origin-manual.sub.html
+ api/element-ready-check-containing-iframe-manual.html
+ api/element-ready-check-fullscreen-element-sibling-manual.html
+ api/element-ready-check-fullscreen-iframe-child-manual.html
+ api/element-ready-check-iframe-child-manual.html
+ api/element-ready-check-not-allowed-cross-origin-manual.sub.html
+ api/element-ready-check-not-allowed-manual.html
+ api/element-ready-check-not-in-document-manual.html
+</wpt>
+
 <p>The <dfn method for=Element><code>requestFullscreen()</code></dfn> method, when invoked, must run
 these steps:
 
@@ -313,9 +335,39 @@ these steps:
 <p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
 exercise to the reader. Input welcome on potential improvements.
 
+<wpt>
+ api/element-request-fullscreen-active-document.html
+ api/element-request-fullscreen-and-exit-iframe-manual.html
+ api/element-request-fullscreen-and-move-manual.html
+ api/element-request-fullscreen-and-move-to-iframe-manual.html
+ api/element-request-fullscreen-and-remove-iframe-manual.html
+ api/element-request-fullscreen-and-remove-manual.html
+ api/element-request-fullscreen-dialog-manual.html
+ api/element-request-fullscreen-manual.html
+ api/element-request-fullscreen-non-top-manual.html
+ api/element-request-fullscreen-not-allowed.html
+ api/element-request-fullscreen-null-ns-manual.html
+ api/element-request-fullscreen-same-manual.html
+ api/element-request-fullscreen-svg-rect-manual.html
+ api/element-request-fullscreen-svg-svg-manual.html
+ api/element-request-fullscreen-timing-manual.html
+ api/element-request-fullscreen-top-manual.html
+ api/element-request-fullscreen-twice-manual.html
+ api/element-request-fullscreen-two-elements-manual.html
+ api/element-request-fullscreen-two-iframes-manual.html
+ api/promises-reject.html
+ api/promises-resolve-manual.html
+</wpt>
+
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
 return true if the <a>context object</a> is <a>allowed to use</a> the feature indicated by attribute
 name <code>allowfullscreen</code> and <a>fullscreen is supported</a>, and false otherwise.
+
+<wpt>
+ api/document-fullscreen-enabled-active-document.html
+ api/document-fullscreen-enabled-cross-origin.sub.html
+ api/document-fullscreen-enabled.html
+</wpt>
 
 <p>The <dfn attribute for=Document><code>fullscreen</code></dfn> attribute's getter must return
 false if <a>context object</a>'s <a>fullscreen element</a> is null, and true otherwise.
@@ -338,6 +390,10 @@ attribute's getter must run these steps:
 
  <li><p>Return null.
 </ol>
+
+<wpt>
+ api/document-fullscreen-element-manual.html
+</wpt>
 
 <p>A <a>document</a> is said to be a <dfn>simple fullscreen document</dfn> if there is exactly one
 <a>element</a> in its <a>top layer</a> that has its <a>fullscreen flag</a> set.
@@ -449,6 +505,17 @@ could be an open <{dialog}> element.
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
 
+<wpt>
+ api/document-exit-fullscreen-active-document.html
+ api/document-exit-fullscreen-manual.html
+ api/document-exit-fullscreen-nested-in-iframe-manual.html
+ api/document-exit-fullscreen-nested-manual.html
+ api/document-exit-fullscreen-timing-manual.html
+ api/document-exit-fullscreen-twice-manual.html
+ api/promises-reject.html
+ api/promises-resolve-manual.html
+</wpt>
+
 <p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method, when invoked, must
 return the result of running <a>exit fullscreen</a> on the <a>context object</a>.
 
@@ -474,6 +541,11 @@ return the result of running <a>exit fullscreen</a> on the <a>context object</a>
 
 <p class=note>These are not supported by {{ShadowRoot}} or {{Window}} objects, and there are no
 corresponding <a>event handler content attributes</a> for {{Element}} objects in any namespace.
+
+<wpt>
+ api/document-onfullscreenchange-manual.html
+ api/document-onfullscreenerror.html
+</wpt>
 
 
 
@@ -593,6 +665,10 @@ properties apply to this pseudo-element either.
 <p class="note no-backref">This makes it different from the
 {{DocumentOrShadowRoot/fullscreenElement}} API, which returns the topmost <a>fullscreen element</a>.
 
+<wpt>
+ rendering/fullscreen-pseudo-class-manual.html
+</wpt>
+
 <h3 id=user-agent-level-style-sheet-defaults>User-agent level style sheet defaults</h3>
 <!-- HTML's "The CSS user agent style sheet and presentational hints" section uses this term -->
 
@@ -631,6 +707,10 @@ iframe:fullscreen {
 }
 </pre>
 
+<wpt>
+ rendering/ua-style-iframe-manual.html
+</wpt>
+
 
 
 <h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
@@ -644,6 +724,16 @@ user agent or even operating system environment when fullscreen. See also the de
 <p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
 specifically allowed via the <code>allowfullscreen</code> attribute of the HTML <{iframe}> element.
 This prevents e.g. content from third parties to go fullscreen without explicit permission.
+
+
+
+<h2 id=historical>Historical</h2>
+
+<p>TODO
+
+<wpt>
+ api/historical.html
+</wpt>
 
 
 
