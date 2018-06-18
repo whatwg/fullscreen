@@ -164,8 +164,18 @@ steps:
 <h2 id=api>API</h2>
 
 <pre class=idl>
+enum <dfn>FullscreenNavigationUI</dfn> {
+  "auto",
+  "show",
+  "hide"
+};
+
+dictionary <dfn>FullscreenOptions</dfn> {
+  FullscreenNavigationUI navigationUI = "auto";
+};
+
 partial interface Element {
-  Promise&lt;void> requestFullscreen();
+  Promise&lt;void> requestFullscreen(optional FullscreenOptions options);
 
   attribute EventHandler onfullscreenchange;
   attribute EventHandler onfullscreenerror;
@@ -189,8 +199,8 @@ partial interface DocumentOrShadowRoot {
      interface, which is implemented by Document and HTMLElement, not Element. -->
 
 <dl class=domintro>
- <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
- <dd><p>Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
+ <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen(<var>options</var>)}}</code>
+ <dd><p>Displays <var>element</var> fullscreen with <var>options</var> and resolves <var>promise</var> when done.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -218,7 +228,22 @@ if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
-<p>The <dfn method for=Element><code>requestFullscreen()</code></dfn> method, when invoked, must run
+<p>The {{FullscreenOptions}} dictionary can be used to help customize the User Agent UI:
+<ul>
+<li>
+ <dl>
+  <dt>{{navigationUI}}</dt>
+  <dd>Some User Agents may have a navigator bar that can be hidden providing more screen space at the
+  cost of increased user actions to perform navigation actions. This attribute if set to
+  <code>hide</code> tells the user agent the application prefers more screen space over requiring
+  the user to perform more actions. If set to <code>show</code> it tells the user agent to prefer
+  user action simplicity over screen space.</dd> If set to <code>auto</code> the user agent is
+  free to decide.
+ </dl>
+</li>
+</ul>
+
+<p>The <dfn method for=Element><code>requestFullscreen(options)</code></dfn> method, when invoked, must run
 these steps:
 
 <ol>
