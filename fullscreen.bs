@@ -635,10 +635,10 @@ iframe:fullscreen {
 
 <ul>
   <li>The feature name for the Fullscreen API is "fullscreen".
-  <li>The default allowlist for the Fullscreen API is '<code>self</code>'.
+  <li>The <a>default allowlist</a> for the Fullscreen API is '<code>self</code>'.
 </ul>
 
-<p>A document's <a>feature policy</a> determines whether any content in that document is allowed to
+<p>A <a>document</a>'s <a>feature policy</a> determines whether any content in that document is allowed to
 go fullscreen. If disabled in any document, no content in the document will be <a>allowed to use</a>
 fullscreen. If enabled, content in the document will be <a>allowed to use</a> fullscreen.
 
@@ -657,8 +657,8 @@ user agent or even operating system environment when fullscreen. See also the de
 <p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
 specifically allowed via feature policy, either through the <code>allowfullscreen</code> attribute
 of the HTML <{iframe}> element, or an appropriate declaration in the <code>allow</code> attribute
-of the HTML <{iframe}> element, or through a <code>Feature-Policy</code> HTTP header delivered with
-the document through which it is nested.
+of the HTML <{iframe}> element, or through a `<a http-header><code>Feature-Policy</code></a>` HTTP
+header delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
