@@ -206,7 +206,7 @@ partial interface DocumentOrShadowRoot {
   When supplied, <var>options</var>'s <code>navigationUI</code> member indicates whether showing
   navigation UI while in fullscreen is preferred or not. If set to "<code>show</code>", navigation
   simplicity is preferred over screen space, and if set to "<code>hide</code>", more screen space
-  is preferred. User agents are always free to honor user preference over the application. The
+  is preferred. User agents are always free to honor user preference over the application's. The
   default value "<code>auto</code>" indicates no application preference.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
