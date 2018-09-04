@@ -199,8 +199,15 @@ partial interface DocumentOrShadowRoot {
      interface, which is implemented by Document and HTMLElement, not Element. -->
 
 <dl class=domintro>
- <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen(<var>options</var>)}}</code>
- <dd><p>Displays <var>element</var> fullscreen with <var>options</var> and resolves <var>promise</var> when done.
+ <dt><code><var>promise</var> = <var>element</var> . <a method for=Element lt=requestFullscreen()>requestFullscreen([<var>options</var>])</a></code>
+ <dd>
+  Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
+
+  When supplied, <var>options</var>'s <code>navigationUI</code> member indicates whether showing
+  navigation UI while in fullscreen is preferred or not. If set to "<code>show</code>", navigation
+  simplicity is preferred over screen space, and if set to "<code>hide</code>", more screen space
+  is preferred. User agents are always free to honor user preference over the application. The
+  default value "<code>auto</code>" indicates no application preference.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
