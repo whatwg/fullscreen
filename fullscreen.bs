@@ -235,23 +235,8 @@ if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
-<p>The {{FullscreenOptions}} dictionary can be used to help customize the User Agent UI:
-<ul>
-<li>
- <dl>
-  <dt>{{navigationUI}}</dt>
-  <dd>Some User Agents may have a navigator bar that can be hidden providing more screen space at the
-  cost of increased user actions to perform navigation actions. This attribute if set to
-  <code>hide</code> tells the user agent the application prefers more screen space over requiring
-  the user to perform more actions. If set to <code>show</code> it tells the user agent to prefer
-  user action simplicity over screen space.</dd> If set to <code>auto</code> the user agent is
-  free to decide.
- </dl>
-</li>
-</ul>
-
-<p>The <dfn method for=Element><code>requestFullscreen(options)</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=Element><code>requestFullscreen(<var>options</var>)</code></dfn> method,
+when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>pending</var> be the <a>context object</a>.
@@ -286,11 +271,17 @@ these steps:
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
- <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
- dimensions of the screen of the output device. Optionally display a message how the end user can
- revert this.
- <!-- cross-process -->
+ <li>
+  <p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
+  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
+  dimensions of the available screen of the output device, optionally taking into account
+  <var>options</var>'s <code>navigationUI</code> member. Optionally display a message how the end
+  user can revert this.
+  <!-- cross-process -->
+
+  <p class=note>The <code>navigationUI</code> member is a hint to the user agent about what the
+  author thinks will lead to the best user experience. The member might be ignored altogether, for
+  example based on user preferences.
 
  <li>
   <p>If any of the following conditions are false, then set <var>error</var> to true:
