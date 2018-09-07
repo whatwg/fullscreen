@@ -273,15 +273,34 @@ when invoked, must run these steps:
 
  <li>
   <p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
-  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
-  dimensions of the available screen of the output device, optionally taking into account
-  <var>options</var>'s <code>navigationUI</code> member. Optionally display a message how the end
-  user can revert this.
+  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions, optionally
+  taking into account <var>options</var>'s <code>navigationUI</code> member:
   <!-- cross-process -->
 
-  <p class=note>The <code>navigationUI</code> member is a hint to the user agent about what the
-  author thinks will lead to the best user experience. The member might be ignored altogether, for
-  example based on user preferences.
+  <table>
+    <thead>
+      <tr>
+      <th>value</th>
+      <th>viewport dimensions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"<code>hide</code>"</td>
+        <td>full dimensions of the screen of the output device</td>
+      </tr>
+      <tr>
+        <td>"<code>show</code>"</td>
+        <td>dimensions of the screen of the output device clamped to allow the user agent to show page navigation controls</td>
+      </tr>
+      <tr>
+        <td>"<code>auto</code>"</td>
+        <td>user-agent defined, but matching one of the above</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Optionally display a message how the end user can revert this.
 
  <li>
   <p>If any of the following conditions are false, then set <var>error</var> to true:
