@@ -165,8 +165,18 @@ steps:
 <h2 id=api>API</h2>
 
 <pre class=idl>
+enum <dfn>FullscreenNavigationUI</dfn> {
+  "auto",
+  "show",
+  "hide"
+};
+
+dictionary <dfn>FullscreenOptions</dfn> {
+  FullscreenNavigationUI navigationUI = "auto";
+};
+
 partial interface Element {
-  Promise&lt;void> requestFullscreen();
+  Promise&lt;void> requestFullscreen(optional FullscreenOptions options);
 
   attribute EventHandler onfullscreenchange;
   attribute EventHandler onfullscreenerror;
@@ -190,8 +200,15 @@ partial interface DocumentOrShadowRoot {
      interface, which is implemented by Document and HTMLElement, not Element. -->
 
 <dl class=domintro>
- <dt><code><var>promise</var> = <var>element</var> . {{Element/requestFullscreen()}}</code>
- <dd><p>Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
+ <dt><code><var>promise</var> = <var>element</var> . <a method for=Element lt=requestFullscreen()>requestFullscreen([<var>options</var>])</a></code>
+ <dd>
+  Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
+
+  When supplied, <var>options</var>'s <code>navigationUI</code> member indicates whether showing
+  navigation UI while in fullscreen is preferred or not. If set to "<code>show</code>", navigation
+  simplicity is preferred over screen space, and if set to "<code>hide</code>", more screen space
+  is preferred. User agents are always free to honor user preference over the application's. The
+  default value "<code>auto</code>" indicates no application preference.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -219,8 +236,8 @@ if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
-<p>The <dfn method for=Element><code>requestFullscreen()</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=Element><code>requestFullscreen(<var>options</var>)</code></dfn> method,
+when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>pending</var> be the <a>context object</a>.
@@ -255,11 +272,36 @@ these steps:
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
- <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions to match the
- dimensions of the screen of the output device. Optionally display a message how the end user can
- revert this.
- <!-- cross-process -->
+ <li>
+  <p>If <var>error</var> is false: Resize <var>pendingDoc</var>'s
+  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions, optionally
+  taking into account <var>options</var>'s <code>navigationUI</code> member:
+  <!-- cross-process -->
+
+  <table>
+    <thead>
+      <tr>
+      <th>value</th>
+      <th>viewport dimensions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"<code>hide</code>"</td>
+        <td>full dimensions of the screen of the output device</td>
+      </tr>
+      <tr>
+        <td>"<code>show</code>"</td>
+        <td>dimensions of the screen of the output device clamped to allow the user agent to show page navigation controls</td>
+      </tr>
+      <tr>
+        <td>"<code>auto</code>"</td>
+        <td>user-agent defined, but matching one of the above</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Optionally display a message how the end user can revert this.
 
  <li>
   <p>If any of the following conditions are false, then set <var>error</var> to true:
