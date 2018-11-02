@@ -192,7 +192,7 @@ partial interface Document {
   attribute EventHandler onfullscreenerror;
 };
 
-partial interface DocumentOrShadowRoot {
+partial interface mixin DocumentOrShadowRoot {
   [LenientSetter] readonly attribute Element? fullscreenElement;
 };
 </pre>
@@ -744,6 +744,7 @@ Ian Hickson,
 Ignacio Solla,
 João Eiras,
 Josh Soref,
+Kagami Sascha Rosylight,
 Matt Falkenhagen,
 Mihai Balan,
 Mounir Lamouri,
