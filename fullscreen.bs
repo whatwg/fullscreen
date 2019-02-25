@@ -327,7 +327,7 @@ when invoked, must run these steps:
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
  <var>pending</var>.
 
- <li><p><a>While</a> the first element in <var>fullscreenElements</var> is in a
+ <li><p><a>While</a> the last element in <var>fullscreenElements</var> is in a
  <a>nested browsing context</a>: <a for=set>append</a> its <a>browsing context container</a> to
  <var>fullscreenElements</var>.
  <!-- cross-process -->
@@ -733,6 +733,7 @@ delivered with the <a>document</a> through which it is nested.
 
 <p>Thanks to
 Andy Earnshaw,
+Changwan Hong,
 Chris Pearce,
 Darin Fisher,
 Dave Tapuska,
