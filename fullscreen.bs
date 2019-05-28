@@ -266,6 +266,9 @@ are:
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
 
+ <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
+ <var>pendingDoc</var>'s <a>relevant global object</a>.
+
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
  <li>
