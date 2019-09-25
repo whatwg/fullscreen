@@ -176,7 +176,7 @@ dictionary <dfn>FullscreenOptions</dfn> {
 };
 
 partial interface Element {
-  Promise&lt;void> requestFullscreen(optional FullscreenOptions options);
+  Promise&lt;void> requestFullscreen(optional FullscreenOptions options = {});
 
   attribute EventHandler onfullscreenchange;
   attribute EventHandler onfullscreenerror;
