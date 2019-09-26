@@ -165,13 +165,13 @@ steps:
 <h2 id=api>API</h2>
 
 <pre class=idl>
-enum <dfn>FullscreenNavigationUI</dfn> {
+enum FullscreenNavigationUI {
   "auto",
   "show",
   "hide"
 };
 
-dictionary <dfn>FullscreenOptions</dfn> {
+dictionary FullscreenOptions {
   FullscreenNavigationUI navigationUI = "auto";
 };
 
