@@ -149,7 +149,7 @@ steps:
   </ol>
 </ol>
 
-<p class=note>These steps integrate with the <a>event loop</a> defined in HTML. [[!HTML]]
+<p class=note>These steps integrate with the <a for=/>event loop</a> defined in HTML. [[!HTML]]
 
 
 
