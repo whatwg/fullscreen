@@ -1,0 +1,17 @@
+name: deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - run: make deploy
+      env:
+        SERVER: ${{ secrets.MARQUEE_SERVER }}
+        SERVER_PUBLIC_KEY: ${{ secrets.MARQUEE_PUBLIC_KEY }}
+        SERVER_DEPLOY_KEY: ${{ secrets.MARQUEE_DEPLOY_KEY }}
