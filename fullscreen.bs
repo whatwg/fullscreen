@@ -725,8 +725,8 @@ user agent or even operating system environment when fullscreen. See also the de
 <p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
 specifically allowed via feature policy, either through the <{iframe/allowfullscreen}> attribute of
 the HTML <{iframe}> element, or an appropriate declaration in the <{iframe/allow}> attribute of the
-HTML <{iframe}> element, or through a `<a http-header><code>Feature-Policy</code></a>` HTTP header
-delivered with the <a>document</a> through which it is nested.
+HTML <{iframe}> element, or through a `<a http-header><code>Permissions-Policy</code></a>` HTTP
+header delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
