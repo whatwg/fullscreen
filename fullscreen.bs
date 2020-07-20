@@ -695,22 +695,23 @@ iframe:fullscreen {
 
 
 
-<h2 id=feature-policy-integration>Feature Policy Integration</h2>
+<h2 id=permissions-policy-integration oldids=feature-policy-integration>Permissions Policy
+Integration</h2>
 
 <p>This specification defines a <a>policy-controlled feature</a> identified by the string
 "<code><dfn data-lt="fullscreen-feature">fullscreen</dfn></code>". Its <a>default allowlist</a> is
 <code>'self'</code>.
 
 <div class="note">
-<p>A <a>document</a>'s <a>feature policy</a> determines whether any content in that document is allowed to
-go fullscreen. If disabled in any document, no content in the document will be <a>allowed to use</a>
-fullscreen.
+<p>A <a>document</a>'s <a for=Document>permissions policy</a> determines whether any content in that
+document is allowed to go fullscreen. If disabled in any document, no content in the document will
+be <a>allowed to use</a> fullscreen.
 
 <p>The <{iframe/allowfullscreen}> attribute of the HTML <{iframe}> element affects the <a>container
 policy</a> for any document nested in that iframe. Unless overridden by the <{iframe/allow}>
 attribute, setting <{iframe/allowfullscreen}> on an iframe is equivalent to <code>&lt;iframe
 allow="fullscreen *"&gt;</code>, as described in
-[[FEATURE-POLICY#iframe-allowfullscreen-attribute]].
+[[feature-policy-1#iframe-allowfullscreen-attribute]].
 </div>
 
 
@@ -723,9 +724,9 @@ user agent or even operating system environment when fullscreen. See also the de
 {{Element/requestFullscreen()}}.
 
 <p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
-specifically allowed via feature policy, either through the <{iframe/allowfullscreen}> attribute of
-the HTML <{iframe}> element, or an appropriate declaration in the <{iframe/allow}> attribute of the
-HTML <{iframe}> element, or through a `<a http-header><code>Permissions-Policy</code></a>` HTTP
+specifically allowed via permissions policy, either through the <{iframe/allowfullscreen}> attribute
+of the HTML <{iframe}> element, or an appropriate declaration in the <{iframe/allow}> attribute of
+the HTML <{iframe}> element, or through a `<a http-header><code>Permissions-Policy</code></a>` HTTP
 header delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
