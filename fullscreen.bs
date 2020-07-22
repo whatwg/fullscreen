@@ -711,7 +711,7 @@ be <a>allowed to use</a> fullscreen.
 policy</a> for any document nested in that iframe. Unless overridden by the <{iframe/allow}>
 attribute, setting <{iframe/allowfullscreen}> on an iframe is equivalent to <code>&lt;iframe
 allow="fullscreen *"&gt;</code>, as described in
-[[feature-policy-1#iframe-allowfullscreen-attribute]].
+[[permissions-policy#iframe-allowfullscreen-attribute]].
 </div>
 
 
