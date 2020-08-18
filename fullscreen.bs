@@ -173,7 +173,7 @@ dictionary FullscreenOptions {
 };
 
 partial interface Element {
-  Promise&lt;void> requestFullscreen(optional FullscreenOptions options = {});
+  Promise&lt;undefined> requestFullscreen(optional FullscreenOptions options = {});
 
   attribute EventHandler onfullscreenchange;
   attribute EventHandler onfullscreenerror;
@@ -183,7 +183,7 @@ partial interface Document {
   [LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
   [LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
 
-  Promise&lt;void> exitFullscreen();
+  Promise&lt;undefined> exitFullscreen();
 
   attribute EventHandler onfullscreenchange;
   attribute EventHandler onfullscreenerror;
