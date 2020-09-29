@@ -3,6 +3,7 @@ Group: WHATWG
 H1: Fullscreen API
 Shortname: fullscreen
 Text Macro: TWITTER fullscreenapi
+Text Macro: LATESTRD 2020-07
 Abstract: The Fullscreen API standard defines an API for elements to display themselves fullscreen.
 Translation: ja https://triple-underscore.github.io/fullscreen-ja.html
 Markup Shorthands: css no
