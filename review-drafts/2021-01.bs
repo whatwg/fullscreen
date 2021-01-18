@@ -1,5 +1,6 @@
 <pre class=metadata>
 Group: WHATWG
+Date: 2021-01-18
 H1: Fullscreen API
 Shortname: fullscreen
 Text Macro: TWITTER fullscreenapi
