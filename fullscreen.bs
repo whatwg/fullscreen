@@ -317,6 +317,11 @@ when invoked, must run these steps:
   <p>If <var>error</var> is true:
 
   <ol>
+   <li><p>If <var>pending</var>'s <a>node document</a> is not <a>allowed to use</a> the "<code><a
+   data-lt="fullscreen-feature">fullscreen</a></code>" feature, then <a
+   data-lt="report-violation">generate a report</a> for violation of <a
+   data-lt="fullscreen-feature">fullscreen</a> policy on the <a>current settings object</a>.
+
    <li><p><a for=set>Append</a> (<code>fullscreenerror</code>, <var>pending</var>) to
    <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
 
