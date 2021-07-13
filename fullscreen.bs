@@ -235,18 +235,16 @@ if all of the following are true, and false otherwise:
 </ul>
 
 <div algorithm>
-<p>The <dfn method for=Element><code>requestFullscreen(<var>options</var>)</code></dfn> method,
-when invoked, must run these steps:
+<p>The <dfn method for=Element><code>requestFullscreen(<var>options</var>)</code></dfn> method steps
+are:
 
 <ol>
- <li><p>Let <var>pending</var> be the <a>context object</a>.
-
- <li><p>Let <var>pendingDoc</var> be <var>pending</var>'s <a>node document</a>.
+ <li><p>Let <var>pendingDoc</var> be <a>this</a>'s <a>node document</a>.
 
  <li><p>Let <var>promise</var> be a new promise.
 
  <li><p>If <var>pendingDoc</var> is not <a>fully active</a>, then reject <var>promise</var> with a
- <code>TypeError</code> exception and return <var>promise</var>.
+ {{TypeError}} exception and return <var>promise</var>.
 
  <li><p>Let <var>error</var> be false.
 
@@ -254,19 +252,19 @@ when invoked, must run these steps:
   <p>If any of the following conditions are false, then set <var>error</var> to true:
 
   <ul>
-   <li><p><var>pending</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
-   <var>pending</var> is an
+   <li><p><a>This</a>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
+   <a>this</a> is an
    <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
    <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
    element. [[!SVG]] [[!MATHML]]
 
-   <li><p><var>pending</var> is not a <{dialog}> element.
+   <li><p><a>This</a> is not a <{dialog}> element.
 
-   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
 
    <li><p><a>Fullscreen is supported</a>.
 
-   <li><p><var>pending</var>'s <a>relevant global object</a> has <a>transient activation</a> or the
+   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
 
@@ -307,9 +305,9 @@ when invoked, must run these steps:
   <p>If any of the following conditions are false, then set <var>error</var> to true:
 
   <ul>
-   <li><p><var>pending</var>'s <a>node document</a> is <var>pendingDoc</var>.
+   <li><p><a>This</a>'s <a>node document</a> is <var>pendingDoc</var>.
 
-   <li><p>The <a>fullscreen element ready check</a> for <var>pending</var> returns true.
+   <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
    <!-- cross-process; check is only needed on pending as it is recursive already -->
   </ul>
 
@@ -317,15 +315,15 @@ when invoked, must run these steps:
   <p>If <var>error</var> is true:
 
   <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenerror</code>, <var>pending</var>) to
+   <li><p><a for=set>Append</a> (<code>fullscreenerror</code>, <a>this</a>) to
    <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
 
-   <li><p>Reject <var>promise</var> with a <code>TypeError</code> exception and terminate these
+   <li><p>Reject <var>promise</var> with a {{TypeError}} exception and terminate these
    steps.
   </ol>
 
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
- <var>pending</var>.
+ <a>this</a>.
 
  <li><p><a>While</a> the last element in <var>fullscreenElements</var> is in a
  <a>nested browsing context</a>: <a for=set>append</a> its <a>browsing context container</a> to
@@ -343,7 +341,7 @@ when invoked, must run these steps:
 
     <p class=note>No need to notify observers when nothing has changed.
 
-   <li><p>If <var>element</var> is <var>pending</var> and <var>pending</var> is an <{iframe}>
+   <li><p>If <var>element</var> is <a>this</a> and <a>this</a> is an <{iframe}>
    <a>element</a>, then set <var>element</var>'s <a>iframe fullscreen flag</a>.
 
    <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
@@ -362,30 +360,30 @@ when invoked, must run these steps:
 exercise to the reader. Input welcome on potential improvements.
 </div>
 
-<p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> attribute's getter must
-return true if the <a>context object</a> is <a>allowed to use</a> the "<code><a
+<p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> getter steps are to return
+true if <a>this</a> is <a>allowed to use</a> the "<code><a
 data-lt="fullscreen-feature">fullscreen</a></code>" feature and <a>fullscreen is supported</a>, and
 false otherwise.
 
-<p>The <dfn attribute for=Document><code>fullscreen</code></dfn> attribute's getter must return
-false if <a>context object</a>'s <a>fullscreen element</a> is null, and true otherwise.
+<p>The <dfn attribute for=Document><code>fullscreen</code></dfn> getter steps are to return false if
+<a>this</a>'s <a>fullscreen element</a> is null, and true otherwise.
 
 <p class=note>Use the {{DocumentOrShadowRoot/fullscreenElement}} attribute instead.
 
 <div algorithm>
 <p>The
 <dfn attribute for=DocumentOrShadowRoot id=dom-document-fullscreenelement><code>fullscreenElement</code></dfn>
-attribute's getter must run these steps:
+getter steps are:
 
 <ol>
- <li><p>If the <a>context object</a> is a <a for=/>shadow root</a> and its
- <a for=DocumentFragment>host</a> is not <a>connected</a>, then return null.</li>
+ <li><p>If <a>this</a> is a <a for=/>shadow root</a> and its <a for=DocumentFragment>host</a> is not
+ <a>connected</a>, then return null.
 
  <li><p>Let <var>candidate</var> be the result of <a>retargeting</a> <a>fullscreen element</a>
- against the <a>context object</a>.
+ against <a>this</a>.
 
- <li><p>If <var>candidate</var> and the <a>context object</a> are in the same <a>tree</a>, then
- return <var>candidate</var>.
+ <li><p>If <var>candidate</var> and <a>this</a> are in the same <a>tree</a>, then return
+ <var>candidate</var>.
 
  <li><p>Return null.
 </ol>
@@ -438,7 +436,7 @@ could be an open <{dialog}> element.
  <li><p>Let <var>promise</var> be a new promise.
 
  <li><p>If <var>doc</var> is not <a>fully active</a> or <var>doc</var>'s <a>fullscreen element</a>
- is null, then reject <var>promise</var> with a <code>TypeError</code> exception and return
+ is null, then reject <var>promise</var> with a {{TypeError}} exception and return
  <var>promise</var>.
 
  <li><p>Let <var>resize</var> be false.
@@ -512,8 +510,8 @@ could be an open <{dialog}> element.
 </ol>
 </div>
 
-<p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method, when invoked, must
-return the result of running <a>exit fullscreen</a> on the <a>context object</a>.
+<p>The <dfn method for=Document><code>exitFullscreen()</code></dfn> method steps are to return the
+result of running <a>exit fullscreen</a> on <a>this</a>.
 
 <hr>
 
