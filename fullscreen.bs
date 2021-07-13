@@ -202,11 +202,12 @@ partial interface mixin DocumentOrShadowRoot {
  <dd>
   Displays <var>element</var> fullscreen and resolves <var>promise</var> when done.
 
-  When supplied, <var>options</var>'s <code>navigationUI</code> member indicates whether showing
-  navigation UI while in fullscreen is preferred or not. If set to "<code>show</code>", navigation
-  simplicity is preferred over screen space, and if set to "<code>hide</code>", more screen space
-  is preferred. User agents are always free to honor user preference over the application's. The
-  default value "<code>auto</code>" indicates no application preference.
+  When supplied, <var>options</var>'s {{FullscreenOptions/navigationUI}} member indicates whether
+  showing navigation UI while in fullscreen is preferred or not. If set to
+  "{{FullscreenNavigationUI/show}}", navigation simplicity is preferred over screen space, and if
+  set to "{{FullscreenNavigationUI/hide}}", more screen space is preferred. User agents are always
+  free to honor user preference over the application's. The default value
+  "{{FullscreenNavigationUI/auto}}" indicates no application preference.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -234,7 +235,7 @@ if all of the following are true, and false otherwise:
  <!-- cross-process, recursive -->
 </ul>
 
-<div algorithm>
+<div algorithm="requestFullscreen(options)">
 <p>The <dfn method for=Element><code>requestFullscreen(<var>options</var>)</code></dfn> method steps
 are:
 
@@ -273,7 +274,7 @@ are:
  <li>
   <p>If <var>error</var> is false, then resize <var>pendingDoc</var>'s
   <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions, optionally
-  taking into account <var>options</var>'s <code>navigationUI</code> member:
+  taking into account <var>options</var>["{{FullscreenOptions/navigationUI}}"]:
   <!-- cross-process -->
 
   <table>
@@ -285,15 +286,15 @@ are:
     </thead>
     <tbody>
       <tr>
-        <td>"<code>hide</code>"</td>
+        <td>"<dfn enum-value for="FullscreenNavigationUI"><code>hide</code></dfn>"</td>
         <td>full dimensions of the screen of the output device</td>
       </tr>
       <tr>
-        <td>"<code>show</code>"</td>
+        <td>"<dfn enum-value for="FullscreenNavigationUI"><code>show</code></dfn>"</td>
         <td>dimensions of the screen of the output device clamped to allow the user agent to show page navigation controls</td>
       </tr>
       <tr>
-        <td>"<code>auto</code>"</td>
+        <td>"<dfn enum-value for="FullscreenNavigationUI"><code>auto</code></dfn>"</td>
         <td>user-agent defined, but matching one of the above</td>
       </tr>
     </tbody>
@@ -315,7 +316,7 @@ are:
   <p>If <var>error</var> is true:
 
   <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenerror</code>, <a>this</a>) to
+   <li><p><a for=set>Append</a> ({{fullscreenerror}}, <a>this</a>) to
    <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
 
    <li><p>Reject <var>promise</var> with a {{TypeError}} exception and terminate these
@@ -346,7 +347,7 @@ are:
 
    <li><p><a lt="fullscreen an element">Fullscreen <var>element</var></a> within <var>doc</var>.
 
-   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>element</var>) to
+   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>element</var>) to
    <var>doc</var>'s <a>list of pending fullscreen events</a>.
   </ol>
 
@@ -456,7 +457,7 @@ could be an open <{dialog}> element.
 
  <li><p>If <var>doc</var>'s <a>fullscreen element</a> is not <a>connected</a>:
   <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>doc</var>'s
+   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>doc</var>'s
    <a>fullscreen element</a>) to <var>doc</var>'s
    <a>list of pending fullscreen events</a>.
   </ol>
@@ -482,7 +483,7 @@ could be an open <{dialog}> element.
   <p><a>For each</a> <var>exitDoc</var> in <var>exitDocs</var>:
 
   <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>exitDoc</var>'s
+   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>exitDoc</var>'s
    <a>fullscreen element</a>) to <var>exitDoc</var>'s <a>list of pending fullscreen events</a>.
 
    <li><p>If <var>resize</var> is true, <a lt="unfullscreen a document">unfullscreen
@@ -496,7 +497,7 @@ could be an open <{dialog}> element.
   <p><a>For each</a> <var>descendantDoc</var> in <var>descendantDocs</var>:
 
   <ol>
-   <li><p><a for=set>Append</a> (<code>fullscreenchange</code>, <var>descendantDoc</var>'s
+   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>descendantDoc</var>'s
    <a>fullscreen element</a>) to <var>descendantDoc</var>'s
    <a>list of pending fullscreen events</a>.
 
@@ -526,11 +527,11 @@ result of running <a>exit fullscreen</a> on <a>this</a>.
    <th><a>event handler event type</a>
  <tbody>
   <tr>
-   <td><dfn attribute for=Document id=handler-document-onfullscreenchange><code>onfullscreenchange</code></dfn>
-   <td><code>fullscreenchange</code>
+   <td><dfn attribute for=Document,Element id=handler-document-onfullscreenchange><code>onfullscreenchange</code></dfn>
+   <td><dfn event for=Document,Element><code>fullscreenchange</code></dfn>
   <tr>
-   <td><dfn attribute for=Document id=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
-   <td><code>fullscreenerror</code>
+   <td><dfn attribute for=Document,Element id=handler-document-onfullscreenerror><code>onfullscreenerror</code></dfn>
+   <td><dfn event for=Document,Element><code>fullscreenerror</code></dfn>
 </table>
 
 <p class=note>These are not supported by {{ShadowRoot}} or {{Window}} objects, and there are no
