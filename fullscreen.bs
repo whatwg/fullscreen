@@ -63,7 +63,7 @@ stated otherwise it is unset.
 <a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
-is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>pairs</a>. It is initially empty.
+is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>
 and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
@@ -138,12 +138,13 @@ security risk, or platform limitation.
 steps:
 
 <ol>
- <li><p>Let <var>pairs</var> be <var>document</var>'s <a>list of pending fullscreen events</a>.
+ <li><p>Let <var>pendingEvents</var> be <var>document</var>'s
+ <a>list of pending fullscreen events</a>.
 
  <li><p><a for=set>Empty</a> <var>document</var>'s <a>list of pending fullscreen events</a>.
 
  <li>
-  <p><a>For each</a> (<var>type</var>, <var>element</var>) in <var>pairs</var>:
+  <p><a>For each</a> (<var>type</var>, <var>element</var>) in <var>pendingEvents</var>:
 
   <ol>
    <li><p>Let <var>target</var> be <var>element</var> if <var>element</var> is <a>connected</a>
