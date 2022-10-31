@@ -81,6 +81,7 @@ its <a>node document</a>'s <a>top layer</a>.
  <li><p><a lt="unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
  set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
  <a>fullscreen element</a>.
+
  <li><p><a>Exit fullscreen</a> <var>document</var>.
 </ol>
 </div>
