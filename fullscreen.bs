@@ -18,12 +18,6 @@ spec:infra
     type:dfn; text:string
 </pre>
 
-<pre class=anchors>
-urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
-    type: dfn
-        text: triggered by a user generated orientation change
-</pre>
-
 <pre class=biblio>
 {
     "CSS": {
@@ -87,7 +81,6 @@ its <a>node document</a>'s <a>top layer</a>.
  <li><p><a lt="unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
  set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
  <a>fullscreen element</a>.
-
  <li><p><a>Exit fullscreen</a> <var>document</var>.
 </ol>
 </div>
@@ -266,8 +259,7 @@ are:
 
    <li><p><a>Fullscreen is supported</a>.
 
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
-   algorithm is <a>triggered by a user generated orientation change</a>.
+   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a>.
   </ul>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
@@ -464,6 +456,8 @@ could be an open <{dialog}> element.
   </ol>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
+
+ <li><p>Run the [=fully unlock orientation steps=] with <var>doc</var>.
 
  <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
 
