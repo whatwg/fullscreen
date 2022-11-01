@@ -172,6 +172,7 @@ enum FullscreenNavigationUI {
 
 dictionary FullscreenOptions {
   FullscreenNavigationUI navigationUI = "auto";
+  OrientationLockType orientation;
 };
 
 partial interface Element {
@@ -209,6 +210,11 @@ partial interface mixin DocumentOrShadowRoot {
   set to "{{FullscreenNavigationUI/hide}}", more screen space is preferred. User agents are always
   free to honor user preference over the application's. The default value
   "{{FullscreenNavigationUI/auto}}" indicates no application preference.
+
+  When supplied, <var>options</var>'s {{FullscreenOptions/orientation}} member indicates whether
+  the screen should be locked to the given [=screen orientation=]. User agents are always
+  free to honor user preference over the application's. When the value is missing,
+  no orientation lock is applied.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -275,7 +281,8 @@ are:
  <li>
   <p>If <var>error</var> is false, then resize <var>pendingDoc</var>'s
   <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions, optionally
-  taking into account <var>options</var>["{{FullscreenOptions/navigationUI}}"]:
+  taking into account <var>options</var>["{{FullscreenOptions/orientation}}"] and
+  <var>options</var>["{{FullscreenOptions/navigationUI}}"]:
   <!-- cross-process -->
 
   <table>
