@@ -44,10 +44,6 @@ urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
 <p>Most terminology used in this specification is from CSS, DOM, HTML, and Web IDL. [[!CSS]]
 [[!DOM]] [[!HTML]] [[!WEBIDL]]
 
-<p>A <a for=/>browsing context</a> <var>A</var> is called a <dfn>descendant browsing context</dfn>
-of a <a for=/>browsing context</a> <var>B</var> if and only if <var>B</var> is an
-<a>ancestor browsing context</a> of <var>A</var>.
-
 
 
 <h2 id=model>Model</h2>
@@ -279,10 +275,7 @@ are:
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
  <li>
-  <p>If <var>error</var> is false, then resize <var>pendingDoc</var>'s
-  <a>top-level browsing context</a>'s <a>active document</a>'s viewport's dimensions, optionally
-  taking into account <var>options</var>["{{FullscreenOptions/orientation}}"] and
-  <var>options</var>["{{FullscreenOptions/navigationUI}}"]:
+  <var>options</var>["{{FullscreenOptions/orientation}}"] and <var>options</var>["{{FullscreenOptions/navigationUI}}"]:
   <!-- cross-process -->
 
   <table>
@@ -334,9 +327,20 @@ are:
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
  <a>this</a>.
 
- <li><p><a>While</a> the last element in <var>fullscreenElements</var> is in a
- <a>nested browsing context</a>: <a for=set>append</a> its <a>browsing context container</a> to
- <var>fullscreenElements</var>.
+ <li>
+  <p>While true:
+
+  <ol>
+   <li><p>Let <var>last</var> be the last <a for=list>item</a> of <var>fullscreenElements</var>.
+
+   <li><p>Let <var>container</var> be <var>last</var>'s <a>node navigable</a>'s
+   <a for=navigable>container</a>.
+
+   <li><p>If <var>container</var> is null, then <a>break</a>.
+
+   <li><p><a for=set>Append</a> <var>container</var> to <var>fullscreenElements</var>.
+  </ol>
+ </li>
  <!-- cross-process -->
 
  <li>
@@ -365,8 +369,8 @@ are:
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
 
-<p class=note>Implementations with out-of-process <a for=/>browsing contexts</a> are left as an
-exercise to the reader. Input welcome on potential improvements.
+<p class=note>Implementations with out-of-process <a for=/>navigables</a> are left as an exercise
+to the reader. Input welcome on potential improvements.
 </div>
 
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> getter steps are to return
@@ -421,8 +425,10 @@ could be an open <{dialog}> element.
 
    <li><p>If <var>lastDoc</var> is not a <a>simple fullscreen document</a>, <a>break</a>.
 
-   <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>browsing context container</a>, if
-   any, and otherwise <a>break</a>.
+   <li><p>Let <var>container</var> be <var>lastDoc</var>'s <a>node navigable</a>'s
+   <a for=navigable>container</a>.
+
+   <li><p>If <var>container</var> is null, then <a>break</a>.
 
    <li><p>If <var>container</var>'s <a>iframe fullscreen flag</a> is set, <a>break</a>.
 
@@ -455,8 +461,8 @@ could be an open <{dialog}> element.
  <var>doc</var>.
  <!-- cross-process -->
 
- <li><p>Let <var>topLevelDoc</var> be <var>doc</var>'s <a>top-level browsing context</a>'s
- <a>active document</a>.
+ <li><p>Let <var>topLevelDoc</var> be <var>doc</var>'s <a>node navigable</a>'s
+ <a for=navigable>top-level traversable</a>'s <a for=navigable>active document</a>.
  <!-- cross-process -->
 
  <li><p>If <var>topLevelDoc</var> is in <var>docs</var>, and it is a
@@ -483,8 +489,8 @@ could be an open <{dialog}> element.
  <!-- cross-process -->
 
  <li><p>Let <var>descendantDocs</var> be an <a>ordered set</a> consisting of <var>doc</var>'s
- <a>descendant browsing contexts</a>' <a>active documents</a> whose <a>fullscreen element</a> is
- non-null, if any, in <a>tree order</a>.
+ <a for=Document>descendant navigables</a>' <a for=navigable>active documents</a> whose
+ <a>fullscreen element</a> is non-null, if any, in <a>tree order</a>.
  <!-- cross-process -->
 
  <li>
@@ -553,8 +559,8 @@ corresponding <a>event handler content attributes</a> for {{Element}} objects in
 {{Element/requestFullscreen()}} and {{Document/exitFullscreen()}}.
 
 <p>If the end user instructs the user agent to end a fullscreen session initiated via
-{{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> the
-<a>top-level browsing context</a>'s <a>active document</a>.
+{{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> given the
+<a for=/>top-level traversable</a>'s <a>active document</a>.
 
 <p>The user agent may end any fullscreen session without instruction from the end user
 or call to {{Document/exitFullscreen()}} whenever the user agent deems it necessary.
@@ -731,11 +737,11 @@ advertise this to the user. This is to prevent a site from spoofing the end user
 user agent or even operating system environment when fullscreen. See also the definition of
 {{Element/requestFullscreen()}}.
 
-<p>To enable content in a <a>nested browsing context</a> to go fullscreen, it needs to be
-specifically allowed via permissions policy, either through the <{iframe/allowfullscreen}> attribute
-of the HTML <{iframe}> element, or an appropriate declaration in the <{iframe/allow}> attribute of
-the HTML <{iframe}> element, or through a `<a http-header><code>Permissions-Policy</code></a>` HTTP
-header delivered with the <a>document</a> through which it is nested.
+<p>To enable content in a <a>child navigable</a> to go fullscreen, it needs to be specifically
+allowed via permissions policy, either through the <{iframe/allowfullscreen}> attribute of the HTML
+<{iframe}> element, or an appropriate declaration in the <{iframe/allow}> attribute of the HTML
+<{iframe}> element, or through a `<a http-header><code>Permissions-Policy</code></a>` HTTP header
+delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
@@ -783,8 +789,7 @@ for also being awesome.
 (<a href=https://google.com/>Google</a>,
 <a href=mailto:philip@foolip.org>philip@foolip.org</a>). It was originally written by
 <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
-(<a href=https://www.mozilla.org/>Mozilla</a>,
-<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
+(<a href=https://www.apple.com/>Apple</a>, <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
 <a lang=tr href=http://tantek.com/>Tantek Çelik</a>
 (<a class="p-org org h-org h-card" href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:tantek@cs.stanford.edu>tantek@cs.stanford.edu</a>) sorted out legal hassles.
