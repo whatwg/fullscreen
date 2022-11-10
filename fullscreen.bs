@@ -18,6 +18,12 @@ spec:infra
     type:dfn; text:string
 </pre>
 
+<pre class=anchors>
+urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
+    type: dfn
+        text: triggered by a user generated orientation change
+</pre>
+
 <pre class=biblio>
 {
     "CSS": {
@@ -260,7 +266,8 @@ are:
 
    <li><p><a>Fullscreen is supported</a>.
 
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a>.
+   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
+   algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
