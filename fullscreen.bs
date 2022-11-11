@@ -241,6 +241,8 @@ if all of the following are true, and false otherwise:
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the "<code><a
  data-lt="fullscreen-feature">fullscreen</a></code>" feature.
  <!-- cross-process, recursive -->
+
+ <li><p><var>element</var> is not in the {{popover showing state}}.
 </ul>
 
 <div algorithm="requestFullscreen(options)">
