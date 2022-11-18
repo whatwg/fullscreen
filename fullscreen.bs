@@ -68,7 +68,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 <p>To <dfn>fullscreen an <var>element</var></dfn>:
 
 <ol>
- <li><p>Run {hide all pop-ups until} given null, false, and true.
+ <li><p>Run {hide all pop-ups until} given null, false, and false.
 
  <li><p>Set <var>element</var>'s <a>fullscreen flag</a>
 
