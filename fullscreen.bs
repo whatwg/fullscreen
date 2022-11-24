@@ -475,6 +475,8 @@ could be an open <{dialog}> element.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
+ <li><p>Run the [=fully unlock the screen orientation steps=] with <var>doc</var>.
+
  <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
 
  <li><p>If <var>doc</var>'s <a>fullscreen element</a> is null, then resolve <var>promise</var> with
