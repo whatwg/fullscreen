@@ -656,17 +656,11 @@ properties apply to this pseudo-element either.
 <h3 id=:fullscreen-pseudo-class><code>:fullscreen</code> pseudo-class</h3>
 
 <p>The <dfn id=css-pc-fullscreen selector><code>:fullscreen</code></dfn> pseudo-class must match any
-<a>element</a> <var>element</var> for which one of the following conditions is true:
-
-<ul>
- <li><p><var>element</var>'s <a>fullscreen flag</a> is set.
-
- <li><p><var>element</var> is a <a>shadow host</a> and the result of <a>retargeting</a> its
- <a>node document</a>'s <a>fullscreen element</a> against <var>element</var> is <var>element</var>.
-</ul>
+<a>element</a> <var>element</var> for which <p><var>element</var>'s <a>fullscreen flag</a> is set.
 
 <p class="note no-backref">This makes it different from the
 {{DocumentOrShadowRoot/fullscreenElement}} API, which returns the topmost <a>fullscreen element</a>.
+It also does not perform <a>retargeting</a>.
 
 <h3 id=user-agent-level-style-sheet-defaults>User-agent level style sheet defaults</h3>
 <!-- HTML's "The CSS user agent style sheet and presentational hints" section uses this term -->
