@@ -70,9 +70,10 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 <ol>
  <li><p>Run {hide all pop-ups until} given null, false, and false.
 
- <li><p>Set <var>element</var>'s <a>fullscreen flag</a>
+ <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
 
- <li><p><a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
+ <li><p><a for="top layer">Add</a> <var>element</var> to <var>element</var>'s <a>node document</a>'s
+ <a>top layer</a>.
 </ol>
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
