@@ -1,5 +1,7 @@
 <pre class=metadata>
 Group: WHATWG
+Status: RD
+Date: 2023-01-16
 H1: Fullscreen API
 Shortname: fullscreen
 Text Macro: TWITTER fullscreenapi
@@ -61,16 +63,8 @@ stated otherwise it is unset.
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
-<p>To <dfn>fullscreen an <var>element</var></dfn>:
-
-<ol>
- <li><p>Run {hide all popovers}.
-
- <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
-
- <li><p><a for="top layer">Add</a> <var>element</var> to <var>element</var>'s <a>node document</a>'s
- <a>top layer</a>.
-</ol>
+<p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>
+and <a for="top layer">add</a> it to its <a>node document</a>'s <a>top layer</a>.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
 <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for=set>remove</a> it from
@@ -238,8 +232,6 @@ if all of the following are true, and false otherwise:
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the "<code><a
  data-lt="fullscreen-feature">fullscreen</a></code>" feature.
  <!-- cross-process, recursive -->
-
- <li><p><var>element</var> is not in the [=popover showing state=].
 </ul>
 
 <div algorithm="requestFullscreen(options)">
