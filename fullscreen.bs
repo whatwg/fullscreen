@@ -64,7 +64,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 <p>To <dfn>fullscreen an <var>element</var></dfn>:
 
 <ol>
- <li><p>Run <a>hide all popovers</a>.
+ <li><p>Run <a>hide all popovers</a> given <var>element</var>'s <a>node document</a>.
 
  <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
 
