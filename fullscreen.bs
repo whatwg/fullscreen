@@ -239,7 +239,7 @@ if all of the following are true, and false otherwise:
  data-lt="fullscreen-feature">fullscreen</a></code>" feature.
  <!-- cross-process, recursive -->
 
- <li><p><var>element</var>'s <a>popover visibility state</a> is not <a for="popover visibility state">showing</a>.
+ <li><p><var>element</var>'s <a>popover visibility state</a> is <a for="popover visibility state">hidden</a>.
 </ul>
 
 <div algorithm="requestFullscreen(options)">
