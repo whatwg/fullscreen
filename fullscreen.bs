@@ -7,7 +7,6 @@ Text Macro: LATESTRD 2023-01
 Abstract: The Fullscreen API standard defines an API for elements to display themselves fullscreen.
 Translation: ja https://triple-underscore.github.io/fullscreen-ja.html
 Markup Shorthands: css no
-Ignore MDN Failure: ::backdrop-pseudo-element
 </pre>
 
 <pre class=link-defaults>
@@ -17,6 +16,7 @@ spec:dom
 spec:infra
     type:dfn; for:set; text:for each
     type:dfn; text:string
+spec:css-position-4; type:selector; text: ::backdrop
 </pre>
 
 <pre class=anchors>
@@ -659,6 +659,13 @@ allowed via permissions policy, either through the <{iframe/allowfullscreen}> at
 delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
+
+
+<h2 id=old-links class=no-num oldids="new-stacking-layer, top-layer, top-layer-add, ::backdrop-pseudo-element, css-pe-backdrop">
+Appendix A: Previously-Hosted Definitions</h2>
+
+This specification previously hosted the definitions of <a selector>::backdrop</a>
+and the concept of the [=Document/top layer=].
 
 
 
