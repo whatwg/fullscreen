@@ -246,25 +246,19 @@ are:
 
  <li><p>Let <var>error</var> be false.
 
- <li>
-  <p>If any of the following conditions are false, then set <var>error</var> to true:
+ <li><p>If <a>this</a>'s <a for=Element>namespace</a> is not the <a>HTML namespace</a> and
+ <a>this</a> is not an <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a>
+ or a <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
+ element, then set <var>error</var> to true. [[!SVG]] [[!MATHML]]
 
-  <ul>
-   <li><p><a>This</a>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
-   <a>this</a> is an
-   <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
-   <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
-   element. [[!SVG]] [[!MATHML]]
+ <li><p>If <a>this</a> is a <{dialog}> element, then set <var>error</var> to true.
 
-   <li><p><a>This</a> is not a <{dialog}> element.
+ <li><p>If the <a>fullscreen element ready check</a> for <a>this</a> returns false, then set <var>error</var> to true.
 
-   <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
+ <li><p>If <a lt="fullscreen is supported">fullscreen is <em>not</em> supported</a>, then set <var>error</var> to true.
 
-   <li><p><a>Fullscreen is supported</a>.
-
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
-   algorithm is <a>triggered by a user generated orientation change</a>.
-  </ul>
+ <li><p>If <a>this</a>'s <a>relevant global object</a> does not have <a>transient activation</a> and
+ the algorithm is not <a>triggered by a user generated orientation change</a>, then set <var>error</var> to true.
 
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
  <var>pendingDoc</var>'s <a>relevant global object</a>.
@@ -303,15 +297,10 @@ are:
 
   <p>Optionally display a message how the end user can revert this.
 
- <li>
-  <p>If any of the following conditions are false, then set <var>error</var> to true:
+ <li><p>If <a>this</a>'s <a>node document</a> is not <var>pendingDoc</var>, then set <var>error</var> to true.
 
-  <ul>
-   <li><p><a>This</a>'s <a>node document</a> is <var>pendingDoc</var>.
-
-   <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
-   <!-- cross-process; check is only needed on pending as it is recursive already -->
-  </ul>
+ <li><p>If the <a>fullscreen element ready check</a> for <a>this</a> returns false, then set <var>error</var> to true.
+ <!-- cross-process; check is only needed on pending as it is recursive already -->
 
  <li>
   <p>If <var>error</var> is true:
