@@ -665,7 +665,7 @@ delivered with the <a>document</a> through which it is nested.
 Appendix A: Previously-Hosted Definitions</h2>
 
 This specification previously hosted the definitions of <a selector>::backdrop</a>
-and the concept of the [=Document/top layer=].
+and the concept of the document's [=Document/top layer=].
 
 
 
