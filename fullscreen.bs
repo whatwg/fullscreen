@@ -63,8 +63,8 @@ stated otherwise it is unset.
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>.
-If <var>element</var> is not currently [=in the top layer=] of its <a>node document</a>,
-[=add to the top layer|add it to the top layer=] of its <a>node document</a>.
+[=Request removal from the top layer=] for |element| from its [=node document=], then
+[=add to the top layer|add it to the top layer=] of its [=node document=].
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
 <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
