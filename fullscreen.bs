@@ -72,7 +72,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
-[=Document/top layer=], whose <a>fullscreen flag</a> is set.
+<a for=Document>top layer</a>, whose <a>fullscreen flag</a> is set.
 
 <hr>
 
