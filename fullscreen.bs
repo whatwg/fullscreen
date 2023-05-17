@@ -68,7 +68,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
 <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
-<a>request removal from the top layer</a> for it from its <a>node document</a>.
+<a>remove from the top layer immediately</a> given |element|'s <a>node document</a> and |element|.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
