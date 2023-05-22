@@ -16,7 +16,9 @@ spec:dom
 spec:infra
     type:dfn; for:set; text:for each
     type:dfn; text:string
-spec:css-position-4; type:selector; text: ::backdrop
+spec:css-position-4
+    type:selector; text: ::backdrop
+    type:dfn; text:top layer
 </pre>
 
 <pre class=anchors>
@@ -57,30 +59,22 @@ stated otherwise it is unset.
 
 <p>All <a for=/>documents</a> have an associated <dfn export>fullscreen element</dfn>. The
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
-<a for=Document>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
+<a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
 
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
-<p>To <dfn>fullscreen an <var>element</var></dfn>:
-
-<ol>
- <li><p>Run <a>hide all popovers</a> given <var>element</var>'s <a>node document</a>.
-
- <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
-
- <li><p><a>Request removal from the top layer</a> given <var>element</var>.
-
- <li><a>Add to the top layer</a> given <var>element</var>.
-</ol>
+<p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>.
+<a>Request removal from the top layer</a> given |element|'s <a>node document</a> and |element|, then
+<a>add to the top layer</a> given |element|'s <a>node document</a> and |element|.
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
 <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
-<a>remove from the top layer immediately</a> given <var>element</var>.
+<a>remove from the top layer immediately</a> given |element|'s <a>node document</a> and |element|.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
-<a for=Document>top layer</a>, whose <a>fullscreen flag</a> is set.
+<a>top layer</a>, whose <a>fullscreen flag</a> is set.
 
 <hr>
 
@@ -91,7 +85,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
  <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, terminate these steps.
 
  <li><p><a lt="unfullscreen an element">Unfullscreen elements</a> whose <a>fullscreen flag</a> is
- set, within <var>document</var>'s <a for=Document>top layer</a>, except for <var>document</var>'s
+ set, within <var>document</var>'s <a>top layer</a>, except for <var>document</var>'s
  <a>fullscreen element</a>.
 
  <li><p><a>Exit fullscreen</a> <var>document</var>.
@@ -119,10 +113,10 @@ these steps:
    <li><p>Otherwise, <a lt="unfullscreen an element">unfullscreen <var>node</var></a>.
 
    <li>
-    <p>If <var>document</var>'s <a for=Document>top layer</a> <a for=set>contains</a> <var>node</var>,
-    <a>remove from the top layer immediately</a> given <var>node</var>.
+    <p>If <var>document</var>'s <a>top layer</a> <a for=set>contains</a> <var>node</var>,
+    <a>remove from the top layer immediately</a> given <var>document</var> and <var>node</var>.
 
-    <p class=note>Other specifications can add and remove elements from <a for=Document>top layer</a>, so
+    <p class=note>Other specifications can add and remove elements from <a>top layer</a>, so
     <var>node</var> might not be <var>document</var>'s <a>fullscreen element</a>. For example,
     <var>node</var> could be an open <{dialog}> element.
   </ol>
@@ -240,10 +234,6 @@ if all of the following are true, and false otherwise:
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the "<code><a
  data-lt="fullscreen-feature">fullscreen</a></code>" feature.
  <!-- cross-process, recursive -->
-
- <li><p><var>element</var> <a for=Element>namespace</a> is not the <a>HTML namespace</a> or
- <var>element</var>'s <a>popover visibility state</a> is <a for="popover visibility
- state">hidden</a>.
 </ul>
 
 <div algorithm="requestFullscreen(options)">
@@ -279,9 +269,6 @@ are:
    <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
-
- <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
- <var>pendingDoc</var>'s <a>relevant global object</a>.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
@@ -417,9 +404,9 @@ getter steps are:
 </div>
 
 <p>A <a>document</a> is said to be a <dfn>simple fullscreen document</dfn> if there is exactly one
-<a>element</a> in its <a for=Document>top layer</a> that has its <a>fullscreen flag</a> set.
+<a>element</a> in its <a>top layer</a> that has its <a>fullscreen flag</a> set.
 
-<p class=note>A <a>document</a> with two <a>elements</a> in its <a for=Document>top layer</a> can be a
+<p class=note>A <a>document</a> with two <a>elements</a> in its <a>top layer</a> can be a
 <a>simple fullscreen document</a>. For example, in addition to the <a>fullscreen element</a> there
 could be an open <{dialog}> element.
 
@@ -453,7 +440,7 @@ could be an open <{dialog}> element.
 
  <p class=note>This is the set of documents for which the <a>fullscreen element</a> will be
  <a lt="unfullscreen an element">unfullscreened</a>, but the last document in <var>docs</var> might
- have more than one <a>element</a> in its <a for=Document>top layer</a> with the <a>fullscreen flag</a> set,
+ have more than one <a>element</a> in its <a>top layer</a> with the <a>fullscreen flag</a> set,
  in which case that document will still remain in fullscreen.
 </ol>
 </div>
@@ -679,7 +666,7 @@ delivered with the <a>document</a> through which it is nested.
 Appendix A: Previously-Hosted Definitions</h2>
 
 This specification previously hosted the definitions of <a selector>::backdrop</a>
-and the concept of the document's <a for=Document>top layer</a>.
+and the concept of the document's <a>top layer</a>.
 
 
 
