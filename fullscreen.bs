@@ -62,9 +62,17 @@ stated otherwise it is unset.
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
-<p>To <dfn>fullscreen an <var>element</var></dfn>, set <var>element</var>'s <a>fullscreen flag</a>.
-<a>Request removal from the top layer</a> given |element|'s <a>node document</a> and |element|, then
-<a>add to the top layer</a> given |element|'s <a>node document</a> and |element|.
+<p>To <dfn>fullscreen an <var>element</var></dfn>:
+
+<ol>
+ <li><p>Run <a>hide all popovers</a> given <var>element</var>'s <a>node document</a>.
+
+ <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
+
+ <li><p><a>Request removal from the top layer</a> given |element|'s <a>node document</a> and |element|.
+
+ <li><a>Add to the top layer</a> given |element|'s <a>node document</a> and |element|.
+</ol>
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
 <a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
@@ -232,6 +240,10 @@ if all of the following are true, and false otherwise:
  <li><p><var>element</var>'s <a>node document</a> is <a>allowed to use</a> the "<code><a
  data-lt="fullscreen-feature">fullscreen</a></code>" feature.
  <!-- cross-process, recursive -->
+
+ <li><p><var>element</var> <a for=Element>namespace</a> is not the <a>HTML namespace</a> or
+ <var>element</var>'s <a>popover visibility state</a> is <a for="popover visibility
+ state">hidden</a>.
 </ul>
 
 <div algorithm="requestFullscreen(options)">
@@ -267,6 +279,9 @@ are:
    <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
+
+ <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
+ <var>pendingDoc</var>'s <a>relevant global object</a>.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
