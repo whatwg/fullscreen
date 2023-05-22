@@ -677,8 +677,7 @@ delivered with the <a>document</a> through which it is nested.
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
 
-<h2 id=old-links class=no-num oldids="new-stacking-layer, top-layer, top-layer-add, ::backdrop-pseudo-element, css-pe-backdrop">
-Appendix A: Previously-Hosted Definitions</h2>
+<h2 id=old-links class=no-num oldids="new-stacking-layer, top-layer, top-layer-add, ::backdrop-pseudo-element, css-pe-backdrop">Previously-hosted definitions</h2>
 
 This specification previously hosted the definitions of <a selector>::backdrop</a>
 and the concept of the document's <a>top layer</a>.
