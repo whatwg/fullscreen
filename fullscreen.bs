@@ -609,7 +609,7 @@ or call to {{Document/exitFullscreen()}} whenever the user agent deems it necess
 <!-- HTML's "The CSS user agent style sheet and presentational hints" section uses this term -->
 
 <pre class=css>
-@namespace "http://www.w3.org/1999/xhtml";
+@namespace url(http://www.w3.org/1999/xhtml);
 
 *|*:not(:root):fullscreen {
   position:fixed !important;
