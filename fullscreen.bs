@@ -660,6 +660,7 @@ allow="fullscreen *"&gt;</code>, as described in
 </div>
 
 
+
 <h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
 
 <p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
@@ -675,6 +676,7 @@ allowed via permissions policy, either through the <{iframe/allowfullscreen}> at
 delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
+
 
 
 <h2 id=old-links class=no-num oldids="new-stacking-layer, top-layer, top-layer-add, ::backdrop-pseudo-element, css-pe-backdrop">Previously-hosted definitions</h2>
