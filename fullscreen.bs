@@ -16,6 +16,9 @@ spec:dom
 spec:infra
     type:dfn; for:set; text:for each
     type:dfn; text:string
+spec:css-position-4
+    type:selector; text: ::backdrop
+    type:dfn; text:top layer
 </pre>
 
 <pre class=anchors>
@@ -68,13 +71,14 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 
  <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
 
- <li><p><a for="top layer">Add</a> <var>element</var> to <var>element</var>'s <a>node document</a>'s
- <a>top layer</a>.
+ <li><p><a>Remove from the top layer immediately</a> given <var>element</var>.
+
+ <li><a>Add to the top layer</a> given <var>element</var>.
 </ol>
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and <a for=set>remove</a> it from
-its <a>node document</a>'s <a>top layer</a>.
+<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
+<a>remove from the top layer immediately</a> given <var>element</var>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
@@ -118,7 +122,7 @@ these steps:
 
    <li>
     <p>If <var>document</var>'s <a>top layer</a> <a for=set>contains</a> <var>node</var>,
-    <a for=set>remove</a> <var>node</var> from <var>document</var>'s <a>top layer</a>.
+    <a>remove from the top layer immediately</a> given <var>node</var>.
 
     <p class=note>Other specifications can add and remove elements from <a>top layer</a>, so
     <var>node</var> might not be <var>document</var>'s <a>fullscreen element</a>. For example,
@@ -585,88 +589,6 @@ or call to {{Document/exitFullscreen()}} whenever the user agent deems it necess
 
 <p>This section is to be interpreted equivalently to the Rendering section of HTML. [[!HTML]]
 
-<p class=XXX>Long term CSS will define the <a>top layer</a> concept and its associated
-<a><code>::backdrop</code></a> pseudo-element as part of CSS' stacking context model. Patching CSS
-as done here is sketchy as hell.
-
-
-<h3 id=new-stacking-layer>New stacking layer</h3>
-
-<p>This specification introduces a new stacking layer to the
-<a href=https://www.w3.org/TR/CSS2/zindex.html>Elaborate description of Stacking Contexts</a> of CSS
-2.1. It is called the <dfn export>top layer</dfn>, comes after step 10 in the painting order, and is
-therefore rendered closest to the user within a viewport. Each <a for=/>document</a> has one
-associated viewport and therefore also one <a>top layer</a>. [[!CSS]]
-
-<p class=note>The terminology used in this and following subsection attempts to match CSS 2.1
-Appendix E.
-
-<p>The <a>top layer</a> is an <a>ordered set</a> of elements, rendered in the order they appear in
-the set. The last element in the set is rendered last, and thus appears on top.
-
-<p class=note>The <code>z-index</code> property has no effect in the <a>top layer</a>.
-
-<p>Each element and <a><code>::backdrop</code></a> pseudo-element in a <a>top layer</a> has the
-following characteristics:
-
-<ul>
- <li><p>It generates a new stacking context.
-
- <li><p>Its parent stacking context is the root stacking context.
-
- <li><p>If it consists of multiple layout boxes, the first box is used.
- <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=24523 -->
-
- <li>
-  <p>It is rendered as an atomic unit as if it were a sibling of its <a for=tree>root</a>.
-
-  <p class=note><a for=tree>Ancestor</a> elements with overflow, opacity, masks, etc. cannot affect
-  it.
-
- <li><p>If its <code>position</code> property computes to <code>fixed</code>, its containing block
- is the viewport, and the initial containing block otherwise.
-
- <li><p>If it is an element, it and its <a><code>::backdrop</code></a> pseudo-element are not
- rendered if its <a>shadow-including inclusive ancestor</a> has the <code>display</code> property
- set to <code>none</code>.
-
- <li><p>If its specified <code>display</code> property is <code>contents</code>, it computes to
- <code>block</code>.
-
- <li><p>If its specified <code>position</code> property is not <code>absolute</code> or
- <code>fixed</code>, it computes to <code>absolute</code>.
-
- <li><p>Its outline, if any, is to be rendered before step 10 in the painting order.
-
- <li><p>Unless overridden by another specification, its static position for <code>left</code>,
- <code>right</code>, and <code>top</code> is zero.
-</ul>
-
-<p>To <dfn export for="top layer">add</dfn> an <var>element</var> to a <var>top layer</var>,
-<a for=set>remove</a> it from <var>top layer</var> and then <a for=set>append</a> it to
-<var>top layer</var>.
-
-<p class=note>In other words, <var>element</var> is moved to the end of <var>top layer</var> if it
-is already present.
-
-
-<h3 id=::backdrop-pseudo-element><code>::backdrop</code> pseudo-element</h3>
-
-<p>Each element in a <a>top layer</a> has a
-<dfn id=css-pe-backdrop selector><code>::backdrop</code></dfn> pseudo-element. This pseudo-element
-is a box rendered immediately below the element (and above the element before the element in the
-set, if any), within the same <a>top layer</a>.
-
-<p class=note>The <a><code>::backdrop</code></a> pseudo-element can be used to create a backdrop
-that hides the underlying document for an element in a <a>top layer</a> (such as an element that is
-displayed fullscreen).
-
-<p>It does not inherit from any element and is not inherited from. No restrictions are made on what
-properties apply to this pseudo-element either.
-
-<!-- That this is not in a more normative prose is because CSS should have hooks for this stuff
-     which make it normative. -->
-
 
 <h3 id=:fullscreen-pseudo-class><code>:fullscreen</code> pseudo-class</h3>
 
@@ -711,11 +633,6 @@ iframe:fullscreen {
   padding:0 !important;
 }
 
-::backdrop {
-  position:fixed;
-  inset:0;
-}
-
 *|*:not(:root):fullscreen::backdrop {
   background:black;
 }
@@ -743,6 +660,7 @@ allow="fullscreen *"&gt;</code>, as described in
 </div>
 
 
+
 <h2 id=security-and-privacy-considerations>Security and Privacy Considerations</h2>
 
 <p>User agents should ensure, e.g. by means of an overlay, that the end user is aware something is
@@ -758,6 +676,13 @@ allowed via permissions policy, either through the <{iframe/allowfullscreen}> at
 delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
+
+
+
+<h2 id=old-links class=no-num oldids="new-stacking-layer, top-layer, top-layer-add, ::backdrop-pseudo-element, css-pe-backdrop">Previously-hosted definitions</h2>
+
+This specification previously hosted the definitions of <a selector>::backdrop</a>
+and the concept of the document's <a>top layer</a>.
 
 
 
@@ -791,7 +716,7 @@ Riff Jiang,
 Rune Lillesveen,
 Sigbjørn Vik,
 Simon Pieters,
-Tab Atkins,
+Tab Atkins-Bittner,
 Takayoshi Kochi,
 Theresa O'Connor,
 triple-underscore,
