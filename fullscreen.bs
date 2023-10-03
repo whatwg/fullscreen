@@ -576,12 +576,12 @@ corresponding <a>event handler content attributes</a> for {{Element}} objects in
 <p>User agents are encouraged to implement native media fullscreen controls in terms of
 {{Element/requestFullscreen()}} and {{Document/exitFullscreen()}}.
 
-<p>If the end user instructs the user agent to end a fullscreen session initiated via
-{{Element/requestFullscreen()}}, <a>fully exit fullscreen</a> given the
-<a for=/>top-level traversable</a>'s <a>active document</a>.
+<p>If the user initiates a <a>close signal</a>, this will trigger the <a>fully exit fullscreen</a>
+algorithm as part of the <a>close signal steps</a>. This takes precedence over any
+<a>close watchers</a>.
 
-<p>The user agent may end any fullscreen session without instruction from the end user
-or call to {{Document/exitFullscreen()}} whenever the user agent deems it necessary.
+<p>The user agent may end any fullscreen session without a <a>close signal</a> or call to
+{{Document/exitFullscreen()}} whenever the user agent deems it necessary.
 
 
 
