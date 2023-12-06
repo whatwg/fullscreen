@@ -366,7 +366,7 @@ are:
   </ol>
 
  <li>
-  If, {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}'s value is not supported,
+  If {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}'s value is not supported,
   reject <var>promise</var> with a {{NotSupportedError}} exception and terminate these
   steps.
  </li>
