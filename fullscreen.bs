@@ -61,7 +61,7 @@ stated otherwise it is unset.
 whether the keyboard lock is active for the document. When the flag is set, the document captures
 and handles key inputs as specified by a passed {{FullscreenKeyboardLock}} enum value. When the
 flag is not set, keyboard inputs are processed in the default manner by the user agent and the
-operating system.
+operating system. Unless stated otherwise it is unset.
 
 <p>All <a for=/>documents</a> have an associated <dfn export>fullscreen element</dfn>. The
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
