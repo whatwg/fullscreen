@@ -188,7 +188,7 @@ enum FullscreenKeyboardLock {
   "application",
   "none",
   "system"
-}
+};
 
 dictionary FullscreenOptions {
   FullscreenKeyboardLock keyboardLock = "none";
@@ -535,7 +535,7 @@ could be an open <{dialog}> element.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>Run [=the release the keyboard lock steps=] with <var>doc</var>.
+ <li><p>[=Run the release the keyboard lock steps=] with <var>doc</var>.
 
  <li><p>Run the [=fully unlock the screen orientation steps=] with <var>doc</var>.
 
@@ -688,7 +688,7 @@ iframe:fullscreen {
 
 
 
-<h2>keyboard lock</h2>
+<h2 id="keyboard-locking">keyboard locking</h2>
 
 <p>keyboard Locking enhances the functionality of web applications running in fullscreen by allowing
 them to intercept certain key inputs that would typically be handled by either the system or the
@@ -711,6 +711,16 @@ web application in fullscreen.
   shortcuts (e.g., Alt+Tab), subject to user consent and user agent implementation.
 </dl>
 
+<div algorithm>
+  <p>To <dfn>run the release the keyboard lock steps</dfn> for a <a>document</a>
+  <var>document</var>, run these steps:
+  <ol>
+    <li><p>If the [=keyboard lock flag=] for the <var>document</var> is not set, abort these steps.
+    <li><p>Deactivate the keyboard lock and restore the handling of keyboard inputs to the default
+    behavior of the user agent and the operating system. <li><p>Set the [=keyboard lock flag=] for
+    the <var>document</var> to <code>false</code>.
+  </ol>
+</div>
 
 <h2 id=permissions-policy-integration oldids=feature-policy-integration>Permissions Policy
 Integration</h2>
