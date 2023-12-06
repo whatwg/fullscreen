@@ -707,7 +707,7 @@ web application in fullscreen.
   <dd><p>Captures all keys that the user agent would ordinarily receive, except those reserved for
   critical system functions or security shortcuts (e.g., Ctrl+Alt+Del).
   <dt><dfn>System-level keyboard lock</dfn></dt>
-  <dd><p>capture a wider range of keys, including those used for system-level navigation and
+  <dd><p>Capture a wider range of keys, including those used for system-level navigation and
   shortcuts (e.g., Alt+Tab), subject to user consent and user agent implementation.
 </dl>
 
