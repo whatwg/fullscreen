@@ -57,6 +57,12 @@ unset.
 <p>All <{iframe}> <a>elements</a> have an associated <dfn>iframe fullscreen flag</dfn>. Unless
 stated otherwise it is unset.
 
+<p>All <a for=/>documents</a> have an associated <dfn>keyboard lock flag</dfn>. This flag indicates
+whether the keyboard lock is active for the document. When the flag is set, the document captures
+and handles key inputs as specified by a passed {{FullscreenKeyboardLock}} enum value. When the
+flag is not set, keyboard inputs are processed in the default manner by the user agent and the
+operating system.
+
 <p>All <a for=/>documents</a> have an associated <dfn export>fullscreen element</dfn>. The
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
 <a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
@@ -178,7 +184,14 @@ enum FullscreenNavigationUI {
   "hide"
 };
 
+enum FullscreenKeyboardLock {
+  "application",
+  "none",
+  "system"
+}
+
 dictionary FullscreenOptions {
+  FullscreenKeyboardLock keyboardLock = "none";
   FullscreenNavigationUI navigationUI = "auto";
 };
 
@@ -217,6 +230,18 @@ partial interface mixin DocumentOrShadowRoot {
   set to "{{FullscreenNavigationUI/hide}}", more screen space is preferred. User agents are always
   free to honor user preference over the application's. The default value
   "{{FullscreenNavigationUI/auto}}" indicates no application preference.
+
+ <dd>
+  When supplied, <var>options</var>'s {{FullscreenOptions/keyboardLock}} member indicates whether
+  the supplied keyboard lock mode should apply.
+
+  If set to "{{FullscreenKeyboardLock/application}}", [=application-level keyboard lock=] should
+  be applied.
+
+  If set to "{{FullscreenKeyboardLock/system}}", [=system-level keyboard lock=] should be applied.
+
+  User agents are always free to honor user preference over the application's. The default value
+  "{{FullscreenKeyboardLock/none}}" indicates no keyboard lock is applied.
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
@@ -340,6 +365,12 @@ are:
    steps.
   </ol>
 
+ <li>
+  If, {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}'s value is not supported,
+  reject <var>promise</var> with a {{NotSupportedError}} exception and terminate these
+  steps.
+ </li>
+
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
  <a>this</a>.
 
@@ -378,6 +409,16 @@ are:
    <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>element</var>) to
    <var>doc</var>'s <a>list of pending fullscreen events</a>.
   </ol>
+
+  <li>
+  Depending on the value of {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}:
+  <dl switch>
+    <dt>"{{FullscreenKeyboardLock/application}}"</dt>
+    <dd><p>Apply an [=application-level keyboard lock=].
+    <dt>"{{FullscreenKeyboardLock/system}}"</dt>
+    <dd><p>Apply a [=system-level keyboard lock=].
+  </dl>
+ </li>
 
   <p class=note>The order in which elements are <a lt="fullscreen an element">fullscreened</a>
   is not observable, because <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
@@ -494,6 +535,8 @@ could be an open <{dialog}> element.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
+ <li><p>Run [=the release the keyboard lock steps=] with <var>doc</var>.
+
  <li><p>Run the [=fully unlock the screen orientation steps=] with <var>doc</var>.
 
  <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
@@ -583,6 +626,11 @@ corresponding <a>event handler content attributes</a> for {{Element}} objects in
 <p>The user agent may end any fullscreen session without instruction from the end user
 or call to {{Document/exitFullscreen()}} whenever the user agent deems it necessary.
 
+<p>Users should be clearly notified when [=keyboard locking=] is active, possibly through browser
+UI indicators.
+
+<p>There should be a simple and intuitive method for users to override keyboard locking, reverting
+control back to the system or user agent.
 
 
 <h2 id=rendering>Rendering</h2>
@@ -640,6 +688,30 @@ iframe:fullscreen {
 
 
 
+<h2>keyboard lock</h2>
+
+<p>keyboard Locking enhances the functionality of web applications running in fullscreen by allowing
+them to intercept certain key inputs that would typically be handled by either the system or the
+user agent. This is useful in scenarios such as gaming or remote desktop applications, where keys
+like ESC or function keys are integral to the application's functionality.
+
+<p>A <dfn>keyboard lock</dfn> enables web applications to capture and handle key inputs directly,
+bypassing the default behavior typically executed by the user agent (in the case of
+"{{FullscreenKeyboardLock/application}}") or operating system (in the case of
+"{{FullscreenKeyboardLock/system}}"). When the [=keyboard lock flag=] is set for a [=document=], key
+events that would normally trigger user agent or system-level actions are instead redirected to the
+web application in fullscreen.
+
+<dl>
+  <dt><dfn>Application-level keyboard lock</dfn></dt>
+  <dd><p>Captures all keys that the user agent would ordinarily receive, except those reserved for
+  critical system functions or security shortcuts (e.g., Ctrl+Alt+Del).
+  <dt><dfn>System-level keyboard lock</dfn></dt>
+  <dd><p>capture a wider range of keys, including those used for system-level navigation and
+  shortcuts (e.g., Alt+Tab), subject to user consent and user agent implementation.
+</dl>
+
+
 <h2 id=permissions-policy-integration oldids=feature-policy-integration>Permissions Policy
 Integration</h2>
 
@@ -676,6 +748,12 @@ allowed via permissions policy, either through the <{iframe/allowfullscreen}> at
 delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
+
+<p>When applying a [=keyboard lock=], only a limited set of keys, primarily those not involving
+system control or privacy risks (like Alt+Tab, Ctrl+Alt+Del), can be locked via the API.
+
+<p>When applying a [=keyboard lock=], user agents should implement safeguards to prevent abuse of
+this feature, such as allowing users to override the lock.
 
 
 
