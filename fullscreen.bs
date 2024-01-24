@@ -278,8 +278,9 @@ are:
 
    <li><p><a>Fullscreen is supported</a>.
 
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
-   algorithm is <a>triggered by a user generated orientation change</a>.
+   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a>, the
+   algorithm is <a>triggered by a user generated orientation change</a>, or the user agent has been
+   configured to permit fullscreen without <a>transient activation</a>.
   </ul>
 
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
@@ -708,6 +709,7 @@ Josh Soref,
 Kagami Sascha Rosylight,
 Matt Falkenhagen,
 Mihai Balan,
+Mike Wasserman
 Mounir Lamouri,
 Øyvind Stenhaug,
 Pat Ladd,
