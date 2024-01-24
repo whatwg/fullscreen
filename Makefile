@@ -16,7 +16,7 @@ remote: fullscreen.bs
 	);
 
 local: fullscreen.bs
-	bikeshed spec fullscreen.bs fullscreen.html --md-Text-Macro="COMMIT-SHA LOCAL COPY"
+	bikeshed spec fullscreen.bs fullscreen.html --md-Text-Macro="COMMIT-SHA LOCAL-COPY"
 
 deploy: fullscreen.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
