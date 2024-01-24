@@ -709,7 +709,7 @@ Josh Soref,
 Kagami Sascha Rosylight,
 Matt Falkenhagen,
 Mihai Balan,
-Mike Wasserman
+Mike Wasserman,
 Mounir Lamouri,
 Øyvind Stenhaug,
 Pat Ladd,
