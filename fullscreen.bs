@@ -70,6 +70,9 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
  <li><p>Let <var>hideUntil</var> be the result of running <a>topmost popover ancestor</a> given
  <var>element</var>, null, and false.
 
+ <li><p>If <var>hideUntil</var> is null, then set <var>hideUntil</var> to <var>element</var>'s
+ <span>node document</span>.</p></li>
+
  <li><p>Run <a>hide all popovers until</a> given <var>hideUntil</var>, false, and true.
 
  <li><p>Set <var>element</var>'s <a>fullscreen flag</a>.
