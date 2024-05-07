@@ -71,7 +71,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
  <var>element</var>, null, and false.
 
  <li><p>If <var>hideUntil</var> is null, then set <var>hideUntil</var> to <var>element</var>'s
- <span>node document</span>.</p></li>
+ <span>node document</span>.
 
  <li><p>Run <a>hide all popovers until</a> given <var>hideUntil</var>, false, and true.
 
