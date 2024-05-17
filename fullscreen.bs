@@ -21,12 +21,6 @@ spec:css-position-4
     type:dfn; text:top layer
 </pre>
 
-<pre class=anchors>
-urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
-    type: dfn
-        text: triggered by a user generated orientation change
-</pre>
-
 <pre class=biblio>
 {
     "CSS": {
@@ -144,6 +138,40 @@ these steps:
 
 <p><dfn>Fullscreen is supported</dfn> if there is no previously-established user preference,
 security risk, or platform limitation.
+
+<div algorithm>
+<p>To determine whether <dfn>fullscreen is prevented</dfn> for an <a>element</a>
+<var>element</var>:
+
+<ol>
+ <li><p>If <a lt="fullscreen is supported">fullscreen is <em>not</em> supported</a>, return
+ true.
+
+ <li>
+  <p>If <var>element</var>'s <a for=Element>namespace</a> is the <a>HTML namespace</a>:
+
+  <ol>
+   <li><p>If <var>element</var> is a <{dialog}> element, return true.
+  </ol>
+
+ <li><p>Otherwise, if <var>element</var> is not a
+ <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
+ <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
+ element, return true. [[!SVG]] [[!MATHML]]
+
+ <li><p>If the <a>fullscreen element ready check</a> for <var>element</var> returns false, return
+ true.
+
+ <!-- https://github.com/whatwg/fullscreen/issues/215 -->
+ <li><p>If the algorithm is triggered by a user generated orientation change, return false.
+
+ <li><p>If <var>element</var>'s <a>relevant global object</a> does not have <a>transient activation</a>,
+ return false.
+
+ <li><p>Return true.
+</ol>
+
+</div>
 
 <hr>
 
@@ -266,27 +294,7 @@ are:
  <li><p>If <var>pendingDoc</var> is not <a>fully active</a>, then reject <var>promise</var> with a
  {{TypeError}} exception and return <var>promise</var>.
 
- <li><p>Let <var>error</var> be false.
-
- <li>
-  <p>If any of the following conditions are false, then set <var>error</var> to true:
-
-  <ul>
-   <li><p><a>This</a>'s <a for=Element>namespace</a> is the <a>HTML namespace</a> or
-   <a>this</a> is an
-   <a href=https://www.w3.org/TR/SVG11/struct.html#SVGElement>SVG <code>svg</code></a> or
-   <a href=https://www.w3.org/Math/draft-spec/chapter2.html#interf.toplevel>MathML <code>math</code></a>
-   element. [[!SVG]] [[!MATHML]]
-
-   <li><p><a>This</a> is not a <{dialog}> element.
-
-   <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
-
-   <li><p><a>Fullscreen is supported</a>.
-
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
-   algorithm is <a>triggered by a user generated orientation change</a>.
-  </ul>
+ <li><p>Let <var>error</var> be true if <a>fullscreen is prevented</a> for <a>this</a>.
 
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
  <var>pendingDoc</var>'s <a>relevant global object</a>.
