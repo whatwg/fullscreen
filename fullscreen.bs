@@ -22,12 +22,6 @@ spec:css-position-4
     type:dfn; text:top layer
 </pre>
 
-<pre class=anchors>
-urlPrefix: https://w3c.github.io/screen-orientation/#dfn-
-    type: dfn
-        text: triggered by a user generated orientation change
-</pre>
-
 <pre class=biblio>
 {
     "CSS": {
@@ -285,8 +279,7 @@ are:
 
    <li><p><a>Fullscreen is supported</a>.
 
-   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
-   algorithm is <a>triggered by a user generated orientation change</a>.
+   <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a>.
   </ul>
 
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
