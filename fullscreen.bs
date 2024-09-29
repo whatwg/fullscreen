@@ -114,6 +114,9 @@ these steps:
 <ol>
  <li><p>Let <var>document</var> be <var>removedNode</var>'s <a>node document</a>.
 
+ <li><p>If <var>document</var>'s <a for=Document>state-preserving atomic move in progress</a> is
+ true, then return.</p></li>
+
  <li><p>Let <var>nodes</var> be <var>removedNode</var>'s
  <a>shadow-including inclusive descendants</a> that have their <a>fullscreen flag</a> set, in
  <a>shadow-including tree order</a>.
