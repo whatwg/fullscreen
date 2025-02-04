@@ -495,9 +495,11 @@ could be an open <{dialog}> element.
 
  <li><p>If <var>doc</var>'s <a>fullscreen element</a> is not <a>connected</a>:
   <ol>
-   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>doc</var>'s
-   <a>fullscreen element</a>) to <var>doc</var>'s
-   <a>list of pending fullscreen events</a>.
+   <li><p><a for=set>Append</a> ({{fullscreenchange}}, <var>doc</var>'s <a>fullscreen element</a>)
+   to <var>doc</var>'s <a>list of pending fullscreen events</a>.
+
+   <li><p><a lt="unfullscreen an element">Unfullscreen</a> <var>doc</var>'s <a>fullscreen
+   element</a>.
   </ol>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
