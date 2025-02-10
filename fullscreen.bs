@@ -12,6 +12,7 @@ Markup Shorthands: css no
 
 <pre class=link-defaults>
 spec:dom
+    type:dfn; for:/; text:document
     type:dfn; for:/; text:element
     type:interface; text:Document
 spec:infra
