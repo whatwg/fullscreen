@@ -19,6 +19,7 @@ spec:dom
 spec:infra
     type:dfn; for:set; text:for each
     type:dfn; text:string
+    type:dfn; text:break
 spec:css-position-4
     type:selector; text: ::backdrop
     type:dfn; text:top layer
