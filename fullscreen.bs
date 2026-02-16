@@ -272,7 +272,7 @@ are:
 <ol>
  <li><p>Let <var>pendingDoc</var> be <a>this</a>'s <a>node document</a>.
 
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>Let <var>promise</var> be a new {{Promise}}.
 
  <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request promise=] to <var>promise</var>.
 
