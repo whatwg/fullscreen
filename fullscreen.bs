@@ -68,12 +68,11 @@ stated otherwise it is unset.
 <p>All <a for=/>documents</a> have an associated <dfn>list of pending fullscreen events</dfn>, which
 is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is initially empty.
 
-<p>All <a for=/>documents</a> have an associated <dfn export>pending fullscreen request flag</dfn>.
-Unless stated otherwise it is unset. When set, it indicates that the document has an outstanding
-fullscreen request that has not yet resolved or been rejected.
+<p>All <a for=/>documents</a> have a <dfn for=Document lt="has pending fullscreen request|pending fullscreen request" export>
+pending fullscreen request</dfn>, which is a boolean. It is initially false.
 
-<p>All <a for=/>documents</a> have an associated <dfn export>pending fullscreen request promise</dfn>.
-Unless stated otherwise it is null. When not null, it is the promise representing the current pending
+<p>All <a for=/>documents</a> have an associated <dfn for=Document export>pending fullscreen request promise</dfn>, 
+which is a nullable {{Promise}}. It is initially null. It represents the current pending
 fullscreen request.
 
 <p>To <dfn>fullscreen an <var>element</var></dfn>:
@@ -275,10 +274,11 @@ are:
 
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Set <var>pendingDoc</var>'s <a>pending fullscreen request promise</a> to <var>promise</var>.
+ <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request promise=] to <var>promise</var>.
 
- <li><p>If <var>pendingDoc</var> is not <a>fully active</a>, then reject <var>promise</var> with a
- {{TypeError}} exception and return <var>promise</var>.
+ <li><p>If <var>pendingDoc</var> is not <a>fully active</a>, then set <var>pendingDoc</var>'s
+ [=Document/pending fullscreen request promise=] to null, reject <var>promise</var> with a
+ {{TypeError}} exception, and return <var>promise</var>.
 
  <li><p>Let <var>error</var> be false.
 
@@ -305,7 +305,7 @@ are:
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
  <var>pendingDoc</var>'s <a>relevant global object</a>.
 
- <li><p>If <var>error</var> is false, set <var>pendingDoc</var>'s <a>pending fullscreen request</a> flag.
+ <li><p>If <var>error</var> is false, then set <var>pendingDoc</var>'s [=Document/pending fullscreen request=] to true.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
@@ -355,9 +355,9 @@ are:
   <p>If <var>error</var> is true:
 
   <ol>
-   <li><p>Unset <var>pendingDoc</var>'s <a>pending fullscreen request</a> flag.
+   <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request=] to false.
 
-   <li><p>Set <var>pendingDoc</var>'s <a>pending fullscreen request promise</a> to null.
+   <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request promise=] to null.
 
    <li><p><a for=set>Append</a> ({{fullscreenerror}}, <a>this</a>) to
    <var>pendingDoc</var>'s <a>list of pending fullscreen events</a>.
@@ -408,9 +408,9 @@ are:
   <p class=note>The order in which elements are <a lt="fullscreen an element">fullscreened</a>
   is not observable, because <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
 
- <li><p>Unset <var>pendingDoc</var>'s <a>pending fullscreen request</a> flag.
+ <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request=] to false.
 
- <li><p>Set <var>pendingDoc</var>'s <a>pending fullscreen request promise</a> to null.
+ <li><p>Set <var>pendingDoc</var>'s [=Document/pending fullscreen request promise=] to null.
 
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
