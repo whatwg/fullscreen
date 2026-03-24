@@ -146,8 +146,16 @@ these steps:
 
 <hr>
 
-<p><dfn>Fullscreen is supported</dfn> if there is no previously-established user preference,
-security risk, or platform limitation.
+<p><dfn>Fullscreen is supported</dfn> for a {{Window}} <var>window</var>
+returns true if all of the following are true, and false otherwise:
+
+<ul>
+  <li><p>There is no previously-established user preference, security risk, or platform
+  limitation.
+
+  <li><p><var>window</var>'s <a for="Window">navigable</a>'s <a for="navigable">
+  top-level traversable</a>'s <a>Is Document Picture-in-Picture</a> is false.
+</ul>
 
 <hr>
 
@@ -230,7 +238,7 @@ partial interface mixin DocumentOrShadowRoot {
 
  <dt><code><var>document</var> . {{Document/fullscreenEnabled}}</code>
  <dd><p>Returns true if <var>document</var> has the ability to display <a>elements</a> fullscreen
- and <a>fullscreen is supported</a>, or false otherwise.
+ and <a>fullscreen is supported</a> for its associated {{Window}}, or false otherwise.
 
  <dt><code><var>promise</var> = <var>document</var> . {{Document/exitFullscreen()}}</code>
  <dd><p>Stops <var>document</var>'s <a>fullscreen element</a> from being displayed fullscreen and
@@ -286,7 +294,7 @@ are:
 
    <li><p>The <a>fullscreen element ready check</a> for <a>this</a> returns true.
 
-   <li><p><a>Fullscreen is supported</a>.
+   <li><p><a>Fullscreen is supported</a> for <var>pendingDoc</var>'s <a>relevant global object</a>.
 
    <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
    algorithm is <a>triggered by a user generated orientation change</a>.
@@ -401,8 +409,8 @@ to the reader. Input welcome on potential improvements.
 
 <p>The <dfn attribute for=Document><code>fullscreenEnabled</code></dfn> getter steps are to return
 true if <a>this</a> is <a for=/>allowed to use</a> the "<code><a
-data-lt="fullscreen-feature">fullscreen</a></code>" feature and <a>fullscreen is supported</a>, and
-false otherwise.
+data-lt="fullscreen-feature">fullscreen</a></code>" feature and <a>fullscreen is supported</a> for
+<a>this</a>'s <a>relevant global object</a>, and false otherwise.
 
 <p>The <dfn attribute for=Document><code>fullscreen</code></dfn> getter steps are to return false if
 <a>this</a>'s <a>fullscreen element</a> is null, and true otherwise.
@@ -732,6 +740,7 @@ Tab Atkins-Bittner,
 Takayoshi Kochi,
 Theresa O'Connor,
 triple-underscore,
+Vincent Hilla,
 Vincent Scheib, and
 Xidorn Quan
 for also being awesome.
