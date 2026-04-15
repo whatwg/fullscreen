@@ -241,14 +241,12 @@ partial interface mixin DocumentOrShadowRoot {
   free to honor user preference over the application's. The default value
   "{{FullscreenNavigationUI/auto}}" indicates no application preference.
 
- <dd>
   When supplied, <var>options</var>'s {{FullscreenOptions/keyboardLock}} member indicates whether
-  the supplied keyboard lock mode should apply.
+  the supplied keyboard lock mode will apply.
 
-  If set to "{{FullscreenKeyboardLock/browser}}", [=application-level keyboard lock=] should
-  be applied.
+  If set to "{{FullscreenKeyboardLock/browser}}", [=application-level keyboard lock=] can be applied.
 
-  If set to "{{FullscreenKeyboardLock/system}}", [=system-level keyboard lock=] should be applied.
+  If set to "{{FullscreenKeyboardLock/system}}", [=system-level keyboard lock=] can be applied.
 
   User agents are always free to honor user preference over the application's. The default value
   "{{FullscreenKeyboardLock/none}}" indicates no keyboard lock is applied.
