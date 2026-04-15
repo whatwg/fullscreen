@@ -195,7 +195,7 @@ enum FullscreenNavigationUI {
 };
 
 enum FullscreenKeyboardLock {
-  "application",
+  "browser",
   "none",
   "system"
 };
@@ -245,7 +245,7 @@ partial interface mixin DocumentOrShadowRoot {
   When supplied, <var>options</var>'s {{FullscreenOptions/keyboardLock}} member indicates whether
   the supplied keyboard lock mode should apply.
 
-  If set to "{{FullscreenKeyboardLock/application}}", [=application-level keyboard lock=] should
+  If set to "{{FullscreenKeyboardLock/browser}}", [=application-level keyboard lock=] should
   be applied.
 
   If set to "{{FullscreenKeyboardLock/system}}", [=system-level keyboard lock=] should be applied.
@@ -423,7 +423,7 @@ are:
   <li>
   Depending on the value of {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}:
   <dl switch>
-    <dt>"{{FullscreenKeyboardLock/application}}"</dt>
+    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
     <dd><p>Apply an [=application-level keyboard lock=].
     <dt>"{{FullscreenKeyboardLock/system}}"</dt>
     <dd><p>Apply a [=system-level keyboard lock=].
@@ -709,7 +709,7 @@ like ESC or function keys are integral to the application's functionality.
 
 <p>A <dfn>keyboard lock</dfn> enables web applications to capture and handle key inputs directly,
 bypassing the default behavior typically executed by the user agent (in the case of
-"{{FullscreenKeyboardLock/application}}") or operating system (in the case of
+"{{FullscreenKeyboardLock/browser}}") or operating system (in the case of
 "{{FullscreenKeyboardLock/system}}"). When the [=keyboard lock flag=] is set for a [=document=], key
 events that would normally trigger user agent or system-level actions are instead redirected to the
 web application in fullscreen.
