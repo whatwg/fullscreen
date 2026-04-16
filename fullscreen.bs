@@ -16,6 +16,7 @@ spec:dom
     type:dfn; for:/; text:document
     type:dfn; for:/; text:element
     type:interface; text:Document
+    type:dfn; text:removing steps
 spec:infra
     type:dfn; for:set; text:for each
     type:dfn; text:string
