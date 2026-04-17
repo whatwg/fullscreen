@@ -415,16 +415,16 @@ are:
    <var>doc</var>'s <a>list of pending fullscreen events</a>.
   </ol>
 
-  <li>
-  Depending on the value of {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}:
-  <dl switch>
-    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
-    <dd><p>Set the [=keyboard lock flag=] for <var>doc</var> to true.
-  </dl>
- </li>
-
   <p class=note>The order in which elements are <a lt="fullscreen an element">fullscreened</a>
   is not observable, because <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
+
+ <li>
+  <p>Depending on the value of {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}:
+
+  <dl class=switch>
+   <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
+   <dd><p>Set the [=keyboard lock flag=] for <var>doc</var> to true.
+  </dl>
 
  <li><p>Resolve <var>promise</var> with undefined.
 </ol>
