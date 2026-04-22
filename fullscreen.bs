@@ -62,12 +62,6 @@ unset.
 <p>All <{iframe}> <a>elements</a> have an associated <dfn>iframe fullscreen flag</dfn>. Unless
 stated otherwise it is unset.
 
-<p>All <a for=/>documents</a> have an associated <dfn>keyboard lock flag</dfn>. This flag indicates
-whether the keyboard lock is active for the document. When the flag is set, the document captures
-and handles key inputs as specified by a passed {{FullscreenKeyboardLock}} enum value. When the flag
-is not set, keyboard inputs are processed in the default manner by the user agent and the operating
-system. Unless stated otherwise it is unset.
-
 <p>All <a for=/>documents</a> have an associated <dfn export>fullscreen element</dfn>. The
 <a>fullscreen element</a> is the topmost <a>element</a> in the <a for=/>document</a>'s
 <a>top layer</a> whose <a>fullscreen flag</a> is set, if any, and null otherwise.
@@ -94,7 +88,7 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
 </ol>
 
 <p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a> and <a>iframe fullscreen flag</a> (if any), and
+<a>fullscreen flag</a>, <a>iframe fullscreen flag</a> (if any), and <a>keyboard lock flag</a>, and
 <a>remove from the top layer immediately</a> given <var>element</var>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
@@ -184,7 +178,24 @@ steps:
 <p class=note>These steps integrate with the <a for=/>event loop</a> defined in HTML. [[!HTML]]
 </div>
 
+<hr>
 
+<p>All <a>elements</a> have an associated <dfn>keyboard lock flag</dfn>. Unless stated otherwise it is unset.
+
+<p>A [=document=] has <dfn>keyboard lock</dfn> active when its [=fullscreen element=] is not null and the [=fullscreen element=]'s [=keyboard lock flag=] is true, and inactive otherwise.
+
+<div algorithm>
+  <p>To <dfn>run the release the keyboard lock steps</dfn> for a <a>document</a>
+  <var>document</var>, run these steps:
+
+  <ol>
+    <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, then return.
+
+    <li><p>If the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> is false, then return.
+
+    <li><p>Set the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> to false.
+  </ol>
+</div>
 
 <h2 id=api>API</h2>
 
@@ -371,10 +382,8 @@ are:
    steps.
   </ol>
 
- <li>
-  If {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}'s value is not supported, reject
+ <li><p>If <var>options</var>["{{FullscreenOptions/keyboardLock}}"] is not supported, then reject
   <var>promise</var> with a {{NotSupportedError}} exception and terminate these steps.
- </li>
 
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
  <a>this</a>.
@@ -419,11 +428,14 @@ are:
   is not observable, because <a>run the fullscreen steps</a> is invoked in <a>tree order</a>.
 
  <li>
-  <p>Depending on the value of {{FullscreenOptions}}'s {{FullscreenOptions/keyboardLock}}:
+  <p>Depending on the value of <var>options</var>["{{FullscreenOptions/keyboardLock}}"]:
 
   <dl class=switch>
    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
-   <dd><p>Set the [=keyboard lock flag=] for <var>doc</var> to true.
+   <dd><p>Set the [=keyboard lock flag=] for <a>this</a> to true.
+
+   <dt>"{{FullscreenKeyboardLock/none}}"</dt>
+   <dd><p>Set the [=keyboard lock flag=] for <a>this</a> to false.
   </dl>
 
  <li><p>Resolve <var>promise</var> with undefined.
@@ -700,9 +712,6 @@ them to intercept certain key inputs that would typically be handled by either t
 user agent. This is useful in scenarios such as gaming or remote desktop applications, where keys
 like ESC or function keys are integral to the application's functionality.
 
-<p>A [=document=] has <dfn>keyboard lock</dfn> active when the [=keyboard lock flag=] is true for a
-[=document=], and inactive otherwise.
-
 <p>A [=keyboard lock=] enables web applications to capture and handle key inputs directly, bypassing
 the default behavior typically executed by the user agent or operating system. Key events that would
 normally trigger user agent or system-level actions are instead redirected to the web application in
@@ -710,23 +719,12 @@ fullscreen. Such key events (for individual keys or keyboard shortcuts) may eith
 while [=keyboard lock=] is active, or it could still have the same action but allow the web page to
 call {{Event/preventDefault()}} to cancel the action.
 
+<p>Whenever a [=document=]'s [=keyboard lock=] is changed from active to inactive, user agents must deactivate the keyboard lock and restore the handling of keyboard inputs to the default behavior of the user agent and the operating system.
+
 <p>User agents should reserve an additional input for the purposes of exiting fullscreen. There are
 also some system-level key sequences or combinations that cannot be intercepted for security
 reasons, such as Ctrl+Alt+Del on Windows.
 
-<div algorithm>
-  <p>To <dfn>run the release the keyboard lock steps</dfn> for a <a>document</a>
-  <var>document</var>, run these steps:
-
-  <ol>
-    <li><p>If the [=keyboard lock flag=] for <var>document</var> is not set, then return.
-
-    <li><p>Deactivate the keyboard lock and restore the handling of keyboard inputs to the default
-    behavior of the user agent and the operating system.
-
-    <li><p>Set the [=keyboard lock flag=] for <var>document</var> to false.
-  </ol>
-</div>
 
 <h2 id=permissions-policy-integration oldids=feature-policy-integration>Permissions Policy
 Integration</h2>
