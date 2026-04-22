@@ -150,6 +150,9 @@ these steps:
 <p><dfn>Fullscreen is supported</dfn> if there is no previously-established user preference,
 security risk, or platform limitation.
 
+<p><dfn>Keyboard lock is supported</dfn> if there is no previously-established user preference,
+security risk, or platform limitation.
+
 <hr>
 
 <div algorithm>
@@ -324,6 +327,8 @@ are:
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
 
+ <li><p>If <var>options</var>["{{FullscreenOptions/keyboardLock}}"] is "{{FullscreenKeyboardLock/browser}}" and <a>keyboard lock is supported</a> is false, then set <var>error</var> to true.
+
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
  <var>pendingDoc</var>'s <a>relevant global object</a>.
 
@@ -381,9 +386,6 @@ are:
    <li><p>Reject <var>promise</var> with a {{TypeError}} exception and terminate these
    steps.
   </ol>
-
- <li><p>If <var>options</var>["{{FullscreenOptions/keyboardLock}}"] is not supported, then reject
-  <var>promise</var> with a {{NotSupportedError}} exception and terminate these steps.
 
  <li><p>Let <var>fullscreenElements</var> be an <a>ordered set</a> initially consisting of
  <a>this</a>.
