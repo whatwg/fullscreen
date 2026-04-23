@@ -87,9 +87,9 @@ is an <a>ordered set</a> of (<a>string</a>, <a>element</a>) <a>tuples</a>. It is
  <li><a>Add to the top layer</a> given <var>element</var>.
 </ol>
 
-<p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s
-<a>fullscreen flag</a>, <a>iframe fullscreen flag</a> (if any), and <a>keyboard lock flag</a>, and
-<a>remove from the top layer immediately</a> given <var>element</var>.
+<p>To <dfn>unfullscreen an <var>element</var></dfn>, unset <var>element</var>'s <a>fullscreen
+flag</a>, <a>iframe fullscreen flag</a> (if any), and <a>keyboard lock flag</a>, and <a>remove from
+the top layer immediately</a> given <var>element</var>.
 
 <p>To <dfn>unfullscreen a <var>document</var></dfn>,
 <a lt="unfullscreen an element">unfullscreen</a> all <a>elements</a>, within <var>document</var>'s
@@ -180,9 +180,11 @@ steps:
 
 <hr>
 
-<p>All <a>elements</a> have an associated <dfn>keyboard lock flag</dfn>. Unless stated otherwise it is unset.
+<p>All <a>elements</a> have an associated <dfn>keyboard lock flag</dfn>. Unless stated otherwise it
+is unset.
 
-<p>A [=document=] has <dfn>keyboard lock</dfn> active when its [=fullscreen element=] is not null and the [=fullscreen element=]'s [=keyboard lock flag=] is true, and inactive otherwise.
+<p>A [=document=] has <dfn>keyboard lock</dfn> active when its [=fullscreen element=] is not null
+and the [=fullscreen element=]'s [=keyboard lock flag=] is true, and inactive otherwise.
 
 <div algorithm>
   <p>To <dfn>run the release the keyboard lock steps</dfn> for a <a>document</a>
@@ -191,9 +193,11 @@ steps:
   <ol>
     <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, then return.
 
-    <li><p>If the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> is false, then return.
+    <li><p>If the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> is
+    false, then return.
 
-    <li><p>Set the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> to false.
+    <li><p>Set the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> to
+    false.
   </ol>
 </div>
 
@@ -716,7 +720,9 @@ fullscreen. Such key events (for individual keys or keyboard shortcuts) may eith
 while [=keyboard lock=] is active, or it could still have the same action but allow the web page to
 call {{Event/preventDefault()}} to cancel the action.
 
-<p>Whenever a [=document=]'s [=keyboard lock=] is changed from active to inactive, user agents must deactivate the keyboard lock and restore the handling of keyboard inputs to the default behavior of the user agent and the operating system.
+<p>Whenever a [=document=]'s [=keyboard lock=] is changed from active to inactive, user agents must
+deactivate the keyboard lock and restore the handling of keyboard inputs to the default behavior of
+the user agent and the operating system.
 
 <p>User agents should reserve an additional input for the purposes of exiting fullscreen. There are
 also some system-level key sequences or combinations that cannot be intercepted for security
@@ -766,7 +772,11 @@ system control or privacy risks (like Alt+Tab, Ctrl+Alt+Del), can be locked via 
 <p>When applying a [=keyboard lock=], user agents should implement safeguards to prevent abuse of
 this feature, such as allowing users to override the lock.
 
-<p>User agents may provide a user preference to ignore [=keyboard lock=] (with any granularity, e.g. for a specific site, or globally). Similarly, some platforms might not have a keyboard, where user agents may ignore the [=keyboard lock=] state. However, this should not affect the web-observable behavior of the {{Element/requestFullscreen()}} method or be exposed in other ways, to avoid fingerprinting.
+<p>User agents may provide a user preference to ignore [=keyboard lock=] (with any granularity, e.g.
+for a specific site, or globally). Similarly, some platforms might not have a keyboard, where user
+agents may ignore the [=keyboard lock=] state. However, this should not affect the web-observable
+behavior of the {{Element/requestFullscreen()}} method or be exposed in other ways, to avoid
+fingerprinting.
 
 
 
