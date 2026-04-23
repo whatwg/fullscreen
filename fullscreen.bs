@@ -150,9 +150,6 @@ these steps:
 <p><dfn>Fullscreen is supported</dfn> if there is no previously-established user preference,
 security risk, or platform limitation.
 
-<p><dfn>Keyboard lock is supported</dfn> if there is no previously-established user preference,
-security risk, or platform limitation.
-
 <hr>
 
 <div algorithm>
@@ -326,8 +323,6 @@ are:
    <li><p><a>This</a>'s <a>relevant global object</a> has <a>transient activation</a> or the
    algorithm is <a>triggered by a user generated orientation change</a>.
   </ul>
-
- <li><p>If <var>options</var>["{{FullscreenOptions/keyboardLock}}"] is "{{FullscreenKeyboardLock/browser}}" and <a>keyboard lock is supported</a> is false, then set <var>error</var> to true.
 
  <li><p>If <var>error</var> is false, then <a>consume user activation</a> given
  <var>pendingDoc</var>'s <a>relevant global object</a>.
@@ -770,6 +765,8 @@ system control or privacy risks (like Alt+Tab, Ctrl+Alt+Del), can be locked via 
 
 <p>When applying a [=keyboard lock=], user agents should implement safeguards to prevent abuse of
 this feature, such as allowing users to override the lock.
+
+<p>User agents may provide a user preference to ignore [=keyboard lock=] (with any granularity, e.g. for a specific site, or globally). Similarly, some platforms might not have a keyboard, where user agents may ignore the [=keyboard lock=] state. However, this should not affect the web-observable behavior of the {{Element/requestFullscreen()}} method or be exposed in other ways, to avoid fingerprinting.
 
 
 
