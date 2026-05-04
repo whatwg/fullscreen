@@ -184,20 +184,19 @@ steps:
 is unset.
 
 <p>A [=document=] has <dfn>keyboard lock</dfn> active when its [=fullscreen element=] is not null
-and the [=fullscreen element=]'s [=keyboard lock flag=] is true, and inactive otherwise.
+and the [=fullscreen element=]'s [=keyboard lock flag=] is set, and inactive otherwise.
 
 <div algorithm>
-  <p>To <dfn>run the release the keyboard lock steps</dfn> for a <a>document</a>
-  <var>document</var>, run these steps:
+  <p>To <dfn>release the keyboard lock</dfn> for a <a>document</a> <var>document</var>, run these
+  steps:
 
   <ol>
     <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, then return.
 
-    <li><p>If the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> is
-    false, then return.
+    <li><p>If <var>document</var>'s <a>fullscreen element</a>'s [=keyboard lock flag=] is unset,
+    then return.
 
-    <li><p>Set the [=keyboard lock flag=] for <var>document</var>'s <a>fullscreen element</a> to
-    false.
+    <li><p>Unset <var>document</var>'s <a>fullscreen element</a>'s [=keyboard lock flag=].
   </ol>
 </div>
 
@@ -553,7 +552,7 @@ could be an open <{dialog}> element.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>[=Run the release the keyboard lock steps=] with <var>doc</var>.
+ <li><p>[=Release the keyboard lock=] for <var>doc</var>.
 
  <li><p>Run the [=fully unlock the screen orientation steps=] with <var>doc</var>.
 
