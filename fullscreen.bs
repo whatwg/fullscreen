@@ -183,8 +183,8 @@ steps:
 <p>All <a>elements</a> have an associated <dfn>keyboard lock flag</dfn>. Unless stated otherwise it
 is unset.
 
-<p>A [=document=] has <dfn>keyboard lock</dfn> active when its [=fullscreen element=] is not null
-and the [=fullscreen element=]'s [=keyboard lock flag=] is set, and inactive otherwise.
+<p>A <a>document</a> has <dfn>keyboard lock</dfn> active when its <a>fullscreen element</a> is not
+null and the <a>fullscreen element</a>'s <a>keyboard lock flag</a> is set, and inactive otherwise.
 
 <div algorithm>
   <p>To <dfn>release the keyboard lock</dfn> for a <a>document</a> <var>document</var>, run these
@@ -193,10 +193,10 @@ and the [=fullscreen element=]'s [=keyboard lock flag=] is set, and inactive oth
   <ol>
     <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, then return.
 
-    <li><p>If <var>document</var>'s <a>fullscreen element</a>'s [=keyboard lock flag=] is unset,
+    <li><p>If <var>document</var>'s <a>fullscreen element</a>'s <a>keyboard lock flag</a> is unset,
     then return.
 
-    <li><p>Unset <var>document</var>'s <a>fullscreen element</a>'s [=keyboard lock flag=].
+    <li><p>Unset <var>document</var>'s <a>fullscreen element</a>'s <a>keyboard lock flag</a>.
   </ol>
 </div>
 
@@ -258,7 +258,7 @@ partial interface mixin DocumentOrShadowRoot {
   When supplied, <var>options</var>'s {{FullscreenOptions/keyboardLock}} member indicates whether
   the supplied keyboard lock mode will apply.
 
-  If set to "{{FullscreenKeyboardLock/browser}}", [=keyboard lock=] can be applied.
+  If set to "{{FullscreenKeyboardLock/browser}}", <a>keyboard lock</a> can be applied.
 
   User agents are always free to honor user preference over the application's. The default value
   "{{FullscreenKeyboardLock/none}}" indicates no keyboard lock is applied.
@@ -432,10 +432,10 @@ are:
 
   <dl class=switch>
    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
-   <dd><p>Set <a>this</a>'s [=keyboard lock flag=].
+   <dd><p>Set <a>this</a>'s <a>keyboard lock flag</a>.
 
    <dt>"{{FullscreenKeyboardLock/none}}"</dt>
-   <dd><p>Unset <a>this</a>'s [=keyboard lock flag=].
+   <dd><p>Unset <a>this</a>'s <a>keyboard lock flag</a>.
   </dl>
 
  <li><p>Resolve <var>promise</var> with undefined.
@@ -552,9 +552,9 @@ could be an open <{dialog}> element.
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
 
- <li><p>[=Release the keyboard lock=] for <var>doc</var>.
+ <li><p><a>Release the keyboard lock</a> for <var>doc</var>.
 
- <li><p>Run the [=fully unlock the screen orientation steps=] with <var>doc</var>.
+ <li><p>Run the <a>fully unlock the screen orientation steps</a> with <var>doc</var>.
 
  <li><p>If <var>resize</var> is true, resize <var>doc</var>'s viewport to its "normal" dimensions.
 
@@ -643,8 +643,8 @@ algorithm as part of the <a>close request steps</a>. This takes precedence over 
 <p>The user agent may end any fullscreen session without a <a>close request</a> or call to
 {{Document/exitFullscreen()}} whenever the user agent deems it necessary.
 
-<p>Users should be clearly notified when [=keyboard locking=] is active, possibly through browser UI
-indicators.
+<p>Users should be clearly notified when <a>keyboard locking</a> is active, possibly through browser
+UI indicators.
 
 <p>There should be a simple and intuitive method for users to override keyboard locking, reverting
 control back to the system or user agent.
@@ -712,16 +712,16 @@ them to intercept certain key inputs that would typically be handled by either t
 user agent. This is useful in scenarios such as gaming or remote desktop applications, where keys
 like ESC or function keys are integral to the application's functionality.
 
-<p>A [=keyboard lock=] enables web applications to capture and handle key inputs directly, bypassing
-the default behavior typically executed by the user agent or operating system. Key events that would
-normally trigger user agent or system-level actions are instead redirected to the web application in
-fullscreen. Such key events (for individual keys or keyboard shortcuts) may either have no action
-while [=keyboard lock=] is active, or it could still have the same action but allow the web page to
-call {{Event/preventDefault()}} to cancel the action.
+<p>A <a>keyboard lock</a> enables web applications to capture and handle key inputs directly,
+bypassing the default behavior typically executed by the user agent or operating system. Key events
+that would normally trigger user agent or system-level actions are instead redirected to the web
+application in fullscreen. Such key events (for individual keys or keyboard shortcuts) may either
+have no action while <a>keyboard lock</a> is active, or it could still have the same action but
+allow the web page to call {{Event/preventDefault()}} to cancel the action.
 
-<p>Whenever a [=document=]'s [=keyboard lock=] is changed from active to inactive, user agents must
-deactivate the keyboard lock and restore the handling of keyboard inputs to the default behavior of
-the user agent and the operating system.
+<p>Whenever a <a>document</a>'s <a>keyboard lock</a> is changed from active to inactive, user agents
+must deactivate the keyboard lock and restore the handling of keyboard inputs to the default
+behavior of the user agent and the operating system.
 
 <p>User agents should reserve an additional input for the purposes of exiting fullscreen. There are
 also some system-level key sequences or combinations that cannot be intercepted for security
@@ -765,17 +765,17 @@ delivered with the <a>document</a> through which it is nested.
 
 <p>This prevents e.g. content from third parties to go fullscreen without explicit permission.
 
-<p>When applying a [=keyboard lock=], only a limited set of keys, primarily those not involving
+<p>When applying a <a>keyboard lock</a>, only a limited set of keys, primarily those not involving
 system control or privacy risks (like Alt+Tab, Ctrl+Alt+Del), can be locked via the API.
 
-<p>When applying a [=keyboard lock=], user agents should implement safeguards to prevent abuse of
+<p>When applying a <a>keyboard lock</a>, user agents should implement safeguards to prevent abuse of
 this feature, such as allowing users to override the lock.
 
-<p>User agents may provide a user preference to ignore [=keyboard lock=] (with any granularity, e.g.
-for a specific site, or globally). Similarly, some platforms might not have a keyboard, where user
-agents may ignore the [=keyboard lock=] state. However, this should not affect the web-observable
-behavior of the {{Element/requestFullscreen()}} method or be exposed in other ways, to avoid
-fingerprinting.
+<p>User agents may provide a user preference to ignore <a>keyboard lock</a> (with any granularity,
+e.g. for a specific site, or globally). Similarly, some platforms might not have a keyboard, where
+user agents may ignore the <a>keyboard lock</a> state. However, this should not affect the
+web-observable behavior of the {{Element/requestFullscreen()}} method or be exposed in other ways,
+to avoid fingerprinting.
 
 
 
