@@ -432,7 +432,7 @@ are:
 
   <dl class=switch>
    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
-   <dd><p>Se <a>this</a>'s [=keyboard lock flag=].
+   <dd><p>Set <a>this</a>'s [=keyboard lock flag=].
 
    <dt>"{{FullscreenKeyboardLock/none}}"</dt>
    <dd><p>Unset <a>this</a>'s [=keyboard lock flag=].
