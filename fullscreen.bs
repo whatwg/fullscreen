@@ -432,10 +432,10 @@ are:
 
   <dl class=switch>
    <dt>"{{FullscreenKeyboardLock/browser}}"</dt>
-   <dd><p>Set the [=keyboard lock flag=] for <a>this</a> to true.
+   <dd><p>Se <a>this</a>'s [=keyboard lock flag=].
 
    <dt>"{{FullscreenKeyboardLock/none}}"</dt>
-   <dd><p>Set the [=keyboard lock flag=] for <a>this</a> to false.
+   <dd><p>Unset <a>this</a>'s [=keyboard lock flag=].
   </dl>
 
  <li><p>Resolve <var>promise</var> with undefined.
