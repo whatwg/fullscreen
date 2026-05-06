@@ -186,20 +186,6 @@ is unset.
 <p>A <a>document</a> has <dfn>keyboard lock</dfn> active when its <a>fullscreen element</a> is not
 null and the <a>fullscreen element</a>'s <a>keyboard lock flag</a> is set, and inactive otherwise.
 
-<div algorithm>
-  <p>To <dfn>release the keyboard lock</dfn> for a <a>document</a> <var>document</var>, run these
-  steps:
-
-  <ol>
-    <li><p>If <var>document</var>'s <a>fullscreen element</a> is null, then return.
-
-    <li><p>If <var>document</var>'s <a>fullscreen element</a>'s <a>keyboard lock flag</a> is unset,
-    then return.
-
-    <li><p>Unset <var>document</var>'s <a>fullscreen element</a>'s <a>keyboard lock flag</a>.
-  </ol>
-</div>
-
 <h2 id=api>API</h2>
 
 <pre class=idl>
@@ -551,8 +537,6 @@ could be an open <{dialog}> element.
   </ol>
 
  <li><p>Return <var>promise</var>, and run the remaining steps <a>in parallel</a>.
-
- <li><p><a>Release the keyboard lock</a> for <var>doc</var>.
 
  <li><p>Run the <a>fully unlock the screen orientation steps</a> with <var>doc</var>.
 
