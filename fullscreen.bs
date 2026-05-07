@@ -711,6 +711,11 @@ behavior of the user agent and the operating system.
 also some system-level key sequences or combinations that cannot be intercepted for security
 reasons, such as Ctrl+Alt+Del on Windows.
 
+<p>For example, user agents that use the Esc key to exit fullscreen use keyboard lock to prevent
+immediate exit on key press, and instead require a long press to exit fullscreen. Some such user
+agents also implicitly grant partial keyboard lock to fullscreen session, in which case the Esc key
+might be the only key that is affected by explicit keyboard lock.
+
 
 <h2 id=permissions-policy-integration oldids=feature-policy-integration>Permissions Policy
 Integration</h2>
