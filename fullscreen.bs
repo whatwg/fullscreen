@@ -155,7 +155,7 @@ security risk, or platform limitation.
 steps:
 
 <ol>
- <li><p>Let <var>pendingEvents</var> be <var>document</var>'s
+ <li><p>Let <var>pendingEvents</var> be a <a for=set>clone</a> of <var>document</var>'s
  <a>list of pending fullscreen events</a>.
 
  <li><p><a for=set>Empty</a> <var>document</var>'s <a>list of pending fullscreen events</a>.
